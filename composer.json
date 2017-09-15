@@ -1,0 +1,12 @@
+{
+  "autoload": {
+    "psr-4": {
+      "JPH\\": "lib/",
+      "APP\\": "src/"
+    }
+  },
+  "require": {
+    "league/plates": "^3.3",
+    "php": "^7.0"
+  }
+}
