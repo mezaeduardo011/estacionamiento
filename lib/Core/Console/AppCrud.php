@@ -187,6 +187,8 @@ class AppCrud extends App
         $router->formatXml($archivoXML);
     }
 
+
+
     /**
      * Permite generar un formato del archivo modelo dentro de la aplicacion seleccionada
      * @param string $app, Nombre de la aplicacion a la cual se genera el modelo

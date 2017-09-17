@@ -69,31 +69,35 @@
     <method>runEntidadesSeleccionadas</method>
     <request>POST</request>
   </link>
-
   <link>
     <name>/setEntidadesProcesar</name>
     <controller>home</controller>
     <method>runSetEntidadesProcesar</method>
     <request>POST</request>
   </link>
-
   <link>
-    <name>/configCampos</name>
+    <name>/sendVistaNuevaConfigurada</name>
     <controller>home</controller>
-    <method>runConfigCampos</method>
-    <request>GET</request>
+    <method>runVistaNuevaConfigurada</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/procesarCrudVistas</name>
+    <controller>gestionar</controller>
+    <method>runProcesarCrudVistas</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/informarProceso</name>
+    <controller>gestionar</controller>
+    <method>runInformarProceso</method>
+    <request>POST</request>
   </link>
   <link>
     <name>/createTablas</name>
     <controller>home</controller>
     <method>runCreateTablas</method>
     <request>GET</request>
-  </link>
-  <link>
-    <name>/procesarForms</name>
-    <controller>home</controller>
-    <method>runProcesarForms</method>
-    <request>POST</request>
   </link>
   <link>
     <name>/usuarios</name>
@@ -132,5 +136,233 @@
     <method>runUsuariosUpdate</method>
     <request>POST</request>
   </link>
- 
+  <!-- Inicio de proceso -->
+  <link>
+    <name>/testAutoIndex</name>
+    <controller>testAbm</controller>
+    <method>runTestAbmIndex</method>
+    <request>GET</request>
+  </link>
+  <!-- Bloque de configuracion de la ruta del controller Raumarys-->
+  <link>
+    <name>/raumarysIndex</name>
+    <controller>testabm</controller>
+    <method>runTestAbmIndex</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/raumarysListar</name>
+    <controller>testabm</controller>
+    <method>runTestAbmListar</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/raumarysCreate</name>
+    <controller>testabm</controller>
+    <method>runTestAbmCreate</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/raumarysShow</name>
+    <controller>testabm</controller>
+    <method>runTestAbmShow</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/raumarysDelete</name>
+    <controller>testabm</controller>
+    <method>runTestAbmDelete</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/raumarysUpdate</name>
+    <controller>testabm</controller>
+    <method>runTestAbmUpdate</method>
+    <request>POST</request>
+  </link>
+  <!-- Bloque de configuracion de la ruta del controller Raumarys-->
+  <link>
+    <name>/raumarysIndex</name>
+    <controller>testabm</controller>
+    <method>runTestAbmIndex</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/raumarysListar</name>
+    <controller>testabm</controller>
+    <method>runTestAbmListar</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/raumarysCreate</name>
+    <controller>testabm</controller>
+    <method>runTestAbmCreate</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/raumarysShow</name>
+    <controller>testabm</controller>
+    <method>runTestAbmShow</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/raumarysDelete</name>
+    <controller>testabm</controller>
+    <method>runTestAbmDelete</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/raumarysUpdate</name>
+    <controller>testabm</controller>
+    <method>runTestAbmUpdate</method>
+    <request>POST</request>
+  </link>
+  <!-- Bloque de configuracion de la ruta del controller Raumarys-->
+  <link>
+    <name>/raumarysIndex</name>
+    <controller>testabm</controller>
+    <method>runTestAbmIndex</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/raumarysListar</name>
+    <controller>testabm</controller>
+    <method>runTestAbmListar</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/raumarysCreate</name>
+    <controller>testabm</controller>
+    <method>runTestAbmCreate</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/raumarysShow</name>
+    <controller>testabm</controller>
+    <method>runTestAbmShow</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/raumarysDelete</name>
+    <controller>testabm</controller>
+    <method>runTestAbmDelete</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/raumarysUpdate</name>
+    <controller>testabm</controller>
+    <method>runTestAbmUpdate</method>
+    <request>POST</request>
+  </link>
+  <!-- Bloque de configuracion de la ruta del controller Raumarys-->
+  <link>
+    <name>/raumarysIndex</name>
+    <controller>testabm</controller>
+    <method>runTestAbmIndex</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/raumarysListar</name>
+    <controller>testabm</controller>
+    <method>runTestAbmListar</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/raumarysCreate</name>
+    <controller>testabm</controller>
+    <method>runTestAbmCreate</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/raumarysShow</name>
+    <controller>testabm</controller>
+    <method>runTestAbmShow</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/raumarysDelete</name>
+    <controller>testabm</controller>
+    <method>runTestAbmDelete</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/raumarysUpdate</name>
+    <controller>testabm</controller>
+    <method>runTestAbmUpdate</method>
+    <request>POST</request>
+  </link>
+  <!-- Bloque de configuracion de la ruta del controller Raumarys-->
+  <link>
+    <name>/raumarysIndex</name>
+    <controller>testabm</controller>
+    <method>runTestAbmIndex</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/raumarysListar</name>
+    <controller>testabm</controller>
+    <method>runTestAbmListar</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/raumarysCreate</name>
+    <controller>testabm</controller>
+    <method>runTestAbmCreate</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/raumarysShow</name>
+    <controller>testabm</controller>
+    <method>runTestAbmShow</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/raumarysDelete</name>
+    <controller>testabm</controller>
+    <method>runTestAbmDelete</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/raumarysUpdate</name>
+    <controller>testabm</controller>
+    <method>runTestAbmUpdate</method>
+    <request>POST</request>
+  </link>
+  <!-- Bloque de configuracion de la ruta del controller Raumarys-->
+  <link>
+    <name>/raumarysIndex</name>
+    <controller>testabm</controller>
+    <method>runTestAbmIndex</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/raumarysListar</name>
+    <controller>testabm</controller>
+    <method>runTestAbmListar</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/raumarysCreate</name>
+    <controller>testabm</controller>
+    <method>runTestAbmCreate</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/raumarysShow</name>
+    <controller>testabm</controller>
+    <method>runTestAbmShow</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/raumarysDelete</name>
+    <controller>testabm</controller>
+    <method>runTestAbmDelete</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/raumarysUpdate</name>
+    <controller>testabm</controller>
+    <method>runTestAbmUpdate</method>
+    <request>POST</request>
+  </link>
 </route>

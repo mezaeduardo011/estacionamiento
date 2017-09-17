@@ -20,8 +20,6 @@ class Comun{
     public $usuario;
     public $active;
 
-    
-    
 
     public function __construct($id = false) {
 

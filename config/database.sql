@@ -17,7 +17,7 @@ ALTER TABLE ho_conexiones
 CREATE TABLE ho_entidades (
   id int Identity(1,1) NOT NULL,
   conexiones_id int NOT NULL,
-  tabla varchar(64) NOT NULL,
+  entidad varchar(64) NOT NULL,
   field varchar(100) NOT NULL,
   type varchar(20) NOT NULL,
   required varchar(10) NOT NULL,
@@ -32,24 +32,26 @@ ALTER TABLE ho_entidades
 CREATE TABLE ho_vistas (
   id int Identity(1,1),
   conexiones_id int NOT NULL,
-  entidades_tabla varchar(64) NOT NULL,
+  entidad varchar(64) NOT NULL,
   nombre varchar(64) NOT NULL,
   field varchar(64) NOT NULL,
-  type varchar(14) NOT NULL,
-  label varchar(14) NOT NULL,
-  place_holder varchar(14),
+  type varchar(20) NOT NULL,
+  dimension int,
+  restrincion varchar(10),
+  label varchar(50) NOT NULL,
+  mascara varchar(50) NOT NULL,
   required bit,
-  related varchar(100),
+  place_holder varchar(14),
   relacionado bit,
-  vista_campo varchar(10),
+  vista_campo varchar(30),
   orden int,
   hidden_form bit ,
   hidden_list bit ,
   CONSTRAINT pk_ho_vistas PRIMARY KEY(id)
 );
 
---ALTER TABLE ho_vistas
- -- ADD UNIQUE (entidades_tabla, nombre,)
+ALTER TABLE ho_vistas
+ ADD UNIQUE (conexiones_id, entidades_tabla,nombre,field,label,mascara)
 
 
 -- Vista encargada de extraer las tablas

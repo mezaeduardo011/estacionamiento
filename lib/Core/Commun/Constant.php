@@ -28,7 +28,8 @@ interface Constant
     const APP_MODEL = DIRECTORY_SEPARATOR.'Model'; // Model
     const APP_CONTR = DIRECTORY_SEPARATOR.'Controller'; // Constrolador
     const APP_VIEWS = DIRECTORY_SEPARATOR.'Templates'; // Responce
-    const APP_VHOME = DIRECTORY_SEPARATOR.'Templates/home'; // Responce
+    const APP_VHOME = DIRECTORY_SEPARATOR.'Templates'.DIRECTORY_SEPARATOR.'home'; // Responce
+    const APP_VISTA = DIRECTORY_SEPARATOR.'Templates'.DIRECTORY_SEPARATOR.'vistas'; // Responce
     const APP_TKEYS = DIRECTORY_SEPARATOR.'extends';
     const PHP_VER_REQ = '7.0.0'; // Minimo
 

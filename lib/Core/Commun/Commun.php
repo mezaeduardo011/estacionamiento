@@ -69,7 +69,8 @@ trait Commun
      */
     static function cameCase(string $texto)
     {
-        $tmp = explode(' ',$texto);
+        $resul = str_replace(array('_'),array(' '),$texto);
+        $tmp = explode(' ',$resul);
         $res = '';
         if(count($tmp)==0)
         {

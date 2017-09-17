@@ -4,7 +4,7 @@ use JPH\Core\Commun\Security;
 use APP\Admin\Model AS Model;
 use JPH\Core\Console\App;
 use JPH\Core\Load\Configuration;
-use APP\Admin\Model\{HoEntidadesModel,HoConexionesModel};
+use APP\Admin\Model\{HoEntidadesModel,HoConexionesModel,HoVistasModel};
 
 
 /**
@@ -27,6 +27,7 @@ class HomeController extends Controller{
          $this->model = new Model\HomeModel();
          $this->hoConexionesModel = new Model\HoConexionesModel();
          $this->hoEntidadesModel = new model\HoEntidadesModel();
+         $this->hoVistasModel = new model\HoVistasModel();
 
      }
      /**
@@ -162,7 +163,11 @@ class HomeController extends Controller{
     public function runConfiguracionVista($request)
     {
         // stdClass Object(    [connect] => 1    [tabla] => test_abm    [vista] => 0)
-        $schema=$this->hoEntidadesModel->extraerDetalleEntidade((array)$request);
+        if($request->vista==0) {
+            $schema = $this->hoEntidadesModel->extraerDetalleEntidade((array)$request);
+        }else{
+            $schema = $this->hoVistasModel->extraerDetalleEntidade((array)$request);
+        }
 
        /*Array(    [0] => stdClass Object
        (
@@ -179,11 +184,26 @@ class HomeController extends Controller{
         $campo = array();
         $temp = array();
         foreach ($schema AS $key => $value){
-            $campo[] = array('id' =>$value->id , 'name' =>$value->field , 'tipo' =>$value->type, 'required' => $value->required, 'dimension' => $value->dimension, 'restrincion' => $value->restrincion);
+            $campo[] = array(
+                'id' =>$value->id ,
+                'name' =>$value->field ,
+                'tipo' =>$value->type,
+                'required' => $value->required,
+                'dimension' => $value->dimension,
+                'restrincion' => $value->restrincion,
+                'nombre' => (empty($value->nombre))?'':$value->nombre,
+                'label' => (empty($value->label))?'':@$value->label,
+                'mascara' => (empty($value->mascara))?'':@$value->mascara,
+                'place_holder' => (empty($value->place_holder))?'':@$value->place_holder,
+                'vista_campo' => (empty($value->vista_campo))?'':@$value->vista_campo,
+                'orden' => (empty($value->orden))?'':@$value->orden,
+                'hidden_form' => (empty($value->hidden_form))?'':@$value->hidden_form,
+                'hidden_list' => (empty($value->hidden_list))?'':@$value->hidden_list
+            );
        }
 
         $temp['conexion'] = $schema[0]->conexiones_id;
-        $temp['tabla'] = $schema[0]->tabla;
+        $temp['tabla'] = $schema[0]->entidad;
         $temp['columns'] = $campo;
         $dataJson[] = $temp;
         $this->json($dataJson);
@@ -207,9 +227,17 @@ class HomeController extends Controller{
 
 
 
-     public function runProcesarForms($request)
+     public function runVistaNuevaConfigurada($request)
      {
-         $this->pp($request);
+         $result=$this->hoVistasModel->setConfiguracionVistaNew($request);
+         if(is_null($result)){
+             $dataJson['error']='1';
+             $dataJson['msj']='¡Uff!, ya el registro se encuentra registrado';
+         }else{
+             $dataJson['error']='0';
+             $dataJson['msj']='¡Bien!, Registro efectuado exitosamente';
+         }
+         $this->json($dataJson);
      }
 
      public function runConfigCampos($request)

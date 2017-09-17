@@ -15,26 +15,26 @@ class HoEntidadesModel extends Main
    {
        $this->tabla = 'ho_entidades';
        $this->campoid = array('id');
-       $this->campos = array('conexiones_id','tabla','field','type','restrincion');
+       $this->campos = array('conexiones_id','entidad','field','type','restrincion');
        parent::__construct();
    }
     /**
      * Permite Agregar entidades nueva a la tabla de configuracion
      * @param Integer $db, Identificador de la base de datos
-     * @param String $table, entidad encargada de procesar los datos
+     * @param String $data, entidad encargada de procesar los datos
      */
-    public function registrarEntidadesConfig($db,$table )
+    public function registrarEntidadesConfig($db,$data )
     {
 
         $sql = "DELETE FROM ho_entidades WHERE conexiones_id=$db";
         $this->execute($sql);
-        for ($a=0;$a<count($table);$a++) {
-            $t = $this->showColumns($table[$a]);
+        for ($a=0;$a<count($data);$a++) {
+            $t = $this->showColumns($data[$a]);
             $sql = "";
             foreach ($t AS $key => $value) {
                 $da = explode('(', $value->Type);
                 $dim = str_replace(')', ' ', $da[1]);
-                $sql = "INSERT INTO ho_entidades (conexiones_id,tabla,field,type,required,dimension,restrincion) VALUES($db,'" . $table[$a] . "','" . $value->Field . "','" . $da[0] . "','" . $value->Null . "',$dim,'" . $value->Key . "');";
+                $sql = "INSERT INTO ho_entidades (conexiones_id,entidad,field,type,required,dimension,restrincion) VALUES($db,'" . $data[$a] . "','" . $value->Field . "','" . $da[0] . "','" . $value->Null . "',$dim,'" . $value->Key . "');";
                 $return = $this->execute($sql);
             }
         }
@@ -45,16 +45,17 @@ class HoEntidadesModel extends Main
      * Permite extraer etidades y detalles de las vistas relacionadas a una conexion seleccionada
      * @return array $tmp, informacion de los diferentes entidades
      */
-    public function extraerTodasLasEntidades($tabla)
+    public function extraerTodasLasEntidades($data)
     {
-
+        // Proceso la entidad que llega en un string separado por ,
+        $data['entidad']=explode(',',$data['entidad']);
         $val = array();
-        for ($a=0;$a<count($tabla['entidad']);$a++) {
-            $sql = "SELECT a.tabla, count(b.label) AS catidad, b.label FROM ho_entidades AS a
-                    LEFT JOIN ho_vistas AS b ON a.tabla=b.entidades_tabla
-                    WHERE tabla='".$tabla['entidad'][$a]."'
-                    GROUP BY a.tabla, label;";
-            $val[$tabla['entidad'][$a]] = $this->executeQuery($sql);
+        for ($a=0;$a<count($data['entidad']);$a++) {
+           $sql = "SELECT a.entidad, count(b.nombre) AS catidad, b.nombre FROM ho_entidades AS a
+                    LEFT JOIN ho_vistas AS b ON a.entidad=b.entidad
+                    WHERE a.entidad='".$data['entidad'][$a]."'
+                    GROUP BY a.entidad, b.nombre;";
+            $val[$data['entidad'][$a]] = $this->executeQuery($sql);
         }
         return $val;
     }
@@ -63,11 +64,13 @@ class HoEntidadesModel extends Main
      * Permite extraer el detalle completo de la entidad que ya esta registrada
      * @return array $tmp, informacion de los diferentes entidades
      */
-    public function extraerDetalleEntidade($tabla)
+    public function extraerDetalleEntidade($data)
     {
-        $sql = "SELECT * FROM ".$this->tabla." WHERE conexiones_id=".$tabla['connect']." AND  tabla='".$tabla['tabla']."'";
+        $sql = "SELECT * FROM ".$this->tabla." WHERE conexiones_id=".$data['connect']." AND  entidad='".$data['tabla']."'";
         $temp = $this->executeQuery($sql);
         return $temp;
     }
+
+
 }
 ?>

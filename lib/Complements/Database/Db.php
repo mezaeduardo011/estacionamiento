@@ -93,34 +93,40 @@ trait Db  {
         if (!$this->inited) {
             $this->init();
         }
+        try {
+            switch ($this->motor) {
+                case "maria":
+                    $this->resultSet = $this->conn->query($query);
 
-        switch ($this->motor) {
-            case "maria":
-            $this->resultSet = $this->conn->query($query);
+                    if ($this->conn->errno > 0) {
+                        $this->error = true;
+                        $this->errorno = $this->conn->errno;
+                        $this->message = mysqli_error($this->conn);
+                    } else {
+                        $this->error = false;
+                        $this->errorno = 0;
+                        $this->message = '';
+                    }
+                    break;
+                case "sql":
+                    $this->resultSet = sqlsrv_query($this->conn, $query);
+                    if (count(sqlsrv_errors())>0) {
+                        $erro = sqlsrv_errors();
+                        $this->error = true;
+                        $this->inited = false;
+                        $this->message = sqlsrv_errors();
+                        throw new \TypeError('Exepcion capturadad de base de datos, code error:'.$erro[0]['SQLSTATE'].', mensaje:'.$erro[0]['message']);
 
-            if ($this->conn->errno > 0) {
-                $this->error = true;
-                $this->errorno = $this->conn->errno;
-                $this->message = mysqli_error($this->conn);
-            } else {
-                $this->error = false;
-                $this->errorno = 0;
-                $this->message = '';
+                    } else {
+                        $this->error = false;
+                        $this->errorno = 0;
+                        $this->message = '';
+                    }
+
+                    break;
             }
-            break;
-            case "sql":
-            $this->resultSet = sqlsrv_query($this->conn, $query);
-            if ($this->resultSet === false) {
-                $this->error = true;
-                $this->inited = false;
-                $this->message = sqlsrv_errors();
-            } else {
-                $this->error = false;
-                $this->errorno = 0;
-                $this->message = '';
-            }
-
-            break;
+        }catch (\TypeError $t){
+            die($t->getMessage());
         }
     }
 

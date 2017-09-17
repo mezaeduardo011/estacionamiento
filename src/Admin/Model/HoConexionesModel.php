@@ -72,7 +72,7 @@ class HoConexionesModel extends Main
         $val = $this->executeQuery($sql);
         // Permite extraer las entidades de la conexion actual desde la informacion schema
         //$sql = "SELECT * FROM ".$val[0]->db.".INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME not like 'ho_%' AND TABLE_TYPE='BASE TABLE' AND TABLE_NAME not like 'seg%'";
-        $sql = "SELECT a.*, (SELECT COUNT(b.TABLE_NAME) from ".$val[0]->db.".INFORMATION_SCHEMA.COLUMNS AS b WHERE b.TABLE_NAME = a.TABLE_NAME) AS TABLE_COLUMNS, (SELECT (CASE count(*) WHEN 0 THEN 'NO' ELSE 'SI' END)   FROM ho_entidades AS c WHERE c.tabla = a.TABLE_NAME  ) AS TABLE_REGISTRADA ";
+        $sql = "SELECT a.*, (SELECT COUNT(b.TABLE_NAME) from ".$val[0]->db.".INFORMATION_SCHEMA.COLUMNS AS b WHERE b.TABLE_NAME = a.TABLE_NAME) AS TABLE_COLUMNS, (SELECT (CASE count(*) WHEN 0 THEN 'NO' ELSE 'SI' END)   FROM ho_entidades AS c WHERE c.entidad = a.TABLE_NAME  ) AS TABLE_REGISTRADA ";
         $sql .= "FROM ".$val[0]->db.".INFORMATION_SCHEMA.TABLES AS a ";
         $sql .= "WHERE a.TABLE_NAME not like 'ho_%' AND a.TABLE_TYPE='BASE TABLE' AND a.TABLE_NAME not like 'seg%'";
         $tablas=$this->executeQuery($sql);
