@@ -247,5 +247,29 @@ $process57 = $router->setRuta($datos57);
 $datos58 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysUpdate", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmUpdate');
 $process58 = $router->setRuta($datos58);
 /** Fin del caso de /raumarysUpdate */
+/** Inicio  del Bloque de instancia al proceso de /raumarysIndex  */
+$datos59 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/raumarysIndex", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmIndex');
+$process59 = $router->setRuta($datos59);
+/** Fin del caso de /raumarysIndex */
+/** Inicio  del Bloque de instancia al proceso de /raumarysListar  */
+$datos60 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysListar", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmListar');
+$process60 = $router->setRuta($datos60);
+/** Fin del caso de /raumarysListar */
+/** Inicio  del Bloque de instancia al proceso de /raumarysCreate  */
+$datos61 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysCreate", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmCreate');
+$process61 = $router->setRuta($datos61);
+/** Fin del caso de /raumarysCreate */
+/** Inicio  del Bloque de instancia al proceso de /raumarysShow  */
+$datos62 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysShow", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmShow');
+$process62 = $router->setRuta($datos62);
+/** Fin del caso de /raumarysShow */
+/** Inicio  del Bloque de instancia al proceso de /raumarysDelete  */
+$datos63 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysDelete", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmDelete');
+$process63 = $router->setRuta($datos63);
+/** Fin del caso de /raumarysDelete */
+/** Inicio  del Bloque de instancia al proceso de /raumarysUpdate  */
+$datos64 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysUpdate", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmUpdate');
+$process64 = $router->setRuta($datos64);
+/** Fin del caso de /raumarysUpdate */
  
 ?>

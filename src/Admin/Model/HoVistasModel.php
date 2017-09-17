@@ -47,18 +47,19 @@ class HoVistasModel extends Main
      */
     public function extraerDetalleEntidade($data)
     {
-        $sql = "SELECT * FROM ".$this->tabla." WHERE conexiones_id=".$data['connect']." AND  entidad='".$data['tabla']."'";
+        $vista = explode('-',$data['vista']);
+        $sql = "SELECT * FROM ".$this->tabla." WHERE conexiones_id=".$data['connect']." AND  entidad='".$data['tabla']."' AND nombre='".$vista[1]."'";
         $temp = $this->executeQuery($sql);
         return $temp;
     }
 
     public function extraerDetalleEntidadeListado($data)
     {
-        // Proceso la entidad que llega en un string separado por ,
+        // Proceso la entidad que llega en un string separado por BUG GENERAR,
         $data['entidad']=explode(',',$data['tabla']);
         $val = array();
         for ($a=0;$a<count($data['tabla']);$a++) {
-            $sql = "SELECT * FROM ".$this->tabla." WHERE conexiones_id=".$data['connect']." AND  entidad='".$data['entidad'][$a]."'";
+            echo $sql = "SELECT * FROM ".$this->tabla." WHERE conexiones_id=".$data['connect']." AND  entidad='".$data['entidad'][$a]."'";
             $val[$data['entidad'][$a]] = $this->executeQuery($sql);
         }
         return $val;

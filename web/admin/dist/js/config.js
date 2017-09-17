@@ -411,7 +411,7 @@ Config = {
                 if(valores.catidad>0){
                     Config.html += '                        <tr>';
                     Config.html += '                            <td>';
-                    Config.html += '                                <i class="fa fa-circle" aria-hidden="true"></i> <a class="cursor" data-tabla="' + key + '" data-id="1">'+valores.nombre+'</a>';
+                    Config.html += '                                <i class="fa fa-circle" aria-hidden="true"></i> <a class="cursor" data-tabla="' + key + '" data-id="1-'+valores.nombre+'">'+valores.nombre+'</a>';
                     Config.html += '                            </td>';
                     Config.html += '                        </tr>';
                 }

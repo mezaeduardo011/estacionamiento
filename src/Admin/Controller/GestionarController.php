@@ -42,8 +42,8 @@ class GestionarController extends Controller
        $schema = $this->hoVistasModel->extraerDetalleEntidadeListado((array)$request);
        foreach ($schema AS $key => $value){
          // sleep(20);
-            echo $key;
-            $this->pp($schema);
+           // echo $key;
+            //$this->pp($schema);
            if(count($value)>0){
                $aplicativo = $this->pathActivo;
                $nombreVista = $value[0]->nombre;
