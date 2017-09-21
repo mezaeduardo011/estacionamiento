@@ -125,15 +125,15 @@ class Route
         foreach ($option AS $cont => $routes):
             foreach ($routes AS $route):
                 $action = strtolower(self::validarMethods($route['request'])); 
-            fputs($ar, '/** Inicio  del Bloque de instancia al proceso de ' . $route['name'] . '  */');
-            fputs($ar, "\n");
-            fputs($ar, '$datos' . $cont . ' = array(\'petition\'=>"'.$route['request'].'", \'request\'=>$request, \'name\'=>"' . $route['name'] . '", \'apps\'=>"' . $app . '", \'controller\'=>"' . $route['controller'] . '",\'method\'=>\'' . $route['method'] . '\');');
-            fputs($ar, "\n");
-            fputs($ar, '$process' . $cont . ' = $router->setRuta($datos' . $cont . ');');
-            fputs($ar, "\n");
-            fputs($ar, '/** Fin del caso de ' . $route['name'] . ' */');
-            fputs($ar, "\n");
-            endforeach;
+                fputs($ar, '/** Inicio  del Bloque de instancia al proceso de ' . $route['name'] . '  */');
+                fputs($ar, "\n");
+                fputs($ar, '$datos' . $cont . ' = array(\'petition\'=>"'.$route['request'].'", \'request\'=>$request, \'name\'=>"' . $route['name'] . '", \'apps\'=>"' . $app . '", \'controller\'=>"' . $route['controller'] . '",\'method\'=>\'' . $route['method'] . '\');');
+                fputs($ar, "\n");
+                fputs($ar, '$process' . $cont . ' = $router->setRuta($datos' . $cont . ');');
+                fputs($ar, "\n");
+                fputs($ar, '/** Fin del caso de ' . $route['name'] . ' */');
+                fputs($ar, "\n");
+                endforeach;
             endforeach;
 
             fputs($ar, " \n");

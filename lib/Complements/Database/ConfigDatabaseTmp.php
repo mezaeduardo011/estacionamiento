@@ -4,7 +4,7 @@ namespace JPH\Complements\Database;
  * Configuracion de las conexiones bb Hornero 1.0
  * @propiedad: Hornero 1.0
  * @utor: Gregorio Bolivar <elalconxvii@gmail.com>
- * @created: 17/09/2017
+ * @created: 21/09/2017
  * @version: 1.0
  */ 
 trait ConfigDatabase
@@ -48,26 +48,5 @@ trait ConfigDatabase
    return $this;
   }
   /** Fin del caso del method de default */
-
-  /** Inicio  del method  de serverDataBaseLocal  */
-  public function serverDataBaseLocal()
-  {
-   // Driver de Conexion con la de base de datos
-   $this->motor = 'sql';
-   // IP o HOST de comunicacion con el servidor de base de datos
-    $this->host = 'localhost';
-   // Puerto de comunicacion con el servidor de base de datos
-   $this->port = '1433';
-   // Nombre base de datos
-   $this->db = 'test_crud';
-   // Usuario de acceso a la base de datos
-   $this->user = 'sa';
-   // Clave de acceso a la base de datos
-   $this->pass = 's3rv3r..*';
-   // Codificacion de la base de datos
-   $this->encoding = 'UTF-8';
-   return $this;
-  }
-  /** Fin del caso del method de serverDataBaseLocal */
 }
 ?>

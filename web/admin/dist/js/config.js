@@ -383,9 +383,12 @@ Config = {
     listadoUniversoTablas: function () {
         // leer las tablas seleccionadas en local store
         var table = localStorage.getItem('entidadesSeleccionadas');
+        var conexion = localStorage.getItem('conexionId');
         //alert(table);
         $('#box3 #menuPrincipalTitulo').html(' ').html('Listado de Tablas Seleccionadas');
-        $.post('/getEntidadesSeleccionadas',{'entidad':table},function (dataJson) {
+
+
+        $.post('/getEntidadesSeleccionadas',{'conn':conexion,'entidad':table},function (dataJson) {
 
         Config.html = '';
         Config.html +='<div class="col-sm-12 col-md-12 ">';
@@ -397,6 +400,7 @@ Config = {
             Config.html +='                        <h4 class="panel-title">';
             Config.html +='                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse'+key+'" id="'+key+'-titulo">';
             Config.html +='                            <i class="fa fa-table" aria-hidden="true"></i> &nbsp;'+key+'</a>';
+            Config.html +='                            <span class="label label-primary pull-right"> &nbsp;'+values.length+'</span>';
             Config.html +='                        </h4>';
             Config.html +='                    </div>';
             Config.html +='                    <div id="collapse'+key+'" class="panel-collapse collapse ">';
@@ -411,7 +415,13 @@ Config = {
                 if(valores.catidad>0){
                     Config.html += '                        <tr>';
                     Config.html += '                            <td>';
-                    Config.html += '                                <i class="fa fa-circle" aria-hidden="true"></i> <a class="cursor" data-tabla="' + key + '" data-id="1-'+valores.nombre+'">'+valores.nombre+'</a>';
+                    if(parseInt(valores.procesado)==0) {
+                        console.info(valores.procesado+'--0');
+                        Config.html += '                         <i class="fa fa-square-o" aria-hidden="true"></i> <a class="cursor" data-tabla="' + key + '" data-id="1-' + valores.nombre + '">' + valores.nombre + '</a>';
+                    }else{
+                        Config.html += '                         <i class="fa fa-check-square-o" aria-hidden="true"></i> <a class="cursor" data-tabla="' + key + '" data-id="1-'+valores.nombre+'">'+valores.nombre+'</a>  <div class=" text-right" style="margin-top: -21px"><a href="/'+valores.nombre+'Index" target="_blank" class="cursor"><i class="fa fa-external-link" aria-hidden="true"></i></a></div>';
+                        console.info(valores.procesado+'--1');
+                    }
                     Config.html += '                            </td>';
                     Config.html += '                        </tr>';
                 }
@@ -480,9 +490,9 @@ Config = {
         Config.html +='          <th style="width: 20px;">Etiqueta</th>';
         Config.html +='          <th style="width: 10px;">Mascara</th>';
         Config.html +='          <th style="width: 5px;"title="Navega en otra Vista">NOV</th>';
-        Config.html +='          <th style="width: 13px;"title="Cual vista navega del listado">CUAL</th>';
-        Config.html +='          <th style="width: 13px;"title="Cual campo es el que necesita">Campo</th>';
-        Config.html +='          <th style="width: 14px;"title="De cual Forma">Forma</th>';
+        Config.html +='          <th style="width: 15px;"title="Cual vista navega del listado">CUAL</th>';
+        Config.html +='          <th style="width: 15px;"title="Cual campo es el que necesita">Campo</th>';
+        //Config.html +='          <th style="width: 10px;"title="De cual Forma">Forma</th>';
         Config.html +='     </tr>';
         // Recorrer datos principal
         $.each(dataJson , function( key, value ) {
@@ -498,23 +508,33 @@ Config = {
             Config.html +='          <td></td>';
             Config.html +='          <td></td>';
             Config.html +='          <td></td>';
-            Config.html +='          <td></td>';
             Config.html +='     </tr>';
             // Recorrer campos principal
             $.each(value.columns , function( item, valor ) {
-                Config.html +='     <tr>';
+                Config.html +='  <tr>';
                 var pk = valor.restrincion=='PRI' ? '<u><b title="Primary Key de la entidad">'+valor.name+'</b></u>' : valor.name;
-                Config.html +='          <td><input type="hidden" name="restrincion[]" value="'+valor.restrincion+'"><input type="hidden" name="field[]" value="'+valor.name+'">'+pk+'</td>';
-                Config.html +='          <td><input type="hidden" name="type[]" value="'+valor.tipo+'">'+valor.tipo+'</td>';
-                Config.html +='          <td><input type="hidden" name="dimension[]" value="'+valor.dimension+'"><span class="badge bg-blue">'+valor.dimension+'</span></td>';
+                Config.html +='    <td><input type="hidden" name="restrincion[]" value="'+valor.restrincion+'"><input type="hidden" name="field[]" value="'+valor.name+'">'+pk+'</td>';
+                Config.html +='    <input type="hidden" name="required[]" value="'+valor.required+'">';
+                Config.html +='    <td><input type="hidden" name="type[]" value="'+valor.tipo+'">'+valor.tipo+'</td>';
+                Config.html +='    <td><input type="hidden" name="dimension[]" value="'+valor.dimension+'"><span class="badge bg-blue">'+valor.dimension+'</span></td>';
                 //alert(valor.restrincion);
-                var req = valor.required=='YES' ? 'required' : '';
-                var imp = valor.restrincion=='PRI' ? '<input type="hidden" name="etiqueta[]" size="20" value="'+valor.name+'" required><span title="Primary Key de la entidad">'+valor.name +'</span>' : '<div style="position: absolute; float: left; margin-top: -1px; font-size: 12px; z-index: 100; color:red;" title="Campo Requerido">*</div><input class="form-control etiqueta" name="etiqueta[]" value="'+valor.label+'" data-item="etiqueta-'+item+'" type="text" size="20" maxlength="20" '+req+'><div id="etiqueta-'+item+'" data-item="'+item+'" style="position: absolute; float: inherit; margin-top: -12px; font-size: 10px; z-index: 100;" title="Maxima cantidad de caracteres">20</div>';
+                var req = valor.required!='YES' ? 'required' : '';
+                var req1 = valor.required!='YES' ? '<div style="position: absolute; float: left; margin-top: -1px; font-size: 12px; z-index: 100; color:red;" title="Campo Requerido">*</div>' : '';
+                var req2 = valor.required!='YES' ? '<div id="etiqueta-\'+item+\'" data-item="\'+item+\'" style=" float: right; margin-top: -12px; margin-right: -12px; font-size: 10px; z-index: 100;" title="Maxima cantidad de caracteres">20</div>' : '';
+                var imp = valor.restrincion=='PRI' ? '<input type="hidden" name="etiqueta[]" size="20" value="'+valor.name+'" required><span title="Primary Key de la entidad">'+valor.name +'</span>' : req1+'<input class="form-control etiqueta" name="etiqueta[]" value="'+valor.label+'" data-item="etiqueta-'+item+'" type="text" size="20" maxlength="20" '+req+'>'+req2;
                 Config.html +='          <td>'+imp+'</td>';
 
                 Config.html +='          <td><select class="form-control" name="mascara[]">';
                 if(valor.restrincion=='PRI' || valor.tipo=='int'){
                     Config.html +='          <option value="integer" selected>Integer</option>';
+                }else if(valor.tipo=='bit'){
+                    Config.html +='          <option value="boolean" selected>Boolean</option>';
+                }else if(valor.tipo=='date'){
+                    Config.html +='          <option value="boolean" selected>Fecha</option>';
+                }else if(valor.tipo=='timestamp'){
+                    Config.html +='          <option value="timestamp" selected>Timestamp</option>';
+                }else if(valor.tipo=='text' || valor.dimension>250){
+                    Config.html +='          <option value="textArea" selected>TextArea</option>';
                 }else{
                     Config.html +='          <option value="texto">Texo</option>';
                     Config.html +='          <option value="integer">Integer</option>';
@@ -527,7 +547,6 @@ Config = {
                 Config.html +='          </select></td>';
                 Config.html +='          <td class="text-center"><input type="checkbox" name="relacionado[]"></td>';
                 Config.html +='          <td><select class="form-control" name="vista_campo[]"></select></td>';
-                Config.html +='          <td><select class="form-control"></select></td>';
                 Config.html +='          <td><select class="form-control"></select></td>';
                 Config.html +='     </tr>';
 
@@ -553,7 +572,7 @@ Config = {
             $('#'+id ).html(diff);
         });
 
-        $('#box3 #menuSegundarioBody form#sendVistaActiva').submit(function(){
+        $('#box3 #menuSegundarioBody form#sendVistaActiva').submit(function(e){
             var name = $('#box3 #nameVista');
             var item = $('#box3 #tabla');
             if(name.val()=='Nueva Vista'){
@@ -563,7 +582,8 @@ Config = {
             }
             var procesada = $("#box3 #tabla").val();
 
-            $.post('/sendVistaNuevaConfigurada',$(this).serialize()+'&name='+name.val(), function (dataJson) {
+
+           $.post('/sendVistaNuevaConfigurada',$(this).serialize()+'&name='+name.val(), function (dataJson) {
                 if(dataJson.error==0) {
                     alertar(dataJson.msj);
                     // append
@@ -574,7 +594,7 @@ Config = {
                     setTimeout(function(){ $('#box3 #accordionTablas #'+procesada+'-titulo').click(); }, 1000);
                 }
             })
-            return false;
+            e.preventDefault();
         })
 
     },
@@ -590,12 +610,22 @@ Config = {
                 type: 'POST',
                 url: '/procesarCrudVistas',
                 data: {'connect':con,'tabla':ent},
-                success: function(data){
-                    // on success use return data here
+                success: function(dataJson){
+                    if(dataJson.error==0){
+                        alertar(dataJson.msj)
+                        $('#box3 #optProcesarCodigoVistas').children('i').removeClass('fa-spin');
+                        Config.listadoUniversoTablas(); //collapsed
+                        //$('table.table#'+item.val()).append('<tr><td><i class="fa fa-circle" aria-hidden="true"></i> <a class="cursor" data-tabla="'+item.val()+'" data-id="1">'+name.val()+'</a></td></tr>').fadeIn(1000)
+                        //Config.selecionarItemTabla();
+                        //setTimeout(function(){ $('#box3 #accordionTablas #'+procesada+'-titulo').click(); }, 1000);
+                        Config.desactivarSegundo('box3');
+                    }else{
+                        mostrarError(dataJson.msj)
+                    }
                 },
                 error: function(xhr, type, exception) {
                     // if ajax fails display error alert
-                    alert("ajax error response type "+type);
+                    mostrarError("ajax error response type "+type);
                 }
             });
 

@@ -126,9 +126,24 @@ trait Commun
 
    static function json($datos)
    {
-       Commun::headerJson();
-      echo $json=\json_encode($datos);
+       self::headerJson();
+       //$tmp = self::utf8enc($datos);
+       echo json_encode( $datos );
    }
+
+    static function utf8enc($array) {
+        if (!is_array($array)) return;
+        $helper = array();
+        foreach ($array as $key => $value) $helper[\utf8_encode($key)] = is_array($value) ? utf8enc($value) : \utf8_encode($value);
+        return $helper;
+    }
+
+    static function utf8dec($array) {
+        if (!is_array($array)) return;
+        $helper = array();
+        foreach ($array as $key => $value) $helper[\utf8_decode($key)] = is_array($value) ? utf8enc($value) : \utf8_decode($value);
+        return $helper;
+    }
 
    /**
     * 
@@ -378,6 +393,11 @@ trait Commun
     {
         $myString = substr($texto, 0, -1);
         return $myString;  // 'number 1, number 2, number 3'
+    }
+    public static function pathVista()
+    {
+        $vista=str_replace(array('/','Index'),array('',''),$_SERVER['PATH_INFO']);
+        return $vista;
     }
 
 }

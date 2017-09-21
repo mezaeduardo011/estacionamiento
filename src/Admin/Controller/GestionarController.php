@@ -39,49 +39,36 @@ class GestionarController extends Controller
    }
    public function runProcesarCrudVistas($request)
    {
-       $schema = $this->hoVistasModel->extraerDetalleEntidadeListado((array)$request);
-       foreach ($schema AS $key => $value){
-         // sleep(20);
-           // echo $key;
-            //$this->pp($schema);
-           if(count($value)>0){
-               $aplicativo = $this->pathActivo;
-               $nombreVista = $value[0]->nombre;
-               $entidad = $key;
-               $campos = $value;
-               $crudVista = new AppCrudVista();
-               echo $crudVista -> createStructuraFileCRUD($aplicativo,$nombreVista,$entidad,$campos);
-               continue;
+       $schema = $this->hoVistasModel->extraerDetalleEntidadListado((array)$request);
+
+       foreach ($schema AS $entidad => $views){
+           $columnsReal = NULL;
+           $columnsReal = $views['columnas'];
+           unset($views['columnas']);
+            //print_r($columnsReal);die();
+           // sleep(20);
+           foreach ($views AS $nombreVista => $campos) {
+               if (count($campos) > 0) {
+                   $aplicativo = $this->pathActivo;
+                   $crudVista = new AppCrudVista();
+                   $crudVista -> createStructuraFileCRUD($aplicativo,$nombreVista,$entidad,$campos,$columnsReal);
+                   $this->hoVistasModel->updateStatusVista($campos[0]->conexiones_id, $entidad,$nombreVista);
+               }
+
            }
-           //$this->cache->set('tabla',$key);
-           //$this->cache->set('proceso',100);
-           //$this->cache->set('alter','modificando file 3'.$a);
-       }
-      /* $campo = array();
-       $temp = array();
-       foreach ($schema AS $key => $value){
-           $campo[] = array(
-               'id' =>$value->id ,
-               'name' =>$value->field ,
-               'tipo' =>$value->type,
-               'required' => $value->required,
-               'dimension' => $value->dimension,
-               'restrincion' => $value->restrincion,
-               'nombre' => (empty($value->nombre))?'':@$value->nombre,
-               'label' => (empty($value->label))?'':@$value->label,
-               'mascara' => (empty($value->mascara))?'':@$value->mascara,
-               'place_holder' => (empty($value->place_holder))?'':@$value->place_holder,
-               'vista_campo' => (empty($value->vista_campo))?'':@$value->vista_campo,
-               'orden' => (empty($value->orden))?'':@$value->orden,
-               'hidden_form' => (empty($value->hidden_form))?'':@$value->hidden_form,
-               'hidden_list' => (empty($value->hidden_list))?'':@$value->hidden_list
-           );
+
        }
 
-       $temp['conexion'] = $schema[0]->conexiones_id;
-       $temp['tabla'] = $schema[0]->tabla;
-       $temp['columns'] = $campo;
-       $dataJson[] = $temp;*/
+       $result=true;
+
+       if(is_null($result)){
+           $dataJson['error']='1';
+           $dataJson['msj']='Error en generar el sistema';
+       }else{
+           $dataJson['error']='0';
+           $dataJson['msj'] = 'Todo fue procesado exitosamente';
+       }
+       $this->json($dataJson);
 
    }
 }

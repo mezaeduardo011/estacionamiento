@@ -136,11 +136,79 @@
     <method>runUsuariosUpdate</method>
     <request>POST</request>
   </link>
-  <!-- Inicio de proceso -->
+  <!-- ### END SYSTEM ### -->
+  <!-- Bloque de configuracion de la ruta del controller Autos-->
   <link>
-    <name>/testAutoIndex</name>
-    <controller>testAbm</controller>
-    <method>runTestAbmIndex</method>
+    <name>/autosIndex</name>
+    <controller>testAutos</controller>
+    <method>runTestAutosIndex</method>
     <request>GET</request>
+  </link>
+  <link>
+    <name>/autosListar</name>
+    <controller>testAutos</controller>
+    <method>runTestAutosListar</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/autosCreate</name>
+    <controller>testAutos</controller>
+    <method>runTestAutosCreate</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/autosShow</name>
+    <controller>testAutos</controller>
+    <method>runTestAutosShow</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/autosDelete</name>
+    <controller>testAutos</controller>
+    <method>runTestAutosDelete</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/autosUpdate</name>
+    <controller>testAutos</controller>
+    <method>runTestAutosUpdate</method>
+    <request>POST</request>
+  </link>
+  <!-- Bloque de configuracion de la ruta del controller Autos2-->
+  <link>
+    <name>/autos2Index</name>
+    <controller>testAutos</controller>
+    <method>runTestAutosIndex</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/autos2Listar</name>
+    <controller>testAutos</controller>
+    <method>runTestAutosListar</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/autos2Create</name>
+    <controller>testAutos</controller>
+    <method>runTestAutosCreate</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/autos2Show</name>
+    <controller>testAutos</controller>
+    <method>runTestAutosShow</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/autos2Delete</name>
+    <controller>testAutos</controller>
+    <method>runTestAutosDelete</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/autos2Update</name>
+    <controller>testAutos</controller>
+    <method>runTestAutosUpdate</method>
+    <request>POST</request>
   </link>
 </route>

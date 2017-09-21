@@ -313,7 +313,8 @@ trait Db  {
      * @param type $table 
      * @return type
      */
-    public function describe($table){
+    public function describe($table,$schem=''){
+        $schema=(!empty($schem))?$schem.'.':'';
         $query = false;
         $q = new Query();
         switch ($this->motor) {
@@ -322,9 +323,9 @@ trait Db  {
             break;
             case "sql":
              $q->select("c.COLUMN_NAME as Field,c.DATA_TYPE + '(' + convert(varchar(10), isnull(c.CHARACTER_MAXIMUM_LENGTH, -1)) + ')' as 'Type',c.IS_NULLABLE as 'Null',isnull(LEFT(k.constraint_type, 3), '') as 'Key',c.COLUMN_DEFAULT as 'Default', case co.is_identity when 1 then 'auto_increment' else '' end as Extra");
-            $q->from("INFORMATION_SCHEMA.COLUMNS as c");
-            $q->join("left", "INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE  as kc")->on("kc.COLUMN_NAME = c.COLUMN_NAME and kc.TABLE_NAME = c.TABLE_NAME");
-            $q->join("left", "INFORMATION_SCHEMA.TABLE_CONSTRAINTS as k")->on("k.CONSTRAINT_NAME = kc.CONSTRAINT_NAME and k.TABLE_NAME = kc.TABLE_NAME");
+            $q->from($schema."INFORMATION_SCHEMA.COLUMNS as c");
+            $q->join("left", $schema."INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE  as kc")->on("kc.COLUMN_NAME = c.COLUMN_NAME and kc.TABLE_NAME = c.TABLE_NAME");
+            $q->join("left", $schema."INFORMATION_SCHEMA.TABLE_CONSTRAINTS as k")->on("k.CONSTRAINT_NAME = kc.CONSTRAINT_NAME and k.TABLE_NAME = kc.TABLE_NAME");
             $q->join("left", "sys.objects as o")->on("o.name = c.TABLE_NAME");
             $q->join("left", "sys.columns as co")->on("o.object_id = co.object_id and co.name = c.COLUMN_NAME");
             $q->where("c.TABLE_NAME = '" . $table . "'");

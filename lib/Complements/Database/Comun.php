@@ -62,8 +62,9 @@ class Comun{
      * @return devuelve el Id
      */
     public function guardar() {
-
+        //var_dump($this->validarTiposDeDatos())
         if ($this->validarTiposDeDatos()) {
+
             if (!$this->existe()) {
                 $fields = '';
                 $values = '';
@@ -87,7 +88,7 @@ class Comun{
                 $fields = substr($fields, 0, -1);
                 $values = substr($values, 0, -1);
 
-                $query = "INSERT INTO " . $this->tabla . " (" . $fields . ") VALUES(" . $values . ")";
+               $query = "INSERT INTO " . $this->tabla . " (" . $fields . ") VALUES(" . $values . ")";
                 $this->execute($query);
 
                 if (!is_array($this->campoid)) {
@@ -128,11 +129,12 @@ class Comun{
                 $query = "UPDATE " . $this->tabla;
                 $query .= " SET " . $set;
                 $query .= " WHERE " . $this->where;
-                $this->execute($query);
+                $this->db->execute($query);
             }
         } else {
             return -1;
         }
+
     }
 
     /**
@@ -159,7 +161,6 @@ class Comun{
         $query .= is_array($this->campoid) ? implode(',', $this->campoid) : $this->campoid;
         $query .= " FROM " . $this->tabla;
         $query .= " WHERE " . $this->where;
-
         $this->db->get($query);
 
         if ($this->db->numRows() > 0) {
@@ -204,6 +205,7 @@ class Comun{
 
     public function fijarValores($data = false)
     {
+        //print_r($data); die();
         if(!$data) $data = $_POST;
         foreach ($data as $campo => $valor) {
             $this->fijarValor($campo,$valor);
@@ -232,7 +234,6 @@ class Comun{
         $query .= is_array($this->campoid) ? implode(',', $this->campoid) : $this->campoid;
         $query .= " FROM " . $this->tabla;
         $query .= " WHERE " . $this->where;
-
 
         $this->db->get($query);
         if ($this->db->numRows() > 0) {
@@ -527,8 +528,8 @@ class Comun{
      * @param string $entidad, valor de la entidad 
      * @return objeto $elemento, valores de la entidad
      */
-    public function showColumns($entidad){
-        $tmp = $this->db->describe($entidad);
+    public function showColumns($entidad,$schema=''){
+        $tmp = $this->db->describe($entidad,$schema);
         $elemento=(object)$this->executeQuery($tmp);
         return $elemento;
     }

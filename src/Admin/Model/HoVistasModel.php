@@ -24,17 +24,19 @@ class HoVistasModel extends Main
        //All::pp($datos);
         $temp = array();
         for ($a=0;$a<count($data->field);$a++){
-            //print_r( $datos->etiqueta[$a]);
-            $this->fijarValor('conexiones_id',$data->conexiones_id);
-            $this->fijarValor('entidad',$data->tabla);
-            $this->fijarValor('nombre',$data->name);
-            $this->fijarValor('field',$data->field[$a]);
-            $this->fijarValor('type',$data->type[$a]);
-            $this->fijarValor('dimension',$data->dimension[$a]);
-            $this->fijarValor('mascara',$data->mascara[$a]);
-            $this->fijarValor('label',$data->etiqueta[$a]);
-            $this->fijarValor('restrincion',$data->restrincion[$a]);
-            $this->guardar();
+            if(!empty(trim($data->etiqueta[$a]))) {
+                $this->fijarValor('conexiones_id', $data->conexiones_id);
+                $this->fijarValor('entidad', $data->tabla);
+                $this->fijarValor('nombre', $data->name);
+                $this->fijarValor('field', $data->field[$a]);
+                $this->fijarValor('type', $data->type[$a]);
+                $this->fijarValor('dimension', $data->dimension[$a]);
+                $this->fijarValor('mascara', $data->mascara[$a]);
+                $this->fijarValor('label', $data->etiqueta[$a]);
+                $this->fijarValor('restrincion', $data->restrincion[$a]);
+                $this->fijarValor('required', $data->required[$a]);
+                $this->guardar();
+            }
         }
        //$this->fijarValores($datos);
        $val = $this->lastId();
@@ -53,16 +55,39 @@ class HoVistasModel extends Main
         return $temp;
     }
 
-    public function extraerDetalleEntidadeListado($data)
+    public function extraerDetalleEntidadListado($data)
     {
-        // Proceso la entidad que llega en un string separado por BUG GENERAR,
+        $registro = array();
+        // Recibimos todas las entidades seleccionadas dependiendo de la conexion enviada y la pasamos a un arreglo
         $data['entidad']=explode(',',$data['tabla']);
-        $val = array();
-        for ($a=0;$a<count($data['tabla']);$a++) {
-            echo $sql = "SELECT * FROM ".$this->tabla." WHERE conexiones_id=".$data['connect']." AND  entidad='".$data['entidad'][$a]."'";
+        // Recorremos las entidades y verificamos las las vistas existentes
+        for ($a=0;$a<count($data['entidad']);$a++) {
+            // Hacemos las consultas para identificar cuales vistas tiene
+            $sql = "SELECT * FROM view_list_vist_gene WHERE conexiones_id=" . $data['connect'] . " AND entidad='" . $data['entidad'][$a] . "'";
             $val[$data['entidad'][$a]] = $this->executeQuery($sql);
+
+            $sql = "SELECT * FROM ho_entidades WHERE conexiones_id=" . $data['connect'] . " AND entidad='" . $data['entidad'][$a] . "'";
+            $registro[$data['entidad'][$a]]['columnas'] = $this->executeQuery($sql);
+
+            foreach ($val AS $key => $value){
+                foreach ($value AS $key => $value2) {
+                    $sql = "SELECT * FROM ho_vistas WHERE conexiones_id=" . $value2->conexiones_id . " AND entidad='" . $value2->entidad . "' AND nombre='" . $value2->nombre . "'";
+                    $obj = $this->executeQuery($sql);
+                    $registro[$value2->entidad][$value2->nombre] = $obj;
+                }
+            }
         }
-        return $val;
+        return $registro;
+    }
+
+    /**
+     * Permite actualizar que fue procesada la vista
+     */
+    public function updateStatusVista($conn, $entidad,$vita)
+    {
+        $sql = "UPDATE ho_vistas SET procesado=1  WHERE conexiones_id=".$conn." AND  entidad='".$entidad."' AND nombre='".$vita."'";
+        $temp = $this->execute($sql);
+        return $temp;
     }
 
 

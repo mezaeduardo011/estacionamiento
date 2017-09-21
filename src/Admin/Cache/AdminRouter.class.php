@@ -3,7 +3,7 @@
 /**
  * @propiedad: PROPIETARIO DEL CODIGO
  * @Autor: Gregorio Bolivar * @email: elalconxvii@gmail.com
- * @Fecha de Creacion: 17/09/2017
+ * @Fecha de Creacion: 21/09/2017
  * @Auditado por: Gregorio J Bolívar B
  * @Descripción: Generado por el generador de codigo de router de webStores * @package: datosClass
  * @version: 1.0
@@ -99,177 +99,53 @@ $process20 = $router->setRuta($datos20);
 $datos21 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/usuariosUpdate", 'apps'=>"Admin", 'controller'=>"usuarios",'method'=>'runUsuariosUpdate');
 $process21 = $router->setRuta($datos21);
 /** Fin del caso de /usuariosUpdate */
-/** Inicio  del Bloque de instancia al proceso de /testAutoIndex  */
-$datos22 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/testAutoIndex", 'apps'=>"Admin", 'controller'=>"testAbm",'method'=>'runTestAbmIndex');
+/** Inicio  del Bloque de instancia al proceso de /autosIndex  */
+$datos22 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/autosIndex", 'apps'=>"Admin", 'controller'=>"testAutos",'method'=>'runTestAutosIndex');
 $process22 = $router->setRuta($datos22);
-/** Fin del caso de /testAutoIndex */
-/** Inicio  del Bloque de instancia al proceso de /raumarysIndex  */
-$datos23 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/raumarysIndex", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmIndex');
+/** Fin del caso de /autosIndex */
+/** Inicio  del Bloque de instancia al proceso de /autosListar  */
+$datos23 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/autosListar", 'apps'=>"Admin", 'controller'=>"testAutos",'method'=>'runTestAutosListar');
 $process23 = $router->setRuta($datos23);
-/** Fin del caso de /raumarysIndex */
-/** Inicio  del Bloque de instancia al proceso de /raumarysListar  */
-$datos24 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysListar", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmListar');
+/** Fin del caso de /autosListar */
+/** Inicio  del Bloque de instancia al proceso de /autosCreate  */
+$datos24 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/autosCreate", 'apps'=>"Admin", 'controller'=>"testAutos",'method'=>'runTestAutosCreate');
 $process24 = $router->setRuta($datos24);
-/** Fin del caso de /raumarysListar */
-/** Inicio  del Bloque de instancia al proceso de /raumarysCreate  */
-$datos25 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysCreate", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmCreate');
+/** Fin del caso de /autosCreate */
+/** Inicio  del Bloque de instancia al proceso de /autosShow  */
+$datos25 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/autosShow", 'apps'=>"Admin", 'controller'=>"testAutos",'method'=>'runTestAutosShow');
 $process25 = $router->setRuta($datos25);
-/** Fin del caso de /raumarysCreate */
-/** Inicio  del Bloque de instancia al proceso de /raumarysShow  */
-$datos26 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysShow", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmShow');
+/** Fin del caso de /autosShow */
+/** Inicio  del Bloque de instancia al proceso de /autosDelete  */
+$datos26 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/autosDelete", 'apps'=>"Admin", 'controller'=>"testAutos",'method'=>'runTestAutosDelete');
 $process26 = $router->setRuta($datos26);
-/** Fin del caso de /raumarysShow */
-/** Inicio  del Bloque de instancia al proceso de /raumarysDelete  */
-$datos27 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysDelete", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmDelete');
+/** Fin del caso de /autosDelete */
+/** Inicio  del Bloque de instancia al proceso de /autosUpdate  */
+$datos27 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/autosUpdate", 'apps'=>"Admin", 'controller'=>"testAutos",'method'=>'runTestAutosUpdate');
 $process27 = $router->setRuta($datos27);
-/** Fin del caso de /raumarysDelete */
-/** Inicio  del Bloque de instancia al proceso de /raumarysUpdate  */
-$datos28 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysUpdate", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmUpdate');
+/** Fin del caso de /autosUpdate */
+/** Inicio  del Bloque de instancia al proceso de /autos2Index  */
+$datos28 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/autos2Index", 'apps'=>"Admin", 'controller'=>"testAutos",'method'=>'runTestAutosIndex');
 $process28 = $router->setRuta($datos28);
-/** Fin del caso de /raumarysUpdate */
-/** Inicio  del Bloque de instancia al proceso de /raumarysIndex  */
-$datos29 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/raumarysIndex", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmIndex');
+/** Fin del caso de /autos2Index */
+/** Inicio  del Bloque de instancia al proceso de /autos2Listar  */
+$datos29 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/autos2Listar", 'apps'=>"Admin", 'controller'=>"testAutos",'method'=>'runTestAutosListar');
 $process29 = $router->setRuta($datos29);
-/** Fin del caso de /raumarysIndex */
-/** Inicio  del Bloque de instancia al proceso de /raumarysListar  */
-$datos30 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysListar", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmListar');
+/** Fin del caso de /autos2Listar */
+/** Inicio  del Bloque de instancia al proceso de /autos2Create  */
+$datos30 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/autos2Create", 'apps'=>"Admin", 'controller'=>"testAutos",'method'=>'runTestAutosCreate');
 $process30 = $router->setRuta($datos30);
-/** Fin del caso de /raumarysListar */
-/** Inicio  del Bloque de instancia al proceso de /raumarysCreate  */
-$datos31 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysCreate", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmCreate');
+/** Fin del caso de /autos2Create */
+/** Inicio  del Bloque de instancia al proceso de /autos2Show  */
+$datos31 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/autos2Show", 'apps'=>"Admin", 'controller'=>"testAutos",'method'=>'runTestAutosShow');
 $process31 = $router->setRuta($datos31);
-/** Fin del caso de /raumarysCreate */
-/** Inicio  del Bloque de instancia al proceso de /raumarysShow  */
-$datos32 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysShow", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmShow');
+/** Fin del caso de /autos2Show */
+/** Inicio  del Bloque de instancia al proceso de /autos2Delete  */
+$datos32 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/autos2Delete", 'apps'=>"Admin", 'controller'=>"testAutos",'method'=>'runTestAutosDelete');
 $process32 = $router->setRuta($datos32);
-/** Fin del caso de /raumarysShow */
-/** Inicio  del Bloque de instancia al proceso de /raumarysDelete  */
-$datos33 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysDelete", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmDelete');
+/** Fin del caso de /autos2Delete */
+/** Inicio  del Bloque de instancia al proceso de /autos2Update  */
+$datos33 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/autos2Update", 'apps'=>"Admin", 'controller'=>"testAutos",'method'=>'runTestAutosUpdate');
 $process33 = $router->setRuta($datos33);
-/** Fin del caso de /raumarysDelete */
-/** Inicio  del Bloque de instancia al proceso de /raumarysUpdate  */
-$datos34 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysUpdate", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmUpdate');
-$process34 = $router->setRuta($datos34);
-/** Fin del caso de /raumarysUpdate */
-/** Inicio  del Bloque de instancia al proceso de /raumarysIndex  */
-$datos35 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/raumarysIndex", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmIndex');
-$process35 = $router->setRuta($datos35);
-/** Fin del caso de /raumarysIndex */
-/** Inicio  del Bloque de instancia al proceso de /raumarysListar  */
-$datos36 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysListar", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmListar');
-$process36 = $router->setRuta($datos36);
-/** Fin del caso de /raumarysListar */
-/** Inicio  del Bloque de instancia al proceso de /raumarysCreate  */
-$datos37 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysCreate", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmCreate');
-$process37 = $router->setRuta($datos37);
-/** Fin del caso de /raumarysCreate */
-/** Inicio  del Bloque de instancia al proceso de /raumarysShow  */
-$datos38 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysShow", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmShow');
-$process38 = $router->setRuta($datos38);
-/** Fin del caso de /raumarysShow */
-/** Inicio  del Bloque de instancia al proceso de /raumarysDelete  */
-$datos39 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysDelete", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmDelete');
-$process39 = $router->setRuta($datos39);
-/** Fin del caso de /raumarysDelete */
-/** Inicio  del Bloque de instancia al proceso de /raumarysUpdate  */
-$datos40 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysUpdate", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmUpdate');
-$process40 = $router->setRuta($datos40);
-/** Fin del caso de /raumarysUpdate */
-/** Inicio  del Bloque de instancia al proceso de /raumarysIndex  */
-$datos41 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/raumarysIndex", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmIndex');
-$process41 = $router->setRuta($datos41);
-/** Fin del caso de /raumarysIndex */
-/** Inicio  del Bloque de instancia al proceso de /raumarysListar  */
-$datos42 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysListar", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmListar');
-$process42 = $router->setRuta($datos42);
-/** Fin del caso de /raumarysListar */
-/** Inicio  del Bloque de instancia al proceso de /raumarysCreate  */
-$datos43 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysCreate", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmCreate');
-$process43 = $router->setRuta($datos43);
-/** Fin del caso de /raumarysCreate */
-/** Inicio  del Bloque de instancia al proceso de /raumarysShow  */
-$datos44 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysShow", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmShow');
-$process44 = $router->setRuta($datos44);
-/** Fin del caso de /raumarysShow */
-/** Inicio  del Bloque de instancia al proceso de /raumarysDelete  */
-$datos45 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysDelete", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmDelete');
-$process45 = $router->setRuta($datos45);
-/** Fin del caso de /raumarysDelete */
-/** Inicio  del Bloque de instancia al proceso de /raumarysUpdate  */
-$datos46 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysUpdate", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmUpdate');
-$process46 = $router->setRuta($datos46);
-/** Fin del caso de /raumarysUpdate */
-/** Inicio  del Bloque de instancia al proceso de /raumarysIndex  */
-$datos47 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/raumarysIndex", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmIndex');
-$process47 = $router->setRuta($datos47);
-/** Fin del caso de /raumarysIndex */
-/** Inicio  del Bloque de instancia al proceso de /raumarysListar  */
-$datos48 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysListar", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmListar');
-$process48 = $router->setRuta($datos48);
-/** Fin del caso de /raumarysListar */
-/** Inicio  del Bloque de instancia al proceso de /raumarysCreate  */
-$datos49 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysCreate", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmCreate');
-$process49 = $router->setRuta($datos49);
-/** Fin del caso de /raumarysCreate */
-/** Inicio  del Bloque de instancia al proceso de /raumarysShow  */
-$datos50 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysShow", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmShow');
-$process50 = $router->setRuta($datos50);
-/** Fin del caso de /raumarysShow */
-/** Inicio  del Bloque de instancia al proceso de /raumarysDelete  */
-$datos51 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysDelete", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmDelete');
-$process51 = $router->setRuta($datos51);
-/** Fin del caso de /raumarysDelete */
-/** Inicio  del Bloque de instancia al proceso de /raumarysUpdate  */
-$datos52 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysUpdate", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmUpdate');
-$process52 = $router->setRuta($datos52);
-/** Fin del caso de /raumarysUpdate */
-/** Inicio  del Bloque de instancia al proceso de /raumarysIndex  */
-$datos53 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/raumarysIndex", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmIndex');
-$process53 = $router->setRuta($datos53);
-/** Fin del caso de /raumarysIndex */
-/** Inicio  del Bloque de instancia al proceso de /raumarysListar  */
-$datos54 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysListar", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmListar');
-$process54 = $router->setRuta($datos54);
-/** Fin del caso de /raumarysListar */
-/** Inicio  del Bloque de instancia al proceso de /raumarysCreate  */
-$datos55 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysCreate", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmCreate');
-$process55 = $router->setRuta($datos55);
-/** Fin del caso de /raumarysCreate */
-/** Inicio  del Bloque de instancia al proceso de /raumarysShow  */
-$datos56 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysShow", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmShow');
-$process56 = $router->setRuta($datos56);
-/** Fin del caso de /raumarysShow */
-/** Inicio  del Bloque de instancia al proceso de /raumarysDelete  */
-$datos57 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysDelete", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmDelete');
-$process57 = $router->setRuta($datos57);
-/** Fin del caso de /raumarysDelete */
-/** Inicio  del Bloque de instancia al proceso de /raumarysUpdate  */
-$datos58 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysUpdate", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmUpdate');
-$process58 = $router->setRuta($datos58);
-/** Fin del caso de /raumarysUpdate */
-/** Inicio  del Bloque de instancia al proceso de /raumarysIndex  */
-$datos59 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/raumarysIndex", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmIndex');
-$process59 = $router->setRuta($datos59);
-/** Fin del caso de /raumarysIndex */
-/** Inicio  del Bloque de instancia al proceso de /raumarysListar  */
-$datos60 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysListar", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmListar');
-$process60 = $router->setRuta($datos60);
-/** Fin del caso de /raumarysListar */
-/** Inicio  del Bloque de instancia al proceso de /raumarysCreate  */
-$datos61 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysCreate", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmCreate');
-$process61 = $router->setRuta($datos61);
-/** Fin del caso de /raumarysCreate */
-/** Inicio  del Bloque de instancia al proceso de /raumarysShow  */
-$datos62 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysShow", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmShow');
-$process62 = $router->setRuta($datos62);
-/** Fin del caso de /raumarysShow */
-/** Inicio  del Bloque de instancia al proceso de /raumarysDelete  */
-$datos63 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysDelete", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmDelete');
-$process63 = $router->setRuta($datos63);
-/** Fin del caso de /raumarysDelete */
-/** Inicio  del Bloque de instancia al proceso de /raumarysUpdate  */
-$datos64 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/raumarysUpdate", 'apps'=>"Admin", 'controller'=>"testabm",'method'=>'runTestAbmUpdate');
-$process64 = $router->setRuta($datos64);
-/** Fin del caso de /raumarysUpdate */
+/** Fin del caso de /autos2Update */
  
 ?>

@@ -48,8 +48,8 @@ class RouterGenerator
                     $mthod = $this->met;
                     if (!file_exists($this->file)) {
                         $obj = array('controller' => $this->activ, 'method' => $mthod);
-                        $msj = All::getMsjException('Core', 'error-cargar-ruta',$this->obj);
-                        throw new \TypeError($this->msj);
+                        $msj = All::getMsjException('Core', 'error-cargar-ruta',$obj);
+                        throw new \TypeError($msj);
                     }
 
                     //include_once $file;

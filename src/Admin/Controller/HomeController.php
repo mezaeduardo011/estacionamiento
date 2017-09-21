@@ -165,6 +165,7 @@ class HomeController extends Controller{
         // stdClass Object(    [connect] => 1    [tabla] => test_abm    [vista] => 0)
         if($request->vista==0) {
             $schema = $this->hoEntidadesModel->extraerDetalleEntidade((array)$request);
+
         }else{
             $schema = $this->hoVistasModel->extraerDetalleEntidade((array)$request);
         }

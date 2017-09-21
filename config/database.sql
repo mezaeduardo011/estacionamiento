@@ -40,13 +40,14 @@ CREATE TABLE ho_vistas (
   restrincion varchar(10),
   label varchar(50) NOT NULL,
   mascara varchar(50) NOT NULL,
-  required bit,
+  required varchar(3) NOT NULL,
   place_holder varchar(14),
   relacionado bit,
   vista_campo varchar(30),
   orden int,
   hidden_form bit ,
   hidden_list bit ,
+  procesado bit,
   CONSTRAINT pk_ho_vistas PRIMARY KEY(id)
 );
 
@@ -56,6 +57,21 @@ ALTER TABLE ho_vistas
 
 -- Vista encargada de extraer las tablas
 SELECT a.*, (SELECT COUNT(b.TABLE_NAME) from test_crud.INFORMATION_SCHEMA.COLUMNS AS b WHERE b.TABLE_NAME = a.TABLE_NAME) AS columas from test_crud.INFORMATION_SCHEMA.TABLES AS a WHERE a.TABLE_NAME not like 'ho_%' AND a.TABLE_TYPE='BASE TABLE' AND a.TABLE_NAME not like 'seg%'
+
+-- Extraer las vistas generadas a partir de una entidad generadas por el sistema
+CREATE VIEW view_list_vist_gene AS
+  SELECT conexiones_id, entidad, nombre, coalesce(procesado,0) AS procesado from ho_vistas
+  GROUP BY conexiones_id, entidad, nombre, procesado
+
+-- Vista encargadas de extraer las entidades seleccionada por el cliente en el momento
+CREATE VIEW view_list_enti_regi AS
+  SELECT b.conexiones_id, a.entidad, (SELECT COUNT(conexiones_id) FROM view_list_vist_gene AS c WHERE c.entidad=a.entidad ) AS catidad, b.nombre, b.procesado FROM ho_entidades AS a
+    LEFT JOIN view_list_vist_gene AS b ON a.entidad=b.entidad
+  --WHERE a.entidad='test_abm'
+  GROUP BY b.conexiones_id, a.entidad, b.nombre, b.procesado
+
+
+https://obliads.myshopify.com/admin/oauth/authorize?client_id=e4c342fe71581dc2ee590f87dd5dd28c&scope=write_orders,read_customers&redirect_uri=http://app-mundoweb.c9users.io/storeShopify&state={nonce}&grant_options[]=per-user
 
 
 

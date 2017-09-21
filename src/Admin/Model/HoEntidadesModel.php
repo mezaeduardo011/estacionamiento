@@ -25,11 +25,13 @@ class HoEntidadesModel extends Main
      */
     public function registrarEntidadesConfig($db,$data )
     {
-
+        $sql = "SELECT * FROM ho_conexiones WHERE id=".$db;
+        $conect = $this->executeQuery($sql);
         $sql = "DELETE FROM ho_entidades WHERE conexiones_id=$db";
         $this->execute($sql);
         for ($a=0;$a<count($data);$a++) {
-            $t = $this->showColumns($data[$a]);
+
+            $t = $this->showColumns($data[$a],$conect[0]->db);
             $sql = "";
             foreach ($t AS $key => $value) {
                 $da = explode('(', $value->Type);
@@ -51,10 +53,8 @@ class HoEntidadesModel extends Main
         $data['entidad']=explode(',',$data['entidad']);
         $val = array();
         for ($a=0;$a<count($data['entidad']);$a++) {
-           $sql = "SELECT a.entidad, count(b.nombre) AS catidad, b.nombre FROM ho_entidades AS a
-                    LEFT JOIN ho_vistas AS b ON a.entidad=b.entidad
-                    WHERE a.entidad='".$data['entidad'][$a]."'
-                    GROUP BY a.entidad, b.nombre;";
+           $sql = "SELECT * FROM view_list_enti_regi AS a
+                    WHERE a.entidad='".$data['entidad'][$a]."' AND conexiones_id=".$data['conn'];
             $val[$data['entidad'][$a]] = $this->executeQuery($sql);
         }
         return $val;
@@ -66,6 +66,8 @@ class HoEntidadesModel extends Main
      */
     public function extraerDetalleEntidade($data)
     {
+
+
         $sql = "SELECT * FROM ".$this->tabla." WHERE conexiones_id=".$data['connect']." AND  entidad='".$data['tabla']."'";
         $temp = $this->executeQuery($sql);
         return $temp;
