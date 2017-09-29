@@ -9,7 +9,6 @@ trait Usuarios
     public $password;
     public $msjError;
     public $errorNum;
-    public $nusuario = 0;
     public $roles = [];
     public $apellido;
     public $nombre;
@@ -18,8 +17,8 @@ trait Usuarios
     public $bloqueada;
     public $cambiarPW;
     public $cantIntentosPermitos;
-    public $ICuentaBloqueada;
-    public $KLoginFallidos;
+    public $cuenta_bloqueada;
+    public $login_fallidos;
     public $db;
 
     public function start($obj)
@@ -31,8 +30,8 @@ trait Usuarios
     public function validarUsuario()
     {
         $this->cantIntentosPermitos = 3;
-        $this->ICuentaBloqueada = "N";
-        $this->KLoginFallidos = "0";
+        $this->cuenta_bloqueada = "N";
+        $this->login_fallidos = "0";
 
         if ($this->usuario == "") {
             $this->msjError = "Ingrese el usuario";
@@ -42,36 +41,36 @@ trait Usuarios
 
             $passEncrypt = md5($this->password);
 
-            $query = "select nusuario,ICuentaBloqueada,KLoginFallidos from SEGUSUARIOS where cusuario = '" . $this->db->escape($this->usuario) . "'";
+            $query = "select id,cuenta_bloqueada,login_fallidos from seg_usuarios where usuario = '" . $this->db->escape($this->usuario) . "'";
             $this->db->get($query);
 
             $rows = $this->db->numRows();
 
             if ($rows > 0) {
                 $row = $this->db->fetch();
-                $this->nusuario = $row->nusuario;
-                $this->ICuentaBloqueada = $row->ICuentaBloqueada;
-                $this->KLoginFallidos = $row->KLoginFallidos;
+                $this->id = $row->id;
+                $this->cuenta_bloqueada = $row->cuenta_bloqueada;
+                $this->login_fallidos = $row->login_fallidos;
 
-                if ($this->ICuentaBloqueada == "N") {
-                    $query = "select NUSUARIO from SEGUSUARIOS where cusuario = '" . $this->db->escape($this->usuario) . "' and (dpassword = '" . $passEncrypt . "' or dpassword = '" . $this->db->escape($this->password) . "')";
+                if ($this->cuenta_bloqueada == "N") {
+                    $query = "select id from seg_usuarios where usuario = '" . $this->db->escape($this->usuario) . "' and (clave = '" . $passEncrypt . "' or clave = '" . $this->db->escape($this->password) . "')";
                     $this->db->get($query);
                     $rows = $this->db->numRows();
                     if ($rows > 0) {
-                        $query = "Update SEGUSUARIOS set ICuentaBloqueada = 'N', KLoginFallidos = 0 where cusuario = '" . $this->db->escape($this->usuario) . "'";
+                        $query = "Update seg_usuarios set cuenta_bloqueada = 'N', login_fallidos = 0 where usuario = '" . $this->db->escape($this->usuario) . "'";
                         $this->db->execute($query);
                         $this->cargarRoles();
                         return true;
-                    } else if ($this->KLoginFallidos >= $this->cantIntentosPermitos) {
+                    } else if ($this->login_fallidos >= $this->cantIntentosPermitos) {
 
-                        $query = "Update SEGUSUARIOS set ICuentaBloqueada = 'S' where cusuario = '" . $this->db->escape($this->usuario) . "'";
+                        $query = "Update seg_usuarios set cuenta_bloqueada = 'S' where usuario = '" . $this->db->escape($this->usuario) . "'";
                         $this->db->execute($query);
                         $this->msjError = "Usuario bloqueado, intentos fallidos excedidos, revise su correo con su nueva clave";
                     } else {
 
-                        $query = "Update SEGUSUARIOS set KLoginFallidos = KLoginFallidos + 1 where cusuario = '" . $this->db->escape($this->usuario) . "'";
+                        $query = "Update seg_usuarios set login_fallidos = login_fallidos + 1 where usuario = '" . $this->db->escape($this->usuario) . "'";
                         $this->db->execute($query);
-                        $this->msjError = "Contraseña incorrecta, intentos fallidos: " . ($this->KLoginFallidos + 1);
+                        $this->msjError = "Contraseña incorrecta, intentos fallidos: " . ($this->login_fallidos + 1);
                         //$this->enviarCorreo();
                     }
                 } else {
@@ -87,13 +86,17 @@ trait Usuarios
 
     private function cargarRoles()
     {
-        $query = "select r.NROL,r.DROL from segroles r inner join SEGUSUARIOSROLES ru on ru.NROL = r.NROL where  ru.NUSUARIO = " . $this->db->escape($this->nusuario);
+        $query = "select a.id AS perfil_id, a.detalle AS perfil, c.id AS roles_id, c.detalle AS roles, e.*  from seg_perfil AS a
+                    INNER JOIN seg_perfil_roles AS b ON b.seg_perfil_id=a.id
+                    INNER JOIN seg_roles AS c ON c.id=b.seg_roles_id
+                    INNER JOIN seg_usuarios_perfil AS d ON d.seg_perfil_id=a.id
+                    INNER JOIN seg_usuarios AS e ON d.seg_usuarios_id=e.id WHERE  e.id = " . $this->db->escape($this->id);
         $this->db->get($query);
         $rows = $this->db->numRows();
 
         if ($rows > 0) {
             while ($row = $this->db->fetch()) {
-                $this->roles[] = $row->DROL;
+                $this->roles[] = $row->perfil;
             }
         }
     }
@@ -109,48 +112,48 @@ trait Usuarios
         $this->correo = ($this->correo == 'NULL' ? $this->correo : "'" . $this->db->escape($this->correo) . "'" );
         $this->telefono = ($this->telefono == 'NULL' ? $this->telefono : "'" . $this->db->escape($this->telefono) . "'" );
 
-        if ($this->nusuario != 0) {
-            $query = "UPDATE SEGUSUARIOS SET ";
-            $query .= "CUSUARIO = '" . $this->db->escape($this->usuario) . "',";
-            $query .= "DAPELLIDO = '" . $this->db->escape($this->apellido) . "',";
-            $query .= "DNOMBRE = '" . $this->db->escape($this->nombre) . "',";
-            $query .= "DCORREOELECTRONICO = " . $this->correo . ",";
-            $query .= "DTELEFONO = " . $this->telefono . ",";
-            $query .= "ICUENTABLOQUEADA = '" . $this->db->escape($this->bloqueada) . "',";
-            $query .= "ICAMBIARPASSWORD = '" . $this->db->escape($this->cambiarPW) . "' ";
+        if ($this->id != 0) {
+            $query = "UPDATE seg_usuarios SET ";
+            $query .= "usuario = '" . $this->db->escape($this->usuario) . "',";
+            $query .= "apellidos = '" . $this->db->escape($this->apellido) . "',";
+            $query .= "nombres = '" . $this->db->escape($this->nombre) . "',";
+            $query .= "correo = " . $this->correo . ",";
+            $query .= "telefono = " . $this->telefono . ",";
+            $query .= "cuenta_bloqueada = '" . $this->db->escape($this->bloqueada) . "',";
+            $query .= "cambiar_clave = '" . $this->db->escape($this->cambiarPW) . "' ";
 
             if($this->password != ''){
-                $query .= ", DPASSWORD = '" . $this->password . "' ";
+                $query .= ", clave = '" . $this->password . "' ";
             }
 
-            $query .= "WHERE NUSUARIO = '" . $this->db->escape($this->nusuario) . "'";
+            $query .= "WHERE id = '" . $this->db->escape($this->id) . "'";
             $this->execute($query);
         } else {
-            $query = "INSERT INTO SEGUSUARIOS (NCLIENTE,NUSUARIO,CUSUARIO,DPASSWORD,DAPELLIDO,DNOMBRE,DCORREOELECTRONICO,DTELEFONO,ICUENTABLOQUEADA,ICAMBIARPASSWORD,FALTA,NUSUALTA) ";
-            $query .= "VALUES (1,(SELECT max(NUSUARIO)+1 FROM segusuarios),'" . $this->db->escape($this->usuario) . "','" . trim($this->db->escape($this->password)) . "','" . $this->db->escape($this->apellido) . "','" . $this->db->escape($this->nombre) . "'," . $this->correo . ",";
+            $query = "INSERT INTO seg_usuarios (id,usuario,clave,apellidos,nombres,correo,telefono,cuenta_bloqueada,cambiar_clave,created_at,created_at) ";
+            $query .= "VALUES ((SELECT max(id)+1 FROM seg_usuarios),'" . $this->db->escape($this->usuario) . "','" . trim($this->db->escape($this->password)) . "','" . $this->db->escape($this->apellido) . "','" . $this->db->escape($this->nombre) . "'," . $this->correo . ",";
             $query .= $this->telefono . ",'" . $this->db->escape($this->bloqueada) . "','" . $this->db->escape($this->cambiarPW) . "', GETDATE(),1);";
             $query .= "SELECT SCOPE_IDENTITY();";
             $this->execute($query);
-            $this->nusuario = $db->lastId();
+            $this->id = $db->lastId();
         }
         $this->errorNum = $db->errorno;
-        return $this->nusuario;
+        return $this->id;
     }
 
     public function borrar()
     {
 
 
-        if ($this->nusuario != 0) {
-            $query = "DELETE FROM SEGUSUARIOS WHERE nusuario = '" . $this->db->escape($this->nusuario) . "'";
+        if ($this->id != 0) {
+            $query = "DELETE FROM seg_usuarios WHERE id = '" . $this->db->escape($this->id) . "'";
             $this->db->execute($query);
         }
     }
 
     public function obtenerJSON()
     {
-        if ($this->nusuario != 0) {
-            $query = "SELECT * FROM SEGUSUARIOS WHERE NUSUARIO = '" . $this->db->escape($this->nusuario) . "'";
+        if ($this->id != 0) {
+            $query = "SELECT * FROM seg_usuarios WHERE id = '" . $this->db->escape($this->id) . "'";
             $this->db->get($query);
             $row = $this->db->fetch();
 
@@ -166,8 +169,8 @@ trait Usuarios
 
     public function obtenerUser()
     {
-        if ($this->nusuario != 0) {
-            $query = "SELECT * FROM SEGUSUARIOS WHERE NUSUARIO = '" . $this->db->escape($this->nusuario) . "'";
+        if ($this->id != 0) {
+            $query = "SELECT * FROM seg_usuarios WHERE id = '" . $this->db->escape($this->id) . "'";
             $this->db->get($query);
             $row = $this->db->fetch();
 
@@ -197,7 +200,7 @@ trait Usuarios
 
     public function cambiarClave()
     {
-        $query = "UPDATE SEGUSUARIOS SET DPASSWORD = '" . $this->password . "' WHERE NUSUARIO = " . $this->nusuario;
+        $query = "UPDATE seg_usuarios SET clave = '" . $this->password . "' WHERE id = " . $this->id;
         $this->db->execute($query);
     }
 

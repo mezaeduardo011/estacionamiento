@@ -24,8 +24,9 @@ class TestAutosModel extends Main
     * Extraer todos los registros de TestAutos
     * @return array $tablas
     */ 
-   public function getTestAutosListar()
+   public function getTestAutosListar($request)
    {
+
      $tablas=$this->leerTodos();
      return $tablas;
    }
@@ -51,7 +52,8 @@ class TestAutosModel extends Main
    public function getTestAutosShow($data)
    {
      $sql = "SELECT * FROM ".$this->tabla." WHERE id=".$data->data;
-     $tablas=$this->executeQuery($sql);
+     $tmp=$this->executeQuery($sql);
+     $tablas['datos'] = $tmp[0];
      return $tablas;
    }
 

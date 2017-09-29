@@ -1,5 +1,6 @@
 <?php
 namespace APP\Admin\Controller;
+use JPH\Core\Commun\Constant;
 use JPH\Core\Commun\Security;
 use APP\Admin\Model AS Model;
 
@@ -16,11 +17,21 @@ class TestAutosController extends Controller
    use Security;
    public $model;
    public $session;
+   /* Variables de Seguridad */
+   public $apps;
+   public $entidad;
+   public $vista;
+   public $permiso;
+   /* Fin de Variables de Seguridad */
    public function __construct()
    {
        parent::__construct();
        $this->session = $this->authenticated();
        $this->hoTestAutosModel = new Model\TestAutosModel();
+
+       $this->apps = $this->pathApps(__DIR__);
+       $this->entidad = $this->hoTestAutosModel->tabla;
+       $this->vista = $this->pathVista();
    }
 
     /**
@@ -29,9 +40,9 @@ class TestAutosController extends Controller
     */ 
    public function runTestAutosIndex($request)
    {
+     $this->permiso = 'CONSULTA|CONTROL TOTAL';
      $this->tpl->addIni();
      $listado = $this->hoTestAutosModel->getTestAutosListar($request);
-     $this->tpl->add('listado', $listado);;
      $this->tpl->add('usuario', $this->getSession('usuario'));
      $this->tpl->renders('view::vistas/testAutos/'.$this->pathVista().'/index');
    }
@@ -43,6 +54,7 @@ class TestAutosController extends Controller
     */ 
    public function runTestAutosListar($request)
    {
+      $this->permiso = 'CONSULTA|CONTROL TOTAL';
       $result = $this->hoTestAutosModel->getTestAutosListar($request);
       $this->json($result);
    }
@@ -54,6 +66,7 @@ class TestAutosController extends Controller
     */ 
    public function runTestAutosCreate($request)
    {
+      $this->permiso = 'ALTA|CONTROL TOTAL';
       $result = $this->hoTestAutosModel->setTestAutosCreate($request);
       if(is_null($result)){
         $dataJson['error']='1';
@@ -72,8 +85,9 @@ class TestAutosController extends Controller
     */ 
    public function runTestAutosShow($request)
    {
+      $this->permiso = 'CONSULTA|CONTROL TOTAL';
       $result = $this->hoTestAutosModel->getTestAutosShow($request);
-      $this->json($result[0]);
+      $this->json($result);
    }
 
     /**
@@ -83,6 +97,7 @@ class TestAutosController extends Controller
     */ 
    public function runTestAutosDelete($request)
    {
+       $this->permiso = 'BAJA|CONTROL TOTAL';
       $result = $this->hoTestAutosModel->remTestAutosDelete($request);
       if(is_null($result)){
         $dataJson['error']='0';
@@ -101,6 +116,7 @@ class TestAutosController extends Controller
     */ 
    public function runTestAutosUpdate($request)
    {
+       $this->permiso = 'MODIFICACION|CONTROL TOTAL';
       $result = $this->hoTestAutosModel->setTestAutosUpdate($request);
       if(is_null($result)){
         $dataJson['error']='0';

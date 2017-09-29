@@ -15,16 +15,17 @@ class HoVistasModel extends Main
    {
        $this->tabla = 'ho_vistas';
        $this->campoid = array('id');
-       $this->campos = array('conexiones_id','entidad','nombre','field','type','dimension', 'restrincion', 'label','mascara','required','place_holder','relacionado','vista_campo','orden','hidden_form','hidden_list');
+       $this->campos = array('apps','conexiones_id','entidad','nombre','field','type','dimension', 'restrincion', 'label','mascara','required','place_holder','relacionado','vista_campo','orden','hidden_form','hidden_list');
        parent::__construct();
    }
 
    public function setConfiguracionVistaNew($data)
    {
-       //All::pp($datos);
+
         $temp = array();
         for ($a=0;$a<count($data->field);$a++){
             if(!empty(trim($data->etiqueta[$a]))) {
+                $this->fijarValor('apps', $data->apps);
                 $this->fijarValor('conexiones_id', $data->conexiones_id);
                 $this->fijarValor('entidad', $data->tabla);
                 $this->fijarValor('nombre', $data->name);
@@ -83,9 +84,9 @@ class HoVistasModel extends Main
     /**
      * Permite actualizar que fue procesada la vista
      */
-    public function updateStatusVista($conn, $entidad,$vita)
+    public function updateStatusVista($apps, $conn, $entidad,$vita)
     {
-        $sql = "UPDATE ho_vistas SET procesado=1  WHERE conexiones_id=".$conn." AND  entidad='".$entidad."' AND nombre='".$vita."'";
+        $sql = "UPDATE ho_vistas SET procesado=1  WHERE apps='$apps' AND conexiones_id=$conn AND  entidad='$entidad' AND nombre='$vita'";
         $temp = $this->execute($sql);
         return $temp;
     }

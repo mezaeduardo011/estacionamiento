@@ -1,3 +1,10 @@
+//######
+//## This work is licensed under the Creative Commons Attribution-Share Alike 3.0
+//## United States License. To view a copy of this license,
+//## visit http://creativecommons.org/licenses/by-sa/3.0/us/ or send a letter
+//## to Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
+//## Desarrollado por JPH - Ing. - Gregorio Jose Bolivar
+//######
 var Config;
 Config = {
     html: null,
@@ -332,8 +339,8 @@ Config = {
             Config.html += '</form>';
             $('#box2 #menuSegundarioBody').html(' ').html(Config.html);
             Config.seleccionarTodoUniverso();
-            Config.sendUniversoSeleccionado()
-        },'JSON')
+            Config.sendUniversoSeleccionado();
+        },'JSON');
 
 
     },
@@ -453,14 +460,15 @@ Config = {
         Config.optRegresarVistaSegundaria();
         Config.optProcesarCodigoVistas();
         Config.selecionarItemTabla();
-        },'JSON')
+
+        },'JSON');
     },
     optRegresarVistaSegundaria: function () {
         var optRegresarVistaSegundaria = $('#box3 #menuPrincipalBody #optRegresarVistaSegundaria');
         optRegresarVistaSegundaria.click(function () {
             Config.activarSegundoBloque();
             informar('Regresar a la vista Segundaria', 'informar')
-        })
+        });
     },
     selecionarItemTabla: function(){
         var item = $('#accordionTablas .cursor')
@@ -472,10 +480,11 @@ Config = {
             var tabla = $(this).data('tabla');
             var id = $(this).data('id');
             var connect = localStorage.getItem('conexionId');
+
             Config.getConfiguracionVista(connect, tabla, id, select);
             // Activar el segundo contenedor
-            Config.activarSegundo('box3');
-        })
+           Config.activarSegundo('box3');
+        });
     },
     getConfiguracionVista: function (connect, tabla, id, select) {
         // Enviar datos post para retornar datos
@@ -487,17 +496,30 @@ Config = {
         Config.html +='          <th style="width: 10px;">Columna</th>';
         Config.html +='          <th style="width: 10px;">Tipo</th>';
         Config.html +='          <th style="width: 5px;" title="Dimension de la tabla original">D</th>';
-        Config.html +='          <th style="width: 20px;">Etiqueta</th>';
+        Config.html +='          <th style="width: 20px;">Etiqueta &nbsp;<i id="cut" class="fa fa-files-o cursor" aria-hidden="true" title="Copiar todos los nombre de la vista real en esta fila"></i></th>';
         Config.html +='          <th style="width: 10px;">Mascara</th>';
         Config.html +='          <th style="width: 5px;"title="Navega en otra Vista">NOV</th>';
         Config.html +='          <th style="width: 15px;"title="Cual vista navega del listado">CUAL</th>';
         Config.html +='          <th style="width: 15px;"title="Cual campo es el que necesita">Campo</th>';
         //Config.html +='          <th style="width: 10px;"title="De cual Forma">Forma</th>';
         Config.html +='     </tr>';
+        // Extraer las aplicaciones existente
+
+        var seleApps='<select name="apps" id="apps">';
+        seleApps +='<option value="0" selected><- Aplicación -></option>';
+
+        $.post('/getListApp',function (dataJson) {
+            $.each(dataJson.seleApps, function (key, value) {
+                    $('#apps').append('<option value="'+value+'">'+value+'</option>');
+            });
+        },'JSON');
+        seleApps+='</select>';
+
+
         // Recorrer datos principal
         $.each(dataJson , function( key, value ) {
             var tmp = $('#box3 #'+tabla+'-titulo').text().trim();
-            var titulo =   '<b>'+tmp + '</b>'+ ' / <input placeholder="Nombre de la vista" name="nombre" id="nameVista" value="' + select +'" style="border: none" maxlength="50" required>';
+            var titulo =   seleApps+' / <b>'+tmp + '</b>'+ ' / <input placeholder="Nombre de la vista" name="nombre" id="nameVista" value="' + select +'" style="border: none" maxlength="50" required>';
             $('#box3 #menuSegundarioTilulo').html(' ').html(titulo);
             Config.html +='     <tr>';
             Config.html +='          <td></td>';
@@ -519,8 +541,8 @@ Config = {
                 Config.html +='    <td><input type="hidden" name="dimension[]" value="'+valor.dimension+'"><span class="badge bg-blue">'+valor.dimension+'</span></td>';
                 //alert(valor.restrincion);
                 var req = valor.required!='YES' ? 'required' : '';
-                var req1 = valor.required!='YES' ? '<div style="position: absolute; float: left; margin-top: -1px; font-size: 12px; z-index: 100; color:red;" title="Campo Requerido">*</div>' : '';
-                var req2 = valor.required!='YES' ? '<div id="etiqueta-\'+item+\'" data-item="\'+item+\'" style=" float: right; margin-top: -12px; margin-right: -12px; font-size: 10px; z-index: 100;" title="Maxima cantidad de caracteres">20</div>' : '';
+                var req1 = valor.required!='YES' ? '<div style="position: absolute; float: left; font-size: 20px; z-index: 100; color:white; background: red; height: 18px;width: 10px;margin-left: -3px; padding-left: 2px;" title="Campo Requerido">*</div>' : '';
+                var req2 = valor.required!='YES' ? '<div id="etiqueta-'+item+'" data-item="'+item+'" style=" float: right; margin-top: -12px; margin-right: -12px; font-size: 10px; z-index: 100;" title="Maxima cantidad de caracteres">20</div>' : '';
                 var imp = valor.restrincion=='PRI' ? '<input type="hidden" name="etiqueta[]" size="20" value="'+valor.name+'" required><span title="Primary Key de la entidad">'+valor.name +'</span>' : req1+'<input class="form-control etiqueta" name="etiqueta[]" value="'+valor.label+'" data-item="etiqueta-'+item+'" type="text" size="20" maxlength="20" '+req+'>'+req2;
                 Config.html +='          <td>'+imp+'</td>';
 
@@ -539,6 +561,7 @@ Config = {
                     Config.html +='          <option value="texto">Texo</option>';
                     Config.html +='          <option value="integer">Integer</option>';
                     Config.html +='          <option value="string">String</option>';
+                    Config.html +='          <option value="datepicker">Fecha</option>';
                     Config.html +='          <option value="correo">Correo</option>';
                     Config.html +='          <option value="ip">IP</option>';
                     Config.html +='          <option value="telefono">Telefono</option>';
@@ -558,10 +581,20 @@ Config = {
             Config.html +='</form>';
             var mostrarUniversoTablabody = $('#box3 #menuSegundarioBody').html(' ').html(Config.html);
         });
+        // Valores de seleccion de la apps
+            setTimeout(function () {
+                $('#apps').val(dataJson[0].apps)
+            },500);
+
         Config.sendVistaNuevaConfigurada();
+        Config.copiarMasivo();
     },'JSON');
     },
-
+    copiarMasivo: function (){
+        $('#cut').click(function () {
+           alertar('Falta esta funcionalidad de copiar datos')
+        });
+    },
     sendVistaNuevaConfigurada: function () {
 
         $('#box3 #menuSegundarioBody .etiqueta').keyup(function() {
@@ -573,17 +606,30 @@ Config = {
         });
 
         $('#box3 #menuSegundarioBody form#sendVistaActiva').submit(function(e){
+            var apps = $('#box3 #apps');
             var name = $('#box3 #nameVista');
             var item = $('#box3 #tabla');
+            // Validar que alla ingresado un valor valido en la vista
             if(name.val()=='Nueva Vista'){
                 mostrarError('Debe cambiar el nombre de la vista para poder procesar el registro: '+name.val());
                 name.focus();
+                return false;
+            }else if(name.val().length<4){
+                mostrarError('Debe cambiar el nombre de la vista para poder procesar el registro, debe tener mas de 3 caracteres y diferente de null la vista: '+name.val());
+                name.focus();
+                return false;
+            }
+            // Validar que alla seleccionado una apps
+            //alert(parseInt(apps.val()));
+            if(parseInt(apps.val())==0){
+                mostrarError('Debe seleccionar una aplicación en el cual será creada esta vista: '+name.val());
+                apps.focus();
                 return false;
             }
             var procesada = $("#box3 #tabla").val();
 
 
-           $.post('/sendVistaNuevaConfigurada',$(this).serialize()+'&name='+name.val(), function (dataJson) {
+           $.post('/sendVistaNuevaConfigurada',$(this).serialize()+'&name='+name.val()+'&apps='+apps.val(), function (dataJson) {
                 if(dataJson.error==0) {
                     alertar(dataJson.msj);
                     // append
@@ -612,7 +658,7 @@ Config = {
                 data: {'connect':con,'tabla':ent},
                 success: function(dataJson){
                     if(dataJson.error==0){
-                        alertar(dataJson.msj)
+                        alertar(dataJson.msj);
                         $('#box3 #optProcesarCodigoVistas').children('i').removeClass('fa-spin');
                         Config.listadoUniversoTablas(); //collapsed
                         //$('table.table#'+item.val()).append('<tr><td><i class="fa fa-circle" aria-hidden="true"></i> <a class="cursor" data-tabla="'+item.val()+'" data-id="1">'+name.val()+'</a></td></tr>').fadeIn(1000)

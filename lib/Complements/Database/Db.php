@@ -289,7 +289,7 @@ trait Db  {
             } while ($this->conn->more_results() && $this->conn->next_result());
             break;
             case "sql":
-            sqlsrv_free_stmt($resultSet);
+            @sqlsrv_free_stmt($resultSet);
             break;
         }
     }

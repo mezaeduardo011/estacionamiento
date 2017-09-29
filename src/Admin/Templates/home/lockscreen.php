@@ -13,7 +13,7 @@ login del sistema
             <a href="../../index2.html"><b>JPH</b>Lions</a>
         </div>
         <!-- User name -->
-        <div class="lockscreen-name"><?php echo $usuario->DNOMBRE ?> <?php echo $usuario->DAPELLIDO ?></div>
+        <div class="lockscreen-name"><?php echo $usuario->nombres ?> <?php echo $usuario->apellidos ?></div>
 
         <!-- START LOCK SCREEN ITEM -->
         <div class="lockscreen-item">
@@ -42,10 +42,6 @@ login del sistema
         </div>
         <div class="text-center">
             <a href="/login">O inicie sesión como un usuario diferente</a>
-        </div>
-        <div class="lockscreen-footer text-center">
-            Copyright &copy; 2014-2016 <b><a href="https://adminlte.io" class="text-black">Almsaeed Studio</a></b><br>
-            All rights reserved
         </div>
     </div>
     <!-- /.center -->

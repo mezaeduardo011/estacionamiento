@@ -181,7 +181,7 @@ class AppCrudVista extends App
         fputs($ar, '   {'.PHP_EOL);
         fputs($ar, '     $this->tpl->addIni();'.PHP_EOL);
         fputs($ar, '     $listado = $this->ho'.$controller.'Model->get'.$controller.'Listar($request);'.PHP_EOL);
-        fputs($ar, '     $this->tpl->add(\'listado\', $listado);;'.PHP_EOL);
+        //fputs($ar, '     $this->tpl->add(\'listado\', $listado);;'.PHP_EOL);
         fputs($ar, '     $this->tpl->add(\'usuario\', $this->getSession(\'usuario\'));'.PHP_EOL);//
         fputs($ar, '     $this->tpl->renders(\'view::'.$rutaVista.'\'.$this->pathVista().\'/index\');'.PHP_EOL);
         fputs($ar, '   }'.PHP_EOL.PHP_EOL);
@@ -223,7 +223,7 @@ class AppCrudVista extends App
         fputs($ar, '   public function run'.$controller.'Show($request)'.PHP_EOL);
         fputs($ar, '   {'.PHP_EOL);
         fputs($ar, '      $result = $this->ho'.$controller.'Model->get'.$controller.'Show($request);'.PHP_EOL);
-        fputs($ar, '      $this->json($result[0]);'.PHP_EOL);
+        fputs($ar, '      $this->json($result);'.PHP_EOL);
         fputs($ar, '   }'.PHP_EOL.PHP_EOL);
 
         fputs($ar, '    /**'.PHP_EOL);
@@ -336,7 +336,8 @@ class AppCrudVista extends App
         fputs($ar, '   public function get'.$modelo.'Show($data)'.PHP_EOL);
         fputs($ar, '   {'.PHP_EOL);
         fputs($ar, '     $sql = "SELECT * FROM ".$this->tabla." WHERE id=".$data->data;'.PHP_EOL);
-        fputs($ar, '     $tablas=$this->executeQuery($sql);'.PHP_EOL);
+        fputs($ar, '     $tmp=$this->executeQuery($sql);'.PHP_EOL);
+        fputs($ar, '     $tablas[\'datos\'] = $tmp[0];'.PHP_EOL);
         fputs($ar, '     return $tablas;'.PHP_EOL);
         fputs($ar, '   }'.PHP_EOL.PHP_EOL);
 
@@ -434,7 +435,6 @@ private function createFileViewIndex($rutaHija, $campos, $rutaVista)
     fputs($ar, '<?php $this->layout(\'base\',[\'usuario\'=>$usuario,\'breadcrumb\'=>$breadcrumb])?>' . PHP_EOL);
 
     fputs($ar, '<?php $this->push(\'addCss\')?>' . PHP_EOL);
-    fputs($ar, '<link href="<?=JPH\Core\Store\Cache::get(\'srcCss\')?>/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">' . PHP_EOL);
     fputs($ar, '<?php $this->end()?>' . PHP_EOL);
 
     fputs($ar, '<?php $this->push(\'title\') ?>' . PHP_EOL);
@@ -445,19 +445,38 @@ private function createFileViewIndex($rutaHija, $campos, $rutaVista)
     fputs($ar, '<!-- left column -->' . PHP_EOL);
     fputs($ar, '<div class="col-md-7">' . PHP_EOL);
     fputs($ar, '    <!-- general form elements -->' . PHP_EOL);
-    fputs($ar, '    <?php $this->insert(\'view::' . $rutaVista . '/listado\',[\'listado\'=>$listado]) ?>' . PHP_EOL);
+    fputs($ar, '    <?php $this->insert(\'view::' . $rutaVista . '/listado\') ?>' . PHP_EOL);
     fputs($ar, '</div>' . PHP_EOL);
     fputs($ar, '<div class="col-md-5">' . PHP_EOL);
     fputs($ar, '   <?php $this->insert(\'view::' . $rutaVista . '/form\') ?>' . PHP_EOL);
     fputs($ar, '</div>' . PHP_EOL);
 
     fputs($ar, '<?php $this->push(\'addJs\') ?>' . PHP_EOL);
-    fputs($ar, '<script src="/admin/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>' . PHP_EOL);
-    fputs($ar, '<script src="/admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>' . PHP_EOL);
     fputs($ar, '<script>' . PHP_EOL);
+    fputs($ar, '    // Definicion los campos del DataTable de esta vista' . PHP_EOL);
+    fputs($ar, '    var Config = {};' . PHP_EOL);
+    fputs($ar, '    Config.colums = [' . PHP_EOL);
+        foreach ($campos['campos'] AS $key => $value){
+                    fputs($ar, '        { "data": "'.$value.'" },' . PHP_EOL);
+        }
+    fputs($ar, '    ];' . PHP_EOL. PHP_EOL);
+    fputs($ar, '    // Configuracion de visual del DataTable' . PHP_EOL);
+    fputs($ar, '    Config.show = {' . PHP_EOL);
+    fputs($ar, '        "display":10,' . PHP_EOL);
+    fputs($ar, '        "search":true,' . PHP_EOL);
+    fputs($ar, '        "pagina":true,' . PHP_EOL);
+    fputs($ar, '        "rowid": "id"' . PHP_EOL);
+    fputs($ar, '    }' . PHP_EOL. PHP_EOL);
+
+    fputs($ar, '    Core.Vista.Util = {' . PHP_EOL);
+    fputs($ar, '        priListaLoad: function () { },' . PHP_EOL);
+    fputs($ar, '        priListaClick: function (dataJson){ }, ' . PHP_EOL);
+    fputs($ar, '        priClickProcesarForm: function(){ } ' . PHP_EOL);
+    fputs($ar, '    };' . PHP_EOL);
+
     fputs($ar, '    $(function () {' . PHP_EOL);
     fputs($ar, '        Core.main();' . PHP_EOL);
-    fputs($ar, '        Vista.main(\''.ALL::upperCase($campos['vista']).'\');' . PHP_EOL);
+    fputs($ar, '        Core.Vista.main(\''.ALL::upperCase($campos['vista']).'\',Config);' . PHP_EOL);
     fputs($ar, '    })' . PHP_EOL);
     fputs($ar, '' . PHP_EOL);
     fputs($ar, '</script>' . PHP_EOL);
@@ -541,40 +560,41 @@ private function createFileViewIndex($rutaHija, $campos, $rutaVista)
         fputs($ar, '<!-- form start -->'.PHP_EOL);
         fputs($ar, '<div class="box-body">'.PHP_EOL);
         fputs($ar, '    <table id="dataJPH" class="table table-bordered table-striped">'.PHP_EOL);
-        fputs($ar, '        <thead>'.PHP_EOL);
-        fputs($ar, '        <tr>'.PHP_EOL);
         // Listado de cabecera
+        fputs($ar, '       <thead>'.PHP_EOL);
+        fputs($ar, '        <tr>'.PHP_EOL);
         foreach ($items AS $key=>$value){
             fputs($ar, '            <th>'.$value->label.'</th>'.PHP_EOL);
         }
         fputs($ar, '        </tr>'.PHP_EOL);
-        fputs($ar, '        </thead>'.PHP_EOL);
-        fputs($ar, '        <tbody>'.PHP_EOL);
+        fputs($ar, '       </thead>'.PHP_EOL);
 
-        // Listado de contenido
-
-        fputs($ar, '<?php foreach ($listado AS $key => $value){ ?>'.PHP_EOL);
-        fputs($ar, '       <tr>'.PHP_EOL);
-        foreach ($items AS $key=>$value){
-                    fputs($ar, '      <td><?php echo @$value->'.$value->field.'?></td>'.PHP_EOL);
-        }
-        fputs($ar, '        </tr> '.PHP_EOL);
-        fputs($ar, '<?php } ?>'.PHP_EOL);
-
-
-         //Listado footer
-        fputs($ar, '        </tbody><tr>'.PHP_EOL);
+        //Listado footer
+        fputs($ar, '       <tfoot>'.PHP_EOL);
+        fputs($ar, '        <tr>'.PHP_EOL);
         foreach ($items AS $key=>$value){
             fputs($ar, '            <th>'.$value->label.'</th>'.PHP_EOL);
         }
         fputs($ar, '       </tr>'.PHP_EOL);
         fputs($ar, '       </tfoot>'.PHP_EOL);
+
+        // Listado de contenido
+       /* fputs($ar, '       <tbody>'.PHP_EOL);
+        fputs($ar, '<?php foreach ($listado AS $key => $value){ ?>'.PHP_EOL);
+        fputs($ar, '       <tr>'.PHP_EOL);
+        foreach ($items AS $key=>$value){
+            fputs($ar, '      <td><?php echo @$value->'.$value->field.'?></td>'.PHP_EOL);
+        }
+        fputs($ar, '        </tr> '.PHP_EOL);
+        fputs($ar, '<?php } ?>'.PHP_EOL);
+        fputs($ar, '        </tbody><tr>'.PHP_EOL);*/
+
+
         fputs($ar, '   </table>'.PHP_EOL);
         fputs($ar, '</div>'.PHP_EOL);
         fputs($ar, '</div>'.PHP_EOL);
         fclose($ar);
     }
-
     private function existsRuta($archivoRoute,$controller)
     {
         $config = simplexml_load_file($archivoRoute);

@@ -43,6 +43,10 @@ trait Commun
         return $resp;
     }
 
+    static function now(){
+        return date('d/m/Y h:i:s');
+    }
+
     /**
      * Permite imprimir objetos, arreglos, y valores enviados mostrado ordenadamente y parando el proceso
      * @param array $dataArray, parametro de entrada para ser impreso 
@@ -394,6 +398,16 @@ trait Commun
         $myString = substr($texto, 0, -1);
         return $myString;  // 'number 1, number 2, number 3'
     }
+
+    /**
+     * Retornar la el nombre del directorio donde se esta ejecutando el sistema
+     **/
+    public static function pathApps($dir)
+    {
+        $vista=@end(explode(DIRECTORY_SEPARATOR,dirname($dir)));
+        return $vista;
+    }
+
     public static function pathVista()
     {
         $vista=str_replace(array('/','Index'),array('',''),$_SERVER['PATH_INFO']);

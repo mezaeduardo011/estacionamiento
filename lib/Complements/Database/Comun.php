@@ -9,7 +9,7 @@ class Comun{
 
     public $db;
     public $database;
-    public $id;  
+
     public $query;
     public $campoid;
     public $tabla;
@@ -62,7 +62,7 @@ class Comun{
      * @return devuelve el Id
      */
     public function guardar() {
-        //var_dump($this->validarTiposDeDatos())
+        //var_dump($this->validarTiposDeDatos());
         if ($this->validarTiposDeDatos()) {
 
             if (!$this->existe()) {
@@ -161,6 +161,7 @@ class Comun{
         $query .= is_array($this->campoid) ? implode(',', $this->campoid) : $this->campoid;
         $query .= " FROM " . $this->tabla;
         $query .= " WHERE " . $this->where;
+        echo $query;
         $this->db->get($query);
 
         if ($this->db->numRows() > 0) {
@@ -185,13 +186,20 @@ class Comun{
      */
     public function executeQuery($query)
     {
+      $this->todos = array();
       $this->get($query);
       $datos = [];           
       while ($row = $this->fetch()) {
-        $datos[] = $row;
+          foreach ($row as $col => $val) {
+              if (gettype($val) == "object" && get_class($val) == "DateTime") {
+                  $row->$col = $val->format("d/m/Y");
+              }
+          }
+          $this->todos[] = $row;
+
       }
      $this->free();
-     return $datos;
+     return  $this->todos;
     }
 
     public function leerValor($campo) 
@@ -208,7 +216,7 @@ class Comun{
         //print_r($data); die();
         if(!$data) $data = $_POST;
         foreach ($data as $campo => $valor) {
-            $this->fijarValor($campo,$valor);
+            $this->fijarValor($campo,trim($valor));
         }
     }
 
@@ -220,16 +228,15 @@ class Comun{
             if (count($fechas) > 0) {
                 $this->$campo = $this->dateToAnsi($valor);
             } else {
-                $this->$campo = $valor;
+                $this->$campo = trim($valor);
             }
         } else {
-            $this->$campo = $valor;
+            $this->$campo = trim($valor);
         }
     }
 
     public function leer() {
         $this->where();
-
         $query = "SELECT " . (is_array($this->campos) ? implode(',', $this->campos) : $this->campos) . ",";
         $query .= is_array($this->campoid) ? implode(',', $this->campoid) : $this->campoid;
         $query .= " FROM " . $this->tabla;

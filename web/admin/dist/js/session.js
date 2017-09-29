@@ -8,9 +8,9 @@
 (function($){
     $.fn.idleTimeout = function(options) {
         var defaults = {
-            inactivity: 1200000, //20 Minutes
+            inactivity: 100,//1200000, //20 Minutes
             noconfirm: 10000, //10 Seconds
-            sessionAlive: 30000, //10 Minutes
+            sessionAlive: 20,//30000, //10 Minutes
             redirect_url: '/auth/acceder/',
             click_reset: true,
             alive_url: '/js_sandbox/',
