@@ -1,1 +1,0 @@
- <footer class="clearfix"></footer>
