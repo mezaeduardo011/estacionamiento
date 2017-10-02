@@ -72,7 +72,8 @@ trait Security
     }
 
     // Method encargado de eliminar la informacion en cache
-    public function delSessionAll() {
+    public function delSessionAll()
+    {
         session_unset();
         session_destroy();
         Cache::set('msjError','');
@@ -84,7 +85,23 @@ trait Security
     {
         return $_SESSION;
     }
-    public function __destruct() {
+
+    // Method encargado de mostrar mensaje de error si tiene permiso o no al acceder a un lugar Index
+    public function validatePermisos($acceso, bool $returnJson=false)
+    {
+        if(!$returnJson AND $acceso->permiso=='NO'){
+            // Proceso solo cuando se procesa una pagina normal
+            die('!Uff¡ No tienes acceso a esta acción contactar al administrador del sistema y solicitar acceso. ');
+        }else if($returnJson AND $acceso->permiso=='NO'){
+            // Proceso solo cuando se procesa un solicitud por json
+            $data['error']=1;
+            $data['msj']='!Uff¡ No tienes acceso a esta acción contactar al administrador del sistema y solicitar acceso. ';
+        }else{
+            return true;
+        }
+    }
+    public function __destruct()
+    {
 
     }
 

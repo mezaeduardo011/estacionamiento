@@ -64,5 +64,19 @@ class SegUsuariosPerfilModel extends Main
         $this->execute($sql);
         return true;
     }
+
+    /**
+     * Consultar permisos de acceso del usuario
+     * @param: string $roles
+     * @return array $tablas
+     */
+    public function valSegPerfilRelacionUser($comps,$roles)
+    {
+        $seg = explode('|',$roles);
+        $temp = strtoupper($comps.' - '.implode("','".$comps.' - ',$seg));
+        $sql = "SELECT CASE WHEN COUNT(roles) > 0 THEN 'SI' ELSE 'NO' END AS permiso  FROM view_seguridad WHERE roles IN('".$temp."') ";
+        $datos=$this->executeQuery($sql);
+        return $datos[0];
+    }
 }
 ?>

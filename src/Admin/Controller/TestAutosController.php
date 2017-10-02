@@ -10,7 +10,7 @@ use APP\Admin\Model AS Model;
  * @utor: Gregorio Bolivar <elalconxvii@gmail.com>
  * @created: 21/09/2017
  * @version: 1.0
- */ 
+ */
 
 class TestAutosController extends Controller
 {
@@ -18,29 +18,34 @@ class TestAutosController extends Controller
    public $model;
    public $session;
    /* Variables de Seguridad */
-   public $apps;
-   public $entidad;
-   public $vista;
-   public $permiso;
+   private $apps;
+   private $entidad;
+   private $vista;
+   private $permisos;
+   public $comps;
    /* Fin de Variables de Seguridad */
    public function __construct()
    {
        parent::__construct();
        $this->session = $this->authenticated();
        $this->hoTestAutosModel = new Model\TestAutosModel();
+       $this->valSegPerfils = new Model\SegUsuariosPerfilModel();
 
        $this->apps = $this->pathApps(__DIR__);
        $this->entidad = $this->hoTestAutosModel->tabla;
        $this->vista = $this->pathVista();
+
+       $this->comps = $this->apps .' - '. $this->entidad .' - '. $this->vista;
    }
 
     /**
     * Listar registros de TestAutos
     * @param: GET $resquest
-    */ 
+    */
    public function runTestAutosIndex($request)
    {
-     $this->permiso = 'CONSULTA|CONTROL TOTAL';
+     $this->permisos = 'CONSULTA|CONTROL TOTAL';
+     $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos));
      $this->tpl->addIni();
      $listado = $this->hoTestAutosModel->getTestAutosListar($request);
      $this->tpl->add('usuario', $this->getSession('usuario'));
@@ -51,10 +56,11 @@ class TestAutosController extends Controller
     * Listar registros de TestAutos
     * @param: POST $resquest
     * @return: JSON $result
-    */ 
+    */
    public function runTestAutosListar($request)
    {
-      $this->permiso = 'CONSULTA|CONTROL TOTAL';
+      $this->permisos = 'CONSULTA|CONTROL TOTAL';
+      $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
       $result = $this->hoTestAutosModel->getTestAutosListar($request);
       $this->json($result);
    }
@@ -63,11 +69,12 @@ class TestAutosController extends Controller
     * Crear registros de TestAutos
     * @param: POST $resquest
     * @return: JSON $result
-    */ 
+    */
    public function runTestAutosCreate($request)
    {
-      $this->permiso = 'ALTA|CONTROL TOTAL';
-      $result = $this->hoTestAutosModel->setTestAutosCreate($request);
+      $this->permisos = 'ALTA|CONTROL TOTAL';
+       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
+       $result = $this->hoTestAutosModel->setTestAutosCreate($request);
       if(is_null($result)){
         $dataJson['error']='1';
         $dataJson['msj']='Error en procesar el registro';
@@ -82,10 +89,11 @@ class TestAutosController extends Controller
     * Ver registros de TestAutos
     * @param: POST $resquest
     * @return: JSON $result
-    */ 
+    */
    public function runTestAutosShow($request)
    {
-      $this->permiso = 'CONSULTA|CONTROL TOTAL';
+      $this->permisos = 'CONSULTA|CONTROL TOTAL';
+      $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
       $result = $this->hoTestAutosModel->getTestAutosShow($request);
       $this->json($result);
    }
@@ -94,38 +102,40 @@ class TestAutosController extends Controller
     * Eliminar registros de TestAutos
     * @param: POST $resquest
     * @return: JSON $result
-    */ 
+    */
    public function runTestAutosDelete($request)
    {
-       $this->permiso = 'BAJA|CONTROL TOTAL';
-      $result = $this->hoTestAutosModel->remTestAutosDelete($request);
-      if(is_null($result)){
-        $dataJson['error']='0';
-        $dataJson['msj']='Registro eliminado exitosamente';
-      }else{
-        $dataJson['error']='1';
-        $dataJson['msj'] = 'Error en procesar la actualizacion';
-      }
-      $this->json($dataJson);
+       $this->permisos = 'BAJA|CONTROL TOTAL';
+       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
+       $result = $this->hoTestAutosModel->remTestAutosDelete($request);
+       if(is_null($result)){
+         $dataJson['error']='0';
+         $dataJson['msj']='Registro eliminado exitosamente';
+       }else{
+         $dataJson['error']='1';
+         $dataJson['msj'] = 'Error en procesar la actualizacion';
+       }
+       $this->json($dataJson);
    }
 
     /**
     * Actualizar registros de TestAutos
     * @param: POST $resquest
     * @return: JSON $result
-    */ 
+    */
    public function runTestAutosUpdate($request)
    {
-       $this->permiso = 'MODIFICACION|CONTROL TOTAL';
-      $result = $this->hoTestAutosModel->setTestAutosUpdate($request);
-      if(is_null($result)){
-        $dataJson['error']='0';
-        $dataJson['msj']='Actualizacion efectuado exitosamente';
-      }else{
-        $dataJson['error']='1';
-        $dataJson['msj'] = 'Error en procesar la actualizacion';
-      }
-        $this->json($dataJson);
+       $this->permisos = 'MODIFICACION|CONTROL TOTAL';
+       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
+       $result = $this->hoTestAutosModel->setTestAutosUpdate($request);
+       if(is_null($result)){
+         $dataJson['error']='0';
+         $dataJson['msj']='Actualizacion efectuado exitosamente';
+       }else{
+         $dataJson['error']='1';
+         $dataJson['msj'] = 'Error en procesar la actualizacion';
+       }
+       $this->json($dataJson);
    }
 }
 ?>

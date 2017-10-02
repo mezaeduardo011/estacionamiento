@@ -45,7 +45,7 @@ class Main extends Comun
 
             
         }catch(\Throwable $t){
-            die("Excepción capturadaooooooooooooo: " . $t->getMessage());
+            die("Excepción capturadao: " . $t->getMessage());
         }
         return $this;
     }

@@ -48,26 +48,30 @@ Core.Vista = {
             var send = '';
             $('table tr').css({'background':'', 'color':''});
             $(this).css({'background':'#293A4A', 'color':'#ffffff'});
-            //alert( 'You clicked on '+data+'s row' );
+            // Enviar peticion para ver el detalles delregistro
             $.post('/'+temp.toLowerCase()+'Show',{'data':data.id},function (dataJson) {
-                $.each(dataJson.datos,function (key, valor) {
-                    //alert(key);
-                    $("#"+key).val(valor);
-                    if(key=='id') {
-                        localStorage.setItem('id', valor);
-                    }else if(key=='clave'){
-                        var item = $("#"+key +",#re"+key);
-                        $("#"+key +",#re"+key).val('').removeClass('requerido').siblings('label').children('div#campoRequerido').remove();
-                    }
-                });
-                send = 'form#send'+temp+'Procesar';
+                if(dataJson.error=0) {
+                    $.each(dataJson.datos, function (key, valor) {
+                        //alert(key);
+                        $("#" + key).val(valor);
+                        if (key == 'id') {
+                            localStorage.setItem('id', valor);
+                        } else if (key == 'clave') {
+                            var item = $("#" + key + ",#re" + key);
+                            $("#" + key + ",#re" + key).val('').removeClass('requerido').siblings('label').children('div#campoRequerido').remove();
+                        }
+                    });
+                    send = 'form#send' + temp + 'Procesar';
 
-                $(send).addClass('update');
-                $(send).data('id',localStorage.getItem('id'))
-                $("button#submit").html('Actualizar Datos').fadeIn(909);
-                $("#divDelete").html('<a id="sacarRegistroSeleccionado" data-registro="'+localStorage.getItem('id')+'" class="btn btn-danger">Eliminar registro</a>');
-                Core.Vista.sacarRegistro();
-                Core.Vista.Util.priListaClick(dataJson);
+                    $(send).addClass('update');
+                    $(send).data('id', localStorage.getItem('id'))
+                    $("button#submit").html('Actualizar Datos').fadeIn(909);
+                    $("#divDelete").html('<a id="sacarRegistroSeleccionado" data-registro="' + localStorage.getItem('id') + '" class="btn btn-danger">Eliminar registro</a>');
+                    Core.Vista.sacarRegistro();
+                    Core.Vista.Util.priListaClick(dataJson);
+                }else{
+                    mostrarError(dataJson.msj)
+                }
             },'JSON')
 
         } );

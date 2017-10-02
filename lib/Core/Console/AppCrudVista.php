@@ -154,31 +154,47 @@ class AppCrudVista extends App
         fputs($ar, 'namespace APP\\'.$app.'\\Controller;'.PHP_EOL);
         fputs($ar, 'use JPH\\Core\\Commun\\Security;'.PHP_EOL);
         fputs($ar, 'use APP\\Admin\\Model AS Model;'.PHP_EOL.PHP_EOL);
+
         fputs($ar, '/**'.PHP_EOL);
         fputs($ar, ' * Generador de codigo de Controller de '.All::FW.' '.All::VERSION.''.PHP_EOL);
         fputs($ar, ' * @propiedad: '.All::FW.' '.All::VERSION.''.PHP_EOL);
         fputs($ar, ' * @utor: Gregorio Bolivar <elalconxvii@gmail.com>'.PHP_EOL);
         fputs($ar, ' * @created: ' .date('d/m/Y') .''.PHP_EOL);
-        fputs($ar, ' * @version: 1.0'.PHP_EOL);
+        fputs($ar, ' * @version: 2.0'.PHP_EOL);
         fputs($ar, ' */ '.PHP_EOL.PHP_EOL);
+
         fputs($ar, 'class '.$controller.'Controller extends Controller'.PHP_EOL);
         fputs($ar, "{".PHP_EOL);
         fputs($ar, '   use Security;'.PHP_EOL);
         fputs($ar, '   public $model;'.PHP_EOL);
-        fputs($ar, '   public $session;'.PHP_EOL);
+        fputs($ar, '   public $session;'.PHP_EOL.PHP_EOL);
+        fputs($ar, '   // Variables de Seguridad asociado a los roles'.PHP_EOL);
+        fputs($ar, '   private $apps;'.PHP_EOL);
+        fputs($ar, '   private $entidad;'.PHP_EOL);
+        fputs($ar, '   private $vista;'.PHP_EOL);
+        fputs($ar, '   private $permisos;'.PHP_EOL);
+        fputs($ar, '   public $comps;'.PHP_EOL.PHP_EOL);
+
         fputs($ar, '   public function __construct()'.PHP_EOL);
         fputs($ar, '   {'.PHP_EOL);
         fputs($ar, '       parent::__construct();'.PHP_EOL);
         fputs($ar, '       $this->session = $this->authenticated();'.PHP_EOL);
         fputs($ar, '       $this->ho'.$controller.'Model = new Model\\'.$controller.'Model();'.PHP_EOL);
+        fputs($ar, '       $this->valSegPerfils = new Model\SegUsuariosPerfilModel();'.PHP_EOL);
+        fputs($ar, '       $this->apps = $this->pathApps(__DIR__);'.PHP_EOL);
+        fputs($ar, '       $this->entidad = $this->ho'.$controller.'Model->tabla;'.PHP_EOL);
+        fputs($ar, '       $this->vista = $this->pathVista();'.PHP_EOL);
+        fputs($ar, '       $this->comps = $this->apps .\' - \'. $this->entidad .\' - \'. $this->vista;'.PHP_EOL);
         fputs($ar, '   }'.PHP_EOL.PHP_EOL);
+
         fputs($ar, '    /**'.PHP_EOL);
         fputs($ar, '    * Listar registros de '.$controller.PHP_EOL);
         fputs($ar, '    * @param: GET $resquest'.PHP_EOL);
         fputs($ar, '    */ '.PHP_EOL);
-
         fputs($ar, '   public function run'.$controller.'Index($request)'.PHP_EOL);
         fputs($ar, '   {'.PHP_EOL);
+        fputs($ar, '     $this->permisos = \'CONSULTA|CONTROL TOTAL\';'.PHP_EOL);
+        fputs($ar, '     $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos));'.PHP_EOL);
         fputs($ar, '     $this->tpl->addIni();'.PHP_EOL);
         fputs($ar, '     $listado = $this->ho'.$controller.'Model->get'.$controller.'Listar($request);'.PHP_EOL);
         //fputs($ar, '     $this->tpl->add(\'listado\', $listado);;'.PHP_EOL);
@@ -193,6 +209,8 @@ class AppCrudVista extends App
         fputs($ar, '    */ '.PHP_EOL);
         fputs($ar, '   public function run'.$controller.'Listar($request)'.PHP_EOL);
         fputs($ar, '   {'.PHP_EOL);
+        fputs($ar, '      $this->permisos = \'CONSULTA|CONTROL TOTAL\';'.PHP_EOL);
+        fputs($ar, '      $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);'.PHP_EOL);
         fputs($ar, '      $result = $this->ho'.$controller.'Model->get'.$controller.'Listar($request);'.PHP_EOL);
         fputs($ar, '      $this->json($result);'.PHP_EOL);
         fputs($ar, '   }'.PHP_EOL.PHP_EOL);
@@ -204,6 +222,8 @@ class AppCrudVista extends App
         fputs($ar, '    */ '.PHP_EOL);
         fputs($ar, '   public function run'.$controller.'Create($request)'.PHP_EOL);
         fputs($ar, '   {'.PHP_EOL);
+        fputs($ar, '      $this->permisos = \'ALTA|CONTROL TOTAL\';'.PHP_EOL);
+        fputs($ar, '      $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);'.PHP_EOL);
         fputs($ar, '      $result = $this->ho'.$controller.'Model->set'.$controller.'Create($request);'.PHP_EOL);
         fputs($ar, '      if(is_null($result)){'.PHP_EOL);
         fputs($ar, '        $dataJson[\'error\']=\'1\';'.PHP_EOL);
@@ -222,6 +242,8 @@ class AppCrudVista extends App
         fputs($ar, '    */ '.PHP_EOL);
         fputs($ar, '   public function run'.$controller.'Show($request)'.PHP_EOL);
         fputs($ar, '   {'.PHP_EOL);
+        fputs($ar, '      $this->permisos = \'CONSULTA|CONTROL TOTAL\';'.PHP_EOL);
+        fputs($ar, '      $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);'.PHP_EOL);
         fputs($ar, '      $result = $this->ho'.$controller.'Model->get'.$controller.'Show($request);'.PHP_EOL);
         fputs($ar, '      $this->json($result);'.PHP_EOL);
         fputs($ar, '   }'.PHP_EOL.PHP_EOL);
@@ -233,6 +255,8 @@ class AppCrudVista extends App
         fputs($ar, '    */ '.PHP_EOL);
         fputs($ar, '   public function run'.$controller.'Delete($request)'.PHP_EOL);
         fputs($ar, '   {'.PHP_EOL);
+        fputs($ar, '      $this->permisos = \'BAJA|CONTROL TOTAL\';'.PHP_EOL);
+        fputs($ar, '      $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);'.PHP_EOL);
         fputs($ar, '      $result = $this->ho'.$controller.'Model->rem'.$controller.'Delete($request);'.PHP_EOL);
         fputs($ar, '      if(is_null($result)){'.PHP_EOL);
         fputs($ar, '        $dataJson[\'error\']=\'0\';'.PHP_EOL);
@@ -249,9 +273,10 @@ class AppCrudVista extends App
         fputs($ar, '    * @param: POST $resquest'.PHP_EOL);
         fputs($ar, '    * @return: JSON $result'.PHP_EOL);
         fputs($ar, '    */ '.PHP_EOL);
-
         fputs($ar, '   public function run'.$controller.'Update($request)'.PHP_EOL);
         fputs($ar, '   {'.PHP_EOL);
+        fputs($ar, '      $this->permisos = \'MODIFICACION|CONTROL TOTAL\';'.PHP_EOL);
+        fputs($ar, '      $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);'.PHP_EOL);
         fputs($ar, '      $result = $this->ho'.$controller.'Model->set'.$controller.'Update($request);'.PHP_EOL);
         fputs($ar, '      if(is_null($result)){'.PHP_EOL);
         fputs($ar, '        $dataJson[\'error\']=\'0\';'.PHP_EOL);
@@ -338,6 +363,7 @@ class AppCrudVista extends App
         fputs($ar, '     $sql = "SELECT * FROM ".$this->tabla." WHERE id=".$data->data;'.PHP_EOL);
         fputs($ar, '     $tmp=$this->executeQuery($sql);'.PHP_EOL);
         fputs($ar, '     $tablas[\'datos\'] = $tmp[0];'.PHP_EOL);
+        fputs($ar, '     $tablas[\'error\'] = 0;'.PHP_EOL);
         fputs($ar, '     return $tablas;'.PHP_EOL);
         fputs($ar, '   }'.PHP_EOL.PHP_EOL);
 
