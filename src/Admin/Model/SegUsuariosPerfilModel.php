@@ -76,6 +76,7 @@ class SegUsuariosPerfilModel extends Main
         $temp = strtoupper($comps.' - '.implode("','".$comps.' - ',$seg));
         $sql = "SELECT CASE WHEN COUNT(roles) > 0 THEN 'SI' ELSE 'NO' END AS permiso  FROM view_seguridad WHERE roles IN('".$temp."') ";
         $datos=$this->executeQuery($sql);
+        $this->free();
         return $datos[0];
     }
 }

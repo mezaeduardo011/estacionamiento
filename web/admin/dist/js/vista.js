@@ -70,7 +70,7 @@ Core.Vista = {
                     Core.Vista.sacarRegistro();
                     Core.Vista.Util.priListaClick(dataJson);
                 }else{
-                    mostrarError(dataJson.msj)
+                    mostrarError(dataJson.msj);
                 }
             },'JSON')
 

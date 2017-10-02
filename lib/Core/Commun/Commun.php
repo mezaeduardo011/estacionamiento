@@ -133,6 +133,7 @@ trait Commun
        self::headerJson();
        //$tmp = self::utf8enc($datos);
        echo json_encode( $datos );
+       die();
    }
 
     static function utf8enc($array) {
@@ -410,7 +411,7 @@ trait Commun
 
     public static function pathVista()
     {
-        $vista=str_replace(array('/','Index'),array('',''),$_SERVER['PATH_INFO']);
+        $vista=str_replace(array('/','Index', 'Listar', 'Create', 'Update','Show','Delete'),array('','','','','','',''),$_SERVER['PATH_INFO']);
         return $vista;
     }
 
