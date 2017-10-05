@@ -105,6 +105,7 @@ Gestionar del Generador
 </section>
 <?php $this->push('addJs')?>
 <script src="/admin/dist/js/config.js"></script>
+<script src="/admin/dist/js/gestionTablas.js"></script>
 <!-- InputMask -->
 <script src="/admin/plugins/input-mask/jquery.inputmask.js"></script>
 <script src="/admin/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>

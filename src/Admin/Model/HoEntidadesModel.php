@@ -66,11 +66,49 @@ class HoEntidadesModel extends Main
      */
     public function extraerDetalleEntidade($data)
     {
-
-
         $sql = "SELECT * FROM ".$this->tabla." WHERE conexiones_id=".$data['connect']." AND  entidad='".$data['tabla']."'";
         $temp = $this->executeQuery($sql);
         return $temp;
+    }
+
+    /**
+     * Permite armar una estructura de entidad a partir de una configuracion desde la vista del generador
+     * @param objeto $data
+     * @return array $tmp, informacion de los diferentes entidades
+     */
+    public function setEstructuraCreateTabla($data)
+    {
+        // BLOQUE DE DEFINIR TABLA
+        $ldd0='CREATE TABLE '.$data->entidad.' ('.PHP_EOL;
+        $constraint = array();
+        $unico = array();
+        foreach($data->campos AS $key=>$value){
+            if($data->baseDatosDriver=='sql'){
+                $incremento = 'IDENTITY(1,1)';
+                $boleano = 'bit';
+            }
+            if($data->index[$key]=='PRIMARY KEY'){
+                array_push($constraint,$value);
+            }elseif ($data->index[$key]=='UNIQUE'){
+                array_push($unico,$value);
+            }
+            $autoIncreme = (!empty($data->extra[$key]))?"$incremento ":'';
+            $cantVarchar = (!empty($data->varcharValor[$key]))?'('.$data->varcharValor[$key].')':'';
+
+            $ldd0.='  '.$value.' '.strtoupper($data->tipos[$key]).$cantVarchar.' '.$autoIncreme.''.$data->requerido[$key].','.PHP_EOL;
+        }
+        $ldd0.='  CONSTRAINT '.$data->entidad.'_PK PRIMARY KEY('.implode(',',$constraint).')'.PHP_EOL;
+        $ldd0.=');';
+        $return = $this->execute($ldd0);
+        // END DEFINICION
+
+        // ALTER TABLE SI HAY -unique
+        if(count($unico)>0) {
+            $ldd1 = 'ALTER TABLE ' . $data->entidad . PHP_EOL;
+            $ldd1 .= ' ADD UNIQUE (' . implode(',', $unico) . ')';
+            $return1 = $this->execute($ldd1);
+        }
+        return true;
     }
 
 

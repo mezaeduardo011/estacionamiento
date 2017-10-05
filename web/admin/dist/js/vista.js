@@ -50,7 +50,7 @@ Core.Vista = {
             $(this).css({'background':'#293A4A', 'color':'#ffffff'});
             // Enviar peticion para ver el detalles delregistro
             $.post('/'+temp.toLowerCase()+'Show',{'data':data.id},function (dataJson) {
-                if(dataJson.error=0) {
+                if(dataJson.error==0) {
                     $.each(dataJson.datos, function (key, valor) {
                         //alert(key);
                         $("#" + key).val(valor);

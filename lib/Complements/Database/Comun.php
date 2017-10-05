@@ -604,6 +604,14 @@ class Comun{
 
         return $valido;
     }
+    /**
+     * Elemto encargado de procesar informacion de base de datos y gestion de ese elemento
+     * @param $defineData
+     */
+    function createEntidades($define)
+    {
+
+    }
 
 }
 

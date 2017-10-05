@@ -15,13 +15,13 @@ class HoVistasModel extends Main
    {
        $this->tabla = 'ho_vistas';
        $this->campoid = array('id');
-       $this->campos = array('apps','conexiones_id','entidad','nombre','field','type','dimension', 'restrincion', 'label','mascara','required','place_holder','relacionado','vista_campo','orden','hidden_form','hidden_list');
+       $this->campos = array('apps','conexiones_id','entidad','nombre','field','type','dimension', 'restrincion', 'label','mascara','required','place_holder','relacionado','tabla_vista','vista_campo','orden','hidden_form','hidden_list');
        parent::__construct();
    }
 
    public function setConfiguracionVistaNew($data)
    {
-
+   // All::pp($data);
         $temp = array();
         for ($a=0;$a<count($data->field);$a++){
             if(!empty(trim($data->etiqueta[$a]))) {
@@ -32,10 +32,17 @@ class HoVistasModel extends Main
                 $this->fijarValor('field', $data->field[$a]);
                 $this->fijarValor('type', $data->type[$a]);
                 $this->fijarValor('dimension', $data->dimension[$a]);
-                $this->fijarValor('mascara', $data->mascara[$a]);
-                $this->fijarValor('label', $data->etiqueta[$a]);
                 $this->fijarValor('restrincion', $data->restrincion[$a]);
-                $this->fijarValor('required', $data->required[$a]);
+                $this->fijarValor('label', $data->etiqueta[$a]);
+                $this->fijarValor('mascara', $data->mascara[$a]);
+                $this->fijarValor('required', (@$data->required[$a]=='on')?'YES':'NO');
+                $this->fijarValor('place_holder', $data->place_holder[$a]);
+                $this->fijarValor('relacionado', (@$data->relacionado[$a]=='on')?true:false);
+                $this->fijarValor('tabla_vista', (!empty((string)$data->tabla_vista[$a])?$data->tabla_vista[$a]:''));
+                $this->fijarValor('vista_campo', (!empty((string)$data->vista_campo[$a])?$data->vista_campo[$a]:''));
+                $this->fijarValor('orden', $a);
+                $this->fijarValor('hidden_form', (@$data->hidden_form[$a]=='on')?true:false);
+                $this->fijarValor('hidden_list', (@$data->hidden_list[$a]=='on')?true:false);
                 $this->guardar();
             }
         }
@@ -80,6 +87,37 @@ class HoVistasModel extends Main
         }
         return $registro;
     }
+
+
+    /**
+     * Permite solicitar las vistas disponibles
+     */
+    public function getShowVista($request)
+    {
+        $sql = "SELECT entidad AS entidad,nombre AS vista FROM ho_vistas WHERE apps='$request->apps' AND conexiones_id=$request->conexionId GROUP BY entidad,nombre ";
+        $temp = $this->executeQuery($sql);
+        $tabla = array();
+        foreach ($temp AS $key => $value){
+            $tabla[$key]['base'] = $value;
+            $tabla[$key]['rows']=self::getShowVistaRow($request->apps,$request->conexionId,$value->entidad,$value->vista);
+        }
+        $retu['datos'] = $tabla;
+        return $retu;
+    }
+
+
+    /**
+     * Permite ver los campos asociados a las vistas
+     */
+    public function getShowVistaRow($app,$conexion,$entidad,$vista)
+    {
+        $sql = "SELECT field AS campos, orden FROM ho_vistas WHERE apps='$app' AND conexiones_id=$conexion AND entidad='$entidad' AND nombre='$vista' GROUP BY field, orden ORDER by orden";
+        $temp = $this->executeQuery($sql);
+        $tabla = $temp;
+        return $tabla;
+    }
+
+
 
     /**
      * Permite actualizar que fue procesada la vista

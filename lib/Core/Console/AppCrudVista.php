@@ -3,7 +3,7 @@ namespace JPH\Core\Console;
 use JPH\Core\Commun\{All,SimpleXMLExtended};
 
 /**
- * Permite integrar un conjunto de funcionalidades de la consola pero en las aplicaciones
+ * Permite integrar un conjunto de funcionalidades que permite generar CRUD de forma automatica
  * @Author: Gregorio Bolívar <elalconxvii@gmail.com>
  * @Author: Blog: <http://gbbolivar.wordpress.com>
  * @created Date: 09/08/2017

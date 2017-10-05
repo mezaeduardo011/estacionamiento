@@ -4,7 +4,7 @@
 //## visit http://creativecommons.org/licenses/by-sa/3.0/us/ or send a letter
 //## to Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
 //## Desarrollado por JPH - Ing. - Gregorio Jose Bolivar
-//######
+//######f
 var Config;
 Config = {
     html: null,
@@ -255,47 +255,53 @@ Config = {
         showConexionDataBaseSelect.change(function () {
             var opt = $(this).val();
             localStorage.setItem('conexionId',opt);
-            $.post('/getConfiguracionConexiones',{'conexion':opt}, function(dataJson){
-                if(dataJson.items>0) {
-                    Config.html = '<div class="panel panel-default">';
-                    Config.html += '     <div class="panel-leftheading">';
-                    Config.html += '         <h4 class="panel-lefttitle"> &nbsp;&nbsp; ' + dataJson.data[0].label + ' </h4>';
-                    Config.html += '     </div>';
-                    Config.html += '     <div class="panel-rightbody >';
-                    Config.html += '         <div class="input-group input-group-addon"">';
-                    $.each(dataJson.data, function (key, value) {
-                        Config.html += '          <div class="input-group-addon">';
-                        Config.html += '             <i class="fa fa-certificate"></i> &nbsp; Label&nbsp;:&nbsp; ' + value.label;
-                        Config.html += '          </div><p></p>';
-                        Config.html += '          <div class="input-group-addon">';
-                        Config.html += '             <i class="fa fa-id-card-o"></i>  &nbsp;Driver&nbsp;:&nbsp;' + value.driver;
-                        Config.html += '          </div><p></p>';
-                        Config.html += '          <div class="input-group-addon">';
-                        Config.html += '             <i class="fa fa-server"></i>  &nbsp;Base de Datos&nbsp;:&nbsp;' + value.db;
-                        Config.html += '          </div><p></p>';
-                        Config.html += '          <div class="input-group-addon">';
-                        Config.html += '             <i class="fa fa-server"></i>  &nbsp;Host&nbsp;:&nbsp;' + value.host;
-                        Config.html += '          </div><p></p>';
-                        Config.html += '          <div class="input-group-addon">';
-                        Config.html += '             <i class="fa fa-user"></i>  &nbsp;User&nbsp;:&nbsp;' + value.usuario;
-                        Config.html += '          </div><p></p>';
-                        Config.html += '          <div class="input-group-addon">';
-                        Config.html += '             <i class="fa fa-key"></i>  &nbsp;Clave&nbsp;:&nbsp; ****** ';
-                        Config.html += '          </div><p></p>';
-                        Config.html += '         </div>';
-                    })
-                    Config.html += '     </div>';
-                    Config.html += '     <div class="clearfix"></div>';
-                    Config.html += '</div>';
-                    $('#box2 #menuPrincipal #menuPrincipalBody #showConexionDataBaseSelect').html(' ').html(Config.html).show();
-                    Config.mostrarUniversoTablaSegunConexion(dataJson.data[0].label,opt);
-                }else{
-                    $('#box2 #menuPrincipal #menuPrincipalBody #showConexionDataBaseSelect').html(' ').html(Config.html).hide();
-                    Config.desactivarSegundo('box2');
-                }
+           Config.loadConfigTablas();
+        });
+    },
+    loadConfigTablas:function () {
+        var opt = localStorage.getItem('conexionId');
+        $.post('/getConfiguracionConexiones',{'conexion': opt}, function(dataJson){
+            if(dataJson.items>0) {
+                Config.html = '<div class="panel panel-default">';
+                Config.html += '     <div class="panel-leftheading">';
+                Config.html += '         <h4 class="panel-lefttitle"> &nbsp;&nbsp; ' + dataJson.data[0].label + ' </h4>';
+                localStorage.setItem('baseDatosName',dataJson.data[0].db);
+                localStorage.setItem('baseDatosDriver',dataJson.data[0].driver);
+                Config.html += '     </div>';
+                Config.html += '     <div class="panel-rightbody >';
+                Config.html += '         <div class="input-group input-group-addon"">';
+                $.each(dataJson.data, function (key, value) {
+                    Config.html += '          <div class="input-group-addon">';
+                    Config.html += '             <i class="fa fa-certificate"></i> &nbsp; Label&nbsp;:&nbsp; ' + value.label;
+                    Config.html += '          </div><p></p>';
+                    Config.html += '          <div class="input-group-addon">';
+                    Config.html += '             <i class="fa fa-id-card-o"></i>  &nbsp;Driver&nbsp;:&nbsp;' + value.driver;
+                    Config.html += '          </div><p></p>';
+                    Config.html += '          <div class="input-group-addon">';
+                    Config.html += '             <i class="fa fa-server"></i>  &nbsp;Base de Datos&nbsp;:&nbsp;' + value.db;
+                    Config.html += '          </div><p></p>';
+                    Config.html += '          <div class="input-group-addon">';
+                    Config.html += '             <i class="fa fa-server"></i>  &nbsp;Host&nbsp;:&nbsp;' + value.host;
+                    Config.html += '          </div><p></p>';
+                    Config.html += '          <div class="input-group-addon">';
+                    Config.html += '             <i class="fa fa-user"></i>  &nbsp;User&nbsp;:&nbsp;' + value.usuario;
+                    Config.html += '          </div><p></p>';
+                    Config.html += '          <div class="input-group-addon">';
+                    Config.html += '             <i class="fa fa-key"></i>  &nbsp;Clave&nbsp;:&nbsp; ****** ';
+                    Config.html += '          </div><p></p>';
+                    Config.html += '         </div>';
+                })
+                Config.html += '     </div>';
+                Config.html += '     <div class="clearfix"></div>';
+                Config.html += '</div>';
+                $('#box2 #menuPrincipal #menuPrincipalBody #showConexionDataBaseSelect').html(' ').html(Config.html).show(900);
+                Config.mostrarUniversoTablaSegunConexion(dataJson.data[0].label,opt);
+            }else{
+                $('#box2 #menuPrincipal #menuPrincipalBody #showConexionDataBaseSelect').html(' ').html(Config.html).hide(900);
+                Config.desactivarSegundo('box2');
+            }
 
-            })
-        })
+        });
     },
     mostrarUniversoTablaSegunConexion: function (titulo,dbId) {
         Config.activarSegundo('box2');
@@ -308,7 +314,7 @@ Config = {
             Config.html += '          <th style="width: 10px"><input type="checkbox" title="Todos" id="seleccionarTodoUniverso"></th>';
             Config.html += '          <th style="width: 10px">#</th>';
             Config.html += '          <th style="width: 10px">Base Dato</th>';
-            Config.html += '          <th style="width: 10px">Tablas</th>';
+            Config.html += '          <th style="width: 10px">Tablas <i class="fa fa-plus-circle fa-2 cursor btn" aria-hidden="true" id="addEntidad"></i></th>';
             Config.html += '          <th style="width: 10px" class="text-center">N.Campo</th>';
             Config.html += '     </tr>';
             if(dataJson.error==0) {
@@ -340,6 +346,8 @@ Config = {
             $('#box2 #menuSegundarioBody').html(' ').html(Config.html);
             Config.seleccionarTodoUniverso();
             Config.sendUniversoSeleccionado();
+            // ### Otro namespace encargado de Procesar la creacion de tablas ###
+            Config.gestionaTablas.main();
         },'JSON');
 
 
@@ -392,7 +400,9 @@ Config = {
         var table = localStorage.getItem('entidadesSeleccionadas');
         var conexion = localStorage.getItem('conexionId');
         //alert(table);
-        $('#box3 #menuPrincipalTitulo').html(' ').html('Listado de Tablas Seleccionadas');
+        $('#box3 #menuPrincipal').prepend('<i class="fa fa-compress btn" aria-hidden="true" id="comprimirExpandir"></i>')
+        $titulo='Listado de Tablas Seleccionadas';
+        $('#box3 #menuPrincipalTitulo').html(' ').html($titulo);
 
 
         $.post('/getEntidadesSeleccionadas',{'conn':conexion,'entidad':table},function (dataJson) {
@@ -456,12 +466,30 @@ Config = {
         Config.html +='</div>';
 
         $('#box3 #menuPrincipal #menuPrincipalBody').html(' ').html(Config.html);
-
+        Config.comprimirExpandir();
         Config.optRegresarVistaSegundaria();
         Config.optProcesarCodigoVistas();
         Config.selecionarItemTabla();
 
         },'JSON');
+    },
+    comprimirExpandir:function () {
+        $('#box3 #comprimirExpandir').click(function () {
+            var existe = $(this).hasClass('activado');
+            if(!existe) {
+                $('#box3 #menuPrincipalTitulo').hide(900);
+                $('#box3 #menuPrincipalBody').hide(900).parent('div').parent('div').addClass('col-md-1').removeClass('col-md-4');
+                $('#box3 #menuSegundario').addClass('col-md-11').removeClass('col-md-8');
+                $(this).addClass('activado');
+                $(this).addClass('fa-expand').removeClass('fa-compress');
+            }else{
+                $('#box3 #menuPrincipalTitulo').show(900);
+                $('#box3 #menuPrincipalBody').show(900).parent('div').parent('div').addClass('col-md-4').removeClass('col-md-1');
+                $('#box3 #menuSegundario').addClass('col-md-8').removeClass('col-md-11');
+                $(this).removeClass('activado');
+                $(this).addClass('fa-compress').removeClass('fa-expand');
+            }
+        });
     },
     optRegresarVistaSegundaria: function () {
         var optRegresarVistaSegundaria = $('#box3 #menuPrincipalBody #optRegresarVistaSegundaria');
@@ -491,30 +519,32 @@ Config = {
         $.post('/getConfiguracionVista',{'connect':connect, 'tabla':tabla , 'vista':id },function(dataJson ) {
         Config.html = '<form method="post" id="sendVistaActiva"><input type="hidden" name="conexiones_id" value="'+connect+'">';
         Config.html += '<input type="hidden" id="tabla" name="tabla" value="'+tabla+'">';
-        Config.html +=' <table class="table table-striped">';
+        Config.html +=' <table class="table table-striped" id="defineEntity">';
+        // Definicion de la tabla
         Config.html +='     <tr>';
-        Config.html +='          <th style="width: 10px;">Columna</th>';
-        Config.html +='          <th style="width: 10px;">Tipo</th>';
-        Config.html +='          <th style="width: 5px;" title="Dimension de la tabla original">D</th>';
-        Config.html +='          <th style="width: 20px;">Etiqueta &nbsp;<i id="cut" class="fa fa-files-o cursor" aria-hidden="true" title="Copiar todos los nombre de la vista real en esta fila"></i></th>';
-        Config.html +='          <th style="width: 10px;">Mascara</th>';
-        Config.html +='          <th style="width: 5px;"title="Navega en otra Vista">NOV</th>';
-        Config.html +='          <th style="width: 15px;"title="Cual vista navega del listado">CUAL</th>';
-        Config.html +='          <th style="width: 15px;"title="Cual campo es el que necesita">Campo</th>';
-        //Config.html +='          <th style="width: 10px;"title="De cual Forma">Forma</th>';
+        Config.html +='          <th style="width: 10%;">Columna</th>';
+        Config.html +='          <th style="width: 10%;">Tipo</th>';
+        Config.html +='          <th style="width: 2%;" title="Dimension de la tabla original">D</th>';
+        Config.html +='          <th style="width: 15%;">Etiqueta &nbsp;<i id="cut" class="fa fa-files-o cursor" aria-hidden="true" title="Copiar todos los nombre de la vista real en esta fila"></i></th>';
+        Config.html +='          <th style="width: 13%;">Mascara</th>';
+        Config.html +='          <th style="width: 3%;"  title="Campo requerido">REQ</th>';
+        Config.html +='          <th style="width: 3%;"  title="Ocultar en la Vista">HVI</th>';
+        Config.html +='          <th style="width: 3%;"  title="Ocultar en el DataTable">HLI</th>';
+        Config.html +='          <th style="width: 12%; text-align: center" title="Ingresar Place Holder">MSJ</th>';
+        Config.html +='          <th style="width: 3%;"  title="Navega en otra Vista">NOV</th>';
+        Config.html +='          <th style="width: 15%;" title="Cual vista navega del listado">CUAL</th>';
+        Config.html +='          <th style="width: 15%;" title="Cual campo es el que necesita">Campo</th>';
         Config.html +='     </tr>';
-        // Extraer las aplicaciones existente
 
+        // Extraer las aplicaciones existente
         var seleApps='<select name="apps" id="apps">';
         seleApps +='<option value="0" selected><- Aplicación -></option>';
-
         $.post('/getListApp',function (dataJson) {
             $.each(dataJson.seleApps, function (key, value) {
                     $('#apps').append('<option value="'+value+'">'+value+'</option>');
             });
         },'JSON');
         seleApps+='</select>';
-
 
         // Recorrer datos principal
         $.each(dataJson , function( key, value ) {
@@ -530,33 +560,51 @@ Config = {
             Config.html +='          <td></td>';
             Config.html +='          <td></td>';
             Config.html +='          <td></td>';
+            Config.html +='          <td></td>';
+            Config.html +='          <td></td>';
+            Config.html +='          <td></td>';
+            Config.html +='          <td></td>';
             Config.html +='     </tr>';
             // Recorrer campos principal
             $.each(value.columns , function( item, valor ) {
                 Config.html +='  <tr>';
+                // Verificar si la item es Primery Key
+                var PK_0 = valor.restrincion!='PRI' ? '' : 'readonly';                                      // Solo para SELECT y INPUT
+                var PK_1 = valor.restrincion=='PRI' ? 'onclick="this.checked=!this.checked" checked' : '';  // Solo para Checkbox Marcar como Ocultar y bloquea su uso
+                var PK_2 = valor.restrincion=='PRI' ? 'onclick="this.checked=!this.checked"' : '';  // Solo para Checkbox
+                var RE_1 = valor.required!='YES' ? 'onclick="this.checked=!this.checked" checked' : '';    // Solo para Checkbox Marca como requerido y no se puede quitar
+                var TC_0 = ''; // Cuando es un tipo de capo reservado por el sistema es imput
+                var TC_1 = ''; // Cuando es tipo Checkbox de campo reservado y es para Ocultar
+                var TC_2 = ''; // Cuando es tipo Checkbox de campo reservado y es para Mostrar
+                if(valor.name=='created_user_id' || valor.name=='updated_user_id' ||  valor.name=='created_at' ||  valor.name=='updated_at'){
+                    TC_0 = 'value="'+valor.name+'" readonly'
+                    TC_1 = 'onclick="this.checked=!this.checked" checked'
+                    TC_2 = 'onclick="this.checked=!this.checked"'
+                }
+
                 var pk = valor.restrincion=='PRI' ? '<u><b title="Primary Key de la entidad">'+valor.name+'</b></u>' : valor.name;
                 Config.html +='    <td><input type="hidden" name="restrincion[]" value="'+valor.restrincion+'"><input type="hidden" name="field[]" value="'+valor.name+'">'+pk+'</td>';
-                Config.html +='    <input type="hidden" name="required[]" value="'+valor.required+'">';
+                //Config.html +='    <input type="text" name="required[]" value="'+valor.required+'">';
                 Config.html +='    <td><input type="hidden" name="type[]" value="'+valor.tipo+'">'+valor.tipo+'</td>';
                 Config.html +='    <td><input type="hidden" name="dimension[]" value="'+valor.dimension+'"><span class="badge bg-blue">'+valor.dimension+'</span></td>';
                 //alert(valor.restrincion);
                 var req = valor.required!='YES' ? 'required' : '';
                 var req1 = valor.required!='YES' ? '<div style="position: absolute; float: left; font-size: 20px; z-index: 100; color:white; background: red; height: 18px;width: 10px;margin-left: -3px; padding-left: 2px;" title="Campo Requerido">*</div>' : '';
                 var req2 = valor.required!='YES' ? '<div id="etiqueta-'+item+'" data-item="'+item+'" style=" float: right; margin-top: -12px; margin-right: -12px; font-size: 10px; z-index: 100;" title="Maxima cantidad de caracteres">20</div>' : '';
-                var imp = valor.restrincion=='PRI' ? '<input type="hidden" name="etiqueta[]" size="20" value="'+valor.name+'" required><span title="Primary Key de la entidad">'+valor.name +'</span>' : req1+'<input class="form-control etiqueta" name="etiqueta[]" value="'+valor.label+'" data-item="etiqueta-'+item+'" type="text" size="20" maxlength="20" '+req+'>'+req2;
+                var imp = valor.restrincion=='PRI' ? '<input type="hidden" name="etiqueta[]" size="20" value="'+valor.name+'" required><span title="Primary Key de la entidad">'+valor.name +'</span>' : req1+'<input class="form-control etiqueta" name="etiqueta[]"  data-item="etiqueta-'+item+'" type="text" size="20" maxlength="20" '+req+' '+TC_0+'>'+req2;
                 Config.html +='          <td>'+imp+'</td>';
 
-                Config.html +='          <td><select class="form-control" name="mascara[]">';
-                if(valor.restrincion=='PRI' || valor.tipo=='int'){
+                Config.html +='          <td><select class="form-control" name="mascara[]" '+PK_0+'>';
+                if(valor.restrincion=='PRI' || valor.tipo=='int' || valor.name=='created_user_id' || valor.name=='created_user_id' ){
                     Config.html +='          <option value="integer" selected>Integer</option>';
                 }else if(valor.tipo=='bit'){
                     Config.html +='          <option value="boolean" selected>Boolean</option>';
                 }else if(valor.tipo=='date'){
                     Config.html +='          <option value="boolean" selected>Fecha</option>';
-                }else if(valor.tipo=='timestamp'){
+                }else if(valor.tipo=='timestamp' || valor.name=='created_at' || valor.name=='updated_at'){
                     Config.html +='          <option value="timestamp" selected>Timestamp</option>';
                 }else if(valor.tipo=='text' || valor.dimension>250){
-                    Config.html +='          <option value="textArea" selected>TextArea</option>';
+                    Config.html +='          <option value="textArea" selected >TextArea</option>';
                 }else{
                     Config.html +='          <option value="texto">Texo</option>';
                     Config.html +='          <option value="integer">Integer</option>';
@@ -568,9 +616,14 @@ Config = {
                     Config.html +='          <option value="movil">Móvil</option>';
                 }
                 Config.html +='          </select></td>';
-                Config.html +='          <td class="text-center"><input type="checkbox" name="relacionado[]"></td>';
-                Config.html +='          <td><select class="form-control" name="vista_campo[]"></select></td>';
-                Config.html +='          <td><select class="form-control"></select></td>';
+
+                Config.html +='          <td class="text-center"><input type="checkbox" name="required[]" '+RE_1+' '+TC_2+'></td>';
+                Config.html +='          <td class="text-center"><input type="checkbox" name="hidden_form[]" '+PK_1+' '+TC_1+' ></td>';
+                Config.html +='          <td class="text-center"><input type="checkbox" name="hidden_list[]" '+PK_1+' '+TC_1+'></td>';
+                Config.html +='          <td class="text-center"><input class="form-control place_holder" type="text" name="place_holder[]" '+PK_0+' '+TC_0+'></td>';
+                Config.html +='          <td class="text-center"><input type="checkbox" name="relacionado[]" id="relacionEntidad" '+PK_2+''+PK_0+' '+TC_2+'></td>';
+                Config.html +='          <td><select class="form-control" name="tabla_vista[]" id="tabla_vista" '+PK_0+' '+TC_0+'><option value="0" selected>Seleccione</option></select></td>';
+                Config.html +='          <td><select class="form-control" name="vista_campo[]" id="vista_campo" '+PK_0+' '+TC_0+'><option value="0" selected>Seleccione</option></select></td>';
                 Config.html +='     </tr>';
 
             });
@@ -586,14 +639,62 @@ Config = {
                 $('#apps').val(dataJson[0].apps)
             },500);
 
-        Config.sendVistaNuevaConfigurada();
         Config.copiarMasivo();
-    },'JSON');
+        Config.activarRelacionTable();
+        Config.sendVistaNuevaConfigurada();
+        },'JSON');
     },
     copiarMasivo: function (){
         $('#cut').click(function () {
-           alertar('Falta esta funcionalidad de copiar datos')
+           var ta1 = $('#box3 #defineEntity').find('tr');
+            $.each(ta1 ,function(index,elemento){
+                var let = $(elemento).find('td').eq(0).text();
+                 $(elemento).find('td').eq(3).children('input').val(let).keyup();
+                 var msjPlaceHolder = 'Por favor ingresar el/los '+let;
+                 $(elemento).find('td').eq(8).children('input').val(msjPlaceHolder).attr({'title':msjPlaceHolder});
+            })
+            alertar('Todos los elementos copiado exitosamente.')
         });
+    },
+    activarRelacionTable:function () {
+        var btnActivarRelacion =  $('#box3 #relacionEntidad');
+
+        // Si activa el boton de que hay una relacion padre e hijo
+        btnActivarRelacion.click(function () {
+            if(btnActivarRelacion.is(':checked')) {
+                var apps = $('#box3 #apps');
+                if(apps.val()==0){
+                    mostrarError('¡Uff!, debe seleccionar una aplicación para procesar las relaciones de entidades');
+                    apps.focus();
+                    return false;
+                }else{
+                    var conex = localStorage.getItem('conexionId');
+                    var opt = '<option value="0" selected>Seleccione</option>';
+                    $.post('getVistas',{'apps':apps.val(),'conexionId':conex},function (dataJson) {
+                        var rowss = [];
+                        $.each(dataJson.datos,function (key,value) {
+                            opt+='<option name="'+value.base.entidad+'|'+value.base.vista+'">'+value.base.entidad+'--'+value.base.vista+'</option>';
+
+                            $.each(value.rows, function (key, value) {
+                                rowss.push(value.campos);
+                            })
+
+                        });
+                        btnActivarRelacion.parent('td').next('td').children('select').html(opt).change(function () {
+                            Config.html = '<option value="0" selected>Seleccione</option>';
+                            $.each(rowss ,function(k,v){
+                                Config.html += '<option name="'+v+'">'+v+'</option>';
+                            })
+                            $(this).parent('td').next('td').children('select').html(Config.html);
+                        })
+                    },'JSON');
+                }
+            } else {
+                var opt = '<option value="0" selected>Seleccione</option>';
+                btnActivarRelacion.parent('td').next('td').children('select').html(opt);
+                btnActivarRelacion.parent('td').next('td').next('td').children('select').html(opt);
+            }
+        })
     },
     sendVistaNuevaConfigurada: function () {
 
@@ -631,8 +732,8 @@ Config = {
 
            $.post('/sendVistaNuevaConfigurada',$(this).serialize()+'&name='+name.val()+'&apps='+apps.val(), function (dataJson) {
                 if(dataJson.error==0) {
+                    $('#box3 #comprimirExpandir').click();
                     alertar(dataJson.msj);
-                    // append
                     Config.desactivarSegundo('box3');
                     Config.listadoUniversoTablas(); //collapsed
                     //$('table.table#'+item.val()).append('<tr><td><i class="fa fa-circle" aria-hidden="true"></i> <a class="cursor" data-tabla="'+item.val()+'" data-id="1">'+name.val()+'</a></td></tr>').fadeIn(1000)

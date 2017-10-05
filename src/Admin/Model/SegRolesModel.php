@@ -95,7 +95,6 @@ class SegRolesModel extends Main
 
             $detalle = $app.' - '.$tabla.' - '.$vista.' - '.$accesos[$a];
             $dato=self::getSegRolesExiste($detalle);
-            print_r($dato);
             if($dato->existe=='NO') {
                 $this->fijarValor('detalle', strtoupper($detalle));
                 $this->guardar();

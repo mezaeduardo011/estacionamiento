@@ -64,6 +64,12 @@
     <request>POST</request>
   </link>
   <link>
+    <name>/getVistas</name>
+    <controller>gestionar</controller>
+    <method>runShowVista</method>
+    <request>POST</request>
+  </link>
+  <link>
     <name>/setDataBase</name>
     <controller>gestionar</controller>
     <method>runSetDataBase</method>
@@ -101,9 +107,9 @@
   </link>
   <link>
     <name>/createTablas</name>
-    <controller>home</controller>
+    <controller>gestionar</controller>
     <method>runCreateTablas</method>
-    <request>GET</request>
+    <request>POST</request>
   </link>
   <!-- ### END SYSTEM ### -->
   <!-- Bloque de configuracion de la ruta del controller Autos23-->
@@ -301,6 +307,117 @@
     <name>/carrosUpdate</name>
     <controller>testAutos</controller>
     <method>runTestAutosUpdate</method>
+    <request>POST</request>
+  </link>
+  <!-- Bloque de configuracion de la ruta del controller Personal-->
+  <link>
+    <name>/personalIndex</name>
+    <controller>personal</controller>
+    <method>runPersonalIndex</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/personalListar</name>
+    <controller>personal</controller>
+    <method>runPersonalListar</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/personalCreate</name>
+    <controller>personal</controller>
+    <method>runPersonalCreate</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/personalShow</name>
+    <controller>personal</controller>
+    <method>runPersonalShow</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/personalDelete</name>
+    <controller>personal</controller>
+    <method>runPersonalDelete</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/personalUpdate</name>
+    <controller>personal</controller>
+    <method>runPersonalUpdate</method>
+    <request>POST</request>
+  </link>
+  <!-- Bloque de configuracion de la ruta del controller Diego1-->
+  <link>
+    <name>/diego1Index</name>
+    <controller>diego</controller>
+    <method>runDiegoIndex</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/diego1Listar</name>
+    <controller>diego</controller>
+    <method>runDiegoListar</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/diego1Create</name>
+    <controller>diego</controller>
+    <method>runDiegoCreate</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/diego1Show</name>
+    <controller>diego</controller>
+    <method>runDiegoShow</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/diego1Delete</name>
+    <controller>diego</controller>
+    <method>runDiegoDelete</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/diego1Update</name>
+    <controller>diego</controller>
+    <method>runDiegoUpdate</method>
+    <request>POST</request>
+  </link>
+  <!-- Bloque de configuracion de la ruta del controller Raumarys20-->
+  <link>
+    <name>/raumarys20Index</name>
+    <controller>raumarys</controller>
+    <method>runRaumarysIndex</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/raumarys20Listar</name>
+    <controller>raumarys</controller>
+    <method>runRaumarysListar</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/raumarys20Create</name>
+    <controller>raumarys</controller>
+    <method>runRaumarysCreate</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/raumarys20Show</name>
+    <controller>raumarys</controller>
+    <method>runRaumarysShow</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/raumarys20Delete</name>
+    <controller>raumarys</controller>
+    <method>runRaumarysDelete</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/raumarys20Update</name>
+    <controller>raumarys</controller>
+    <method>runRaumarysUpdate</method>
     <request>POST</request>
   </link>
 </route>

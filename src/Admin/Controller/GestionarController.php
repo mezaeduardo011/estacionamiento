@@ -22,7 +22,7 @@ class GestionarController extends Controller
     public $pathActivo;
     use Security;
 
-   public function __construct()
+    public function __construct()
    {
        parent::__construct();
        $this->session = $this->authenticated();
@@ -33,7 +33,7 @@ class GestionarController extends Controller
        $this->hoSegRolesModel = new Model\SegRolesModel();
    }
 
-   public function runInformarProceso($resquest){
+    public function runInformarProceso($resquest){
        $data['msj']='Procesando la Vista:'.$this->cache->get('proceso');
        $data['proceso']=$this->cache->get('proceso');
        $data['alter'] = $this->cache->get('alter');
@@ -46,7 +46,6 @@ class GestionarController extends Controller
         $this->tpl->add('usuario', $this->getSession('usuario'));
         $this->tpl->renders('view::home/gestionar');
     }
-
 
     public function runProcesarCrudVistas($request)
    {
@@ -68,8 +67,6 @@ class GestionarController extends Controller
                }
            }
            // Elemto encargado de procesar los roles automaticos de usuarios
-
-           die('GENERAR ROLES AUTOMATICOS APP + TABLA + VISTA + ACCION (ALTA,BAJA,CONSULTA,MODIFICACION,CONTROL TOTAL)');
        }
        $result=true;
        if(is_null($result)){
@@ -82,7 +79,6 @@ class GestionarController extends Controller
        }
        $this->json($dataJson);
    }
-
 
     public function runConfiguracionConexiones($request)
     {
@@ -204,7 +200,6 @@ class GestionarController extends Controller
         $this->json($schema);
     }
 
-
     public function runConfiguracionVista($request)
     {
         // stdClass Object(    [connect] => 1    [tabla] => test_abm    [vista] => 0)
@@ -256,6 +251,12 @@ class GestionarController extends Controller
         $dataJson[] = $temp;
         $this->json($dataJson);
     }
+
+    public function runShowVista($request)
+    {
+        $dataJson = $this->hoVistasModel->getShowVista($request);
+        $this->json($dataJson);
+    }
     /**
      * Permite visualizar las aplicaciones que existen dentro del sistema
      */
@@ -268,6 +269,19 @@ class GestionarController extends Controller
             $a++;
         }
         $dataJson['seleApps']=$valor;
+        $this->json($dataJson);
+    }
+
+    public function runCreateTablas($request )
+    {
+        $result = $this->hoEntidadesModel->setEstructuraCreateTabla($request);
+        if(is_null($result)){
+            $dataJson['error']='1';
+            $dataJson['msj']='¡Uff!, ya el registro se encuentra registrado';
+        }else{
+            $dataJson['error']='0';
+            $dataJson['msj']='¡Bien!, entidad creada exitosamente';
+        }
         $this->json($dataJson);
     }
 
