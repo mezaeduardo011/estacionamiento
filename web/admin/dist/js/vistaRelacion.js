@@ -50,8 +50,8 @@ Core.VistaRelacion = {
 
         localStorage.removeItem('id');
         $('#dataJPH'+temp+' tbody').on('click', 'tr', function () {
+        	
             var data = table.row($(this)).data();
-
             var send = '';
             $('table tr').css({'background':'', 'color':''});
             $(this).css({'background':'#293A4A', 'color':'#ffffff'});
