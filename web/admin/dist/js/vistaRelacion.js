@@ -5,8 +5,8 @@
 //## to Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
 //## Desarrollado por JPH - Ing. - Gregorio Jose Bolivar
 //######
-Core.Vista = {};
-Core.Vista = {
+Core.VistaRelacion = {};
+Core.VistaRelacion = {
     pathR: '',
     columns: '',
     main: function (path,Config) {
@@ -20,16 +20,21 @@ Core.Vista = {
         var pagina = Config.show.pagina;
         //Identificador del valor para el data
         var rowid = Config.show.rowid;
-        this.listado(display,search,pagina,rowid);
+        this.listado(display,search,pagina,rowid,Config.relacionPadre);
         this.procesar();
     },
-    listado : function (display,search,pagina,rowid) {
+    listado : function (display,search,pagina,rowid,relacionPadre) {
         var temp = this.__pathR__;
         var rows = this.__columns__;
+        var datos = {'data':null};
+        if(relacionPadre.field.length>0){
+            datos={'campo':""+relacionPadre.field+"--"+relacionPadre.value};
+        }
         var table = $('#dataJPH'+temp+'').DataTable({
             "ajax": {
                 "url": temp.toLowerCase()+'Listar',
                 "dataSrc": "",
+                "data": datos
             },
             "rowId": rowid,
             "iDisplayLength": display,
@@ -42,8 +47,6 @@ Core.Vista = {
             },
             "destroy": true
         });
-        // Configuracion personalizada local
-        Core.Vista.Util.priListaLoad();
 
         localStorage.removeItem('id');
         $('#dataJPH'+temp+' tbody').on('click', 'tr', function () {
@@ -70,8 +73,7 @@ Core.Vista = {
                     $(send).data('id', localStorage.getItem('id'))
                     $(send+" button#submit").html('Actualizar Datos').fadeIn(909);
                     $("#divDelete").html('<a id="sacarRegistroSeleccionado" data-registro="' + localStorage.getItem('id') + '" class="btn btn-danger">Eliminar registro</a>');
-                    Core.Vista.sacarRegistro();
-                    Core.Vista.Util.priListaClick(dataJson);
+                    Core.VistaRelacion.sacarRegistro();
                 }else{
                     mostrarError(dataJson.msj);
                 }
@@ -97,7 +99,6 @@ Core.Vista = {
                 token = tockeR;
                 //alert('CREAR SI');
             }
-            Core.Vista.Util.priClickProcesarForm(send);
             if (Core.valCamposObligatoriosCompletos(send)) {
                 var campos = new FormData();
 
@@ -151,17 +152,6 @@ Core.Vista = {
                 }
             },'JSON');
         });
-    },
-    validarClave: function () {
-        var d1 = $('input#clave.requerido');
-        var d2 =$('input#reclave.requerido');
-        if(d1.val().trim()!=d2.val().trim()){
-            d2.focus();
-            mostrarBug("Las claves ingresadas no coinciden debe de ser igual para continuar");
-            return false;
-        }else{
-            return true;
-        }
     }
 };
 

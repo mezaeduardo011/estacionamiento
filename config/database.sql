@@ -88,7 +88,7 @@
     entidad varchar(64) NOT NULL,
     field varchar(100) NOT NULL,
     type varchar(20) NOT NULL,
-    required varchar(10) NOT NULL,
+    nulo varchar(10) NOT NULL,
     dimension int,
     restrincion varchar(10),
     CONSTRAINT pk_ho_entidades PRIMARY KEY(id)
@@ -109,9 +109,9 @@
     restrincion varchar(10),
     label varchar(50) NOT NULL,
     mascara varchar(50) NOT NULL,
-    required varchar(3) NOT NULL,
+    nulo varchar(3) NOT NULL,
     place_holder varchar(14),
-    relacionado bit,
+    relacionado varchar(10),
     tabla_vista varchar(50) NULL,
     vista_campo varchar(50),
     orden int,
@@ -122,7 +122,7 @@
   );
 
   ALTER TABLE ho_vistas
-   ADD UNIQUE (conexiones_id, entidades_tabla,nombre,field,label,mascara)
+   ADD UNIQUE  (conexiones_id, entidades_tabla,nombre,field,label,mascara)
 
 
   -- Vista encargada de extraer las tablas
@@ -130,8 +130,11 @@
 
   -- Extraer las vistas generadas a partir de una entidad generadas por el sistema
   CREATE VIEW view_list_vist_gene AS
-    SELECT conexiones_id, entidad, nombre, coalesce(procesado,0) AS procesado from ho_vistas
-    GROUP BY conexiones_id, entidad, nombre, procesado
+ SELECT c.apps, c.conexiones_id, c.entidad, c.nombre, (select b.COLUMN_NAME from INFORMATION_SCHEMA.TABLE_CONSTRAINTS AS a
+    INNER JOIN INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE AS b
+    ON a.CONSTRAINT_NAME=b.CONSTRAINT_NAME
+    WHERE a.TABLE_NAME=c.entidad AND CONSTRAINT_TYPE='PRIMARY KEY') AS pk, coalesce(procesado,0) AS procesado from ho_vistas AS c
+    GROUP BY c.apps,c.conexiones_id, c.entidad, c.nombre, c.procesado
 
   -- Vista encargadas de extraer las entidades seleccionada por el cliente en el momento
   CREATE VIEW view_list_enti_regi AS
@@ -141,3 +144,10 @@
     GROUP BY b.conexiones_id, a.entidad, b.nombre, b.procesado
 
 
+-- Vistas encargada de mostrar los campos cuando se selecciona drilla en la definicion
+  CREATE VIEW view_selec_grilla AS
+ SELECT c.apps, c.conexiones_id, c.entidad, c.nombre, a.COLUMN_NAME AS pk, a.ORDINAL_POSITION AS orden,  coalesce(procesado,0) AS procesado
+ FROM ho_vistas AS c
+ INNER JOIN INFORMATION_SCHEMA.COLUMNS AS a ON a.TABLE_NAME=c.entidad
+ WHERE COLUMN_NAME NOT IN('update_at','created_at','created_usuario_id','updated_usuario_id')
+ GROUP BY c.apps,c.conexiones_id, c.entidad, c.nombre, a.COLUMN_NAME, a.ORDINAL_POSITION, c.procesado

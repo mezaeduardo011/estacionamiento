@@ -1,17 +1,18 @@
 <?php
 namespace APP\Admin\Model;
 use JPH\Complements\Database\Main;
-use JPH\Core\Commun\All;
+use JPH\Core\Commun\{All,Security};
 /**
  * Generador de codigo del Modelo de la App Admin
  * @propiedad: Hornero 1.0
  * @utor: Gregorio Bolivar <elalconxvii@gmail.com>
- * @created: 03/10/2017
+ * @created: 05/10/2017
  * @version: 1.0
  */ 
 
 class PersonalModel extends Main
 {
+   use Security;
    public function __construct()
    {
        $this->tabla = 'personal';
@@ -24,9 +25,9 @@ class PersonalModel extends Main
     * Extraer todos los registros de Personal
     * @return array $tablas
     */ 
-   public function getPersonalListar()
+   public function getPersonalListar($datos)
    {
-     $tablas=$this->leerTodos();
+     $tablas=$this->leerTodos($datos);
      return $tablas;
    }
 
@@ -38,6 +39,7 @@ class PersonalModel extends Main
    public function setPersonalCreate($datos)
    {
      $this->fijarValores($datos);
+     $this->fijarValor('created_at',All::now());
      $this->guardar();
      $val = $this->lastId();
      return $val;
@@ -78,6 +80,7 @@ class PersonalModel extends Main
    public function setPersonalUpdate($datos)
    {
      $this->fijarValores($datos);
+     $this->fijarValor('updated_at',All::now());
      $val = $this->guardar();
      return $val;
    }

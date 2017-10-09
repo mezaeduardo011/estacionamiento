@@ -1,19 +1,15 @@
 <div class="box box-primary">
 <div class="box-header with-border">
-<h3 class="box-title">Formulario de diego1</h3>
+<h3 class="box-title">Formulario de modelos</h3>
 </div>
 <!-- /.box-header -->
 <!-- form start -->
-<form role="form" method="post" id="sendDiego1Procesar" enctype="multipart/form-data">
+<form role="form" method="post" id="sendModelosProcesar" enctype="multipart/form-data">
    <div class="box-body">
 <input type="hidden" id="id" name="id">
 <div class="form-group">
-<label for="nombres">nombres</label>
-<input type="text" name="nombres" class="form-control default requerido " id="nombres" placeholder="Enter nombres">
-</div>
-<div class="form-group">
-<label for="correo">correo</label>
-<input type="text" name="correo" class="form-control default requerido " id="correo" placeholder="Enter correo">
+<label for="detalle">detalle</label>
+<input type="text" name="detalle" class="form-control texto requerido " id="detalle" placeholder="Por favor ingresar el/los detalle">
 </div>
   </div>
   <!-- /.box-body -->

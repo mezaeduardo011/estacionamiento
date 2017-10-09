@@ -399,10 +399,10 @@ Config = {
         // leer las tablas seleccionadas en local store
         var table = localStorage.getItem('entidadesSeleccionadas');
         var conexion = localStorage.getItem('conexionId');
-        //alert(table);
-        $('#box3 #menuPrincipal').prepend('<i class="fa fa-compress btn" aria-hidden="true" id="comprimirExpandir"></i>')
         $titulo='Listado de Tablas Seleccionadas';
         $('#box3 #menuPrincipalTitulo').html(' ').html($titulo);
+        //alert(table);
+        $('#optExtra').html(' ').html('<i class="fa fa-compress btn" aria-hidden="true" id="comprimirExpandir"></i>')
 
 
         $.post('/getEntidadesSeleccionadas',{'conn':conexion,'entidad':table},function (dataJson) {
@@ -474,7 +474,7 @@ Config = {
         },'JSON');
     },
     comprimirExpandir:function () {
-        $('#box3 #comprimirExpandir').click(function () {
+        $('#comprimirExpandir').on('click',function () {
             var existe = $(this).hasClass('activado');
             if(!existe) {
                 $('#box3 #menuPrincipalTitulo').hide(900);
@@ -522,16 +522,16 @@ Config = {
         Config.html +=' <table class="table table-striped" id="defineEntity">';
         // Definicion de la tabla
         Config.html +='     <tr>';
-        Config.html +='          <th style="width: 10%;">Columna</th>';
-        Config.html +='          <th style="width: 10%;">Tipo</th>';
+        Config.html +='          <th style="width: 5%;">Columna</th>';
+        Config.html +='          <th style="width: 5%;">Tipo</th>';
         Config.html +='          <th style="width: 2%;" title="Dimension de la tabla original">D</th>';
-        Config.html +='          <th style="width: 15%;">Etiqueta &nbsp;<i id="cut" class="fa fa-files-o cursor" aria-hidden="true" title="Copiar todos los nombre de la vista real en esta fila"></i></th>';
+        Config.html +='          <th style="width: 13%;">Etiqueta &nbsp;<i id="cut" class="fa fa-files-o cursor" aria-hidden="true" title="Copiar todos los nombre de la vista real en esta fila"></i></th>';
         Config.html +='          <th style="width: 13%;">Mascara</th>';
         Config.html +='          <th style="width: 3%;"  title="Campo requerido">REQ</th>';
         Config.html +='          <th style="width: 3%;"  title="Ocultar en la Vista">HVI</th>';
         Config.html +='          <th style="width: 3%;"  title="Ocultar en el DataTable">HLI</th>';
-        Config.html +='          <th style="width: 12%; text-align: center" title="Ingresar Place Holder">MSJ</th>';
-        Config.html +='          <th style="width: 3%;"  title="Navega en otra Vista">NOV</th>';
+        Config.html +='          <th style="width: 15%; text-align: center" title="Ingresar Place Holder">MSJ</th>';
+        Config.html +='          <th style="width: 10%;"  title="Navega en otra Vista o es combo">NOV</th>';
         Config.html +='          <th style="width: 15%;" title="Cual vista navega del listado">CUAL</th>';
         Config.html +='          <th style="width: 15%;" title="Cual campo es el que necesita">Campo</th>';
         Config.html +='     </tr>';
@@ -551,28 +551,34 @@ Config = {
             var tmp = $('#box3 #'+tabla+'-titulo').text().trim();
             var titulo =   seleApps+' / <b>'+tmp + '</b>'+ ' / <input placeholder="Nombre de la vista" name="nombre" id="nameVista" value="' + select +'" style="border: none" maxlength="50" required>';
             $('#box3 #menuSegundarioTilulo').html(' ').html(titulo);
-            Config.html +='     <tr>';
-            Config.html +='          <td></td>';
-            Config.html +='          <td></td>';
-            Config.html +='          <td></td>';
-            Config.html +='          <td></td>';
-            Config.html +='          <td></td>';
-            Config.html +='          <td></td>';
-            Config.html +='          <td></td>';
-            Config.html +='          <td></td>';
-            Config.html +='          <td></td>';
-            Config.html +='          <td></td>';
-            Config.html +='          <td></td>';
-            Config.html +='          <td></td>';
-            Config.html +='     </tr>';
+            var BTN = 'Procesar vista';
             // Recorrer campos principal
             $.each(value.columns , function( item, valor ) {
-                Config.html +='  <tr>';
+                // ########### Ya esta registrado  mostar ############
+                // Valores cuando es un update o mostrar
+                var VA_0 = '';
+                var VA_1 = '';
+                var VA_2 = '';
+                var VA_3 = '';
+                var VA_4 = '';
+                var VA_5 = '';
+
+                if(id!=0 && (valor.label.length>0 || valor.place_holder.length>0 || valor.relacionado==1)) {
+                    VA_0 = 'value="' + valor.label + '"';     // Valor cuando existen valor en la etiqueta
+                    VA_2 = 'value="' + valor.place_holder + '"'; // Valor cuando existe registro en el place_holder
+                    if (valor.relacionado!=0){ // Debe ser grilla o combo
+                        VA_3 = '<option value="'+valor.relacionado+'" selected>'+valor.relacionado+'</option>'; // Valor para cuando retorna el valor relacionado y esta chequeado
+                        VA_4 = '<option value="'+valor.tabla_vista+'" selected>'+valor.tabla_vista+'</option>'; // Seeccion de Tabla y Vista
+                        VA_5 = '<option value="'+valor.vista_campo+'" selected>'+valor.vista_campo+'</option>'; // Seleccion de Item
+                    }
+                    BTN = 'Actualizar vista';
+                }
+                // ###########  END   ######
                 // Verificar si la item es Primery Key
                 var PK_0 = valor.restrincion!='PRI' ? '' : 'readonly';                                      // Solo para SELECT y INPUT
                 var PK_1 = valor.restrincion=='PRI' ? 'onclick="this.checked=!this.checked" checked' : '';  // Solo para Checkbox Marcar como Ocultar y bloquea su uso
                 var PK_2 = valor.restrincion=='PRI' ? 'onclick="this.checked=!this.checked"' : '';  // Solo para Checkbox
-                var RE_1 = valor.required!='YES' ? 'onclick="this.checked=!this.checked" checked' : '';    // Solo para Checkbox Marca como requerido y no se puede quitar
+                var RE_1 = valor.nulo!='YES' ? 'onclick="this.checked=!this.checked" checked' : '';    // Solo para Checkbox Marca como requerido y no se puede quitar
                 var TC_0 = ''; // Cuando es un tipo de capo reservado por el sistema es imput
                 var TC_1 = ''; // Cuando es tipo Checkbox de campo reservado y es para Ocultar
                 var TC_2 = ''; // Cuando es tipo Checkbox de campo reservado y es para Mostrar
@@ -583,18 +589,22 @@ Config = {
                 }
 
                 var pk = valor.restrincion=='PRI' ? '<u><b title="Primary Key de la entidad">'+valor.name+'</b></u>' : valor.name;
-                Config.html +='    <td><input type="hidden" name="restrincion[]" value="'+valor.restrincion+'"><input type="hidden" name="field[]" value="'+valor.name+'">'+pk+'</td>';
-                //Config.html +='    <input type="text" name="required[]" value="'+valor.required+'">';
-                Config.html +='    <td><input type="hidden" name="type[]" value="'+valor.tipo+'">'+valor.tipo+'</td>';
-                Config.html +='    <td><input type="hidden" name="dimension[]" value="'+valor.dimension+'"><span class="badge bg-blue">'+valor.dimension+'</span></td>';
+                Config.html +='    <td><input type="hidden" name="restrincion['+item+']" value="'+valor.restrincion+'"><input type="hidden" name="field['+item+']" value="'+valor.name+'">'+pk+'</td>';
+                if(id!=0){
+                    Config.html +='<td><input type="hidden" name="id['+item+']" value="'+valor.id+'">';
+                }else{
+                    Config.html +='<td>';
+                }
+                Config.html +='    <input type="hidden" name="type['+item+']" value="'+valor.tipo+'">'+valor.tipo+'</td>';
+                Config.html +='    <td><input type="hidden" name="dimension['+item+']" value="'+valor.dimension+'"><span class="badge bg-blue">'+valor.dimension+'</span></td>';
                 //alert(valor.restrincion);
-                var req = valor.required!='YES' ? 'required' : '';
-                var req1 = valor.required!='YES' ? '<div style="position: absolute; float: left; font-size: 20px; z-index: 100; color:white; background: red; height: 18px;width: 10px;margin-left: -3px; padding-left: 2px;" title="Campo Requerido">*</div>' : '';
-                var req2 = valor.required!='YES' ? '<div id="etiqueta-'+item+'" data-item="'+item+'" style=" float: right; margin-top: -12px; margin-right: -12px; font-size: 10px; z-index: 100;" title="Maxima cantidad de caracteres">20</div>' : '';
-                var imp = valor.restrincion=='PRI' ? '<input type="hidden" name="etiqueta[]" size="20" value="'+valor.name+'" required><span title="Primary Key de la entidad">'+valor.name +'</span>' : req1+'<input class="form-control etiqueta" name="etiqueta[]"  data-item="etiqueta-'+item+'" type="text" size="20" maxlength="20" '+req+' '+TC_0+'>'+req2;
+                var req = valor.nulo!='YES' ? 'nulo' : '';
+                var req1 = valor.nulo!='YES' ? '<div style="position: absolute; float: left; font-size: 20px; z-index: 100; color:white; background: red; height: 18px;width: 10px;margin-left: -3px; padding-left: 2px;" title="Campo Requerido">*</div>' : '';
+                var req2 = valor.nulo!='YES' ? '<div id="etiqueta-'+item+'" data-item="'+item+'" style=" float: right; margin-top: -12px; margin-right: -12px; font-size: 10px; z-index: 100;" title="Maxima cantidad de caracteres">20</div>' : '';
+                var imp = valor.restrincion=='PRI' ? '<input type="hidden" name="etiqueta['+item+']" size="20" value="'+valor.name+'" required><span title="Primary Key de la entidad">'+valor.name +'</span>' : req1+'<input class="form-control etiqueta" name="etiqueta['+item+']"  data-item="etiqueta-'+item+'" type="text" size="20" maxlength="20" '+req+' '+TC_0+' '+VA_0+'>'+req2;
                 Config.html +='          <td>'+imp+'</td>';
 
-                Config.html +='          <td><select class="form-control" name="mascara[]" '+PK_0+'>';
+                Config.html +='          <td><select class="form-control" name="mascara['+item+']" '+PK_0+' id="mascara_'+item+'">';
                 if(valor.restrincion=='PRI' || valor.tipo=='int' || valor.name=='created_user_id' || valor.name=='created_user_id' ){
                     Config.html +='          <option value="integer" selected>Integer</option>';
                 }else if(valor.tipo=='bit'){
@@ -617,19 +627,20 @@ Config = {
                 }
                 Config.html +='          </select></td>';
 
-                Config.html +='          <td class="text-center"><input type="checkbox" name="required[]" '+RE_1+' '+TC_2+'></td>';
-                Config.html +='          <td class="text-center"><input type="checkbox" name="hidden_form[]" '+PK_1+' '+TC_1+' ></td>';
-                Config.html +='          <td class="text-center"><input type="checkbox" name="hidden_list[]" '+PK_1+' '+TC_1+'></td>';
-                Config.html +='          <td class="text-center"><input class="form-control place_holder" type="text" name="place_holder[]" '+PK_0+' '+TC_0+'></td>';
-                Config.html +='          <td class="text-center"><input type="checkbox" name="relacionado[]" id="relacionEntidad" '+PK_2+''+PK_0+' '+TC_2+'></td>';
-                Config.html +='          <td><select class="form-control" name="tabla_vista[]" id="tabla_vista" '+PK_0+' '+TC_0+'><option value="0" selected>Seleccione</option></select></td>';
-                Config.html +='          <td><select class="form-control" name="vista_campo[]" id="vista_campo" '+PK_0+' '+TC_0+'><option value="0" selected>Seleccione</option></select></td>';
+                Config.html +='          <td class="text-center"><input type="checkbox" name="nulo['+item+']" '+RE_1+' '+TC_2+' '+VA_1+'></td>';
+                Config.html +='          <td class="text-center"><input type="checkbox" name="hidden_form['+item+']" '+PK_1+' '+TC_1+' '+VA_1+'></td>';
+                Config.html +='          <td class="text-center"><input type="checkbox" name="hidden_list['+item+']" '+PK_1+' '+TC_1+' '+VA_1+'></td>';
+                Config.html +='          <td class="text-center"><input class="form-control place_holder" type="text" name="place_holder[]" id="place_holder_'+item+'" '+PK_0+' '+TC_0+' '+VA_2+'></td>';
+                //Config.html +='          <td class="text-center"><input type="checkbox" name="relacionado['+item+']" id="relacionEntidad" '+VA_3+'></td>';
+                Config.html +='          <td class="text-center"><select class="form-control" name="relacionado['+item+']" id="relacionEntidad">'+VA_3+'<option value="0">----</option><option value="combo">Combo</option><option value="grilla">Grilla</option></select></td>';
+                Config.html +='          <td><select class="form-control" name="tabla_vista['+item+']" id="tabla_vista" '+TC_0+'><option value="0" selected>----</option>'+VA_4+'</select></td>';
+                Config.html +='          <td><select class="form-control" name="vista_campo['+item+']" id="vista_campo" '+TC_0+'><option value="0" selected>----</option>'+VA_5+'</select></td>';
                 Config.html +='     </tr>';
 
             });
             Config.html +='</table>';
             Config.html +=' <div class="box-footer">';
-            Config.html +='  <button type="submit" class="btn btn-info pull-right" id="enviarUniversoTablas">Procesar datos</button>';
+            Config.html +='  <button type="submit" class="btn btn-info pull-right" id="enviarUniversoTablas">'+BTN+'</button>';
             Config.html +=' </div>';
             Config.html +='</form>';
             var mostrarUniversoTablabody = $('#box3 #menuSegundarioBody').html(' ').html(Config.html);
@@ -660,32 +671,32 @@ Config = {
         var btnActivarRelacion =  $('#box3 #relacionEntidad');
 
         // Si activa el boton de que hay una relacion padre e hijo
-        btnActivarRelacion.click(function () {
-            if(btnActivarRelacion.is(':checked')) {
+        btnActivarRelacion.on('change',function (event) {
+            var activo = $(this);
+            if($(this).val()!=0) {
                 var apps = $('#box3 #apps');
                 if(apps.val()==0){
                     mostrarError('¡Uff!, debe seleccionar una aplicación para procesar las relaciones de entidades');
                     apps.focus();
-                    return false;
+                    event.preventDefault();
                 }else{
                     var conex = localStorage.getItem('conexionId');
                     var opt = '<option value="0" selected>Seleccione</option>';
-                    $.post('getVistas',{'apps':apps.val(),'conexionId':conex},function (dataJson) {
+                    $.post('/getVistas',{'apps':apps.val(),'conexionId':conex,'tipo':activo.val()},function (dataJson) {
                         var rowss = [];
                         $.each(dataJson.datos,function (key,value) {
-                            opt+='<option name="'+value.base.entidad+'|'+value.base.vista+'">'+value.base.entidad+'--'+value.base.vista+'</option>';
-
-                            $.each(value.rows, function (key, value) {
-                                rowss.push(value.campos);
-                            })
-
+                            opt+='<option name="'+value.entidad+'|'+value.vista+'">'+value.entidad+'--'+value.vista+'--'+value.pk+'</option>';
                         });
-                        btnActivarRelacion.parent('td').next('td').children('select').html(opt).change(function () {
-                            Config.html = '<option value="0" selected>Seleccione</option>';
-                            $.each(rowss ,function(k,v){
-                                Config.html += '<option name="'+v+'">'+v+'</option>';
-                            })
-                            $(this).parent('td').next('td').children('select').html(Config.html);
+                        activo.parent('td').next('td').children('select').html(opt).change(function () {
+                                var v = $(this);
+                                $.post('/getVistasColumns',{'apps':apps.val(),'conexionId':conex,'entidad':v.val()},function (dataJson) {
+                                    Config.html = '<option value="0" selected>Seleccione</option>';
+                                    $.each(dataJson.rows ,function(k,v){
+                                        Config.html += '<option name="'+v.campos+'">'+v.campos+'</option>';
+                                    });
+                                    v.parent('td').next('td').children('select').html(' ').html(Config.html);
+                                });
+
                         })
                     },'JSON');
                 }
@@ -728,11 +739,10 @@ Config = {
                 return false;
             }
             var procesada = $("#box3 #tabla").val();
-
-
-           $.post('/sendVistaNuevaConfigurada',$(this).serialize()+'&name='+name.val()+'&apps='+apps.val(), function (dataJson) {
+            //$('#box3 #comprimirExpandir').click();
+            $.post('/sendVistaNuevaConfigurada',$(this).serialize()+'&name='+name.val()+'&apps='+apps.val(), function (dataJson) {
                 if(dataJson.error==0) {
-                    $('#box3 #comprimirExpandir').click();
+
                     alertar(dataJson.msj);
                     Config.desactivarSegundo('box3');
                     Config.listadoUniversoTablas(); //collapsed

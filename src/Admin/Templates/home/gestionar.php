@@ -76,6 +76,7 @@ Gestionar del Generador
                 <div class="box-body pad table-responsive" id="box3" style="display: none">
                     <div class="col-md-4" id="menuPrincipal">
                         <!-- social buttons -->
+
                         <div class="box">
                             <div class="box-header">
                                 <h3 class="box-title" id="menuPrincipalTitulo"> Opciones del sistema.   </h3>
@@ -83,6 +84,7 @@ Gestionar del Generador
                             <div class="box-body" id="menuPrincipalBody">
                                 cargando ..
                             </div>
+
                         </div>
                         <!-- /.box -->
                     </div>
@@ -100,9 +102,9 @@ Gestionar del Generador
             </div>
             <!-- /.box -->
         </div>
-
     </div>
 </section>
+<div id="optExtra"><div>
 <?php $this->push('addJs')?>
 <script src="/admin/dist/js/config.js"></script>
 <script src="/admin/dist/js/gestionTablas.js"></script>

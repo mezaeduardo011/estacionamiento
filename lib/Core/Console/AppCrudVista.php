@@ -26,12 +26,15 @@ class AppCrudVista extends App
     /**
      * Instanciador de eventos para generar las vistas
      * @param string $app, Nombre de la apicacion
-     * @param string $crud, nombre del Crud
+     * @param string $crud, nombre del la Vista
      * @param string $tabla, nombre de la tabla
-     * @campos array $campos, arrego de los campos que tiene lavista
+     * @param array $campos, arrego de los campos que tiene la la vista
+     * @param array $columnsReal, arrego de los campos que tiene la vista
+     * @return bool true
      */
     public function createStructuraFileCRUD($app,$crud,$tabla,$campos,$columnsReal)
     {
+
        // echo 'App:'.$app.'--,Crud:'.$crud.'--,tabla:'.$tabla; //die();
         foreach ($campos AS $key=>$value)
         {
@@ -44,8 +47,15 @@ class AppCrudVista extends App
             }
             $temp[]=$value->field;
             $temp1[]=$value->label;
+            //   [hidden_form] => 1 | [hidden_list] => 1 | [relacionado] 1 | [tabla_vista] personal--personalD1 | [vista_campo] id
+            $hidden_f=(empty($value->hidden_form))?0:$value->hidden_form;
+            $hidden_l=(empty($value->hidden_list))?0:$value->hidden_list;
+            $relacion=(empty($value->relacionado))?0:$value->relacionado;
+            $vista=(empty($value->tabla_vista))?0:$value->tabla_vista;
+            $campo=(empty($value->vista_campo))?0:$value->vista_campo;
+            $temp2[$value->field]=$hidden_f.'|'.$hidden_l.'|'.$relacion.'|'.$vista.'|'.$campo;
         }
-
+        $requerido = $temp2;
         $campos['campos']= $temp;
         $campRealEnti = array();
 
@@ -92,7 +102,6 @@ class AppCrudVista extends App
             }else{
                 self::createFileReadControllerCRUD($archivoController,$this->app,$entidad,$campos,$rutaVistaD);
             }
-
             // Verificar si existe modelo $ruta."Model.php"
             $archivoModel = $rutaApp.All::APP_MODEL.DIRECTORY_SEPARATOR."".$entidad."Model.php";
             if (file_exists($archivoModel)) {
@@ -109,12 +118,13 @@ class AppCrudVista extends App
             }else{ ///'.strtolower($controller).'
                 self::createNewRutaXmlCRUD($archivoRoute,$controller,$tabla);
             }
-
+            // Permite crear la carpeta donde estará el proyecto
             self::createDirViews($rutaPadre,$rutaHija);
-
-            self::createFileViewIndex($rutaHija, $campos, $rutaVista);
-            self::createFileViewForm($rutaHija, $campos);
-            self::createFileViewListado($rutaHija, $campos);
+            // Permite crear los archivos de la vista
+            self::createFileViewIndex($rutaHija, $campos, $rutaVista,$requerido);
+            self::createFileViewAssent($rutaHija, $campos, $rutaVista,$requerido);
+            self::createFileViewForm($rutaHija, $campos,$requerido);
+            self::createFileViewListado($rutaHija, $campos,$requerido);
 
             $msj=Interprete::getMsjConsole($this->active,'app:crud-creado');
 
@@ -307,11 +317,12 @@ class AppCrudVista extends App
         $app = All::upperCase($app);
 
         $ar = fopen($archivoModel, "w+") or die("Problemas en la add del model del apps". $app);
+        $camposCompleto = $campos['campos'];
         // Inicio la escritura en el activo
         fputs($ar, '<?php'.PHP_EOL);
         fputs($ar, 'namespace APP\\'.$app.'\\Model;'.PHP_EOL);
         fputs($ar, 'use JPH\\Complements\\Database\\Main;'.PHP_EOL);
-        fputs($ar, 'use JPH\\Core\\Commun\\All;'.PHP_EOL);
+        fputs($ar, 'use JPH\\Core\\Commun\\{All,Security};'.PHP_EOL);
         fputs($ar, '/**'.PHP_EOL);
         fputs($ar, ' * Generador de codigo del Modelo de la App '.$app.PHP_EOL);
         fputs($ar, ' * @propiedad: '.All::FW.' '.All::VERSION.''.PHP_EOL);
@@ -321,6 +332,7 @@ class AppCrudVista extends App
         fputs($ar, ' */ '.PHP_EOL.PHP_EOL);
         fputs($ar, "class ". $modelo."Model extends Main".PHP_EOL);
         fputs($ar, "{".PHP_EOL);
+        fputs($ar, "   use Security;".PHP_EOL);
         fputs($ar, '   public function __construct()'.PHP_EOL);
         fputs($ar, '   {'.PHP_EOL);
         fputs($ar, '       $this->tabla = \''.$campos['entida'].'\';'.PHP_EOL);
@@ -334,9 +346,9 @@ class AppCrudVista extends App
         fputs($ar, '    * Extraer todos los registros de '.$modelo.PHP_EOL);
         fputs($ar, '    * @return array $tablas'.PHP_EOL);
         fputs($ar, '    */ '.PHP_EOL);
-        fputs($ar, '   public function get'.$modelo.'Listar()'.PHP_EOL);
+        fputs($ar, '   public function get'.$modelo.'Listar($datos)'.PHP_EOL);
         fputs($ar, '   {'.PHP_EOL);
-        fputs($ar, '     $tablas=$this->leerTodos();'.PHP_EOL);
+        fputs($ar, '     $tablas=$this->leerTodos($datos);'.PHP_EOL);
         fputs($ar, '     return $tablas;'.PHP_EOL);
         fputs($ar, '   }'.PHP_EOL.PHP_EOL);
 
@@ -348,6 +360,14 @@ class AppCrudVista extends App
         fputs($ar, '   public function set'.$modelo.'Create($datos)'.PHP_EOL);
         fputs($ar, '   {'.PHP_EOL);
         fputs($ar, '     $this->fijarValores($datos);'.PHP_EOL);
+        // Valores reservados del Sistema
+        if (in_array("created_usuario_id", $camposCompleto)) {
+            fputs($ar, '     $this->fijarValor(\'created_usuario_id\',$user->id);'.PHP_EOL);
+        }
+        if (in_array("created_at", $camposCompleto)) {
+            fputs($ar, '     $this->fijarValor(\'created_at\',All::now());'.PHP_EOL);
+        }
+        // Fin de seteo de valores reservado del sistema
         fputs($ar, '     $this->guardar();'.PHP_EOL);
         fputs($ar, '     $val = $this->lastId();'.PHP_EOL);
         fputs($ar, '     return $val;'.PHP_EOL);
@@ -388,6 +408,14 @@ class AppCrudVista extends App
         fputs($ar, '   public function set'.$modelo.'Update($datos)'.PHP_EOL);
         fputs($ar, '   {'.PHP_EOL);
         fputs($ar, '     $this->fijarValores($datos);'.PHP_EOL);
+        // Valores reservados del Sistema
+        if (in_array("updated_usuario_id", $camposCompleto)) {
+            fputs($ar, '     $this->fijarValor(\'updated_usuario_id\',$user->id);'.PHP_EOL);
+        }
+        if (in_array("updated_at", $camposCompleto)) {
+            fputs($ar, '     $this->fijarValor(\'updated_at\',All::now());'.PHP_EOL);
+        }
+        // Fin de seteo de valores reservado del sistema
         fputs($ar, '     $val = $this->guardar();'.PHP_EOL);
         fputs($ar, '     return $val;'.PHP_EOL);
         fputs($ar, '   }'.PHP_EOL);
@@ -398,16 +426,16 @@ class AppCrudVista extends App
     }
 
 
-/**
- * Method encargado de procesar rutas asociadas al al sistema
- * @param string $archivoRoute, ruta donde se hace el proceso donde esta la apliacion
- * @param string $controller, nombre del controllador
- * @param string $tabla, nombre con el cual se llama al sistema
- * @param string $method, permite identificar cual es el method que debe instanciar el clase
- * @param string $request, permite identificar si el method GET o POST
- */
+    /**
+     * Method encargado de procesar rutas asociadas al al sistema
+     * @param string $archivoRoute, ruta donde se hace el proceso donde esta la apliacion
+     * @param string $controller, nombre del controllador
+     * @param string $tabla, nombre con el cual se llama al sistema
+     * @param string $method, permite identificar cual es el method que debe instanciar el clase
+     * @param string $request, permite identificar si el method GET o POST
+     */
 
-private function createNewRutaXmlCRUD(string $archivoRoute, string $controller, string $tabla)
+    private function createNewRutaXmlCRUD(string $archivoRoute, string $controller, string $tabla)
 {
     $router = new SimpleXMLExtended($archivoRoute, null, true) or die("Problemas en la creaci&oacute;n del router del apps Router.xml");
     $router->addComentario(' Bloque de configuracion de la ruta del controller '.ucfirst($controller));
@@ -451,9 +479,8 @@ private function createNewRutaXmlCRUD(string $archivoRoute, string $controller, 
     $router->formatXml($archivoRoute);
 }
 
-private function createFileViewIndex($rutaHija, $campos, $rutaVista)
-{
-
+    private function createFileViewIndex($rutaHija, $campos, $rutaVista, $requerido)
+    {
     $ar = fopen($rutaHija . DIRECTORY_SEPARATOR . "index.php", "w+") or die("Problemas en la creaci&oacute;n del view index.php");
     // Inicio la escritura en el activo
     fputs($ar, '<?php' . PHP_EOL);
@@ -468,35 +495,89 @@ private function createFileViewIndex($rutaHija, $campos, $rutaVista)
     fputs($ar, '<?php $this->end()?>' . PHP_EOL);
 
     fputs($ar, '<div class="row">' . PHP_EOL);
-    fputs($ar, '<!-- left column -->' . PHP_EOL);
-    fputs($ar, '<div class="col-md-7">' . PHP_EOL);
-    fputs($ar, '    <!-- general form elements -->' . PHP_EOL);
-    fputs($ar, '    <?php $this->insert(\'view::' . $rutaVista . '/listado\') ?>' . PHP_EOL);
-    fputs($ar, '</div>' . PHP_EOL);
-    fputs($ar, '<div class="col-md-5">' . PHP_EOL);
-    fputs($ar, '   <?php $this->insert(\'view::' . $rutaVista . '/form\') ?>' . PHP_EOL);
+    fputs($ar, '    <!-- left column -->' . PHP_EOL);
+    fputs($ar, '    <div class="col-md-7">' . PHP_EOL);
+    fputs($ar, '        <!-- general form elements -->' . PHP_EOL);
+    fputs($ar, '        <?php $this->insert(\'view::' . $rutaVista . '/listado\') ?>' . PHP_EOL);
+    fputs($ar, '    </div>' . PHP_EOL);
+    fputs($ar, '        <div class="col-md-5">' . PHP_EOL);
+    fputs($ar, '        <?php $this->insert(\'view::' . $rutaVista . '/form\') ?>' . PHP_EOL);
+    fputs($ar, '    </div>' . PHP_EOL);
     fputs($ar, '</div>' . PHP_EOL);
 
+    /** Vista con hijos */
+    foreach ($campos['campos'] AS $key => $value){
+        $mostrar = explode('|',$requerido[$value]);
+        //   [0][hidden_form] => 1 | [1][hidden_list] => 1 | [2][relacionado] (grilla|combo) | [3][tabla_vista] personal--personalD1 | [4][vista_campo] id
+
+        $valores=explode('--',$mostrar[3]);
+        if($mostrar[2] =='grilla' AND count($valores) > 0 ) {
+            fputs($ar, '<!-- Incluir las de la vista de navegacion de ### ('.$mostrar[3].') ### -->' . PHP_EOL);
+            fputs($ar, '<div class="row">' . PHP_EOL);
+            fputs($ar, '    <!-- left column -->' . PHP_EOL);
+            fputs($ar, '    <div class="col-md-7">' . PHP_EOL);
+            fputs($ar, '        <!-- general form elements -->' . PHP_EOL);
+            fputs($ar, '        <?php $this->insert(\'view::vistas/'.All::cameCase($valores[0]).'/'.$valores[1].'/listado\') ?>' . PHP_EOL);
+            fputs($ar, '    </div>' . PHP_EOL);
+            fputs($ar, '        <div class="col-md-5">' . PHP_EOL);
+            fputs($ar, '        <?php $this->insert(\'view::vistas/'.All::cameCase($valores[0]).'/'.$valores[1].'/form\') ?>' . PHP_EOL);
+            fputs($ar, '    </div>' . PHP_EOL);
+            fputs($ar, '</div>' . PHP_EOL);
+        }
+    }
     fputs($ar, '<?php $this->push(\'addJs\') ?>' . PHP_EOL);
     fputs($ar, '<script>' . PHP_EOL);
     fputs($ar, '    // Definicion los campos del DataTable de esta vista' . PHP_EOL);
     fputs($ar, '    var Config = {};' . PHP_EOL);
-    fputs($ar, '    Config.colums = [' . PHP_EOL);
-        foreach ($campos['campos'] AS $key => $value){
-                    fputs($ar, '        { "data": "'.$value.'" },' . PHP_EOL);
-        }
-    fputs($ar, '    ];' . PHP_EOL. PHP_EOL);
-    fputs($ar, '    // Configuracion de visual del DataTable' . PHP_EOL);
-    fputs($ar, '    Config.show = {' . PHP_EOL);
-    fputs($ar, '        "display":10,' . PHP_EOL);
-    fputs($ar, '        "search":true,' . PHP_EOL);
-    fputs($ar, '        "pagina":true,' . PHP_EOL);
-    fputs($ar, '        "rowid": "id"' . PHP_EOL);
-    fputs($ar, '    }' . PHP_EOL. PHP_EOL);
 
+    fputs($ar, '    <?php $this->insert(\'view::' . $rutaVista . '/assent\') ?>' . PHP_EOL);
+
+    fputs($ar, '    Core.Vista.Util = {}' . PHP_EOL);
     fputs($ar, '    Core.Vista.Util = {' . PHP_EOL);
-    fputs($ar, '        priListaLoad: function () { },' . PHP_EOL);
-    fputs($ar, '        priListaClick: function (dataJson){ }, ' . PHP_EOL);
+    // Fragmento de codigo que permite hacer los combos dinamicos
+    fputs($ar, '        priListaLoad: function (){ ' . PHP_EOL);
+    foreach ($campos['campos'] AS $key => $value){
+        $mostrar = explode('|',$requerido[$value]);
+        //   [0][hidden_form] => 1 | [1][hidden_list] => 1 | [2][relacionado] (grilla|combo) | [3][tabla_vista] personal--personalD1 | [4][vista_campo] id
+        $valores=explode('--',$mostrar[3]);
+        if($mostrar[0]==0 AND $mostrar[2]=='combo' AND count($valores)>0) {
+            fputs($ar, '            var html = \'<option>Seelccionar</option>\';' . PHP_EOL);
+            fputs($ar, '            $.post("/getEntidadComun",{"tipo":"combo","tabla_vista":"'.$mostrar[3].'","vista_campo":"'.$mostrar[4].'"},function(dataJson){' . PHP_EOL);
+            fputs($ar, '                $.each(dataJson.datos,function(key,value){' . PHP_EOL);
+            fputs($ar, '                html += \'<option value="\'+value.id+\'">\'+value.nombre+\'</option>;\'' . PHP_EOL);
+            fputs($ar, '                });' . PHP_EOL);
+            fputs($ar, '                $(".'.$mostrar[3].'").html(html)' . PHP_EOL);
+            fputs($ar, '            });' . PHP_EOL);
+        }
+    }
+
+    fputs($ar, '        },' . PHP_EOL);
+    // Fin de combo dinamicos
+    // Fragmento de codigo para mostrar los datos del hijo seleccionando el padre
+    fputs($ar, '        priListaClick: function (dataJson){'.PHP_EOL);
+    foreach ($campos['campos'] AS $key => $value){
+        $mostrar = explode('|',$requerido[$value]);
+        //   [0][hidden_form] => 1 | [1][hidden_list] => 1 | [2][relacionado] (grilla|combo) | [3] tabla_vista--personal--personalD1 | [4][vista_campo] id
+        $valores=explode('--',$mostrar[3]);
+        if($mostrar[2]=='grilla' AND count($valores)>0) {
+           /* fputs($ar, '            var html = \'<option>Seelccionar</option>\';' . PHP_EOL);
+            fputs($ar, '            $.post("/getEntidadComun",{"tipo":"grilla","tabla_vista":"'.$mostrar[3].'","vista_campo":"'.$mostrar[4].'"},function(dataJson){' . PHP_EOL);
+            fputs($ar, '                $.each(dataJson.datos,function(key,value){' . PHP_EOL);
+            fputs($ar, '                html += \'<option value="\'+value.id+\'">\'+value.nombre+\'</option>;\'' . PHP_EOL);
+            fputs($ar, '                });' . PHP_EOL);
+            fputs($ar, '                $(".'.$mostrar[3].'").html(html)' . PHP_EOL);
+            fputs($ar, '            });' . PHP_EOL);*/
+            fputs($ar, '                    <?php $this->insert(\'view::vistas/'.All::cameCase($valores[0]).'/'.$valores[1].'/assent\') ?>' . PHP_EOL);
+            fputs($ar, '            Config.relacionPadre = {' . PHP_EOL);
+            fputs($ar, '                "field":\''.$valores[2].'\',' . PHP_EOL);
+            fputs($ar, '                "value": dataJson.datos.'.$mostrar[4]. PHP_EOL);
+            fputs($ar, '            };' . PHP_EOL);
+            fputs($ar, '            Core.VistaRelacion.main(\''.All::upperCase($valores[1]).'\',Config);' . PHP_EOL);
+        }
+
+    }
+    fputs($ar, '        }, ' . PHP_EOL);
+    // Fing de Fragento de codigo para extraer los datos del click del padre
     fputs($ar, '        priClickProcesarForm: function(){ } ' . PHP_EOL);
     fputs($ar, '    };' . PHP_EOL);
 
@@ -508,10 +589,41 @@ private function createFileViewIndex($rutaHija, $campos, $rutaVista)
     fputs($ar, '</script>' . PHP_EOL);
     fputs($ar, '<?php $this->end() ?> ' . PHP_EOL);
     fclose($ar);
+    }
 
-}
+    private function createFileViewAssent($rutaHija, $campos, $rutaVista, $requerido)
+    {
+        $ar = fopen($rutaHija . DIRECTORY_SEPARATOR . "assent.php", "w+") or die("Problemas en la creaci&oacute;n del view index.php");
+        // Inicio la escritura en el activo
+        fputs($ar, '    // Definicion los campos del DataTable de esta vista' . PHP_EOL);
+        fputs($ar, '    var Config = {};' . PHP_EOL);
+        fputs($ar, '    Config.colums = [' . PHP_EOL);
+            foreach ($campos['campos'] AS $key => $value){
+                $mostrar = explode('|',$requerido[$value]);
+                //   [0][hidden_form] => 1 | [1][hidden_list] => 1 | [2][relacionado] (grilla|combo) | [3][tabla_vista] personal--personalD1 | [4][vista_campo] id
+                if((int)$mostrar[1]!=1) {
+                    fputs($ar, '        { "data": "' . $value . '" },' . PHP_EOL);
+                }
+            }
+        fputs($ar, '    ];' . PHP_EOL. PHP_EOL);
+        fputs($ar, '    // Configuracion de visual del DataTable' . PHP_EOL);
+        fputs($ar, '    Config.show = {' . PHP_EOL);
+        fputs($ar, '        "display":10,' . PHP_EOL);
+        fputs($ar, '        "search":true,' . PHP_EOL);
+        fputs($ar, '        "pagina":true,' . PHP_EOL);
+        fputs($ar, '        "rowid": "id"' . PHP_EOL);
+        fputs($ar, '    }' . PHP_EOL. PHP_EOL);
 
-    private function createFileViewForm($rutaHija, $campos)
+        fputs($ar, '    // Configuracion de relacion de entidad' . PHP_EOL);
+        fputs($ar, '    Config.relacionPadre = {' . PHP_EOL);
+        fputs($ar, '        "field":"",' . PHP_EOL);
+        fputs($ar, '        "value": ""' . PHP_EOL);
+        fputs($ar, '    }' . PHP_EOL. PHP_EOL);
+        // Fin de combo dinamicos
+        fclose($ar);
+    }
+
+    private function createFileViewForm($rutaHija, $campos, $requerido)
     {
         $ar = fopen($rutaHija.DIRECTORY_SEPARATOR."form.php", "w+") or die("Problemas en la creaci&oacute;n del view form.php");
         // Inicio la escritura en el activo
@@ -543,17 +655,27 @@ private function createFileViewIndex($rutaHija, $campos, $rutaVista)
                         $classes ='texto';
                      break;
                     default:
-                        $classes ='default';
+                        $classes =$value->mascara;
                     break;
                 }
-                $classes .= ($value->required!='YES')?' requerido':'';
+                $classes .= ($value->nulo!='YES')?' requerido':'';
+                $mostrar = explode('|',$requerido[$value->field]);
+                //All::pp($mostrar);
+                //   [0][hidden_form] => 1 | [1][hidden_list] => 1 | [2][relacionado] (grilla|combo) | [3][tabla_vista] personal--personalD1 | [4][vista_campo] id
 
-                fputs($ar, '<div class="form-group">'.PHP_EOL);
-                fputs($ar, '<label for="'.$value->label.'">'.$value->label.'</label>'.PHP_EOL);
-                fputs($ar, '<input type="text" name="'.$value->field.'" class="form-control '.$classes.' " id="'.$value->field.'" placeholder="Enter '.$value->label.'">'.PHP_EOL);
-                fputs($ar, '</div>'.PHP_EOL);
+                if($mostrar[0]==0 AND $mostrar[2]==0 AND $mostrar[2]!='combo' AND $mostrar[2]!='grilla') { // mostrar Si y no es relacionado
+                    fputs($ar, '<div class="form-group">'.PHP_EOL);
+                    fputs($ar, '<label for="'.$value->label.'">'.$value->label.'</label>'.PHP_EOL);
+                    fputs($ar, '<input type="text" name="'.$value->field.'" class="form-control '.$classes.' " id="'.$value->field.'" placeholder="'.$value->place_holder.'">'.PHP_EOL);
+                    fputs($ar, '</div>'.PHP_EOL);
+                }elseif ($mostrar[0]==0 AND $mostrar[2]=='combo'){ // mostrar Si y es relacionado
+                    //print_r($mostrar[0].'-'.$mostrar[2].' \n');
+                    fputs($ar, '<div class="form-group">'.PHP_EOL);
+                    fputs($ar, '<label for="'.$value->label.'">'.$value->label.'</label>'.PHP_EOL);
+                    fputs($ar, '<select  name="'.$value->field.'" class="form-control '.$classes.' '.$mostrar[3].' " id="'.$value->field.'"  placeholder="'.$value->place_holder.'"><option value="0">Seleccionar</option></select>'.PHP_EOL);
+                    fputs($ar, '</div>'.PHP_EOL);
+                }
             }
-
         }
         fputs($ar, '  </div>'.PHP_EOL);
         fputs($ar, '  <!-- /.box-body -->'.PHP_EOL);
@@ -567,7 +689,7 @@ private function createFileViewIndex($rutaHija, $campos, $rutaVista)
     }
 
 
-    private function createFileViewListado($rutaHija, $campos)
+    private function createFileViewListado($rutaHija, $campos, $requerido)
     {
         $ar = fopen($rutaHija.DIRECTORY_SEPARATOR."listado.php", "w+") or die("Problemas en la creaci&oacute;n del view listado.php");
         // Inicio la escritura en el activo
@@ -577,20 +699,23 @@ private function createFileViewIndex($rutaHija, $campos, $rutaVista)
         unset($items['pk']);
         unset($items['campos']);
 
-
         fputs($ar, '<div class="box box-primary">'.PHP_EOL);
         fputs($ar, '<div class="box-header with-border">'.PHP_EOL);
-        fputs($ar, '<h3 class="box-title">Listado de Registros.</h3>'.PHP_EOL);
+        fputs($ar, '<h3 class="box-title">Listado de '.$campos['vista'].'</h3>'.PHP_EOL);
         fputs($ar, '</div>'.PHP_EOL);
         fputs($ar, '<!-- /.box-header -->'.PHP_EOL);
         fputs($ar, '<!-- form start -->'.PHP_EOL);
         fputs($ar, '<div class="box-body">'.PHP_EOL);
-        fputs($ar, '    <table id="dataJPH" class="table table-bordered table-striped">'.PHP_EOL);
+        fputs($ar, '    <table id="dataJPH'.ALL::upperCase($campos['vista']).'" class="table table-bordered table-striped">'.PHP_EOL);
         // Listado de cabecera
         fputs($ar, '       <thead>'.PHP_EOL);
         fputs($ar, '        <tr>'.PHP_EOL);
         foreach ($items AS $key=>$value){
-            fputs($ar, '            <th>'.$value->label.'</th>'.PHP_EOL);
+            $mostrar = explode('|',$requerido[$value->field]);
+            //   [0][hidden_form] => 1 | [1][hidden_list] => 1 | [2][relacionado] (grilla|combo) | [3][tabla_vista] personal--personalD1 | [4][vista_campo] id
+            if($mostrar[1]!=1) {
+                fputs($ar, '            <th>' . $value->label . '</th>' . PHP_EOL);
+            }
         }
         fputs($ar, '        </tr>'.PHP_EOL);
         fputs($ar, '       </thead>'.PHP_EOL);
@@ -599,7 +724,11 @@ private function createFileViewIndex($rutaHija, $campos, $rutaVista)
         fputs($ar, '       <tfoot>'.PHP_EOL);
         fputs($ar, '        <tr>'.PHP_EOL);
         foreach ($items AS $key=>$value){
-            fputs($ar, '            <th>'.$value->label.'</th>'.PHP_EOL);
+            $mostrar = explode('|',$requerido[$value->field]);
+            //   [0][hidden_form] => 1 | [1][hidden_list] => 1 | [2][relacionado] (grilla|combo) | [3][tabla_vista] personal--personalD1 | [4][vista_campo] id
+            if($mostrar[1]!=1) {
+                fputs($ar, '            <th>' . $value->label . '</th>' . PHP_EOL);
+            }
         }
         fputs($ar, '       </tr>'.PHP_EOL);
         fputs($ar, '       </tfoot>'.PHP_EOL);

@@ -87,11 +87,11 @@ var Core = {
     valTextoEnriquecido:function () {
         
     },
-    valCamposObligatoriosCompletos: function () {
+    valCamposObligatoriosCompletos: function (send) {
 
         var error = 0;
         var datosOk = true;
-        $('.requerido').each(function(i, elem){
+        $(send+'.requerido').each(function(i, elem){
             if($(elem).val() == ''){
                 $(elem).css({'border':'1px solid red'});
                 $(elem).focus();

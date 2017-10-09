@@ -5,7 +5,7 @@
 <!-- /.box-header -->
 <!-- form start -->
 <div class="box-body">
-    <table id="dataJPH" class="table table-bordered table-striped col-sm-7 col-xs-12">
+    <table id="dataJPHUsuarios" class="table table-bordered table-striped col-sm-7 col-xs-12">
        <thead>
         <tr>
             <th>id</th>

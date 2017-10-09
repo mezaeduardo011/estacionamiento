@@ -54,6 +54,7 @@ class SegRolesModel extends Main
      $sql = "SELECT * FROM ".$this->tabla." WHERE id=".$data->data;
      $tmp=$this->executeQuery($sql);
      $tablas['datos'] = $tmp[0];
+     $tablas['error'] = 0;
      return $tablas;
    }
 

@@ -40,13 +40,22 @@ class GestionarController extends Controller
        $this->json($data);
    }
 
+    /**
+     * Permite gestionar la parte de configuraciones de la definicion de los elementos
+     * @param Resuest $request
+     * @return plantilla $tpl
+     */
     public function runGestionar($request)
     {
         $this->tpl->addIni();
         $this->tpl->add('usuario', $this->getSession('usuario'));
         $this->tpl->renders('view::home/gestionar');
     }
-
+    /**
+     * Proceso encargado de controlar la generacion de la vistas luego de leer la base de datos de las configuraciones
+     * @param Resquest $request
+     * @return json $ $dataJson
+     */
     public function runProcesarCrudVistas($request)
    {
        $schema = $this->hoVistasModel->extraerDetalleEntidadListado((array)$request);
@@ -56,13 +65,21 @@ class GestionarController extends Controller
            unset($views['columnas']);
             //print_r($columnsReal);die();
            // sleep(20);
-
            foreach ($views AS $nombreVista => $campos) {
                if (count($campos) > 0) {
-                   $aplicativo = $campos[0]->apps; // Aplicacion
+                   // Aplicacion seleccionada
+                   $aplicativo = $campos[0]->apps;
+
+                   // Instanciar la clase de generacion de vista
                    $crudVista = new AppCrudVista();
+
+                   // Crear estructura de la vista
                    $crudVista -> createStructuraFileCRUD($aplicativo,$nombreVista,$entidad,$campos,$columnsReal);
+
+                   // Actualizar el registro donde se notifica que ya fue generado
                    $this->hoVistasModel->updateStatusVista($aplicativo,$campos[0]->conexiones_id, $entidad,$nombreVista);
+
+                   // Asignacion de roles para la vista creada
                    $this->hoSegRolesModel->setSegRolesGeneradorVistaAcceso($campos[0]->apps,$campos[0]->entidad,$campos[0]->nombre);
                }
            }
@@ -151,8 +168,8 @@ class GestionarController extends Controller
     {
         $result=$this->hoVistasModel->setConfiguracionVistaNew($request);
         if(is_null($result)){
-            $dataJson['error']='1';
-            $dataJson['msj']='¡Uff!, ya el registro se encuentra registrado';
+            $dataJson['error']='0';
+            $dataJson['msj']='¡Bien!, Registro actualizado exitosamente';
         }else{
             $dataJson['error']='0';
             $dataJson['msj']='¡Bien!, Registro efectuado exitosamente';
@@ -218,7 +235,7 @@ class GestionarController extends Controller
             [tabla] => test_autos
             [field] => id
             [type] => int(-1)
-            [required] => NO
+            [nulo] => NO
             [dimension] => -1
             [restrincion] => PRI
          )
@@ -230,17 +247,19 @@ class GestionarController extends Controller
                 'id' =>$value->id ,
                 'name' =>$value->field ,
                 'tipo' =>$value->type,
-                'required' => $value->required,
                 'dimension' => $value->dimension,
                 'restrincion' => $value->restrincion,
                 'nombre' => (empty($value->nombre))?'':$value->nombre,
                 'label' => (empty($value->label))?'':@$value->label,
                 'mascara' => (empty($value->mascara))?'':@$value->mascara,
+                'nulo' => $value->nulo,
                 'place_holder' => (empty($value->place_holder))?'':@$value->place_holder,
+                'relacionado' => (empty($value->relacionado))?0:@$value->relacionado,
                 'vista_campo' => (empty($value->vista_campo))?'':@$value->vista_campo,
+                'tabla_vista' => (empty($value->tabla_vista))?'':@$value->tabla_vista,
                 'orden' => (empty($value->orden))?'':@$value->orden,
-                'hidden_form' => (empty($value->hidden_form))?'':@$value->hidden_form,
-                'hidden_list' => (empty($value->hidden_list))?'':@$value->hidden_list
+                'hidden_form' => (empty($value->hidden_form))?0:@$value->hidden_form,
+                'hidden_list' => (empty($value->hidden_list))?0:@$value->hidden_list
             );
         }
 
@@ -255,6 +274,11 @@ class GestionarController extends Controller
     public function runShowVista($request)
     {
         $dataJson = $this->hoVistasModel->getShowVista($request);
+        $this->json($dataJson);
+    }
+
+    public function runGetVistasColumns($request){
+        $dataJson = $this->hoVistasModel->getShowVistaRow($request);
         $this->json($dataJson);
     }
     /**
@@ -282,6 +306,12 @@ class GestionarController extends Controller
             $dataJson['error']='0';
             $dataJson['msj']='¡Bien!, entidad creada exitosamente';
         }
+        $this->json($dataJson);
+    }
+
+    public  function runGetEntidadComun($request)
+    {
+        $dataJson = $this->hoConexionesModel->getExtraerDetallesComun((array)$request);
         $this->json($dataJson);
     }
 

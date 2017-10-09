@@ -51,7 +51,7 @@ $breadcrumb=(object)array('actual'=>'Perfil','titulo'=>'Vista de integrada de ge
             "language": {
                 "url": "/admin/dist/js/Spanish.json"
             },
-            "bDestory": true
+            "destroy": true
         }),
         asociado: [],
         priListaLoad: function () {

@@ -55,6 +55,7 @@ class SegPerfilModel extends Main
       $tmp=$this->executeQuery($sql);
       $tablas['datos'] = $tmp[0];
       $tablas['roles'] = $this->segPerfilRolesModel->getSegPerfilRolesShow($data->data);
+      $tablas['error'] = 0;
       return $tablas;
    }
 

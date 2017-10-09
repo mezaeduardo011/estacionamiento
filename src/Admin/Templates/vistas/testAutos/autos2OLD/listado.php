@@ -1,27 +1,25 @@
 <div class="box box-primary">
 <div class="box-header with-border">
-<h3 class="box-title">Listado de Registros.</h3>
+<h3 class="box-title">Listado de autos2</h3>
 </div>
 <!-- /.box-header -->
 <!-- form start -->
 <div class="box-body">
-    <table id="dataJPH" class="table table-bordered table-striped">
+    <table id="dataJPHAutos2" class="table table-bordered table-striped">
        <thead>
         <tr>
-            <th>id</th>
-            <th>codigo</th>
+            <th>id_persona</th>
             <th>marca</th>
             <th>modelo</th>
-            <th>año</th>
+            <th>anio</th>
         </tr>
        </thead>
        <tfoot>
         <tr>
-            <th>id</th>
-            <th>codigo</th>
+            <th>id_persona</th>
             <th>marca</th>
             <th>modelo</th>
-            <th>año</th>
+            <th>anio</th>
        </tr>
        </tfoot>
    </table>

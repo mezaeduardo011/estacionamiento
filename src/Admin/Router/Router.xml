@@ -70,6 +70,12 @@
     <request>POST</request>
   </link>
   <link>
+    <name>/getVistasColumns</name>
+    <controller>gestionar</controller>
+    <method>runGetVistasColumns</method>
+    <request>POST</request>
+  </link>
+  <link>
     <name>/setDataBase</name>
     <controller>gestionar</controller>
     <method>runSetDataBase</method>
@@ -109,44 +115,6 @@
     <name>/createTablas</name>
     <controller>gestionar</controller>
     <method>runCreateTablas</method>
-    <request>POST</request>
-  </link>
-  <!-- ### END SYSTEM ### -->
-  <!-- Bloque de configuracion de la ruta del controller Autos23-->
-  <link>
-    <name>/autos23Index</name>
-    <controller>testAutos</controller>
-    <method>runTestAutosIndex</method>
-    <request>GET</request>
-  </link>
-  <link>
-    <name>/autos23Listar</name>
-    <controller>testAutos</controller>
-    <method>runTestAutosListar</method>
-    <request>GET</request>
-  </link>
-  <link>
-    <name>/autos23Create</name>
-    <controller>testAutos</controller>
-    <method>runTestAutosCreate</method>
-    <request>POST</request>
-  </link>
-  <link>
-    <name>/autos23Show</name>
-    <controller>testAutos</controller>
-    <method>runTestAutosShow</method>
-    <request>POST</request>
-  </link>
-  <link>
-    <name>/autos23Delete</name>
-    <controller>testAutos</controller>
-    <method>runTestAutosDelete</method>
-    <request>POST</request>
-  </link>
-  <link>
-    <name>/autos23Update</name>
-    <controller>testAutos</controller>
-    <method>runTestAutosUpdate</method>
     <request>POST</request>
   </link>
   <!-- Bloque de configuracion de la ruta del controller Roles-->
@@ -272,152 +240,159 @@
     <method>runSegUsuariosUpdate</method>
     <request>POST</request>
   </link>
-  <!-- Bloque de configuracion de la ruta del controller Carros-->
   <link>
-    <name>/carrosIndex</name>
-    <controller>testAutos</controller>
-    <method>runTestAutosIndex</method>
-    <request>GET</request>
-  </link>
-  <link>
-    <name>/carrosListar</name>
-    <controller>testAutos</controller>
-    <method>runTestAutosListar</method>
+    <name>/getEntidadComun</name>
+    <controller>gestionar</controller>
+    <method>runGetEntidadComun</method>
     <request>POST</request>
   </link>
+  <!-- ### END SYSTEM CONFIG ### -->
+  <!-- Bloque de configuracion de la ruta del controller Clientes-->
   <link>
-    <name>/carrosCreate</name>
-    <controller>testAutos</controller>
-    <method>runTestAutosCreate</method>
-    <request>POST</request>
-  </link>
-  <link>
-    <name>/carrosShow</name>
-    <controller>testAutos</controller>
-    <method>runTestAutosShow</method>
-    <request>POST</request>
-  </link>
-  <link>
-    <name>/carrosDelete</name>
-    <controller>testAutos</controller>
-    <method>runTestAutosDelete</method>
-    <request>POST</request>
-  </link>
-  <link>
-    <name>/carrosUpdate</name>
-    <controller>testAutos</controller>
-    <method>runTestAutosUpdate</method>
-    <request>POST</request>
-  </link>
-  <!-- Bloque de configuracion de la ruta del controller Personal-->
-  <link>
-    <name>/personalIndex</name>
+    <name>/clientesIndex</name>
     <controller>personal</controller>
     <method>runPersonalIndex</method>
     <request>GET</request>
   </link>
   <link>
-    <name>/personalListar</name>
+    <name>/clientesListar</name>
     <controller>personal</controller>
     <method>runPersonalListar</method>
     <request>POST</request>
   </link>
   <link>
-    <name>/personalCreate</name>
+    <name>/clientesCreate</name>
     <controller>personal</controller>
     <method>runPersonalCreate</method>
     <request>POST</request>
   </link>
   <link>
-    <name>/personalShow</name>
+    <name>/clientesShow</name>
     <controller>personal</controller>
     <method>runPersonalShow</method>
     <request>POST</request>
   </link>
   <link>
-    <name>/personalDelete</name>
+    <name>/clientesDelete</name>
     <controller>personal</controller>
     <method>runPersonalDelete</method>
     <request>POST</request>
   </link>
   <link>
-    <name>/personalUpdate</name>
+    <name>/clientesUpdate</name>
     <controller>personal</controller>
     <method>runPersonalUpdate</method>
     <request>POST</request>
   </link>
-  <!-- Bloque de configuracion de la ruta del controller Diego1-->
+  <!-- Bloque de configuracion de la ruta del controller Autos-->
   <link>
-    <name>/diego1Index</name>
-    <controller>diego</controller>
-    <method>runDiegoIndex</method>
+    <name>/autosIndex</name>
+    <controller>testAutos</controller>
+    <method>runTestAutosIndex</method>
     <request>GET</request>
   </link>
   <link>
-    <name>/diego1Listar</name>
-    <controller>diego</controller>
-    <method>runDiegoListar</method>
+    <name>/autosListar</name>
+    <controller>testAutos</controller>
+    <method>runTestAutosListar</method>
     <request>POST</request>
   </link>
   <link>
-    <name>/diego1Create</name>
-    <controller>diego</controller>
-    <method>runDiegoCreate</method>
+    <name>/autosCreate</name>
+    <controller>testAutos</controller>
+    <method>runTestAutosCreate</method>
     <request>POST</request>
   </link>
   <link>
-    <name>/diego1Show</name>
-    <controller>diego</controller>
-    <method>runDiegoShow</method>
+    <name>/autosShow</name>
+    <controller>testAutos</controller>
+    <method>runTestAutosShow</method>
     <request>POST</request>
   </link>
   <link>
-    <name>/diego1Delete</name>
-    <controller>diego</controller>
-    <method>runDiegoDelete</method>
+    <name>/autosDelete</name>
+    <controller>testAutos</controller>
+    <method>runTestAutosDelete</method>
     <request>POST</request>
   </link>
   <link>
-    <name>/diego1Update</name>
-    <controller>diego</controller>
-    <method>runDiegoUpdate</method>
+    <name>/autosUpdate</name>
+    <controller>testAutos</controller>
+    <method>runTestAutosUpdate</method>
     <request>POST</request>
   </link>
-  <!-- Bloque de configuracion de la ruta del controller Raumarys20-->
+  <!-- Bloque de configuracion de la ruta del controller Autos2-->
   <link>
-    <name>/raumarys20Index</name>
-    <controller>raumarys</controller>
-    <method>runRaumarysIndex</method>
+    <name>/autos2Index</name>
+    <controller>testAutos</controller>
+    <method>runTestAutosIndex</method>
     <request>GET</request>
   </link>
   <link>
-    <name>/raumarys20Listar</name>
-    <controller>raumarys</controller>
-    <method>runRaumarysListar</method>
+    <name>/autos2Listar</name>
+    <controller>testAutos</controller>
+    <method>runTestAutosListar</method>
     <request>POST</request>
   </link>
   <link>
-    <name>/raumarys20Create</name>
-    <controller>raumarys</controller>
-    <method>runRaumarysCreate</method>
+    <name>/autos2Create</name>
+    <controller>testAutos</controller>
+    <method>runTestAutosCreate</method>
     <request>POST</request>
   </link>
   <link>
-    <name>/raumarys20Show</name>
-    <controller>raumarys</controller>
-    <method>runRaumarysShow</method>
+    <name>/autos2Show</name>
+    <controller>testAutos</controller>
+    <method>runTestAutosShow</method>
     <request>POST</request>
   </link>
   <link>
-    <name>/raumarys20Delete</name>
-    <controller>raumarys</controller>
-    <method>runRaumarysDelete</method>
+    <name>/autos2Delete</name>
+    <controller>testAutos</controller>
+    <method>runTestAutosDelete</method>
     <request>POST</request>
   </link>
   <link>
-    <name>/raumarys20Update</name>
-    <controller>raumarys</controller>
-    <method>runRaumarysUpdate</method>
+    <name>/autos2Update</name>
+    <controller>testAutos</controller>
+    <method>runTestAutosUpdate</method>
+    <request>POST</request>
+  </link>
+  <!-- Bloque de configuracion de la ruta del controller Modelos-->
+  <link>
+    <name>/modelosIndex</name>
+    <controller>modelos</controller>
+    <method>runModelosIndex</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/modelosListar</name>
+    <controller>modelos</controller>
+    <method>runModelosListar</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/modelosCreate</name>
+    <controller>modelos</controller>
+    <method>runModelosCreate</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/modelosShow</name>
+    <controller>modelos</controller>
+    <method>runModelosShow</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/modelosDelete</name>
+    <controller>modelos</controller>
+    <method>runModelosDelete</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/modelosUpdate</name>
+    <controller>modelos</controller>
+    <method>runModelosUpdate</method>
     <request>POST</request>
   </link>
 </route>

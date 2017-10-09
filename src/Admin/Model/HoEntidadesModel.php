@@ -15,7 +15,7 @@ class HoEntidadesModel extends Main
    {
        $this->tabla = 'ho_entidades';
        $this->campoid = array('id');
-       $this->campos = array('conexiones_id','entidad','field','type','restrincion');
+       $this->campos = array('conexiones_id','entidad','field','type', 'nulo', 'dimension','restrincion');
        parent::__construct();
    }
     /**
@@ -36,7 +36,7 @@ class HoEntidadesModel extends Main
             foreach ($t AS $key => $value) {
                 $da = explode('(', $value->Type);
                 $dim = str_replace(')', ' ', $da[1]);
-                $sql = "INSERT INTO ho_entidades (conexiones_id,entidad,field,type,required,dimension,restrincion) VALUES($db,'" . $data[$a] . "','" . $value->Field . "','" . $da[0] . "','" . $value->Null . "',$dim,'" . $value->Key . "');";
+                $sql = "INSERT INTO ho_entidades (conexiones_id,entidad,field,type,nulo,dimension,restrincion) VALUES($db,'" . $data[$a] . "','" . $value->Field . "','" . $da[0] . "','" . $value->Null . "',$dim,'" . $value->Key . "');";
                 $return = $this->execute($sql);
             }
         }

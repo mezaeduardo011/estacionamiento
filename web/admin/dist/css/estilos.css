@@ -90,10 +90,15 @@ table.dataTable tbody tr.selected{background-color:#293A4A;color: #ffffff}table.
 .cursor{
     cursor: pointer;
 }
-#comprimirExpandir{
-    position: absolute;
-    z-index: 1;
-    margin-left: 80%;
+#optExtra {
+    position:relative;
+    margin-left: -10px;
 }
-
-https://oblishop-testshop-for-obliads.myshopify.com/admin/oauth/authorize?client_id=e4c342fe71581dc2ee590f87dd5dd28c&grant_options%5B%5D=per-user&redirect_uri=http%3A%2F%2Fproject2.dev%2FstoreShopify&scope=read_product_listings%2Cread_products%2Cread_analytics%2Cwrite_orders%2Cread_customers&state=%7Bnonce%7D
+#comprimirExpandir {
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: 2;
+    clear:both;
+    float:left;
+}

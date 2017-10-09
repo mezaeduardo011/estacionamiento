@@ -66,6 +66,7 @@ class SegUsuariosModel extends Main
      $sql .= " WHERE a.id=".$data->data;
      $tmp=$this->executeQuery($sql);
      $tablas['datos'] = $tmp[0];
+     $tablas['error'] = 0;
 
      $sql = "SELECT a.seg_perfil_id, b.detalle AS perfil  FROM seg_usuarios_perfil AS a";
      $sql .= " LEFT JOIN seg_perfil AS b ON a.seg_perfil_id=b.id  ";
@@ -81,7 +82,6 @@ class SegUsuariosModel extends Main
     */ 
    public function remSegUsuariosDelete($datos)
    {
-
       $valor=base64_decode($datos->obj);
       $this->segUsuariosPerfilModel->remSegPerfilRelacionUserDelete($valor);
       $this->fijarValor('id',$valor);
@@ -100,6 +100,8 @@ class SegUsuariosModel extends Main
      $this->segUsuariosPerfilModel->setSegPerfilRelacionUserUpdate($roles,$datos->id);
      unset($datos->roles);
      $this->fijarValores($datos);
+       $this->fijarValor('updated_usuario_id',$user->id);
+       $this->fijarValor('updated_at',All::now());
      $val = $this->guardar();
      return $val;
    }

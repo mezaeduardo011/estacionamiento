@@ -254,14 +254,16 @@ class Comun{
         }
     }
 
-    public function leerTodos() {
+    public function leerTodos($datos=null) {
         $this->todos = array();
-
-        $q = new Query(); 
-
-
+        $q = new Query();
         $q->select((is_array($this->campos) ? implode(',', $this->campos) : $this->campos) . "," . (is_array($this->campoid) ? implode(',', $this->campoid) : $this->campoid));
         $q->from($this->tabla);
+        // Elemento necesario para filtrar los valores
+        if(isset($datos->campo)){
+            $valores = explode('--',$datos->campo);
+            $q->where("$valores[0]=$valores[1]");
+        }
 
         $this->db->get($q->query());
 
@@ -352,6 +354,7 @@ class Comun{
         $id = $this->where();
         $query = "SELECT * FROM " . $this->tabla;
         $query .= " WHERE " . $this->where;
+        //echo $query; die();
         $this->get($query);
         $existe = ($this->numRows() > 0);
         $this->free();

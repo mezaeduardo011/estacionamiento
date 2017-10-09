@@ -7,11 +7,11 @@ use APP\Admin\Model AS Model;
  * Generador de codigo de Controller de Hornero 1.0
  * @propiedad: Hornero 1.0
  * @utor: Gregorio Bolivar <elalconxvii@gmail.com>
- * @created: 04/10/2017
+ * @created: 07/10/2017
  * @version: 2.0
  */ 
 
-class RaumarysController extends Controller
+class ModelosController extends Controller
 {
    use Security;
    public $model;
@@ -28,51 +28,51 @@ class RaumarysController extends Controller
    {
        parent::__construct();
        $this->session = $this->authenticated();
-       $this->hoRaumarysModel = new Model\RaumarysModel();
+       $this->hoModelosModel = new Model\ModelosModel();
        $this->valSegPerfils = new Model\SegUsuariosPerfilModel();
        $this->apps = $this->pathApps(__DIR__);
-       $this->entidad = $this->hoRaumarysModel->tabla;
+       $this->entidad = $this->hoModelosModel->tabla;
        $this->vista = $this->pathVista();
        $this->comps = $this->apps .' - '. $this->entidad .' - '. $this->vista;
    }
 
     /**
-    * Listar registros de Raumarys
+    * Listar registros de Modelos
     * @param: GET $resquest
     */ 
-   public function runRaumarysIndex($request)
+   public function runModelosIndex($request)
    {
      $this->permisos = 'CONSULTA|CONTROL TOTAL';
      $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos));
      $this->tpl->addIni();
-     $listado = $this->hoRaumarysModel->getRaumarysListar($request);
+     $listado = $this->hoModelosModel->getModelosListar($request);
      $this->tpl->add('usuario', $this->getSession('usuario'));
-     $this->tpl->renders('view::vistas/raumarys/'.$this->pathVista().'/index');
+     $this->tpl->renders('view::vistas/modelos/'.$this->pathVista().'/index');
    }
 
     /**
-    * Listar registros de Raumarys
+    * Listar registros de Modelos
     * @param: POST $resquest
     * @return: JSON $result
     */ 
-   public function runRaumarysListar($request)
+   public function runModelosListar($request)
    {
       $this->permisos = 'CONSULTA|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
-      $result = $this->hoRaumarysModel->getRaumarysListar($request);
+      $result = $this->hoModelosModel->getModelosListar($request);
       $this->json($result);
    }
 
     /**
-    * Crear registros de Raumarys
+    * Crear registros de Modelos
     * @param: POST $resquest
     * @return: JSON $result
     */ 
-   public function runRaumarysCreate($request)
+   public function runModelosCreate($request)
    {
       $this->permisos = 'ALTA|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
-      $result = $this->hoRaumarysModel->setRaumarysCreate($request);
+      $result = $this->hoModelosModel->setModelosCreate($request);
       if(is_null($result)){
         $dataJson['error']='1';
         $dataJson['msj']='Error en procesar el registro';
@@ -84,28 +84,28 @@ class RaumarysController extends Controller
    }
 
     /**
-    * Ver registros de Raumarys
+    * Ver registros de Modelos
     * @param: POST $resquest
     * @return: JSON $result
     */ 
-   public function runRaumarysShow($request)
+   public function runModelosShow($request)
    {
       $this->permisos = 'CONSULTA|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
-      $result = $this->hoRaumarysModel->getRaumarysShow($request);
+      $result = $this->hoModelosModel->getModelosShow($request);
       $this->json($result);
    }
 
     /**
-    * Eliminar registros de Raumarys
+    * Eliminar registros de Modelos
     * @param: POST $resquest
     * @return: JSON $result
     */ 
-   public function runRaumarysDelete($request)
+   public function runModelosDelete($request)
    {
       $this->permisos = 'BAJA|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
-      $result = $this->hoRaumarysModel->remRaumarysDelete($request);
+      $result = $this->hoModelosModel->remModelosDelete($request);
       if(is_null($result)){
         $dataJson['error']='0';
         $dataJson['msj']='Registro eliminado exitosamente';
@@ -117,15 +117,15 @@ class RaumarysController extends Controller
    }
 
     /**
-    * Actualizar registros de Raumarys
+    * Actualizar registros de Modelos
     * @param: POST $resquest
     * @return: JSON $result
     */ 
-   public function runRaumarysUpdate($request)
+   public function runModelosUpdate($request)
    {
       $this->permisos = 'MODIFICACION|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
-      $result = $this->hoRaumarysModel->setRaumarysUpdate($request);
+      $result = $this->hoModelosModel->setModelosUpdate($request);
       if(is_null($result)){
         $dataJson['error']='0';
         $dataJson['msj']='Actualizacion efectuado exitosamente';

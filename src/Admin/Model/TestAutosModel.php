@@ -1,17 +1,18 @@
 <?php
 namespace APP\Admin\Model;
 use JPH\Complements\Database\Main;
-use JPH\Core\Commun\All;
+use JPH\Core\Commun\{All,Security};
 /**
  * Generador de codigo del Modelo de la App Admin
  * @propiedad: Hornero 1.0
  * @utor: Gregorio Bolivar <elalconxvii@gmail.com>
- * @created: 21/09/2017
+ * @created: 05/10/2017
  * @version: 1.0
  */ 
 
 class TestAutosModel extends Main
 {
+   use Security;
    public function __construct()
    {
        $this->tabla = 'test_autos';
@@ -24,11 +25,10 @@ class TestAutosModel extends Main
     * Extraer todos los registros de TestAutos
     * @return array $tablas
     */ 
-   public function getTestAutosListar($request)
+   public function getTestAutosListar($datos)
    {
-
-     $tablas=$this->leerTodos();
-     return $tablas;
+        $tablas=$this->leerTodos($datos);
+        return $tablas;
    }
 
     /**

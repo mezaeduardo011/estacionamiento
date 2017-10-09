@@ -35,7 +35,7 @@ class HoConexionesModel extends Main
     /**
      * Permite extraer las conexiones existententes
      * @param Integer $data,identificador de las conexioes
-     * @param Object $val
+     * @return array $val
      */
     public function getExtraerConexiones($data='NULL')
     {
@@ -78,6 +78,47 @@ class HoConexionesModel extends Main
         $tablas=$this->executeQuery($sql);
         return $tablas;
     }
+
+    /**
+     * Permite extraer las entidades comunes definidas en el sistema
+     * @param datos pasado del controlador
+     * @return  Array $retu
+     */
+    public function getExtraerDetallesComun($data)
+    {
+        /* stdClass Object
+        (
+            [tabla_vista] => personal--clientes--id
+            [vista_campo] => nombres
+        )
+         */
+        $detalle=explode('--',$data['tabla_vista']);
+        /*
+          Array
+            (
+                [0] => personal
+                [1] => clientes
+                [2] => id
+            )
+         */
+        if($data['tipo']=='combo')
+        {
+            $sql = "SELECT  $detalle[2] AS id, ".$data['vista_campo']." AS nombre  FROM $detalle[0]";
+        }else{
+            $sql = "select field, label, hidden_list from ho_vistas WHERE entidad='$detalle[0]' and nombre='$detalle[1]'";
+            $tabla = $this->executeQuery($sql);
+            $valor = Array();
+            foreach ($tabla AS $key => $value){
+                $valor[$key] = $value->field;
+            }
+            $this->free();
+            $sql = "SELECT  ".implode(',',$valor)."  FROM $detalle[0] WHERE $detalle[2] = '".$data['where']."'";
+        }
+        $tabla = $this->executeQuery($sql);
+        $retu['datos'] = $tabla;
+        return $retu;
+    }
+
 }
 
 ?>

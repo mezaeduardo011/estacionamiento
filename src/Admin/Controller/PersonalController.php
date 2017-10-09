@@ -7,7 +7,7 @@ use APP\Admin\Model AS Model;
  * Generador de codigo de Controller de Hornero 1.0
  * @propiedad: Hornero 1.0
  * @utor: Gregorio Bolivar <elalconxvii@gmail.com>
- * @created: 03/10/2017
+ * @created: 05/10/2017
  * @version: 2.0
  */ 
 
