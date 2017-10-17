@@ -53,7 +53,8 @@ class AppCrudVista extends App
             $relacion=(empty($value->relacionado))?0:$value->relacionado;
             $vista=(empty($value->tabla_vista))?0:$value->tabla_vista;
             $campo=(empty($value->vista_campo))?0:$value->vista_campo;
-            $temp2[$value->field]=$hidden_f.'|'.$hidden_l.'|'.$relacion.'|'.$vista.'|'.$campo;
+            $cart_separacion=(empty($value->cart_separacion))?' ':$value->cart_separacion;
+            $temp2[$value->field]=$hidden_f.'#'.$hidden_l.'#'.$relacion.'#'.$vista.'#'.$campo.'#'.$cart_separacion;
         }
         $requerido = $temp2;
         $campos['campos']= $temp;
@@ -507,8 +508,8 @@ class AppCrudVista extends App
 
     /** Vista con hijos */
     foreach ($campos['campos'] AS $key => $value){
-        $mostrar = explode('|',$requerido[$value]);
-        //   [0][hidden_form] => 1 | [1][hidden_list] => 1 | [2][relacionado] (grilla|combo) | [3][tabla_vista] personal--personalD1 | [4][vista_campo] id
+        $mostrar = explode('#',$requerido[$value]);
+        //   [0][hidden_form] => 1 # [1][hidden_list] => 1 # [2][relacionado] (grilla|combo) # [3][tabla_vista] personal--personalD1 # [4][vista_campo] id # [5] [$cart_separacion] -
 
         $valores=explode('--',$mostrar[3]);
         if($mostrar[2] =='grilla' AND count($valores) > 0 ) {
@@ -537,12 +538,13 @@ class AppCrudVista extends App
     // Fragmento de codigo que permite hacer los combos dinamicos
     fputs($ar, '        priListaLoad: function (){ ' . PHP_EOL);
     foreach ($campos['campos'] AS $key => $value){
-        $mostrar = explode('|',$requerido[$value]);
-        //   [0][hidden_form] => 1 | [1][hidden_list] => 1 | [2][relacionado] (grilla|combo) | [3][tabla_vista] personal--personalD1 | [4][vista_campo] id
+        $mostrar = explode('#',$requerido[$value]);
+        //   [0][hidden_form] => 1 # [1][hidden_list] => 1 # [2][relacionado] (grilla|combo) # [3][tabla_vista] personal--personalD1 # [4][vista_campo] id # [5] [$cart_separacion] -
         $valores=explode('--',$mostrar[3]);
         if($mostrar[0]==0 AND $mostrar[2]=='combo' AND count($valores)>0) {
+            fputs($ar, '            // Configurar de los campos '.$mostrar[3].' \';' . PHP_EOL);
             fputs($ar, '            var html = \'<option>Seelccionar</option>\';' . PHP_EOL);
-            fputs($ar, '            $.post("/getEntidadComun",{"tipo":"combo","tabla_vista":"'.$mostrar[3].'","vista_campo":"'.$mostrar[4].'"},function(dataJson){' . PHP_EOL);
+            fputs($ar, '            $.post("/getEntidadComun",{"tipo":"combo","tabla_vista":"'.$mostrar[3].'","vista_campo":"'.$mostrar[4].'","cart_separacion":"'.$mostrar[5].'"},function(dataJson){' . PHP_EOL);
             fputs($ar, '                $.each(dataJson.datos,function(key,value){' . PHP_EOL);
             fputs($ar, '                html += \'<option value="\'+value.id+\'">\'+value.nombre+\'</option>;\'' . PHP_EOL);
             fputs($ar, '                });' . PHP_EOL);
@@ -556,8 +558,8 @@ class AppCrudVista extends App
     // Fragmento de codigo para mostrar los datos del hijo seleccionando el padre
     fputs($ar, '        priListaClick: function (dataJson){'.PHP_EOL);
     foreach ($campos['campos'] AS $key => $value){
-        $mostrar = explode('|',$requerido[$value]);
-        //   [0][hidden_form] => 1 | [1][hidden_list] => 1 | [2][relacionado] (grilla|combo) | [3] tabla_vista--personal--personalD1 | [4][vista_campo] id
+        $mostrar = explode('#',$requerido[$value]);
+        //   [0][hidden_form] => 1 # [1][hidden_list] => 1 # [2][relacionado] (grilla|combo) # [3] tabla_vista--personal--personalD1 # [4][vista_campo] id # [5] [$cart_separacion] -
         $valores=explode('--',$mostrar[3]);
         if($mostrar[2]=='grilla' AND count($valores)>0) {
            /* fputs($ar, '            var html = \'<option>Seelccionar</option>\';' . PHP_EOL);
@@ -599,8 +601,8 @@ class AppCrudVista extends App
         fputs($ar, '    var Config = {};' . PHP_EOL);
         fputs($ar, '    Config.colums = [' . PHP_EOL);
             foreach ($campos['campos'] AS $key => $value){
-                $mostrar = explode('|',$requerido[$value]);
-                //   [0][hidden_form] => 1 | [1][hidden_list] => 1 | [2][relacionado] (grilla|combo) | [3][tabla_vista] personal--personalD1 | [4][vista_campo] id
+                $mostrar = explode('#',$requerido[$value]);
+                //   [0][hidden_form] => 1 # [1][hidden_list] => 1 # [2][relacionado] (grilla|combo) # [3][tabla_vista] personal--personalD1 # [4][vista_campo] id # [5] [$cart_separacion] -
                 if((int)$mostrar[1]!=1) {
                     fputs($ar, '        { "data": "' . $value . '" },' . PHP_EOL);
                 }
@@ -659,9 +661,9 @@ class AppCrudVista extends App
                     break;
                 }
                 $classes .= ($value->nulo!='YES')?' requerido':'';
-                $mostrar = explode('|',$requerido[$value->field]);
+                $mostrar = explode('#',$requerido[$value->field]);
                 //All::pp($mostrar);
-                //   [0][hidden_form] => 1 | [1][hidden_list] => 1 | [2][relacionado] (grilla|combo) | [3][tabla_vista] personal--personalD1 | [4][vista_campo] id
+                //   [0][hidden_form] => 1 # [1][hidden_list] => 1 #  [2][relacionado] (grilla|combo) # [3][tabla_vista] personal--personalD1 # [4][vista_campo] id # [5] [$cart_separacion] -
 
                 if($mostrar[0]==0 AND $mostrar[2]==0 AND $mostrar[2]!='combo' AND $mostrar[2]!='grilla') { // mostrar Si y no es relacionado
                     fputs($ar, '<div class="form-group">'.PHP_EOL);
@@ -711,8 +713,8 @@ class AppCrudVista extends App
         fputs($ar, '       <thead>'.PHP_EOL);
         fputs($ar, '        <tr>'.PHP_EOL);
         foreach ($items AS $key=>$value){
-            $mostrar = explode('|',$requerido[$value->field]);
-            //   [0][hidden_form] => 1 | [1][hidden_list] => 1 | [2][relacionado] (grilla|combo) | [3][tabla_vista] personal--personalD1 | [4][vista_campo] id
+            $mostrar = explode('#',$requerido[$value->field]);
+            //   [0][hidden_form] => 1 # [1][hidden_list] => 1 # [2][relacionado] (grilla|combo) # [3][tabla_vista] personal--personalD1 # [4][vista_campo] id # [5] [$cart_separacion] -
             if($mostrar[1]!=1) {
                 fputs($ar, '            <th>' . $value->label . '</th>' . PHP_EOL);
             }
@@ -724,8 +726,8 @@ class AppCrudVista extends App
         fputs($ar, '       <tfoot>'.PHP_EOL);
         fputs($ar, '        <tr>'.PHP_EOL);
         foreach ($items AS $key=>$value){
-            $mostrar = explode('|',$requerido[$value->field]);
-            //   [0][hidden_form] => 1 | [1][hidden_list] => 1 | [2][relacionado] (grilla|combo) | [3][tabla_vista] personal--personalD1 | [4][vista_campo] id
+            $mostrar = explode('#',$requerido[$value->field]);
+            //   [0][hidden_form] => 1 # [1][hidden_list] => 1 # [2][relacionado] (grilla|combo) # [3][tabla_vista] personal--personalD1 # [4][vista_campo] id # [5] [$cart_separacion] -
             if($mostrar[1]!=1) {
                 fputs($ar, '            <th>' . $value->label . '</th>' . PHP_EOL);
             }

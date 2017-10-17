@@ -1,7 +1,6 @@
 <?php
 namespace APP\Admin\Model;
 use JPH\Complements\Database\Main;
-use JPH\Core\Commun\All;
 /**
  * Generador de codigo del Modelo de la App Admin
  * @propiedad: Hornero 1.0
@@ -51,7 +50,7 @@ class HoConexionesModel extends Main
 
     /**
      * Permite Verificar si una conexion existe en base de datos
-     * @param Sting $label, etiqueta de conexion o token
+     * @param String $label, etiqueta de conexion o token
      * @param String $val, SI o NO
      */
     public function getExtraerConexionesToken($label)
@@ -63,8 +62,8 @@ class HoConexionesModel extends Main
 
     /**
      * Permite extraer todas las entidades(Tablas) correspondiente a la conexion descartando las tablas necesarias del sistema
-     * @param objeto $data,identificador de la conexion para poder consultar la entidades relacionadas
-     * @return Objeto $tablas;
+     * @param Array $data,identificador de la conexion para poder consultar la entidades relacionadas
+     * @return Array $tablas;
      */
     public function getAllUniverso($data)
     {
@@ -90,8 +89,9 @@ class HoConexionesModel extends Main
         (
             [tabla_vista] => personal--clientes--id
             [vista_campo] => nombres
-        )
-         */
+            [cart_separacion] => cualquier
+        )*/
+         // Separacion del campo de la vista
         $detalle=explode('--',$data['tabla_vista']);
         /*
           Array
@@ -101,9 +101,13 @@ class HoConexionesModel extends Main
                 [2] => id
             )
          */
+        // indicador cuando es un combo
         if($data['tipo']=='combo')
         {
-            $sql = "SELECT  $detalle[2] AS id, ".$data['vista_campo']." AS nombre  FROM $detalle[0]";
+            $tmp = explode('|',$data['vista_campo']);
+            $colums = $data['vista_campo'];
+            if(count($tmp)>0){ $colums=implode("+' ".$data['cart_separacion']." '+",$tmp);}
+            $sql = "SELECT  $detalle[2] AS id, ".$colums." AS nombre  FROM $detalle[0]";
         }else{
             $sql = "select field, label, hidden_list from ho_vistas WHERE entidad='$detalle[0]' and nombre='$detalle[1]'";
             $tabla = $this->executeQuery($sql);

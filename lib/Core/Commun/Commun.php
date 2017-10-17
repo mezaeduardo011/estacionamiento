@@ -50,7 +50,7 @@ trait Commun
     /**
      * Permite imprimir objetos, arreglos, y valores enviados mostrado ordenadamente y parando el proceso
      * @param array $dataArray, parametro de entrada para ser impreso 
-     * @return imprimir valores
+     * @return array valores
      */
     static function pp($dataArray)
     {
@@ -414,6 +414,47 @@ trait Commun
         $vista=str_replace(array('/','Index', 'Listar', 'Create', 'Update','Show','Delete'),array('','','','','','',''),$_SERVER['PATH_INFO']);
         return $vista;
     }
+    
+    /**
+     * Permite extraer el contenido del arreglo mutidimencional de la captura del rol de la session
+     */
+    public static function extrerMenu()
+    {
+        // Bloque encargado de extraer el el primer parte del arreglo
+        $menu = array();
+        foreach ($_SESSION['roles'] AS $kry => $value1 ){
+            $item = explode('-', $value1);
+            $v = count($item)-1;
+            unset($item[$v]);
+            $menu[]=implode('|',$item);
+        }
+        $bufer=array_unique($menu);
+        
+        $menu2 = array();
+        
+        // Bloque de proceso del sub menu
+        foreach ($bufer AS $key=>$value2){
+            $item2 = explode('|', $value2);
+            $v = count($item2)-1;
+            $it = $item2[0];
+            unset($item2[0]);
+            $menu2[$it][]=implode('|',$item2);
+        }
+        
+        $menu3 = array();
+        // Bloque encargado del ultimo menu
+        foreach ($menu2 AS $key3=>$value3){
+            for ($a=0;$a<count($value3);$a++){
+                $item3 = explode('|', $value3[$a]);
+                $it2 = $item3[0];
+                unset($item3[0]);
+                $menu3[$key3][$it2][$a]=implode($item3);
+                
+            }
+        }
+        return $menu3;
+    }
+    
 
 }
 

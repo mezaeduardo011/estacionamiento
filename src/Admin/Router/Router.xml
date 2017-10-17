@@ -395,4 +395,41 @@
     <method>runModelosUpdate</method>
     <request>POST</request>
   </link>
+  <!-- Bloque de configuracion de la ruta del controller Eduardos-->
+  <link>
+    <name>/eduardosIndex</name>
+    <controller>eduardo</controller>
+    <method>runEduardoIndex</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/eduardosListar</name>
+    <controller>eduardo</controller>
+    <method>runEduardoListar</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/eduardosCreate</name>
+    <controller>eduardo</controller>
+    <method>runEduardoCreate</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/eduardosShow</name>
+    <controller>eduardo</controller>
+    <method>runEduardoShow</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/eduardosDelete</name>
+    <controller>eduardo</controller>
+    <method>runEduardoDelete</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/eduardosUpdate</name>
+    <controller>eduardo</controller>
+    <method>runEduardoUpdate</method>
+    <request>POST</request>
+  </link>
 </route>

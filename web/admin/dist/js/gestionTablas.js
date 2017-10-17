@@ -81,7 +81,7 @@ Config.gestionaTablas = {
                if(dataJson.error==0){
                    alertar(dataJson.msj);
                    setTimeout(function () {
-                       Config.loadConfigTablas();
+                       Config.Box2.loadConfigTablas();
                    },'500');
                }else{
                    mostrarError(dataJson.msj);

@@ -254,7 +254,7 @@ class Comun{
         }
     }
 
-    public function leerTodos($datos=null) {
+    public function leerTodos($datos=NULL) {
         $this->todos = array();
         $q = new Query();
         $q->select((is_array($this->campos) ? implode(',', $this->campos) : $this->campos) . "," . (is_array($this->campoid) ? implode(',', $this->campoid) : $this->campoid));

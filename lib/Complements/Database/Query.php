@@ -1,7 +1,5 @@
 <?php
 namespace JPH\Complements\Database;
-use JPH\Core\Commun\Commun;
-
 class Query {
 
     public $action;

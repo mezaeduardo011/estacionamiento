@@ -1,12 +1,13 @@
 <?php
 namespace APP\admin\Controller;
-namespace APP\Admin\Controller;
+use APP\Admin\Model;
+use APP\Admin\Controller\Controller;
+//use APP\Admin\Controller\LoginController;
 use JPH\Core\Commun\Constant;
 use JPH\Core\Commun\Security;
-use APP\Admin\Model AS Model;
-use JPH\Core\Console\{AppCrudVista};
+use JPH\Core\Console\App;
+use JPH\Core\Console\AppCrudVista;
 use JPH\Core\Load\Configuration;
-use APP\Admin\Model\{HoEntidadesModel,HoConexionesModel,HoVistasModel};
 /**
  * Generador de codigo de Controller de Hornero 1.0
  * @propiedad: Hornero 1.0
@@ -42,10 +43,10 @@ class GestionarController extends Controller
 
     /**
      * Permite gestionar la parte de configuraciones de la definicion de los elementos
-     * @param Resuest $request
-     * @return plantilla $tpl
+     * @param resource $request
+     * @return static $tpl html de la plantilla
      */
-    public function runGestionar($request)
+   public function runGestionar($request)
     {
         $this->tpl->addIni();
         $this->tpl->add('usuario', $this->getSession('usuario'));
@@ -53,12 +54,13 @@ class GestionarController extends Controller
     }
     /**
      * Proceso encargado de controlar la generacion de la vistas luego de leer la base de datos de las configuraciones
-     * @param Resquest $request
-     * @return json $ $dataJson
+     * @param resource $request
+     * @return \JsonSerializable $ $dataJson
      */
     public function runProcesarCrudVistas($request)
    {
        $schema = $this->hoVistasModel->extraerDetalleEntidadListado((array)$request);
+       //$this->pp($schema);
        foreach ($schema AS $entidad => $views){
            $columnsReal = NULL;
            $columnsReal = $views['columnas'];
@@ -85,6 +87,9 @@ class GestionarController extends Controller
            }
            // Elemto encargado de procesar los roles automaticos de usuarios
        }
+       // Refrescar datos
+       // ### $cla = new LoginController();
+       // ### $cla -> runLoadRoles();
        $result=true;
        if(is_null($result)){
            $dataJson['error']='1';
@@ -115,7 +120,7 @@ class GestionarController extends Controller
     /**
      * Permite registrar las entidades seleccionadas dependiendo de la conexion
      * @param $request $request
-     * @param json $return
+     * @param \JsonSerializable $return
      */
     public function runSetEntidadesProcesar($request)
     {
@@ -150,6 +155,8 @@ class GestionarController extends Controller
 
     /**
      * Permite extraer el universo de entidades asociada a una conexion de base de dato
+     * @param resource $request
+     * @return \JsonSerializable $dataJson
      */
     public function runAllUniverso($request){
         $result=$this->hoConexionesModel->getAllUniverso($request);
@@ -179,8 +186,8 @@ class GestionarController extends Controller
 
     /**
      * Permite agregar configuraciones nuevas de base de datos nuevas
-     * @param Request $request, Proceso request enviado por el cliente
-     * @return Json $dataJson
+     * @param resource $request, Proceso request enviado por el cliente
+     * @return \JsonSerializable $dataJson
      */
     public function runSetDataBase($request){
         $conf = array();
@@ -208,8 +215,8 @@ class GestionarController extends Controller
 
     /**
      * Ejecuta la todas las entidades deacuerdo a la conexion seleccionada
-     * @param request $request, todo lo que se enviea por el request definido en el router
-     * @return json $schema
+     * @param resource $request, todo lo que se enviea por el request definido en el router
+     * @return \JsonSerializable $schema
      */
     public function runEntidadesSeleccionadas($request)
     {
@@ -257,6 +264,7 @@ class GestionarController extends Controller
                 'relacionado' => (empty($value->relacionado))?0:@$value->relacionado,
                 'vista_campo' => (empty($value->vista_campo))?'':@$value->vista_campo,
                 'tabla_vista' => (empty($value->tabla_vista))?'':@$value->tabla_vista,
+                'cart_separacion' => (empty($value->cart_separacion))?'':@$value->cart_separacion,
                 'orden' => (empty($value->orden))?'':@$value->orden,
                 'hidden_form' => (empty($value->hidden_form))?0:@$value->hidden_form,
                 'hidden_list' => (empty($value->hidden_list))?0:@$value->hidden_list

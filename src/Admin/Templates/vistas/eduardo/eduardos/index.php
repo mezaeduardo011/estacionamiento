@@ -1,26 +1,26 @@
 <?php
-$breadcrumb=(object)array('actual'=>'Clientes','titulo'=>'Vista de integrada de gestion de Clientes','ruta'=>'Clientes')?>
+$breadcrumb=(object)array('actual'=>'Eduardos','titulo'=>'Vista de integrada de gestion de Eduardos','ruta'=>'Eduardos')?>
 <?php $this->layout('base',['usuario'=>$usuario,'breadcrumb'=>$breadcrumb])?>
 <?php $this->push('addCss')?>
 <?php $this->end()?>
 <?php $this->push('title') ?>
- Gestionar de la vista Clientes
+ Gestionar de la vista Eduardos
 <?php $this->end()?>
 <div class="row">
     <!-- left column -->
     <div class="col-md-7">
         <!-- general form elements -->
-        <?php $this->insert('view::vistas/personal/clientes/listado') ?>
+        <?php $this->insert('view::vistas/eduardo/eduardos/listado') ?>
     </div>
         <div class="col-md-5">
-        <?php $this->insert('view::vistas/personal/clientes/form') ?>
+        <?php $this->insert('view::vistas/eduardo/eduardos/form') ?>
     </div>
 </div>
 <?php $this->push('addJs') ?>
 <script>
     // Definicion los campos del DataTable de esta vista
     var Config = {};
-    <?php $this->insert('view::vistas/personal/clientes/assent') ?>
+    <?php $this->insert('view::vistas/eduardo/eduardos/assent') ?>
     Core.Vista.Util = {}
     Core.Vista.Util = {
         priListaLoad: function (){ 
@@ -31,7 +31,7 @@ $breadcrumb=(object)array('actual'=>'Clientes','titulo'=>'Vista de integrada de 
     };
     $(function () {
         Core.main();
-        Core.Vista.main('Clientes',Config);
+        Core.Vista.main('Eduardos',Config);
     })
 
 </script>

@@ -164,4 +164,5 @@ Core.Vista = {
         }
     }
 };
+document.write("<"+"script type='text/javascript' src='admin/dist/js/vistaRelacion.js'><"+"/script>")
 

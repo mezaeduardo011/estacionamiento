@@ -90,9 +90,13 @@ table.dataTable tbody tr.selected{background-color:#293A4A;color: #ffffff}table.
 .cursor{
     cursor: pointer;
 }
+
 #optExtra {
-    position:relative;
-    margin-left: -10px;
+	position: absolute;
+    width: 10px;
+    float: left;
+    margin-top: -25px;
+    left: 500px;
 }
 #comprimirExpandir {
     position: absolute;
@@ -101,4 +105,14 @@ table.dataTable tbody tr.selected{background-color:#293A4A;color: #ffffff}table.
     z-index: 2;
     clear:both;
     float:left;
+}
+input#extra{
+    margin-top: 4px;
+    position: static;
+    z-index: 2;
+    width: 15px;
+    float: right;
+    margin-right: -15px;
+    display:none;
+    height: 25px;
 }

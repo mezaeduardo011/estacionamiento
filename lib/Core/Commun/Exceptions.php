@@ -1,7 +1,6 @@
 <?php
 namespace JPH\Core\Commun;
 use JPH\Core\Console\Interprete;
-use JPH\Core\Commun\All;
 
 /**
  * Clase encargada de gestionar todas las Exceptions del sistema con el objetivo de implementar
@@ -37,11 +36,6 @@ class Exceptions extends \Error implements \Throwable
             }
             return All::mergeTaps($msj, $obj);
         }
-
-
-
-
-
 }
 
 ?>

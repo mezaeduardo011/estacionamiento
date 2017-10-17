@@ -17,7 +17,7 @@
 </div>
 <div class="form-group">
 <label for="correo">correo</label>
-<input type="text" name="correo" class="form-control texto requerido " id="correo" placeholder="Por favor ingresar el/los correo">
+<input type="text" name="correo" class="form-control correo requerido " id="correo" placeholder="Por favor ingresar el/los correo">
 </div>
 <div class="form-group">
 <label for="estatus">estatus</label>

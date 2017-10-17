@@ -1,8 +1,7 @@
 <?php
 namespace APP\Admin\Controller;
-use JPH\Core\Commun\Constant;
+use APP\Admin\Model;
 use JPH\Core\Commun\Security;
-use APP\Admin\Model AS Model;
 
 /**
  * Generador de codigo de Controller de Hornero 1.0

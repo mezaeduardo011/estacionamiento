@@ -15,7 +15,7 @@ class HoVistasModel extends Main
    {
        $this->tabla = 'ho_vistas';
        $this->campoid = array('id');
-       $this->campos = array('apps','conexiones_id','entidad','nombre','field','type','dimension', 'restrincion', 'label','mascara','nulo','place_holder','relacionado','tabla_vista','vista_campo','orden','hidden_form','hidden_list');
+       $this->campos = array('apps','conexiones_id','entidad','nombre','field','type','dimension', 'restrincion', 'label','mascara','nulo','place_holder','relacionado','tabla_vista','vista_campo','cart_separacion','orden','hidden_form','hidden_list');
        parent::__construct();
    }
 
@@ -45,7 +45,10 @@ class HoVistasModel extends Main
                 $this->fijarValor('place_holder', $data->place_holder[$a]);
                 $this->fijarValor('relacionado', $data->relacionado[$a]);
                 $this->fijarValor('tabla_vista', (!empty((string)$data->tabla_vista[$a])?$data->tabla_vista[$a]:''));
-                $this->fijarValor('vista_campo', (!empty((string)$data->vista_campo[$a])?$data->vista_campo[$a]:''));
+                // Vista_campo es la relacion de las opciones que tienes para seleccionar y campCombox es el que lo procesa
+                $this->fijarValor('vista_campo', (!empty((string)@$data->campCombox[$a])?$data->campCombox[$a]:''));
+                // Caracter de sepacion cuando la persona desea agregar algo adicional que separcion por espacio
+                $this->fijarValor('cart_separacion', (!empty((string)@$data->extra[$a])?$data->extra[$a]:''));
                 $this->fijarValor('orden', $a);
                 $this->fijarValor('hidden_form', (@$data->hidden_form[$a]=='on')?true:false);
                 $this->fijarValor('hidden_list', (@$data->hidden_list[$a]=='on')?true:false);

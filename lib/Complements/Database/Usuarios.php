@@ -1,6 +1,6 @@
 <?php
 namespace JPH\Complements\Database;
-use JPH\Core\Commun\All;
+
 
 trait Usuarios
 {
@@ -86,21 +86,21 @@ trait Usuarios
 
     private function cargarRoles()
     {
-        $query = "select a.id AS perfil_id, a.detalle AS perfil, c.id AS roles_id, c.detalle AS roles, e.*  from seg_perfil AS a
-                    INNER JOIN seg_perfil_roles AS b ON b.seg_perfil_id=a.id
-                    INNER JOIN seg_roles AS c ON c.id=b.seg_roles_id
-                    INNER JOIN seg_usuarios_perfil AS d ON d.seg_perfil_id=a.id
-                    INNER JOIN seg_usuarios AS e ON d.seg_usuarios_id=e.id WHERE  e.id = " . $this->db->escape($this->id);
+        $query = "select * from view_seguridad WHERE id = " . $this->db->escape($this->id);
         $this->db->get($query);
         $rows = $this->db->numRows();
 
         if ($rows > 0) {
             while ($row = $this->db->fetch()) {
-                $this->roles[] = $row->perfil;
+                $this->roles[] = $row->roles;
             }
         }
     }
-
+    /**
+     * Verificar si existe roles asociados a ese perfil 
+     * @param string $rol
+     * @return array $roles
+     */
     public function tieneRol($rol)
     {
         return in_array($rol, $this->roles);
@@ -183,7 +183,7 @@ trait Usuarios
         }
     }
 
-    public function leerTodos()
+    public function leerTodos($datos=NULL)
     {
         $query = "select * from SegUsuarios order by Cusuario";
         $this->db->get($query);

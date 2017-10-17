@@ -23,8 +23,8 @@ class HomeController extends Controller{
      }
      /**
       * Method encargado de mostrar la pantalla de inicio del sistema
-      * @param request $request
-      * @return html $view
+      * @param resource $request
+      * @return \JsonSerializable $view
       */
      public function runIndex($request)
      {

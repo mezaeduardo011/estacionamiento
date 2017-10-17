@@ -54,6 +54,7 @@ class LoginController extends Controller
                 $this->setSession('usuario',$tmp);
                 $this->setSession('path',getcwd());
                 $this->setSession('autenticado','SI');
+                self::runLoadRoles();
                 $this->delSession('lockscreen');
                 $this->redirect($this->cache->get('urlWebs'));
             }else{
@@ -64,6 +65,10 @@ class LoginController extends Controller
             $this->redirect($this->cache->get('urlAute'));
         }
 
+    }
+
+    public function runLoadRoles(){
+        $this->setSession('roles', $this->model->roles);
     }
 
 }

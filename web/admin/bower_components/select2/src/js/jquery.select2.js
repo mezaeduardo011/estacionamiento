@@ -1,7 +1,6 @@
 define([
   'jquery',
   'jquery-mousewheel',
-
   './select2/core',
   './select2/defaults'
 ], function ($, _, Select2, Defaults) {

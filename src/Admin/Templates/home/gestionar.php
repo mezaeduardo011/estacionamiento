@@ -14,7 +14,7 @@ Gestionar del Generador
             <div class="box box-primary">
                 <div class="box-header">
                     <i class="fa fa-list"></i>
-                    <h3 class="box-title">Menu de gestión  de configuración del modulo de generador</h3>
+                    <h3 class="box-title">Menu de gesti&oacute;n  de configuraci&oacute;n del modulo de generador<div id="optExtra"></div></h3>
                 </div>
                 <div class="box-body pad table-responsive" id="box1">
                     <div class="col-md-6" id="menuPrincipal">
@@ -104,7 +104,6 @@ Gestionar del Generador
         </div>
     </div>
 </section>
-<div id="optExtra"><div>
 <?php $this->push('addJs')?>
 <script src="/admin/dist/js/config.js"></script>
 <script src="/admin/dist/js/gestionTablas.js"></script>
@@ -113,6 +112,8 @@ Gestionar del Generador
 <script src="/admin/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
 <script src="/admin/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 <script type="text/javascript">
-    Config.main();
+    $(function () {
+        Config.main();
+    });
 </script>
 <?php $this->end()?>

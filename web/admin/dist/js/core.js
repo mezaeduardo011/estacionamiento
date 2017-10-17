@@ -21,8 +21,8 @@ function mostrarBug(mensaje, titulo) {
     Command: toastr["warning"](mensaje, titulo);
 }
 
-function notificar(titulo, texto, icono, color) {
-    Command: toastr["success"](mensaje, titulo);
+function notificar(mensaje, titulo) {
+    alerta(titulo,mensaje);
 }
 
 var Core = {
@@ -145,3 +145,5 @@ toastr.options = {
     "showMethod": "fadeIn",
     "hideMethod": "fadeOut"
 }
+<!-- Notificaciones -->
+document.write("<"+"script type='text/javascript' src='admin/dist/js/notificaciones.js'><"+"/script>")

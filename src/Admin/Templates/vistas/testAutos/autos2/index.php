@@ -24,15 +24,17 @@ $breadcrumb=(object)array('actual'=>'Autos2','titulo'=>'Vista de integrada de ge
     Core.Vista.Util = {}
     Core.Vista.Util = {
         priListaLoad: function (){ 
+            // Configurar de los campos personal--clientes--id ';
             var html = '<option>Seelccionar</option>';
-            $.post("/getEntidadComun",{"tipo":"combo","tabla_vista":"personal--clientes--id","vista_campo":"nombres"},function(dataJson){
+            $.post("/getEntidadComun",{"tipo":"combo","tabla_vista":"personal--clientes--id","vista_campo":"nombres|apellidos|correo","cart_separacion":"-"},function(dataJson){
                 $.each(dataJson.datos,function(key,value){
                 html += '<option value="'+value.id+'">'+value.nombre+'</option>;'
                 });
                 $(".personal--clientes--id").html(html)
             });
+            // Configurar de los campos modelos--modelos--id ';
             var html = '<option>Seelccionar</option>';
-            $.post("/getEntidadComun",{"tipo":"combo","tabla_vista":"modelos--modelos--id","vista_campo":"detalle"},function(dataJson){
+            $.post("/getEntidadComun",{"tipo":"combo","tabla_vista":"modelos--modelos--id","vista_campo":"detalle","cart_separacion":" "},function(dataJson){
                 $.each(dataJson.datos,function(key,value){
                 html += '<option value="'+value.id+'">'+value.nombre+'</option>;'
                 });
