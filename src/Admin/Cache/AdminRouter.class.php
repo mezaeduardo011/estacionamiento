@@ -3,7 +3,7 @@
 /**
  * @propiedad: PROPIETARIO DEL CODIGO
  * @Autor: Gregorio Bolivar * @email: elalconxvii@gmail.com
- * @Fecha de Creacion: 23/10/2017
+ * @Fecha de Creacion: 25/10/2017
  * @Auditado por: Gregorio J Bolívar B
  * @Descripción: Generado por el generador de codigo de router de webStores * @package: datosClass
  * @version: 1.0
@@ -171,5 +171,29 @@ $process38 = $router->setRuta($datos38);
 $datos39 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/getEntidadComun", 'apps'=>"Admin", 'controller'=>"gestionar",'method'=>'runGetEntidadComun');
 $process39 = $router->setRuta($datos39);
 /** Fin del caso de /getEntidadComun */
+/** Inicio  del Bloque de instancia al proceso de /hugoIndex  */
+$datos40 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/hugoIndex", 'apps'=>"Admin", 'controller'=>"prueba",'method'=>'runPruebaIndex');
+$process40 = $router->setRuta($datos40);
+/** Fin del caso de /hugoIndex */
+/** Inicio  del Bloque de instancia al proceso de /hugoListar  */
+$datos41 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/hugoListar", 'apps'=>"Admin", 'controller'=>"prueba",'method'=>'runPruebaListar');
+$process41 = $router->setRuta($datos41);
+/** Fin del caso de /hugoListar */
+/** Inicio  del Bloque de instancia al proceso de /hugoCreate  */
+$datos42 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/hugoCreate", 'apps'=>"Admin", 'controller'=>"prueba",'method'=>'runPruebaCreate');
+$process42 = $router->setRuta($datos42);
+/** Fin del caso de /hugoCreate */
+/** Inicio  del Bloque de instancia al proceso de /hugoShow  */
+$datos43 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/hugoShow", 'apps'=>"Admin", 'controller'=>"prueba",'method'=>'runPruebaShow');
+$process43 = $router->setRuta($datos43);
+/** Fin del caso de /hugoShow */
+/** Inicio  del Bloque de instancia al proceso de /hugoDelete  */
+$datos44 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/hugoDelete", 'apps'=>"Admin", 'controller'=>"prueba",'method'=>'runPruebaDelete');
+$process44 = $router->setRuta($datos44);
+/** Fin del caso de /hugoDelete */
+/** Inicio  del Bloque de instancia al proceso de /hugoUpdate  */
+$datos45 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/hugoUpdate", 'apps'=>"Admin", 'controller'=>"prueba",'method'=>'runPruebaUpdate');
+$process45 = $router->setRuta($datos45);
+/** Fin del caso de /hugoUpdate */
  
 ?>

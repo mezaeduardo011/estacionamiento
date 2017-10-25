@@ -41,7 +41,7 @@ var Core = {
         var ime = $('input.contar').parent('div').text();
         $('input.requerido, select.requerido').parent('div').children('label').append(' ')
         $('input.requerido, select.requerido').parent('div').children('label').append('<div id="campoRequerido"></div>')
-        $('input.requerido, select.requerido').parent('div').children('label').children('div').html('<div style="position: absolute; float: left; font-size: 20px; z-index: 2; color:white; background: red; height: 18px;width: 10px;margin-left: -3px; padding-left: 2px;" title="Campo Requerido">*</div>');
+        $('input.requerido, select.requerido').parent('div').children('label').children('div').html('<div class="requerido" title="Campo Requerido">*</div>');
 
         /*$('input.contar').parent('div').append('<div id="contar"></div>')
         $('input.contar').parent('div').children('div').html('<div  style=" float: right; margin-top: -12px; margin-right: -12px; font-size: 10px; z-index: 100;" title="Maxima cantidad de caracteres">20</div>');
