@@ -1,6 +1,0 @@
-vendor/*
-.idea/*
-src/*
-src/Admin/Cache/*
-!src/Admin/*
-lib/Complements/Database/ConfigDatabaseTmp.php

@@ -246,6 +246,12 @@
     <method>runGetEntidadComun</method>
     <request>POST</request>
   </link>
+  <link>
+    <name>/locksPost</name>
+    <controller>login</controller>
+    <method>runLocksPost</method>
+    <request>POST</request>
+  </link>
   <!-- ### END SYSTEM CONFIG ### -->
 
 </route>
