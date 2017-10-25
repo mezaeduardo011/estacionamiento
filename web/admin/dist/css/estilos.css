@@ -36,7 +36,10 @@ line-height: 21px;
 {
     width:180px;
 }
-
+li.dropdown .notifications-menu
+{
+    color:#333 !important;
+}
 .navbar-nav > li > a {
     padding-top: 21px !important;
     padding-bottom: 15px !important;
@@ -72,10 +75,21 @@ ul.menu li
     padding: 8px;
 	text-transform:uppercase;
 }
+header.main-header ul.menu li a 
+{
+	font-size: 11px;
+	color:#fff;
+}
+ul.menu.notificaciones li a
+{
+	padding:0px !important;
+	
+}
+
 ul.menu li a 
 {
 	font-size: 11px;
-	color:#f1f1f1 !important;
+	
 }
 .menu .dropdown-menu{
     background:#192734 !important;
