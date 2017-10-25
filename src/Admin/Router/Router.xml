@@ -253,5 +253,41 @@
     <request>POST</request>
   </link>
   <!-- ### END SYSTEM CONFIG ### -->
-
+  <!-- Bloque de configuracion de la ruta del controller Hugo-->
+  <link>
+    <name>/hugoIndex</name>
+    <controller>prueba</controller>
+    <method>runPruebaIndex</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/hugoListar</name>
+    <controller>prueba</controller>
+    <method>runPruebaListar</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/hugoCreate</name>
+    <controller>prueba</controller>
+    <method>runPruebaCreate</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/hugoShow</name>
+    <controller>prueba</controller>
+    <method>runPruebaShow</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/hugoDelete</name>
+    <controller>prueba</controller>
+    <method>runPruebaDelete</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/hugoUpdate</name>
+    <controller>prueba</controller>
+    <method>runPruebaUpdate</method>
+    <request>POST</request>
+  </link>
 </route>

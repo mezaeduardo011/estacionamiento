@@ -3,7 +3,40 @@ body {
     font-weight: 400;
     /*overflow-x: auto;
     overflow-y: auto;*/
+	font-size:12px !important;
 }
+.input-group-addon {
+    text-align: left;
+}
+/*Estilo de campo requerido del div que se arma para mostrar los datos*/
+div.requerido {
+position: absolute;
+float: left;
+font-size: 18px;
+z-index: 2;
+color: white;
+background: red;
+height: 14px;
+width: 14px;
+margin-left: -3px;
+padding-left: 4px;
+border-radius: 50%;
+line-height: 21px;
+}
+.dropdown-menu > li > a:hover
+{
+    width:180px;
+	background: #293a4a;
+}
+.dropdown-menu > li > a {
+    padding: 0px 9px 4px 6px;
+    line-height: 20px;
+}
+.dropdown-menu > li > a
+{
+    width:180px;
+}
+
 .navbar-nav > li > a {
     padding-top: 21px !important;
     padding-bottom: 15px !important;
