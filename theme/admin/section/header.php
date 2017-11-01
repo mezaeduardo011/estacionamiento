@@ -157,7 +157,7 @@
                             <li class="header">You have 10 notifications</li>
                             <li>
                                 <!-- inner menu: contains the actual data -->
-                                <ul class="menu">
+                                <ul class="menu notificaciones">
                                     <li>
                                         <a href="#">
                                             <i class="fa fa-users text-aqua"></i> 5 new members joined today
