@@ -3,7 +3,7 @@
 /**
  * @propiedad: PROPIETARIO DEL CODIGO
  * @Autor: Gregorio Bolivar * @email: elalconxvii@gmail.com
- * @Fecha de Creacion: 25/10/2017
+ * @Fecha de Creacion: 01/11/2017
  * @Auditado por: Gregorio J Bolívar B
  * @Descripción: Generado por el generador de codigo de router de webStores * @package: datosClass
  * @version: 1.0
@@ -92,7 +92,7 @@ $datos19 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/rolesIndex", 
 $process19 = $router->setRuta($datos19);
 /** Fin del caso de /rolesIndex */
 /** Inicio  del Bloque de instancia al proceso de /rolesListar  */
-$datos20 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/rolesListar", 'apps'=>"Admin", 'controller'=>"segRoles",'method'=>'runSegRolesListar');
+$datos20 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/rolesListar", 'apps'=>"Admin", 'controller'=>"segRoles",'method'=>'runSegRolesListar');
 $process20 = $router->setRuta($datos20);
 /** Fin del caso de /rolesListar */
 /** Inicio  del Bloque de instancia al proceso de /rolesCreate  */
@@ -124,7 +124,7 @@ $datos27 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/admin/setAso
 $process27 = $router->setRuta($datos27);
 /** Fin del caso de /admin/setAsociarRolesPerfil */
 /** Inicio  del Bloque de instancia al proceso de /perfilListar  */
-$datos28 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/perfilListar", 'apps'=>"Admin", 'controller'=>"segPerfil",'method'=>'runSegPerfilListar');
+$datos28 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/perfilListar", 'apps'=>"Admin", 'controller'=>"segPerfil",'method'=>'runSegPerfilListar');
 $process28 = $router->setRuta($datos28);
 /** Fin del caso de /perfilListar */
 /** Inicio  del Bloque de instancia al proceso de /perfilCreate  */
@@ -148,7 +148,7 @@ $datos33 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/usuariosIndex
 $process33 = $router->setRuta($datos33);
 /** Fin del caso de /usuariosIndex */
 /** Inicio  del Bloque de instancia al proceso de /usuariosListar  */
-$datos34 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/usuariosListar", 'apps'=>"Admin", 'controller'=>"segUsuarios",'method'=>'runSegUsuariosListar');
+$datos34 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/usuariosListar", 'apps'=>"Admin", 'controller'=>"segUsuarios",'method'=>'runSegUsuariosListar');
 $process34 = $router->setRuta($datos34);
 /** Fin del caso de /usuariosListar */
 /** Inicio  del Bloque de instancia al proceso de /usuariosCreate  */
@@ -171,29 +171,57 @@ $process38 = $router->setRuta($datos38);
 $datos39 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/getEntidadComun", 'apps'=>"Admin", 'controller'=>"gestionar",'method'=>'runGetEntidadComun');
 $process39 = $router->setRuta($datos39);
 /** Fin del caso de /getEntidadComun */
-/** Inicio  del Bloque de instancia al proceso de /hugoIndex  */
-$datos40 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/hugoIndex", 'apps'=>"Admin", 'controller'=>"prueba",'method'=>'runPruebaIndex');
+/** Inicio  del Bloque de instancia al proceso de /locksPost  */
+$datos40 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/locksPost", 'apps'=>"Admin", 'controller'=>"login",'method'=>'runLocksPost');
 $process40 = $router->setRuta($datos40);
-/** Fin del caso de /hugoIndex */
-/** Inicio  del Bloque de instancia al proceso de /hugoListar  */
-$datos41 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/hugoListar", 'apps'=>"Admin", 'controller'=>"prueba",'method'=>'runPruebaListar');
+/** Fin del caso de /locksPost */
+/** Inicio  del Bloque de instancia al proceso de /personalIndex  */
+$datos41 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/personalIndex", 'apps'=>"Admin", 'controller'=>"empleados",'method'=>'runEmpleadosIndex');
 $process41 = $router->setRuta($datos41);
-/** Fin del caso de /hugoListar */
-/** Inicio  del Bloque de instancia al proceso de /hugoCreate  */
-$datos42 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/hugoCreate", 'apps'=>"Admin", 'controller'=>"prueba",'method'=>'runPruebaCreate');
+/** Fin del caso de /personalIndex */
+/** Inicio  del Bloque de instancia al proceso de /personalListar  */
+$datos42 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/personalListar", 'apps'=>"Admin", 'controller'=>"empleados",'method'=>'runEmpleadosListar');
 $process42 = $router->setRuta($datos42);
-/** Fin del caso de /hugoCreate */
-/** Inicio  del Bloque de instancia al proceso de /hugoShow  */
-$datos43 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/hugoShow", 'apps'=>"Admin", 'controller'=>"prueba",'method'=>'runPruebaShow');
+/** Fin del caso de /personalListar */
+/** Inicio  del Bloque de instancia al proceso de /personalCreate  */
+$datos43 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/personalCreate", 'apps'=>"Admin", 'controller'=>"empleados",'method'=>'runEmpleadosCreate');
 $process43 = $router->setRuta($datos43);
-/** Fin del caso de /hugoShow */
-/** Inicio  del Bloque de instancia al proceso de /hugoDelete  */
-$datos44 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/hugoDelete", 'apps'=>"Admin", 'controller'=>"prueba",'method'=>'runPruebaDelete');
+/** Fin del caso de /personalCreate */
+/** Inicio  del Bloque de instancia al proceso de /personalShow  */
+$datos44 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/personalShow", 'apps'=>"Admin", 'controller'=>"empleados",'method'=>'runEmpleadosShow');
 $process44 = $router->setRuta($datos44);
-/** Fin del caso de /hugoDelete */
-/** Inicio  del Bloque de instancia al proceso de /hugoUpdate  */
-$datos45 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/hugoUpdate", 'apps'=>"Admin", 'controller'=>"prueba",'method'=>'runPruebaUpdate');
+/** Fin del caso de /personalShow */
+/** Inicio  del Bloque de instancia al proceso de /personalDelete  */
+$datos45 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/personalDelete", 'apps'=>"Admin", 'controller'=>"empleados",'method'=>'runEmpleadosDelete');
 $process45 = $router->setRuta($datos45);
-/** Fin del caso de /hugoUpdate */
+/** Fin del caso de /personalDelete */
+/** Inicio  del Bloque de instancia al proceso de /personalUpdate  */
+$datos46 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/personalUpdate", 'apps'=>"Admin", 'controller'=>"empleados",'method'=>'runEmpleadosUpdate');
+$process46 = $router->setRuta($datos46);
+/** Fin del caso de /personalUpdate */
+/** Inicio  del Bloque de instancia al proceso de /legajoIndex  */
+$datos47 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/legajoIndex", 'apps'=>"Admin", 'controller'=>"legajos",'method'=>'runLegajosIndex');
+$process47 = $router->setRuta($datos47);
+/** Fin del caso de /legajoIndex */
+/** Inicio  del Bloque de instancia al proceso de /legajoListar  */
+$datos48 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/legajoListar", 'apps'=>"Admin", 'controller'=>"legajos",'method'=>'runLegajosListar');
+$process48 = $router->setRuta($datos48);
+/** Fin del caso de /legajoListar */
+/** Inicio  del Bloque de instancia al proceso de /legajoCreate  */
+$datos49 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/legajoCreate", 'apps'=>"Admin", 'controller'=>"legajos",'method'=>'runLegajosCreate');
+$process49 = $router->setRuta($datos49);
+/** Fin del caso de /legajoCreate */
+/** Inicio  del Bloque de instancia al proceso de /legajoShow  */
+$datos50 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/legajoShow", 'apps'=>"Admin", 'controller'=>"legajos",'method'=>'runLegajosShow');
+$process50 = $router->setRuta($datos50);
+/** Fin del caso de /legajoShow */
+/** Inicio  del Bloque de instancia al proceso de /legajoDelete  */
+$datos51 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/legajoDelete", 'apps'=>"Admin", 'controller'=>"legajos",'method'=>'runLegajosDelete');
+$process51 = $router->setRuta($datos51);
+/** Fin del caso de /legajoDelete */
+/** Inicio  del Bloque de instancia al proceso de /legajoUpdate  */
+$datos52 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/legajoUpdate", 'apps'=>"Admin", 'controller'=>"legajos",'method'=>'runLegajosUpdate');
+$process52 = $router->setRuta($datos52);
+/** Fin del caso de /legajoUpdate */
  
 ?>

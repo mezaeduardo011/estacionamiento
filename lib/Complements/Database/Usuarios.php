@@ -1,7 +1,6 @@
 <?php
 namespace JPH\Complements\Database;
 
-
 trait Usuarios
 {
     public $email;

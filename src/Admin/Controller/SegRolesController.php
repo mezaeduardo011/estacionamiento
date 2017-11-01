@@ -30,7 +30,7 @@ class SegRolesController extends Controller
    public function runSegRolesIndex($request)
    {
      $this->tpl->addIni();
-     $listado = $this->hoSegRolesModel->getSegRolesListar($request);
+     //$listado = $this->hoSegRolesModel->getSegRolesListar($request);
      $this->tpl->add('usuario', $this->getSession('usuario'));
      $this->tpl->renders('view::seguridad/segRoles/'.$this->pathVista().'/index');
    }
@@ -43,8 +43,12 @@ class SegRolesController extends Controller
     */ 
    public function runSegRolesListar($request)
    {
-      $result = $this->hoSegRolesModel->getSegRolesListar($request);
-      $this->json($result);
+       $result = $this->formatRows($request->obj);
+       $rows = $this->hoSegRolesModel->getSegRolesListar($request,$result);
+       $valor = array();
+       $valor['head']=$result['campos'];
+       $valor['rows']=$rows; // return del modelo
+       $this->json($valor);
    }
 
     /**

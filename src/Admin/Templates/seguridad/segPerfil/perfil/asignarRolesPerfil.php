@@ -24,20 +24,19 @@ $breadcrumb=(object)array('actual'=>'Perfil','titulo'=>'Vista de integrada de ge
     // Variable de configuracion
     var Config = {};
     // Columnas para el dataTable de Perfile
+    // Columnas para el grilla
     Config.colums = [
-        { "data": "id" },
-        { "data": "detalle" },
+        { "id": "detalle", "type":"ed", "align":"left", "sort":"str" , "value":"Detalles" },
     ];
-    // Configuracion de visualizacion del Datatable de Perfiles
+    // Configuracion de visualizacion del grilla
     Config.show = {
-        'display':10,
-        'search':false,
-        'pagina':false,
-        'rowid': "id"
+        'module':'Perfil',
+        'tableTitle':'Listado de Registros.',
+        'filter':'#text_filter'
     }
     // Configuración personalizada del entorno privado de la vista
     Core.Vista.Util = {
-        onTable: $('#dataJPHRoles').DataTable({
+        /*onTable: $('#dataJPHRoles').DataTable({
             "ajax": {
                 "url": '/rolesListar',
                 "dataSrc": ""
@@ -52,10 +51,24 @@ $breadcrumb=(object)array('actual'=>'Perfil','titulo'=>'Vista de integrada de ge
                 "url": "/admin/dist/js/Spanish.json"
             },
             "destroy": true
-        }),
+        }),*/
         asociado: [],
         priListaLoad: function () {
-            localStorage.setItem('rolesId',0);
+            /* CARGAR SEGUNDA GRILLA */
+            var Config = {};
+            // Columnas para el grilla
+            Config.colums = [
+                { "id": "detalle", "type":"ed", "align":"left", "sort":"str" , "value":"Detalles" },
+            ];
+            // Configuracion de visualizacion del grilla
+            Config.show = {
+                'module':'Roles',
+                'tableTitle':'Listado de Registros.',
+                'filter':'&nbsp;,#text_filter'
+            }
+            //Core.Vista.main('Roles',Config);
+
+           /* localStorage.setItem('rolesId',0);
             // Funcionalidad privada del listaLoad
             var asoc = this.asociado;
             var onTabla = this.onTable;
@@ -71,7 +84,7 @@ $breadcrumb=(object)array('actual'=>'Perfil','titulo'=>'Vista de integrada de ge
                 }
 
             } );
-            this.priClickProcesarForm();
+            this.priClickProcesarForm();*/
         },
         priListaClick: function (dataJson) {
             // Funcionalidad adicional cuando haces click en el datatable principal

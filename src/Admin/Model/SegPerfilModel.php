@@ -22,13 +22,73 @@ class SegPerfilModel extends Main
    }
 
     /**
+     * Extraer todos los registros de SegUsuarios
+     * @return array $tablas
+     */
+    public function getSegPerfilListarCombo()
+    {
+        $tablas=$this->leerTodos();
+        return $tablas;
+    }
+    /**
     * Extraer todos los registros de SegPerfil
     * @return array $tablas
     */ 
-   public function getSegPerfilListar()
+   public function getSegPerfilListar($request,$result)
    {
-     $tablas=$this->leerTodos();
-     return $tablas;
+       //define variables from incoming values
+       if(isset($request->posStart))
+           $posStart = $request->posStart;
+       else
+           $posStart = 0;
+       if(isset($request->count))
+           $count = $request->count;
+       else
+           $count = 100;
+
+
+       // Primero extraer la cantidad de registros
+       $sqlCount = "Select count(*) as items FROM ".$this->tabla;
+       $resCount = $this->executeQuery($sqlCount);
+
+       //create query to products table
+       $sql = implode(',', $result['select']).", id FROM ".$this->tabla;
+
+       //if this is the first query - get total number of records in the query result
+       $sqlCount = "SELECT * FROM (
+				SELECT ROW_NUMBER() OVER( ORDER BY id ASC ) AS row, ".$resCount[0]->items." AS cnt, $sql ) AS sub";
+       $resQuery = $this->get($sqlCount);
+       $rowCount =  $this->fetch();
+
+       $totalCount = $rowCount->cnt;
+
+       //add limits to query to get only rows necessary for the output
+       $sqlCount.= " WHERE row>=".$posStart." AND row<=".$count;
+
+       $sqlCount;
+
+       $res = $this->get($sqlCount);
+
+       //output data in XML format
+       $items = array();
+       while($row=$this->fetch($res)){
+           $tmp['id'] = $row->id;
+           $tep = array();
+           foreach ($row as $key => $value) {
+               foreach ($row as $col => $val) {
+                   if (gettype($val) == "object" && get_class($val) == "DateTime") {
+                       $row->$col = $val->format("d/m/Y");
+                   }
+               }
+               if($key!='id' AND $key!='cnt' AND $key!='row'){
+                   $tep[] = $value;
+               }
+           }
+
+           $tmp['data'] = $tep;
+           array_push($items,$tmp);
+       }
+       return $items;
    }
 
     /**

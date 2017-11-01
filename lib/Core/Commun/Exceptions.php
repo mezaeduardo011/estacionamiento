@@ -14,6 +14,7 @@ use JPH\Core\Console\Interprete;
 
 class Exceptions extends \Error implements \Throwable
 {
+    use SendMail;
     /**
      * Se encarga de leer los mensajes de exepciones
      * @param string $index indice del grupo de mensaje
@@ -31,10 +32,15 @@ class Exceptions extends \Error implements \Throwable
                 $datos = str_replace(']',' ', $text[1]);
                 $files = Interprete::getDirDoc().trim($datos).'.html';
                 $htm = file_get_contents($files);
-
                 $msj = $text[0]."<br>".$htm;
             }
+            //$senMej=new Exceptions();
+            //$senMej->sendMailException('mensaje');
             return All::mergeTaps($msj, $obj);
+        }
+
+        public function sendMailException($msj){
+            echo  $this->send($msj);
         }
 }
 

@@ -82,7 +82,7 @@ Class Cache
         public static function rm($key)
         {
                
-                $files=self::pathFiles($key);
+                $files=(object)self::pathFiles($key);
                 $filename_cache = $files->filename_cache;
                 $filename_info = $files->filename_info; //Store info
  

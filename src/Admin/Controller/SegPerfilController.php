@@ -31,7 +31,7 @@ class SegPerfilController extends Controller
    public function runSegPerfilIndex($request)
    {
      $this->tpl->addIni();
-     $listado = $this->hoSegPerfilModel->getSegPerfilListar($request);
+     $listado = $this->hoSegPerfilModel->getSegPerfilListarCombo($request);
      $this->tpl->add('usuario', $this->getSession('usuario'));
      $this->tpl->renders('view::seguridad/segPerfil/'.$this->pathVista().'/index');
    }
@@ -43,7 +43,7 @@ class SegPerfilController extends Controller
     public function runSegRolesAsignarRolesPerfil($request)
     {
         $this->tpl->addIni();
-        $listado = $this->hoSegPerfilModel->getSegPerfilListar($request);
+        $listado = $this->hoSegPerfilModel->getSegPerfilListarCombo($request);
         $this->tpl->add('usuario', $this->getSession('usuario'));
         $this->tpl->renders('view::seguridad/segPerfil/perfil/asignarRolesPerfil');
     }
@@ -55,8 +55,12 @@ class SegPerfilController extends Controller
     */ 
    public function runSegPerfilListar($request)
    {
-      $result = $this->hoSegPerfilModel->getSegPerfilListar($request);
-      $this->json($result);
+       $result = $this->formatRows($request->obj);
+       $rows = $this->hoSegPerfilModel->getSegPerfilListar($request,$result);
+       $valor = array();
+       $valor['head']=$result['campos'];
+       $valor['rows']=$rows; // return del modelo
+       $this->json($valor);
    }
 
     /**

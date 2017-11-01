@@ -19,17 +19,16 @@ $breadcrumb=(object)array('actual'=>'Perfil','titulo'=>'Vista de integrada de ge
 <script>
     // Variable de configuracion
     var Config = {};
-    // Columnas para el dataTable de Perfile
+
+    // Columnas para el grilla
     Config.colums = [
-        { "data": "id" },
-        { "data": "detalle" },
+        { "id": "detalle", "type":"ed", "align":"left", "sort":"str" , "value":"Detalles" },
     ];
-    // Configuracion de visualizacion del Datatable de Perfiles
+    // Configuracion de visualizacion del grilla
     Config.show = {
-        'display':10,
-        'search':false,
-        'pagina':false,
-        'rowid': "id"
+        'module':'Perfil',
+        'tableTitle':'Listado de Registros.',
+        'filter':'#text_filter'
     }
     // Configuración personalizada del entorno privado de la vista
     Core.Vista.Util = {

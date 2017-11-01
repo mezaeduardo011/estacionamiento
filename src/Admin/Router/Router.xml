@@ -128,7 +128,7 @@
     <name>/rolesListar</name>
     <controller>segRoles</controller>
     <method>runSegRolesListar</method>
-    <request>POST</request>
+    <request>GET</request>
   </link>
   <link>
     <name>/rolesCreate</name>
@@ -177,7 +177,7 @@
     <name>/perfilListar</name>
     <controller>segPerfil</controller>
     <method>runSegPerfilListar</method>
-    <request>POST</request>
+    <request>GET</request>
   </link>
   <link>
     <name>/perfilCreate</name>
@@ -214,7 +214,7 @@
     <name>/usuariosListar</name>
     <controller>segUsuarios</controller>
     <method>runSegUsuariosListar</method>
-    <request>POST</request>
+    <request>GET</request>
   </link>
   <link>
     <name>/usuariosCreate</name>
@@ -253,41 +253,78 @@
     <request>POST</request>
   </link>
   <!-- ### END SYSTEM CONFIG ### -->
-  <!-- Bloque de configuracion de la ruta del controller Hugo-->
+  <!-- Bloque de configuracion de la ruta del controller Personal-->
   <link>
-    <name>/hugoIndex</name>
-    <controller>prueba</controller>
-    <method>runPruebaIndex</method>
+    <name>/personalIndex</name>
+    <controller>empleados</controller>
+    <method>runEmpleadosIndex</method>
     <request>GET</request>
   </link>
   <link>
-    <name>/hugoListar</name>
-    <controller>prueba</controller>
-    <method>runPruebaListar</method>
+    <name>/personalListar</name>
+    <controller>empleados</controller>
+    <method>runEmpleadosListar</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/personalCreate</name>
+    <controller>empleados</controller>
+    <method>runEmpleadosCreate</method>
     <request>POST</request>
   </link>
   <link>
-    <name>/hugoCreate</name>
-    <controller>prueba</controller>
-    <method>runPruebaCreate</method>
+    <name>/personalShow</name>
+    <controller>empleados</controller>
+    <method>runEmpleadosShow</method>
     <request>POST</request>
   </link>
   <link>
-    <name>/hugoShow</name>
-    <controller>prueba</controller>
-    <method>runPruebaShow</method>
+    <name>/personalDelete</name>
+    <controller>empleados</controller>
+    <method>runEmpleadosDelete</method>
     <request>POST</request>
   </link>
   <link>
-    <name>/hugoDelete</name>
-    <controller>prueba</controller>
-    <method>runPruebaDelete</method>
+    <name>/personalUpdate</name>
+    <controller>empleados</controller>
+    <method>runEmpleadosUpdate</method>
+    <request>POST</request>
+  </link>
+  <!-- Bloque de configuracion de la ruta del controller Legajo-->
+  <link>
+    <name>/legajoIndex</name>
+    <controller>legajos</controller>
+    <method>runLegajosIndex</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/legajoListar</name>
+    <controller>legajos</controller>
+    <method>runLegajosListar</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/legajoCreate</name>
+    <controller>legajos</controller>
+    <method>runLegajosCreate</method>
     <request>POST</request>
   </link>
   <link>
-    <name>/hugoUpdate</name>
-    <controller>prueba</controller>
-    <method>runPruebaUpdate</method>
+    <name>/legajoShow</name>
+    <controller>legajos</controller>
+    <method>runLegajosShow</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/legajoDelete</name>
+    <controller>legajos</controller>
+    <method>runLegajosDelete</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/legajoUpdate</name>
+    <controller>legajos</controller>
+    <method>runLegajosUpdate</method>
     <request>POST</request>
   </link>
 </route>

@@ -1,10 +1,15 @@
 # Hornero Repositories
 
 
-Es una metodología de desarrollo basado en MVC, podes una estructura de desarrollo muy comodo para trabajar basado en programación horientada a objeto, posee el Estandar PSR-4 de autocargas de clases, de este modo te permite desarrollar aplicaciones de forma mas simple ordenada y sin tanta capa de astracción de datos, se adapta a todo tipo de desarrollo por mas compleja que sea hastas puedes incluir componentes de tercero sin restrinciones.
+Es una estructura de desarrollo basada en MVC, muy cómodo para trabajar basado en Programación Orientada a Objeto al 100%, posee varios estándares de desarrollo en PHP en el cual tenemos las siguientes implementaciones:
+	
+	PSR-4  Estándar de carga automática
+	PSR-7  Interfaz de mensajes HTTP.
+	PSR-16 Caché Simple.
 
-Desarrollo rapido y simple, sin tener que aprener tantas cosas adicionales solo saber las buenas pracicas de desarrolo y patrones de diseño
+Así mismo te permite desarrollar aplicaciones de forma más simple ordenada y sin tanta capa de abstracción de datos, se adapta a todo tipo de desarrollo por más compleja que sea, hasta puedes incluir componentes de tercero sin restricciones.
 
+Desarrollo rápido, simple, sin tener que aprender tantas cosas adicionales solo saber las buenas prácticas de desarrollo y patrones de arquitectura de Software en MVC.
 [![Autor](@gbolivarb)](https://twitter.com/gbolivarb)
 [![Desarrollo](Tag pre-alpha-02)](https://github.com/CaribesTIC/hornero/tree/pre-alpha-02)
 [![Plantilla Plates](https://img.shields.io/badge/source-league/plates-blue.svg?style=flat-square)](http://platesphp.com/)
@@ -36,13 +41,13 @@ composer install
 
 
 ### Hornero
-Hornero es una solucion tecnologica basada en simplifación de 
-structuras de trabajos o framework mas complicado, la idea esta 
-estructura es simplificar el tiempo de desarrollo y hacer aplicaciones 
-en tiempo record, sin tener que saber programar, pero tienes una parte 
-desarrolladores donde puedes impementar sistemas as rapidos todo basado
- en PHP igual que las plantillas. 
+Hornero es una solución tecnológica basada en simplicidad de 
+estructuras de trabajos, la idea de esta arquitectura es simplificar el tiempo de desarrollo y hacer aplicaciones en tiempo record, sin ser un programador de alta gama.
+
+Te permite hacer integraciones modular dentro de la arquitectura podes crear un módulo para ser usado en otros sistema desarrollados con hornero, todo está basado en PHP igual que las plantillas. 
+
 Puedes ver todas las opciones de la siguiente forma:
+
 ```terminal
 php hornero 
 ```

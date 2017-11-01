@@ -1,18 +1,17 @@
 <?php
 namespace JPH\Core\Commun;
 /**
- * Commun permite terner un conjunto de funcionalidades muy utiles para el sistema 
- * que pueden ser usada en cualquier momento
+ * Commun permite terner un conjunto de funcionalidades muy utiles para el sistema que pueden ser usada en cualquier momento
  * @author: Gregorio Jose Bolivar Bolivar <elalconxvii@gmail.com>
- * @Creation Date: 09/01/2014
- * @Audited by: Gregorio J BolÃ­var B
- * @Modified Date: 09/04/2016
+ * @Creation Date: 09/7/2017
+ * @Audited by: Gregorio J Bolivar B
+ * @Modified Date: 31/10/2017
  * @package: CommunController.php
- * @version: 3.4
+ * @version: 4.0
  */
 
 trait Commun
-{   
+{
     public $resp;
     /**
      * Permite procesar un nombre de la clase basado en el namespace que se encuentra
@@ -28,12 +27,12 @@ trait Commun
 
     /**
      * Permite crear un directorios
-     * @param string $ruta, ruta donde procesara la creacion del directorio 
+     * @param string $ruta, ruta donde procesara la creacion del directorio
      * @return boolean
      */
     static function mkddir(string $ruta)
     {
-        if (!file_exists($ruta)) 
+        if (!file_exists($ruta))
         {
             mkdir($ruta, 0777, true);
             $resp = true;
@@ -44,16 +43,17 @@ trait Commun
     }
 
     static function now(){
-        return date('d/m/Y h:i:s');
+        return date('d/m/Y h:i:s:u');
     }
 
     /**
      * Permite imprimir objetos, arreglos, y valores enviados mostrado ordenadamente y parando el proceso
-     * @param array $dataArray, parametro de entrada para ser impreso 
+     * @param array $dataArray, parametro de entrada para ser impreso
      * @return array valores
      */
     static function pp($dataArray)
     {
+        self::statusHttp(201);
         echo "<pre>"; print_r($dataArray); die();
     }
 
@@ -62,8 +62,8 @@ trait Commun
      */
     static function modDevelopment()
     {
-        error_reporting(E_ALL); 
-        ini_set("display_errors", 1); 
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
     }
 
     /**
@@ -82,7 +82,7 @@ trait Commun
         }
         else
         {
-             foreach ($tmp as $key => $value) 
+             foreach ($tmp as $key => $value)
              {
                 if($key==0)
                 {
@@ -121,16 +121,17 @@ trait Commun
     }
 
    /**
-    * 
+    *
     */
    static function headerJson()
    {
     header('Content-Type: application/json');
    }
 
-   static function json($datos)
+   static function json($datos,$num=200)
    {
        self::headerJson();
+       self::statusHttp($num);
        //$tmp = self::utf8enc($datos);
        echo json_encode( $datos );
        die();
@@ -151,7 +152,7 @@ trait Commun
     }
 
    /**
-    * 
+    *
     */
    static function compressResponse(string $html)
     {
@@ -161,7 +162,7 @@ trait Commun
     }
 
    /**
-    * 
+    *
     */
    static function sanear_string(string $string)
    {
@@ -251,14 +252,14 @@ trait Commun
      * Unifica los eqiquetas con el valor pasado en el arreglo
      * @param string $string, Cadena de texto que vamos a parcear
      * @param array $options, Valores del arreglo a cambiar
-     * @return string $result, cadena de texto con los datos reales 
+     * @return string $result, cadena de texto con los datos reales
      */
     static function  mergeTaps( $texto, $option)
     {
-        $tmp = array(); 
+        $tmp = array();
         // Creamos las reglas en lote
         foreach ($option as $key => $b)
-        { 
+        {
             $tmp[]='/{'.$key.'}/';
         }
         $result = preg_replace($tmp, $option, $texto);
@@ -284,6 +285,52 @@ trait Commun
         @rmdir($carpeta);
     }
 
+    static function statusHttp($num)
+    {
+        static $http = array (
+            100 => "HTTP/1.1 100 Continue",
+            101 => "HTTP/1.1 101 Switching Protocols",
+            200 => "HTTP/1.1 200 OK",
+            201 => "HTTP/1.1 201 Created",
+            202 => "HTTP/1.1 202 Accepted",
+            203 => "HTTP/1.1 203 Non-Authoritative Information",
+            204 => "HTTP/1.1 204 No Content",
+            205 => "HTTP/1.1 205 Reset Content",
+            206 => "HTTP/1.1 206 Partial Content",
+            300 => "HTTP/1.1 300 Multiple Choices",
+            301 => "HTTP/1.1 301 Moved Permanently",
+            302 => "HTTP/1.1 302 Found",
+            303 => "HTTP/1.1 303 See Other",
+            304 => "HTTP/1.1 304 Not Modified",
+            305 => "HTTP/1.1 305 Use Proxy",
+            307 => "HTTP/1.1 307 Temporary Redirect",
+            400 => "HTTP/1.1 400 Bad Request",
+            401 => "HTTP/1.1 401 Unauthorized",
+            402 => "HTTP/1.1 402 Payment Required",
+            403 => "HTTP/1.1 403 Forbidden",
+            404 => "HTTP/1.1 404 Not Found",
+            405 => "HTTP/1.1 405 Method Not Allowed",
+            406 => "HTTP/1.1 406 Not Acceptable",
+            407 => "HTTP/1.1 407 Proxy Authentication Required",
+            408 => "HTTP/1.1 408 Request Time-out",
+            409 => "HTTP/1.1 409 Conflict",
+            410 => "HTTP/1.1 410 Gone",
+            411 => "HTTP/1.1 411 Length Required",
+            412 => "HTTP/1.1 412 Precondition Failed",
+            413 => "HTTP/1.1 413 Request Entity Too Large",
+            414 => "HTTP/1.1 414 Request-URI Too Large",
+            415 => "HTTP/1.1 415 Unsupported Media Type",
+            416 => "HTTP/1.1 416 Requested range not satisfiable",
+            417 => "HTTP/1.1 417 Expectation Failed",
+            500 => "HTTP/1.1 500 Internal Server Error",
+            501 => "HTTP/1.1 501 Not Implemented",
+            502 => "HTTP/1.1 502 Bad Gateway",
+            503 => "HTTP/1.1 503 Service Unavailable",
+            504 => "HTTP/1.1 504 Gateway Time-out"
+        );
+        header($http[$num]);
+    }
+
     /**
      * Redireccionar un elemento de una solicitud web personalizando la cabecera
      * @param string $url, Enlace donde quieres redireccionar
@@ -292,49 +339,8 @@ trait Commun
 
     static function redirect(string $url,  $num=200)
     {
-            static $http = array (
-                100 => "HTTP/1.1 100 Continue",
-                101 => "HTTP/1.1 101 Switching Protocols",
-                200 => "HTTP/1.1 200 OK",
-                201 => "HTTP/1.1 201 Created",
-                202 => "HTTP/1.1 202 Accepted",
-                203 => "HTTP/1.1 203 Non-Authoritative Information",
-                204 => "HTTP/1.1 204 No Content",
-                205 => "HTTP/1.1 205 Reset Content",
-                206 => "HTTP/1.1 206 Partial Content",
-                300 => "HTTP/1.1 300 Multiple Choices",
-                301 => "HTTP/1.1 301 Moved Permanently",
-                302 => "HTTP/1.1 302 Found",
-                303 => "HTTP/1.1 303 See Other",
-                304 => "HTTP/1.1 304 Not Modified",
-                305 => "HTTP/1.1 305 Use Proxy",
-                307 => "HTTP/1.1 307 Temporary Redirect",
-                400 => "HTTP/1.1 400 Bad Request",
-                401 => "HTTP/1.1 401 Unauthorized",
-                402 => "HTTP/1.1 402 Payment Required",
-                403 => "HTTP/1.1 403 Forbidden",
-                404 => "HTTP/1.1 404 Not Found",
-                405 => "HTTP/1.1 405 Method Not Allowed",
-                406 => "HTTP/1.1 406 Not Acceptable",
-                407 => "HTTP/1.1 407 Proxy Authentication Required",
-                408 => "HTTP/1.1 408 Request Time-out",
-                409 => "HTTP/1.1 409 Conflict",
-                410 => "HTTP/1.1 410 Gone",
-                411 => "HTTP/1.1 411 Length Required",
-                412 => "HTTP/1.1 412 Precondition Failed",
-                413 => "HTTP/1.1 413 Request Entity Too Large",
-                414 => "HTTP/1.1 414 Request-URI Too Large",
-                415 => "HTTP/1.1 415 Unsupported Media Type",
-                416 => "HTTP/1.1 416 Requested range not satisfiable",
-                417 => "HTTP/1.1 417 Expectation Failed",
-                500 => "HTTP/1.1 500 Internal Server Error",
-                501 => "HTTP/1.1 501 Not Implemented",
-                502 => "HTTP/1.1 502 Bad Gateway",
-                503 => "HTTP/1.1 503 Service Unavailable",
-                504 => "HTTP/1.1 504 Gateway Time-out"
-            );
-            @header($http[$num]);
-            @header("Location: $url");
+        self::statusHttp($num);
+        @header("Location: $url");
     }
     /**
      * Permite hacer validaciones de campos basadao en los validadores de nativos de php
@@ -414,7 +420,7 @@ trait Commun
         $vista=str_replace(array('/','Index', 'Listar', 'Create', 'Update','Show','Delete'),array('','','','','','',''),$_SERVER['PATH_INFO']);
         return $vista;
     }
-    
+
     /**
      * Permite extraer el contenido del arreglo mutidimencional de la captura del rol de la session
      */
@@ -429,9 +435,9 @@ trait Commun
             $menu[]=implode('|',$item);
         }
         $bufer=array_unique($menu);
-        
+
         $menu2 = array();
-        
+
         // Bloque de proceso del sub menu
         foreach ($bufer AS $key=>$value2){
             $item2 = explode('|', $value2);
@@ -440,7 +446,7 @@ trait Commun
             unset($item2[0]);
             $menu2[$it][]=implode('|',$item2);
         }
-        
+
         $menu3 = array();
         // Bloque encargado del ultimo menu
         foreach ($menu2 AS $key3=>$value3){
@@ -449,12 +455,39 @@ trait Commun
                 $it2 = $item3[0];
                 unset($item3[0]);
                 $menu3[$key3][$it2][$a]=implode($item3);
-                
+
             }
         }
         return $menu3;
     }
-    
+
+    /**
+     * Permite darle formato al a los campos proveniente de la vista para adaptarlo a los parametros necesarios para la grilla
+     * @param Objeto $obj , Trae la definicion de los campos necesio de todas los valores que lleva la vista
+     * @return array
+     */
+    public function formatRows($obj)
+    {
+        $str = base64_decode($obj);
+        $temp = explode('#',$str);
+        $select = array();
+        $campos = array();
+        foreach($temp AS $index=>$value){
+            // obtengo el segundo valor para el item
+            $rest = explode('|',$value);
+            $select[] = str_replace('id:','',$rest[0]);
+            $campos[] = array('id'=>str_replace('id:','',$rest[0]),
+                'type'=>str_replace('type:','',$rest[1]),
+                'align'=>str_replace('align:','',$rest[2]),
+                'sort'=>str_replace('sort:','',$rest[3]) ,
+                'value'=>str_replace('value:','',$rest[4])
+            );
+
+        }
+        return array('select'=>$select,'campos'=>$campos);
+    }
+
+
 
 }
 

@@ -69,6 +69,7 @@ class RouterGenerator
                         if(method_exists($obj,$mthod)){
                             $obj->$mthod((object)$_GET);
                         }else{
+                            All::statusHttp(404);
                             $tmp = array('controller'=>$this->activ, 'method'=>$mthod);
                             $msj = All::getMsjException('Core', 'method-no-existe',$tmp);
                             throw new \TypeError($msj);
@@ -80,6 +81,7 @@ class RouterGenerator
                         if(method_exists($obj,$mthod)) {
                             $obj->$mthod((object)$_POST);
                         }else{
+                            All::statusHttp(404);
                             $tmp = array('controller'=>$this->activ, 'method'=>$mthod);
                             $msj = All::getMsjException('Core', 'method-no-existe',$tmp);
                             throw new \TypeError($msj);
@@ -87,6 +89,7 @@ class RouterGenerator
 
                     }else{
                         $tmp = array('methodActivo'=>$this->req->REQUEST_METHOD, 'methodRequerid'=>$this->petition);
+                        All::statusHttp(405);
                         $msj = All::getMsjException('Resquest', '405',$tmp);
                         throw new \TypeError($msj);
                     }

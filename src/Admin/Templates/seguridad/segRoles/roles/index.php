@@ -18,17 +18,17 @@ $breadcrumb=(object)array('actual'=>'Roles','titulo'=>'Vista de integrada de ges
 
 <script>
     var Config = {};
-     Config.colums = [
-        { "data": "id" },
-        { "data": "detalle" },
+    // Columnas para el grilla
+    Config.colums = [
+        { "id": "detalle", "type":"ed", "align":"left", "sort":"str" , "value":"Detalles" },
     ];
-    // Configuracion de visualizacion del Datatable
+    // Configuracion de visualizacion del grilla
     Config.show = {
-        'display':10,
-        'search':true,
-        'pagina':true,
-        'rowid': "id"
+        'module':'Roles',
+        'tableTitle':'Listado de Registros.',
+        'filter':'&nbsp;,#text_filter'
     }
+
 
     Core.Vista.Util = {
         priListaLoad: function () {  },

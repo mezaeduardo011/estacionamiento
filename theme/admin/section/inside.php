@@ -8,7 +8,7 @@
                 <img src="/admin/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p><?php echo $usuario->DNOMBRE ?> <?php echo $usuario->DAPELLIDO ?></p>
+                <p><?php echo $usuario->nombres ?> <?php echo $usuario->apellidos ?></p>
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>

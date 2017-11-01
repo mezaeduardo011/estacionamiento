@@ -24,12 +24,12 @@ login del sistema
             <!-- /.lockscreen-image -->
 
             <!-- lockscreen credentials (contains the form) -->
-            <form class="lockscreen-credentials">
+            <form class="lockscreen-credentials" method="post" action="/locksPost">
                 <div class="input-group">
-                    <input type="password" class="form-control" placeholder="password">
+                    <input type="password" name="contra" class="form-control" placeholder="password" requered>
 
                     <div class="input-group-btn">
-                        <button type="button" class="btn"><i class="fa fa-arrow-right text-muted"></i></button>
+                        <button type="button" class="btn" id="desbloquear"><i class="fa fa-arrow-right text-muted"></i></button>
                     </div>
                 </div>
             </form>
@@ -49,11 +49,20 @@ login del sistema
 <?php $this->push('addJs') ?>
     <script>
         $(function () {
-            $('input').iCheck({
-                checkboxClass: 'icheckbox_square-blue',
-                radioClass: 'iradio_square-blue',
-                increaseArea: '20%' // optional
-            });
+            <?php
+                if(!empty($msjError)){
+                    echo "mostrarError('$msjError');".PHP_EOL;
+                }
+            ?>
+            $('#desbloquear').on('click',function () {
+                var imp = $('input').val();
+                if(imp.length>0) {
+                    $('form.lockscreen-credentials').submit();
+                }else{
+                    $('input').focus();
+                    mostrarError('Es necesario ingresar la clave para poder ingresar.')
+                }
+            })
         });
     </script>
 <?php $this->end() ?>

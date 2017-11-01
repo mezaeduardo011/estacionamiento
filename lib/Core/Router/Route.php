@@ -1,6 +1,8 @@
 <?php
 namespace JPH\Core\Router;
-use JPH\Core\Commun\{All};
+use JPH\Core\Commun\{
+    All, Commun
+};
 /**
  * Clase encargadad de procesar las rutas del sistema
  * @author: Gregorio Bolívar <elalconxvii@gmail.com>
@@ -54,7 +56,7 @@ class Route
             }
         
         }catch(\Throwable $t){
-            //header('Content-Type: text/html; charset=utf-8');
+            Commun::statusHttp(404);
             die($t->getMessage());
         }
         return $this;

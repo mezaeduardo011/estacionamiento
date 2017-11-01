@@ -45,5 +45,6 @@
 <script src="<?=JPH\Core\Store\Cache::get('srcJs')?>dist/js/core.js"></script>
 <script src="<?=JPH\Core\Store\Cache::get('srcJs')?>dist/js/vista.js"></script>
 <script src="<?=JPH\Core\Store\Cache::get('srcJs')?>dist/js/session.js"></script>
-<script src="<?=JPH\Core\Store\Cache::get('srcJs')?>bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="<?=JPH\Core\Store\Cache::get('srcJs')?>bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!--script src="<?=JPH\Core\Store\Cache::get('srcJs')?>bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="<?=JPH\Core\Store\Cache::get('srcJs')?>bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script-->
+<script src="<?=JPH\Core\Store\Cache::get('srcJs')?>dhtmlxSuite/codebase/dhtmlx.js"></script>

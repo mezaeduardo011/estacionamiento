@@ -32,7 +32,7 @@ class SegUsuariosController extends Controller
    {
      $this->tpl->addIni();
      //$listado = $this->hoSegUsuariosModel->getSegUsuariosListar($request);
-     $roles = $this->hoSegPerfilsModel->getSegPerfilListar();
+     $roles = $this->hoSegPerfilsModel->getSegPerfilListarCombo();
      $this->tpl->add('usuario', $this->getSession('usuario'));
      $this->tpl->add('roles', $roles);
      $this->tpl->renders('view::seguridad/segUsuarios/'.$this->pathVista().'/index');
@@ -45,8 +45,12 @@ class SegUsuariosController extends Controller
     */ 
    public function runSegUsuariosListar($request)
    {
-      $result = $this->hoSegUsuariosModel->getSegUsuariosListar($request);
-      $this->json($result);
+       $result = $this->formatRows($request->obj);
+       $rows = $this->hoSegUsuariosModel->getSegUsuariosListar($request,$result);
+       $valor = array();
+       $valor['head']=$result['campos'];
+       $valor['rows']=$rows; // return del modelo
+       $this->json($valor);
    }
 
     /**

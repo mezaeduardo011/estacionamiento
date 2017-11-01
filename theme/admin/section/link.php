@@ -20,14 +20,18 @@
 <!-- bootstrap wysihtml5 - text editor -->
 <link rel="stylesheet" href="<?=JPH\Core\Store\Cache::get('srcCss')?>plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
-<link rel="stylesheet" href="<?=JPH\Core\Store\Cache::get('srcCss')?>bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+<!--link rel="stylesheet" href="<?=JPH\Core\Store\Cache::get('srcCss')?>bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css"-->
 <!-- select2  -->
 <link rel="stylesheet" href="<?=JPH\Core\Store\Cache::get('srcCss')?>bower_components/select2/dist/css/select2.min.css">
 
 <!-- Notificaciones toastr -->
-<link rel="stylesheet" href="<?=JPH\Core\Store\Cache::get('srcCss')?>/dist/css/toastr.min.css">
+<link rel="stylesheet" href="<?=JPH\Core\Store\Cache::get('srcCss')?>dist/css/toastr.min.css">
 
 <link rel="stylesheet" href="<?=JPH\Core\Store\Cache::get('srcCss')?>dist/css/estilos.css">
+<!-- Incluir elementos de diseño -->
+<link rel="stylesheet" href="<?=JPH\Core\Store\Cache::get('srcCss')?>dhtmlxSuite/codebase/fonts/font_roboto/roboto.css">
+<link rel="stylesheet" href="<?=JPH\Core\Store\Cache::get('srcCss')?>dhtmlxSuite/codebase/dhtmlx.css">
+
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>

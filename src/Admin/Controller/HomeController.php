@@ -28,6 +28,7 @@ class HomeController extends Controller{
       */
      public function runIndex($request)
      {
+         //echo session_id();
          $this->tpl->addIni();
          $this->tpl->add('usuario', $this->getSession('usuario'));
          $this->tpl->renders('view::home/home');

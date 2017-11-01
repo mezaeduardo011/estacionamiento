@@ -13,7 +13,7 @@ trait Security
     public $cache;
     public function init()
     {
-        @session_start();
+        session_start();
     }
 
     /**
@@ -42,9 +42,7 @@ trait Security
         }
         return true;
     }
-    //gr3g0php
-
-     public function setSession(string $key, $value)
+    public function setSession(string $key, $value)
     {
         $_SESSION[$key] = $value;
     }

@@ -30,7 +30,7 @@ class HoVistasModel extends Main
         $temp = array();
         for ($a=0;$a<count($data->field);$a++){
             if(!empty(trim($data->etiqueta[$a]))) {
-                $this->fijarValor('id', $data->id[$a]);
+                $this->fijarValor('id', @$data->id[$a]);
                 $this->fijarValor('apps', $data->apps);
                 $this->fijarValor('conexiones_id', $data->conexiones_id);
                 $this->fijarValor('entidad', $data->tabla);
@@ -79,13 +79,14 @@ class HoVistasModel extends Main
         $data['entidad']=explode(',',$data['tabla']);
         // Recorremos las entidades y verificamos las las vistas existentes
         for ($a=0;$a<count($data['entidad']);$a++) {
+
             // Hacemos las consultas para identificar cuales vistas tiene
-            $sql = "SELECT * FROM view_list_vist_gene WHERE conexiones_id=" . $data['connect'] . " AND entidad='" . $data['entidad'][$a] . "'";
-            $val[$data['entidad'][$a]] = $this->executeQuery($sql);
+            $sql1 = "SELECT * FROM view_list_vist_gene WHERE conexiones_id=" . $data['connect'] . " AND entidad='" . $data['entidad'][$a] . "'";
+            $val[$data['entidad'][$a]] = $this->executeQuery($sql1);
 
-            $sql = "SELECT * FROM ho_entidades WHERE conexiones_id=" . $data['connect'] . " AND entidad='" . $data['entidad'][$a] . "'";
-            $registro[$data['entidad'][$a]]['columnas'] = $this->executeQuery($sql);
-
+            $sql2 = "SELECT * FROM ho_entidades WHERE conexiones_id=" . $data['connect'] . " AND entidad='" . $data['entidad'][$a] . "'";
+            $registro[$data['entidad'][$a]]['columnas'] = $this->executeQuery($sql2);
+            //All::pp($this->executeQuery($sql1));
             foreach ($val AS $key => $value){
                 foreach ($value AS $key => $value2) {
                     $sql = "SELECT * FROM ho_vistas WHERE conexiones_id=" . $value2->conexiones_id . " AND entidad='" . $value2->entidad . "' AND nombre='" . $value2->nombre . "'";
@@ -94,6 +95,7 @@ class HoVistasModel extends Main
                 }
             }
         }
+
         return $registro;
     }
 

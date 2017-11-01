@@ -1,4 +1,4 @@
-<?php
+    <?php
 $breadcrumb=(object)array('actual'=>'Usuarios','titulo'=>'Vista de integrada de gestion de Usuarios','ruta'=>'Usuarios')?>
 <?php $this->layout('base',['usuario'=>$usuario,'breadcrumb'=>$breadcrumb])?>
 <?php $this->push('addCss')?>
@@ -20,22 +20,26 @@ $breadcrumb=(object)array('actual'=>'Usuarios','titulo'=>'Vista de integrada de 
 
 
 <script>
+
      // Variable de configuracion
     var Config = {};
-    // Columnas para el datatable
+    // Columnas para el grilla
     Config.colums = [
-        { "data": "id" },
-        { "data": "apellidos" },
-        { "data": "nombres" },
-        { "data": "usuario" },
-        { "data": "correo" },
+        { "id":"nombres", "type":"ed", "align":"center", "sort":"str" , "value":"Nombres"},
+        { "id":"apellidos", "type":"ed", "align":"center", "sort":"str" , "value":"Apellidos"},
+        { "id":"fech_nacimiento", "type":"ed", "align":"center", "sort":"str" , "value":"Nacimiento"},
+        { "id":"correo", "type":"ed", "align":"center", "sort":"str" , "value":"Correo"},
+        { "id":"usuario", "type":"ed", "align":"center", "sort":"str" , "value":"Login"},
+        { "id":"clave", "type":"ed", "align":"center", "sort":"str" , "value":"Clave"},
+        { "id":"telefono", "type":"ed", "align":"center", "sort":"str" , "value":"telefono"},
     ];
-    // Configuracion de visualizacion del Datatable
+
+
+    // Configuracion de visualizacion del grilla
     Config.show = {
-        'display':10,
-        'search':false,
-        'pagina':false,
-        'rowid': "id"
+        'module':'Usuarios',
+        'tableTitle':'Listado de Registros.',
+        'filter':'#text_filter,#text_filter,&nbsp;,&nbsp;,#text_filter,#text_filter'
     }
 
     Core.Vista.Util = {
@@ -62,7 +66,7 @@ $breadcrumb=(object)array('actual'=>'Usuarios','titulo'=>'Vista de integrada de 
     };
     $(function () {
         Core.main();
-        Core.Vista.main('Usuarios',Config);
+        Core.Vista.main(Config.show.module,Config);
     })
 
 </script>

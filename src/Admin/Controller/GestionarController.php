@@ -59,45 +59,51 @@ class GestionarController extends Controller
      */
     public function runProcesarCrudVistas($request)
    {
+
        $schema = $this->hoVistasModel->extraerDetalleEntidadListado((array)$request);
-       //$this->pp($schema);
-       foreach ($schema AS $entidad => $views){
-           $columnsReal = NULL;
-           $columnsReal = $views['columnas'];
-           unset($views['columnas']);
-            //print_r($columnsReal);die();
-           // sleep(20);
-           foreach ($views AS $nombreVista => $campos) {
-               if (count($campos) > 0) {
-                   // Aplicacion seleccionada
-                   $aplicativo = $campos[0]->apps;
+       if(count($schema)>0) {
+           foreach ($schema AS $entidad => $views) {
+               $columnsReal = NULL;
+               $columnsReal = $views['columnas'];
+               unset($views['columnas']);
+               //print_r($columnsReal);die();
+               // sleep(20);
 
-                   // Instanciar la clase de generacion de vista
-                   $crudVista = new AppCrudVista();
+               foreach ($views AS $nombreVista => $campos) {
+                   if (count($campos) > 0) {
+                       // Aplicacion seleccionada
+                       $aplicativo = $campos[0]->apps;
 
-                   // Crear estructura de la vista
-                   $crudVista -> createStructuraFileCRUD($aplicativo,$nombreVista,$entidad,$campos,$columnsReal);
+                       // Instanciar la clase de generacion de vista
+                       $crudVista = new AppCrudVista();
 
-                   // Actualizar el registro donde se notifica que ya fue generado
-                   $this->hoVistasModel->updateStatusVista($aplicativo,$campos[0]->conexiones_id, $entidad,$nombreVista);
+                       // Crear estructura de la vista
+                       $crudVista->createStructuraFileCRUD($aplicativo, $nombreVista, $entidad, $campos, $columnsReal);
 
-                   // Asignacion de roles para la vista creada
-                   $this->hoSegRolesModel->setSegRolesGeneradorVistaAcceso($campos[0]->apps,$campos[0]->entidad,$campos[0]->nombre);
+                       // Actualizar el registro donde se notifica que ya fue generado
+                       $this->hoVistasModel->updateStatusVista($aplicativo, $campos[0]->conexiones_id, $entidad, $nombreVista);
+
+                       // Asignacion de roles para la vista creada
+                       $this->hoSegRolesModel->setSegRolesGeneradorVistaAcceso($campos[0]->apps, $campos[0]->entidad, $campos[0]->nombre);
+                   }
                }
+               // Elemto encargado de procesar los roles automaticos de usuarios
            }
-           // Elemto encargado de procesar los roles automaticos de usuarios
-       }
-       // Refrescar datos
-       // ### $cla = new LoginController();
-       // ### $cla -> runLoadRoles();
-       $result=true;
-       if(is_null($result)){
-           $dataJson['error']='1';
-           $dataJson['msj']='Error en generar el sistema';
-       }else{
-           $dataJson['error']='0';
-           $dataJson['msj'] = 'Todo fue procesado exitosamente';
+           // Refrescar datos
+           // ### $cla = new LoginController();
+           // ### $cla -> runLoadRoles();
+           $result = true;
+           if (is_null($result)) {
+               $dataJson['error'] = '1';
+               $dataJson['msj'] = 'Error en generar el sistema';
+           } else {
+               $dataJson['error'] = '0';
+               $dataJson['msj'] = 'Todo fue procesado exitosamente';
 
+           }
+       }else{
+           $dataJson['error'] = '1';
+           $dataJson['msj'] = 'Uff!, debe tener al menos una vista generada.';
        }
        $this->json($dataJson);
    }

@@ -356,7 +356,7 @@ class Comun{
         $query .= " WHERE " . $this->where;
         //echo $query; die();
         $this->get($query);
-        $existe = ($this->numRows() > 0);
+        $existe = ($this->db->numRows() > 0);
         $this->free();
         return $existe && $id;
     }
