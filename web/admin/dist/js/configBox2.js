@@ -61,7 +61,7 @@ Config.Box2 = {
                     Config.html += '             <i class="fa fa-id-card-o"></i>  &nbsp;Driver&nbsp;:&nbsp;' + value.driver;
                     Config.html += '          </div><p></p>';
                     Config.html += '          <div class="input-group-addon">';
-                    Config.html += '             <i class="fa fa-server"></i>  &nbsp;Base de Datos&nbsp;:&nbsp;' + value.db;
+                    Config.html += '             <i class="fa fa-server"></i>  &nbsp;DB&nbsp;:&nbsp;' + value.db;
                     Config.html += '          </div><p></p>';
                     Config.html += '          <div class="input-group-addon">';
                     Config.html += '             <i class="fa fa-server"></i>  &nbsp;Host&nbsp;:&nbsp;' + value.host;

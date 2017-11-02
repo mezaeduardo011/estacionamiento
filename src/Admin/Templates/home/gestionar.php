@@ -6,8 +6,8 @@ Gestionar del Generador
 <?php $this->end() ?>
 
 <?php $this->push('addCss')?>
-
 <?php $this->end()?>
+
 <section class="content">
     <div class="row">
         <div class="col-md-12  ">
@@ -50,7 +50,7 @@ Gestionar del Generador
                     </div>
                 </div>
                 <div class="box-body pad table-responsive" id="box2" style="display: none">
-                    <div class="col-md-4" id="menuPrincipal">
+                    <div class="col-md-3" id="menuPrincipal">
                         <!-- social buttons -->
                         <div class="box">
                             <div class="box-header">
@@ -62,7 +62,7 @@ Gestionar del Generador
                         </div>
                         <!-- /.box -->
                     </div>
-                    <div class="col-md-8" id="menuSegundario" style="display: none">
+                    <div class="col-md-9" id="menuSegundario" style="display: none">
                         <div class="box">
                             <div class="box-header">
                                 <h3 class="box-title" id="menuSegundarioTilulo"> Cargando ... </h3>
