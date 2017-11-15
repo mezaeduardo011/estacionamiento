@@ -182,6 +182,22 @@ trait Usuarios
         }
     }
 
+    public function obtenerUserLogin($login)
+    {
+        if ($this->id != 0) {
+            $query = "SELECT * FROM seg_usuarios WHERE usuario = '".$login."'";
+            $this->db->get($query);
+            $row = $this->db->fetch();
+
+            foreach ($row as $col => $val) {
+                if (gettype($val) == "object" && get_class($val) == "DateTime") {
+                    $row->$col = $val->format("d/m/Y");
+                }
+            }
+            return $row;
+        }
+    }
+
     public function leerTodos($datos=NULL)
     {
         $query = "select * from SegUsuarios order by Cusuario";
@@ -202,5 +218,7 @@ trait Usuarios
         $query = "UPDATE seg_usuarios SET clave = '" . $this->password . "' WHERE id = " . $this->id;
         $this->db->execute($query);
     }
+
+
 
 }

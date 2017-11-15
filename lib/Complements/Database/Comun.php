@@ -1,7 +1,9 @@
 <?php
 namespace JPH\Complements\Database;
 use JPH\Complements\Database\Query AS Query;
-use JPH\Core\Commun\All;
+use JPH\Core\Commun\{
+    All, Logs
+};
 /**
  * Representa un modelo generico algo similar a orm, para setiar valores campos y tablas
  */
@@ -19,6 +21,7 @@ class Comun{
     public $where;
     public $usuario;
     public $active;
+    use Logs;
 
 
     public function __construct($id = false) {

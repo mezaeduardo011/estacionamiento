@@ -5,7 +5,7 @@ use JPH\Core\Load\Configuration;
 
 /**
  * Permite integrar un conjunto de funcionalidades de la consola pero en las aplicaciones
- * @Author: Gregorio Bolívar <elalconxvii@gmail.com>
+ * @Author: Ing. Gregorio Bolívar <elalconxvii@gmail.com>
  * @Author: Blog: <http://gbbolivar.wordpress.com>
  * @created Date: 09/08/2017
  * @updated Date: 29/08/2017
@@ -22,7 +22,7 @@ class App
         public $ruta;
         // Constante de la clase
         const SUBITEM = __CLASS__;
-
+        
     /**
      * App constructor.
      */
@@ -31,7 +31,6 @@ class App
                 $this->pathapp = All::DIR_SRC;
                 $this->active = All::onlyClassActive(App::SUBITEM);
                 return $this;
-
         }
         /**
          * Methodo encargado de generar la estructura de las aplicacion dentro del sistema
@@ -74,6 +73,7 @@ class App
         {
             All::mkddir($ruta.All::APP_CACHE);
         }
+
         /**
          * Permite crear el directorio donde se almacenara los controladores de la aplicacion
          * @return boolean
@@ -82,6 +82,7 @@ class App
         {
             All::mkddir($ruta.All::APP_CONTR);
         }
+
         /**
          * Permite crear el directorio del model de la aplicacion que se esta creando
          * @return boolean
@@ -90,7 +91,6 @@ class App
         {
             All::mkddir($ruta.All::APP_MODEL);
         }
-
 
         /**
          * Permote crear el direcrorio donde se almacenaran las vista de la aplicacion
@@ -115,6 +115,7 @@ class App
          * Permite gestionar las clases model del sistema en la aplicacion
          * @param string $app, Aplicacion que deberia estar creada donde se montara el model
          * @param string $modelo, Nombre del model que se generá en el sistema
+         * @return string $msj
          */
         public function createStructuraFileModel($app, $modelo)
         {
@@ -143,6 +144,7 @@ class App
      * Permite gestionar las clases controller del sistema en la aplicacion
      * @param string $app, Aplicacion que deberia estar creada donde se montara el model
      * @param string $controller, Nombre del controller que se generá en el sistema
+     * @return string $msj
      */
     public function createStructuraFileController($app, $controller)
     {
@@ -171,6 +173,7 @@ class App
 
         /**
          * Permite listar las aplicaciones que se encuentran creadas en e sistema
+         * @return string $item
          */
         public function showApps()
         {
@@ -207,7 +210,7 @@ class App
             fputs($ar, '/**'.PHP_EOL);
             fputs($ar, ' * Generado por el generador de codigo de router de '.All::FW.' '.All::VERSION.''.PHP_EOL);
             fputs($ar, ' * @propiedad: '.All::FW.' '.All::VERSION.''.PHP_EOL);
-            fputs($ar, ' * @utor: Gregorio Bolivar <elalconxvii@gmail.com>'.PHP_EOL);
+            fputs($ar, ' * @autor: Ing. Gregorio Bolivar <elalconxvii@gmail.com>'.PHP_EOL);
             fputs($ar, ' * @created: ' .date('d/m/Y') .''.PHP_EOL);
             fputs($ar, ' * @version: 1.0'.PHP_EOL);
             fputs($ar, ' */ '.PHP_EOL);
@@ -251,6 +254,7 @@ class App
          * @param String $db, Base de datos que usara la conexion
          * @param String $user, Usuario de la conexion a base de datos
          * @param String $pass, Clave de la conexion de base de dato
+         * @return Bool true
          */
         public static function createNewConexionItemApp(String $label, String $driver, String $host, String $dataBase, String $user, String $pass): bool
         {
@@ -307,7 +311,7 @@ class App
             fputs($ar, '/**'.PHP_EOL);
             fputs($ar, ' * Generador de codigo de Controller de '.All::FW.' '.All::VERSION.''.PHP_EOL);
             fputs($ar, ' * @propiedad: '.All::FW.' '.All::VERSION.''.PHP_EOL);
-            fputs($ar, ' * @utor: Gregorio Bolivar <elalconxvii@gmail.com>'.PHP_EOL);
+            fputs($ar, ' * @autor: Ing. Gregorio Bolivar <elalconxvii@gmail.com>'.PHP_EOL);
             fputs($ar, ' * @created: ' .date('d/m/Y') .''.PHP_EOL);
             fputs($ar, ' * @version: 1.0'.PHP_EOL);
             fputs($ar, ' */ '.PHP_EOL);
@@ -346,7 +350,7 @@ class App
             fputs($ar, '/**'.PHP_EOL);
             fputs($ar, ' * Generador de codigo de Controller de '.All::FW.' '.All::VERSION.''.PHP_EOL);
             fputs($ar, ' * @propiedad: '.All::FW.' '.All::VERSION.''.PHP_EOL);
-            fputs($ar, ' * @utor: Gregorio Bolivar <elalconxvii@gmail.com>'.PHP_EOL);
+            fputs($ar, ' * @autor: Ing. Gregorio Bolivar <elalconxvii@gmail.com>'.PHP_EOL);
             fputs($ar, ' * @created: ' .date('d/m/Y') .''.PHP_EOL);
             fputs($ar, ' * @version: 1.0'.PHP_EOL);
             fputs($ar, ' */ '.PHP_EOL);
@@ -394,7 +398,7 @@ class App
             fputs($ar, '/**'.PHP_EOL);
             fputs($ar, ' * Generador de codigo del Modelo de la App '.$app.PHP_EOL);
             fputs($ar, ' * @propiedad: '.All::FW.' '.All::VERSION.''.PHP_EOL);
-            fputs($ar, ' * @utor: Gregorio Bolivar <elalconxvii@gmail.com>'.PHP_EOL);
+            fputs($ar, ' * @autor: Ing. Gregorio Bolivar <elalconxvii@gmail.com>'.PHP_EOL);
             fputs($ar, ' * @created: ' .date('d/m/Y') .''.PHP_EOL);
             fputs($ar, ' * @version: 1.0'.PHP_EOL);
             fputs($ar, ' */ '.PHP_EOL);

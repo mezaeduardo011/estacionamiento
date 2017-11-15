@@ -2,7 +2,7 @@
 namespace APP\Admin\Model;
 use JPH\Complements\Database\Main;
 use JPH\Core\Commun\{
-    All, Commun, Security
+    All, Constant, Security
 };
 use APP\Admin\Model\SegUsuariosPerfilModel;
 /**
@@ -23,6 +23,7 @@ class SegUsuariosModel extends Main
        $this->campos = array('apellidos','nombres','fech_nacimiento','usuario','clave','correo','telefono','created_usuario_id','created_at','cuenta_bloqueada','fvence_clave','ivence_clave','cambiar_clave','login_fallidos','idioma','updated_usuario_id','removed_at','updated_at','nsesion','dactive');
        parent::__construct();
        $this->segUsuariosPerfilModel = new SegUsuariosPerfilModel();
+       $this->segLogAccionesModel = new SegLogAccionesModel();
    }
 
     /**
@@ -51,7 +52,6 @@ class SegUsuariosModel extends Main
            $count = $request->count;
        else
            $count = 100;
-
 
        // Primero extraer la cantidad de registros
        $sqlCount = "Select count(*) as items FROM ".$this->tabla;
@@ -116,6 +116,11 @@ class SegUsuariosModel extends Main
        $this->guardar();
        $val = $this->lastId();
        $this->segUsuariosPerfilModel->getSegPerfilRelacionUserCreate($roles,$val);
+
+       // Registra log de auditoria de registro de acciones
+       $user = $this->getSession('usuario');
+       $this->segLogAccionesModel->cargaAcciones($this->tabla, 'id', serialize($datos),'',$user->id,Constant::LOG_ALTA);
+
        return $val;
    }
 
@@ -136,6 +141,9 @@ class SegUsuariosModel extends Main
      $sql .= " LEFT JOIN seg_perfil AS b ON a.seg_perfil_id=b.id  ";
      $sql .= " WHERE a.seg_usuarios_id=".$data->data;
      $tablas['perfiles']=$this->executeQuery($sql);
+     // Registro de Auditoria
+     $user = $this->getSession('usuario');
+     $this->segLogAccionesModel->cargaAcciones($this->tabla, $data->data,'','',$user->id,Constant::LOG_CONS);
      return $tablas;
    }
 
@@ -150,7 +158,10 @@ class SegUsuariosModel extends Main
       $this->segUsuariosPerfilModel->remSegPerfilRelacionUserDelete($valor);
       $this->fijarValor('id',$valor);
       $val = $this->borrar();
-      return $val;
+      // Registro de Auditoria
+       $user = $this->getSession('usuario');
+       $this->segLogAccionesModel->cargaAcciones($this->tabla, $valor,'','', $user->id,Constant::LOG_BAJA);
+       return $val;
    }
 
     /**
@@ -160,14 +171,17 @@ class SegUsuariosModel extends Main
     */ 
    public function setSegUsuariosUpdate($datos)
    {
-     $roles = $datos->roles;
-     $this->segUsuariosPerfilModel->setSegPerfilRelacionUserUpdate($roles,$datos->id);
-     unset($datos->roles);
-     $this->fijarValores($datos);
-       $this->fijarValor('updated_usuario_id',$datos->id);
-       $this->fijarValor('updated_at',All::now());
-     $val = $this->guardar();
-     return $val;
+        $user = $this->getSession('usuario');
+        $roles = $datos->roles;
+        $this->segUsuariosPerfilModel->setSegPerfilRelacionUserUpdate($roles,$datos->id);
+        unset($datos->roles);
+        $this->fijarValores($datos);
+        $this->fijarValor('updated_usuario_id',$user->id);
+        $this->fijarValor('updated_at',All::now());
+        $val = $this->guardar();
+        // Setear log de registro de acciones
+        $this->segLogAccionesModel->cargaAcciones($this->tabla, $datos->id,'', json_encode($datos), $user->id,Constant::LOG_MODI);
+        return $val;
    }
 }
 ?>

@@ -23,7 +23,6 @@ Config.Box3 = {
         //alert(table);
         $('#optExtra').html(' ').html('<i class="fa fa-compress btn" aria-hidden="true" id="comprimirExpandir"></i>')
 
-
         $.post('/getEntidadesSeleccionadas',{'conn':conexion,'entidad':table},function (dataJson) {
 
             Config.html = '';
@@ -67,7 +66,6 @@ Config.Box3 = {
                 Config.html +='                    </div>';
                 Config.html +='                </div>';
                 $a ++;
-
             });
 
             Config.html +='            </div>';
@@ -95,23 +93,25 @@ Config.Box3 = {
     getConfiguracionVista: function (connect, tabla, id, select) {
         // Enviar datos post para retornar datos
         $.post('/getConfiguracionVista',{'connect':connect, 'tabla':tabla , 'vista':id },function(dataJson ) {
-            Config.html = '<form method="post" id="sendVistaActiva"><input type="hidden" name="conexiones_id" value="'+connect+'">';
+            Config.html = '<form method="post" id="sendVistaActiva">';
+            Config.html += '<input type="hidden" name="conexiones_id" value="'+connect+'">';
             Config.html += '<input type="hidden" id="tabla" name="tabla" value="'+tabla+'">';
             Config.html +=' <table class="table table-striped" id="defineEntity">';
             // Definicion de la tabla
             Config.html +='     <tr>';
-            Config.html +='          <th style="width: 5%;">Columna</th>';
-            Config.html +='          <th style="width: 5%;">Tipo</th>';
-            Config.html +='          <th style="width: 2%;" title="Dimension de la tabla original">D</th>';
-            Config.html +='          <th style="width: 13%;">Etiqueta &nbsp;<i id="cut" class="fa fa-files-o cursor" aria-hidden="true" title="Copiar todos los nombre de la vista real en esta fila"></i></th>';
-            Config.html +='          <th style="width: 13%;">Mascara</th>';
-            Config.html +='          <th style="width: 3%;"  title="Campo requerido">REQ</th>';
-            Config.html +='          <th style="width: 3%;"  title="Ocultar en la Vista">HVI</th>';
-            Config.html +='          <th style="width: 3%;"  title="Ocultar en el DataTable">HLI</th>';
-            Config.html +='          <th style="width: 15%;  text-align: center" title="Ingresar Place Holder">MSJ</th>';
-            Config.html +='          <th style="width: 10%;" title="Navega en otra Vista o es combo">NOV</th>';
-            Config.html +='          <th style="width: 15%;" title="Cual vista navega del listado">CUAL</th>';
-            Config.html +='          <th style="width: 15%;" title="Cual campo es el que necesita">Campo</th>';
+            Config.html +='          <th>Columna</th>';
+            Config.html +='          <th>Tipo</th>';
+            Config.html +='          <th title="Dimension de la tabla original">D</th>';
+            Config.html +='          <th>Etiqueta &nbsp;<i id="cut" class="fa fa-files-o cursor" aria-hidden="true" title="Copiar todos los nombre de la vista real en esta fila"></i></th>';
+            Config.html +='          <th>Mascara</th>';
+            Config.html +='          <th title="Campo requerido">REQ</th>';
+            Config.html +='          <th title="Ocultar en la Vista">HVI</th>';
+            Config.html +='          <th title="Ocultar en el DataTable">HLI</th>';
+            Config.html +='          <th title="Valor fijo en la vista">FIJO</th>';
+            Config.html +='          <th title="Ingresar Place Holder">MSJ</th>';
+            Config.html +='          <th title="Navega en otra Vista o es combo">NOV</th>';
+            Config.html +='          <th title="Cual vista navega del listado">CUAL</th>';
+            Config.html +='          <th title="Cual campo es el que necesita">Campo</th>';
             Config.html +='     </tr>';
 
             // Extraer las aplicaciones existente
@@ -142,7 +142,9 @@ Config.Box3 = {
                     var VA_5 = '';
                     var VA_6 = ''; // Valor para el campo oculto del ordenamiento
                     var VA_7 = ''; // Valor para el campo oculto de caracter de separacion
+                    var VA_FIJO = valor.fijo.length>0 ? 'value="'+valor.fijo+'"' : '';
 
+                    // Verificar cuando trae valores cuando la vista esta registrada
                     if(id!=0 && (valor.label.length>0 || valor.place_holder.length>0 || valor.relacionado==1)) {
                         VA_0 = 'value="' + valor.label + '"';     // Valor cuando existen valor en la etiqueta
                         VA_2 = 'value="' + valor.place_holder + '"'; // Valor cuando existe registro en el place_holder
@@ -183,40 +185,20 @@ Config.Box3 = {
                     Config.html +='    <td><input type="hidden" name="dimension['+item+']" value="'+valor.dimension+'"><span class="badge bg-blue">'+valor.dimension+'</span></td>';
                     //alert(valor.restrincion);
                     var req = valor.nulo!='YES' ? 'nulo' : '';
-                    var req1 = valor.nulo!='YES' ? '<div style="position: absolute; float: left; font-size: 20px; z-index: 100; color:white; background: red; height: 18px;width: 10px;margin-left: -3px; padding-left: 2px;" title="Campo Requerido">*</div>' : '';
+                    var req1 = valor.nulo!='YES' ? '<div class="requerido" title="Campo Requerido">*</div>' : '';
                     var req2 = valor.nulo!='YES' ? '<div id="etiqueta-'+item+'" data-item="'+item+'" style=" float: right; margin-top: -12px; margin-right: -12px; font-size: 10px; z-index: 100;" title="Maxima cantidad de caracteres">20</div>' : '';
                     var imp = valor.restrincion=='PRI' ? '<input type="hidden" name="etiqueta['+item+']" size="20" value="'+valor.name+'" required><span title="Primary Key de la entidad">'+valor.name +'</span>' : req1+'<input class="form-control etiqueta" name="etiqueta['+item+']"  data-item="etiqueta-'+item+'" type="text" size="20" maxlength="20" '+req+' '+TC_0+' '+VA_0+'>'+req2;
                     Config.html +='          <td>'+imp+'</td>';
 
-                    Config.html +='          <td><select class="form-control" name="mascara['+item+']" '+PK_0+' id="mascara_'+item+'">';
-                    if(valor.restrincion=='PRI' || valor.tipo=='int' || valor.name=='created_user_id' || valor.name=='created_user_id' ){
-                        Config.html +='          <option value="integer" selected>Integer</option>';
-                    }else if(valor.tipo=='bit'){
-                        Config.html +='          <option value="boolean" selected>Boolean</option>';
-                    }else if(valor.tipo=='date'){
-                        Config.html +='          <option value="boolean" selected>Fecha</option>';
-                    }else if(valor.tipo=='timestamp' || valor.name=='created_at' || valor.name=='updated_at'){
-                        Config.html +='          <option value="timestamp" selected>Timestamp</option>';
-                    }else if(valor.tipo=='text' || valor.dimension>250){
-                        Config.html +='          <option value="textArea" selected >TextArea</option>';
-                    }else{
-                        Config.html +='          <option value="texto">Texo</option>';
-                        Config.html +='          <option value="integer">Integer</option>';
-                        Config.html +='          <option value="string">String</option>';
-                        Config.html +='          <option value="datepicker">Fecha</option>';
-                        Config.html +='          <option value="correo">Correo</option>';
-                        Config.html +='          <option value="ip">IP</option>';
-                        Config.html +='          <option value="telefono">Telefono</option>';
-                        Config.html +='          <option value="movil">Móvil</option>';
-                    }
-                    Config.html +='          </select></td>';
+                    Config.html +='          <td>'+Config.Box3.selectMascara(item,valor,PK_0)+'</td>';
                     Config.html +='          <td class="text-center"><input type="checkbox" name="nulo['+item+']" '+RE_1+' '+TC_2+' '+VA_1+'></td>';
                     Config.html +='          <td class="text-center"><input type="checkbox" name="hidden_form['+item+']" '+PK_1+' '+TC_1+' '+VA_1+'></td>';
                     Config.html +='          <td class="text-center"><input type="checkbox" name="hidden_list['+item+']" '+PK_1+' '+TC_1+' '+VA_1+'></td>';
-                    Config.html +='          <td class="text-center"><input class="form-control place_holder" type="text" name="place_holder[]" id="place_holder_'+item+'" '+PK_0+' '+TC_0+' '+VA_2+'></td>';
-                    Config.html +='          <td class="text-center"><select class="form-control" name="relacionado['+item+']" id="relacionEntidad">'+VA_3+'<option value="0">----</option><option value="combo">Combo</option><option value="grilla">Grilla</option></select></td>';
-                    Config.html +='          <td><select class="form-control" name="tabla_vista['+item+']" id="tabla_vista" '+TC_0+' data-items="'+item+'" ><option value="0" selected>----</option>'+VA_4+'</select></td>';
-                    Config.html +='          <td class="vista_campo"><select class="form-control select2" style="width: 100%;" multiple name="vista_campo['+item+']" id="vista_campo" '+TC_0+'>'+VA_5.campos+'</select><input type="text" id="campCombox" name="campCombox['+item+']" value="'+VA_6+'" style="display: none"><input type="text" id="extra" name="extra['+item+']" size="1" maxlength="1" title="Caracter de separación." '+VA_7+'></td>';
+                    Config.html +='          <td class="text-center"><input class="form-control" type="text" name="fijo['+item+']" id="fijo_'+item+'" '+PK_0+' '+VA_FIJO+'></td>';
+                    Config.html +='          <td class="text-center"><input class="form-control" type="text" name="place_holder['+item+']" id="place_holder_'+item+'" '+PK_0+' '+TC_0+' '+VA_2+'></td>';
+                    Config.html +='          <td class="text-center">'+Config.Box3.selectNavegaVista(item,VA_3)+'</td>';
+                    Config.html +='          <td>'+Config.Box3.selectCualVista(item,TC_0,VA_4)+'</td>';
+                    Config.html +='          <td class="vista_campo">'+Config.Box3.selectVistaCampos(item,TC_0,VA_5,VA_6,VA_7)+'</td>';
                     Config.html +='     </tr>';
                 });
                 Config.html +='</table>';
@@ -240,13 +222,66 @@ Config.Box3 = {
             $('.select2').select2({
                 placeholder: 'Valores del selector',
                 tags: true,
-                width: 250
+                width: 200
             });
             $("ul.select2-selection__rendered").sortable({
                 containment: 'parent'
             })
             // End config seect 2
         },'JSON');
+    },
+    selectMascara: function(item,valor,PK_0){
+        Config.html = '';
+        Config.html +='<select class="form-control" name="mascara['+item+']" '+PK_0+' id="mascara_'+item+'">';
+        if(valor.restrincion=='PRI' || valor.tipo=='int' || valor.name=='created_user_id' || valor.name=='created_user_id' ){
+            Config.html +='          <option value="integer" selected>Integer</option>';
+        }else if(valor.tipo=='bit'){
+            Config.html +='          <option value="boolean" selected>Boolean</option>';
+        }else if(valor.tipo=='date'){
+            Config.html +='          <option value="boolean" selected>Fecha</option>';
+        }else if(valor.tipo=='timestamp' || valor.name=='created_at' || valor.name=='updated_at'){
+            Config.html +='          <option value="timestamp" selected>Timestamp</option>';
+        }else if(valor.tipo=='text' || valor.dimension>250){
+            Config.html +='          <option value="textArea" selected >TextArea</option>';
+        }else{
+            Config.html +='          <option value="texto">Texo</option>';
+            Config.html +='          <option value="integer">Integer</option>';
+            Config.html +='          <option value="string">String</option>';
+            Config.html +='          <option value="datepicker">Fecha</option>';
+            Config.html +='          <option value="correo">Correo</option>';
+            Config.html +='          <option value="ip">IP</option>';
+            Config.html +='          <option value="telefono">Telefono</option>';
+            Config.html +='          <option value="color">Color</option>';
+        }
+        Config.html +='          </select>';
+        return Config.html;
+    },
+    selectNavegaVista: function (item,VA_3) {
+        Config.html = '';
+        Config.html +='<select class="form-control" name="relacionado['+item+']" id="relacionEntidad">'+VA_3+'';
+        Config.html +='<option value="0">----</option>';
+        Config.html +='<option value="combo">Combo</option>';
+        Config.html +='<option value="grilla">Grilla</option>';
+        Config.html +='</select>';
+        return Config.html;
+    },
+    selectCualVista: function (item,TC_0,VA_4) {
+        Config.html = '';
+        Config.html +='<select class="form-control" name="tabla_vista['+item+']" id="tabla_vista" '+TC_0+' data-items="'+item+'" >';
+        Config.html +='<option value="0" selected>----</option>';
+        Config.html += VA_4;
+        Config.html +='</select>';
+        return Config.html;
+
+    },
+    selectVistaCampos: function (item,TC_0,VA_5,VA_6,VA_7) {
+        Config.html = '';
+        Config.html += '<select class="form-control select2" style="min-width:50%;max-width:100%" multiple name="vista_campo['+item+']" id="vista_campo" '+TC_0+'>';
+        Config.html += VA_5.campos;
+        Config.html += '</select>';
+        Config.html += '<input type="text" id="campCombox" name="campCombox['+item+']" value="'+VA_6+'" style="display: none">';
+        Config.html += '<input type="text" id="extra" name="extra['+item+']" size="1" maxlength="1" title="Caracter de separación." '+VA_7+'>';
+        return Config.html;
     },
     mostrarSelectores:function(vista_campo) {
         var campos = vista_campo.split('|');
@@ -267,7 +302,7 @@ Config.Box3 = {
                 var let = $(elemento).find('td').eq(0).text();
                 $(elemento).find('td').eq(3).children('input').val(let).keyup();
                 var msjPlaceHolder = 'Por favor ingresar el/los '+let;
-                $(elemento).find('td').eq(8).children('input').val(msjPlaceHolder).attr({'title':msjPlaceHolder});
+                $(elemento).find('td').eq(9).children('input').val(msjPlaceHolder).attr({'title':msjPlaceHolder});
             })
             alertar('Todos los elementos copiado exitosamente.')
         });

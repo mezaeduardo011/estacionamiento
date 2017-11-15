@@ -1,7 +1,7 @@
 <?php
 namespace JPH\Core\Router;
 use JPH\Core\Commun\{
-    All, Commun
+    All, Commun, Logs
 };
 /**
  * Clase encargadad de procesar las rutas del sistema
@@ -17,13 +17,14 @@ class Route
     protected $routes = array();
     protected $routesTMP = array();
     protected $rulesWeb;
+    use Logs;
     /**
      * Constructor de la clase que permite obtener los datos del configuracion de la ruta
      * @param string $application, Aplicacion que esta lavantando las rutas
      * @param array $config, arreglo del los campos configurados en el xml  
      * @return $this
      */
-    
+
     function __construct($application, $config) 
     {
         try{
@@ -52,11 +53,13 @@ class Route
             }else{
                 $obj = array('app' => $application);
                 $msj = All::getMsjException('Core', 'ruta-no-existe',$obj);
+                $this->logError($msj);
                 throw new \TypeError($msj);
             }
         
         }catch(\Throwable $t){
             Commun::statusHttp(404);
+            $this->logError($t->getMessage());
             die($t->getMessage());
         }
         return $this;
@@ -163,7 +166,7 @@ class Route
             $dato = array('post'=>'postty','get'=>'getty');
             $disponible = array(All::METHOD_GET, All::METHOD_POST);
             if (!in_array($meth, $disponible)) {
-                die('Error en el method soolicitado no definido:'.$meth);
+                die('Error en el method solicitado no definido:'.$meth);
             }
             return $dato[strtolower($meth)];
         }

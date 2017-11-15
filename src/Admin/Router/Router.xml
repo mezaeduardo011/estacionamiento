@@ -168,7 +168,7 @@
     <request>GET</request>
   </link>
   <link>
-    <name>/admin/setAsociarRolesPerfil</name>
+    <name>/setAsociarRolesPerfil</name>
     <controller>segPerfil</controller>
     <method>runSetAsociarRolesPerfil</method>
     <request>POST</request>
@@ -217,6 +217,12 @@
     <request>GET</request>
   </link>
   <link>
+    <name>/usuariosSegLogLogin</name>
+    <controller>segUsuarios</controller>
+    <method>runSegLogAutenticacion</method>
+    <request>GET</request>
+  </link>
+  <link>
     <name>/usuariosCreate</name>
     <controller>segUsuarios</controller>
     <method>runSegUsuariosCreate</method>
@@ -235,10 +241,40 @@
     <request>POST</request>
   </link>
   <link>
+    <name>/usuariosAuditoria</name>
+    <controller>segUsuarios</controller>
+    <method>runSegUsuariosAuditoria</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/usuariosShowAuditoria</name>
+    <controller>segUsuarios</controller>
+    <method>runSegUsuariosShowAuditoria</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/showAccionesAuditoria</name>
+    <controller>segUsuarios</controller>
+    <method>runShowAccionesAuditoria</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/usuariosShowAcciones</name>
+    <controller>segUsuarios</controller>
+    <method>runSegUsuariosShowAcciones</method>
+    <request>GET</request>
+  </link>
+  <link>
     <name>/usuariosUpdate</name>
     <controller>segUsuarios</controller>
     <method>runSegUsuariosUpdate</method>
     <request>POST</request>
+  </link>
+  <link>
+    <name>/usuariosPerfil</name>
+    <controller>segUsuarios</controller>
+    <method>runSegUsuariosPerfil</method>
+    <request>GET</request>
   </link>
   <link>
     <name>/getEntidadComun</name>
@@ -254,77 +290,189 @@
   </link>
   <!-- ### END SYSTEM CONFIG ### -->
   <!-- Bloque de configuracion de la ruta del controller Personal-->
+  <!-- Bloque de configuracion de la ruta del controller Estatus-->
   <link>
-    <name>/personalIndex</name>
-    <controller>empleados</controller>
-    <method>runEmpleadosIndex</method>
+    <name>/estatusIndex</name>
+    <controller>tipoEstatus</controller>
+    <method>runTipoEstatusIndex</method>
     <request>GET</request>
   </link>
   <link>
-    <name>/personalListar</name>
-    <controller>empleados</controller>
-    <method>runEmpleadosListar</method>
+    <name>/estatusListar</name>
+    <controller>tipoEstatus</controller>
+    <method>runTipoEstatusListar</method>
     <request>GET</request>
   </link>
   <link>
-    <name>/personalCreate</name>
-    <controller>empleados</controller>
-    <method>runEmpleadosCreate</method>
+    <name>/estatusCreate</name>
+    <controller>tipoEstatus</controller>
+    <method>runTipoEstatusCreate</method>
     <request>POST</request>
   </link>
   <link>
-    <name>/personalShow</name>
-    <controller>empleados</controller>
-    <method>runEmpleadosShow</method>
+    <name>/estatusShow</name>
+    <controller>tipoEstatus</controller>
+    <method>runTipoEstatusShow</method>
     <request>POST</request>
   </link>
   <link>
-    <name>/personalDelete</name>
-    <controller>empleados</controller>
-    <method>runEmpleadosDelete</method>
+    <name>/estatusDelete</name>
+    <controller>tipoEstatus</controller>
+    <method>runTipoEstatusDelete</method>
     <request>POST</request>
   </link>
   <link>
-    <name>/personalUpdate</name>
-    <controller>empleados</controller>
-    <method>runEmpleadosUpdate</method>
+    <name>/estatusUpdate</name>
+    <controller>tipoEstatus</controller>
+    <method>runTipoEstatusUpdate</method>
     <request>POST</request>
   </link>
-  <!-- Bloque de configuracion de la ruta del controller Legajo-->
+  <!-- Bloque de configuracion de la ruta del controller Tipo-->
   <link>
-    <name>/legajoIndex</name>
-    <controller>legajos</controller>
-    <method>runLegajosIndex</method>
+    <name>/tipoIndex</name>
+    <controller>tipoServicio</controller>
+    <method>runTipoServicioIndex</method>
     <request>GET</request>
   </link>
   <link>
-    <name>/legajoListar</name>
-    <controller>legajos</controller>
-    <method>runLegajosListar</method>
+    <name>/tipoListar</name>
+    <controller>tipoServicio</controller>
+    <method>runTipoServicioListar</method>
     <request>GET</request>
   </link>
   <link>
-    <name>/legajoCreate</name>
-    <controller>legajos</controller>
-    <method>runLegajosCreate</method>
+    <name>/tipoCreate</name>
+    <controller>tipoServicio</controller>
+    <method>runTipoServicioCreate</method>
     <request>POST</request>
   </link>
   <link>
-    <name>/legajoShow</name>
-    <controller>legajos</controller>
-    <method>runLegajosShow</method>
+    <name>/tipoShow</name>
+    <controller>tipoServicio</controller>
+    <method>runTipoServicioShow</method>
     <request>POST</request>
   </link>
   <link>
-    <name>/legajoDelete</name>
-    <controller>legajos</controller>
-    <method>runLegajosDelete</method>
+    <name>/tipoDelete</name>
+    <controller>tipoServicio</controller>
+    <method>runTipoServicioDelete</method>
     <request>POST</request>
   </link>
   <link>
-    <name>/legajoUpdate</name>
-    <controller>legajos</controller>
-    <method>runLegajosUpdate</method>
+    <name>/tipoUpdate</name>
+    <controller>tipoServicio</controller>
+    <method>runTipoServicioUpdate</method>
+    <request>POST</request>
+  </link>
+  <!-- Bloque de configuracion de la ruta del controller Productoss-->
+  <link>
+    <name>/productossIndex</name>
+    <controller>productos</controller>
+    <method>runProductosIndex</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/productossListar</name>
+    <controller>productos</controller>
+    <method>runProductosListar</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/productossCreate</name>
+    <controller>productos</controller>
+    <method>runProductosCreate</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/productossShow</name>
+    <controller>productos</controller>
+    <method>runProductosShow</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/productossDelete</name>
+    <controller>productos</controller>
+    <method>runProductosDelete</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/productossUpdate</name>
+    <controller>productos</controller>
+    <method>runProductosUpdate</method>
+    <request>POST</request>
+  </link>
+  <!-- Bloque de configuracion de la ruta del controller Unida-->
+  <link>
+    <name>/unidaIndex</name>
+    <controller>tipoEstatus</controller>
+    <method>runTipoEstatusIndex</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/unidaListar</name>
+    <controller>tipoEstatus</controller>
+    <method>runTipoEstatusListar</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/unidaCreate</name>
+    <controller>tipoEstatus</controller>
+    <method>runTipoEstatusCreate</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/unidaShow</name>
+    <controller>tipoEstatus</controller>
+    <method>runTipoEstatusShow</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/unidaDelete</name>
+    <controller>tipoEstatus</controller>
+    <method>runTipoEstatusDelete</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/unidaUpdate</name>
+    <controller>tipoEstatus</controller>
+    <method>runTipoEstatusUpdate</method>
+    <request>POST</request>
+  </link>
+  <!-- Bloque de configuracion de la ruta del controller Pablo-->
+  <link>
+    <name>/pabloIndex</name>
+    <controller>prueba</controller>
+    <method>runPruebaIndex</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/pabloListar</name>
+    <controller>prueba</controller>
+    <method>runPruebaListar</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/pabloCreate</name>
+    <controller>prueba</controller>
+    <method>runPruebaCreate</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/pabloShow</name>
+    <controller>prueba</controller>
+    <method>runPruebaShow</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/pabloDelete</name>
+    <controller>prueba</controller>
+    <method>runPruebaDelete</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/pabloUpdate</name>
+    <controller>prueba</controller>
+    <method>runPruebaUpdate</method>
     <request>POST</request>
   </link>
 </route>

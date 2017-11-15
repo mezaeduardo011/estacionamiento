@@ -31,41 +31,66 @@ $breadcrumb=(object)array('actual'=>'Perfil','titulo'=>'Vista de integrada de ge
     // Configuracion de visualizacion del grilla
     Config.show = {
         'module':'Perfil',
-        'tableTitle':'Listado de Registros.',
-        'filter':'#text_filter'
+        'tableTitle':'Listado de Perfiles.',
+        'filter':'#text_filter',
+        'autoWidth': false,
+        'multiSelect': false
     }
     // Configuración personalizada del entorno privado de la vista
     Core.Vista.Util = {
-        /*onTable: $('#dataJPHRoles').DataTable({
-            "ajax": {
-                "url": '/rolesListar',
-                "dataSrc": ""
-            },
-            "rowId": 'id',
-            "iDisplayLength": 100,
-            "searching": true,
-            "paging": true,
-            "columns": Config.colums,
-            "sServerMethod": "POST",
-            "language": {
-                "url": "/admin/dist/js/Spanish.json"
-            },
-            "destroy": true
-        }),*/
         asociado: [],
+        myGrid2:'',
         priListaLoad: function () {
             /* CARGAR SEGUNDA GRILLA */
             var Config = {};
             // Columnas para el grilla
             Config.colums = [
-                { "id": "detalle", "type":"ed", "align":"left", "sort":"str" , "value":"Detalles" },
+                { "id": "detalle", "type":"ed", "align":"left", "sort":"str" , "value":"Detalles" }
             ];
             // Configuracion de visualizacion del grilla
             Config.show = {
                 'module':'Roles',
-                'tableTitle':'Listado de Registros.',
-                'filter':'&nbsp;,#text_filter'
-            }
+                'filter':'#text_filter',
+                'autoWidth': true,
+                'multiSelect': true
+            };
+
+            /* START DE GRILLA DHTML */
+            var camp = '';
+            /* Procedemos a crear una cadena de texto paa enviar al procesador de la vista para enviar lo datos en json*/
+            $.each(Config.colums, function (index,value) {
+                camp+='id:'+value.id+'|type:'+value.type+'|align:'+value.align+'|sort:'+value.sort+'|value:'+value.value+'#';
+            });
+            // Quitamos el ultimo caracter de la cadena
+            var tmp = camp.substring(0,camp.length-1);
+
+            Core.Vista.myGrid2 = new dhtmlXGridObject('dataJPHRoles');
+            //myLayout.cells("a").setText(Config.show.tableTitle);
+
+
+            //var myGrid = myLayout.cells("a").attachGrid();
+            Core.Vista.myGrid2.setImagePath("/admin/dhtmlxSuite/codebase/imgs/");
+            // Filtro de la tabla
+            Core.Vista.myGrid2.attachHeader( Config.show.filter);
+            // Campos id Mostrar
+            //myGrid.setColumnIds("col1,col2,col3");
+
+            //myGrid.enablePaging(true, 10, 3, "pagingArea");
+            Core.Vista.myGrid2.enablePaging(true,10,5,'pagingArea'+Config.show.module,true,"recinfoArea");
+
+            Core.Vista.myGrid2.setPagingSkin("toolbar");
+            Core.Vista.myGrid2.enableAutoWidth(true);
+            Core.Vista.myGrid2.enableMultiselect(true);
+
+            Core.Vista.myGrid2.attachEvent("onRowSelect", this.localOnRowSelected);
+            Core.Vista.myGrid2.init();
+            //Core.Vista.myGrid2.enableSmartRendering(true);
+            // Evniamos los parametros de configuracion
+            var gridQString = '/'+ Config.show.module.toLowerCase()+'Listar?obj='+window.btoa(tmp); // save query string to global variable (see step 5)
+            Core.Vista.myGrid2.load(gridQString, 'json');
+
+            /* END  */
+            //Core.Vista = {};
             //Core.Vista.main('Roles',Config);
 
            /* localStorage.setItem('rolesId',0);
@@ -83,38 +108,54 @@ $breadcrumb=(object)array('actual'=>'Perfil','titulo'=>'Vista de integrada de ge
                     asoc.push(data.id);
                 }
 
-            } );
-            this.priClickProcesarForm();*/
+            } );*/
+            this.priClickProcesarForm();
         },
-        priListaClick: function (dataJson) {
+        localOnRowSelected: function(item) {
+           // Core.Vista.myGrid2.
+            var asoc = Core.Vista.Util.asociado;
+            asoc.push(item);
+            Core.Vista.Util.displayRoles(asoc.length);
+
+        },
+        priListaClick: function(dataJson) {
             // Funcionalidad adicional cuando haces click en el datatable principal
             var asoc = this.asociado;
-            var onTabla = this.onTable;
-            var item = onTabla.rows().data()
+            //var onTabla = this.onTable;
+            var item = Core.Vista.myGrid2;
             localStorage.setItem('rolesId',dataJson.datos.id)
             //$.each(item, function (item, rows) {
+            // Valores de datos que tienen seleccion
                 $.each(dataJson.roles, function (key, valor) {
 
-                    if(valor.existe=='SI' && item[key].id==valor.id){
-                        $('#rolesDetalles #'+item[key].id).addClass('selected')
-                        console.log(item[key].id);
-                        asoc.push(valor.id);
+                    // Valores disponible
+                    var rows = item.getAllItemIds().split(',');
+                    //alert(rows[key]); Valor del item
+                    if(valor.existe=='SI' && rows[key]==valor.id){
+                        item.setSelectedRow(rows[key],'background-color:#293A4A;color: #ffffff');
+                        //console.log(rows[key]);
+                        asoc.push(rows[key]);
                     }else{
-                        var index = asoc.indexOf(valor.id);
+                        var index = asoc.indexOf(rows[key]);
                         asoc.splice(index, 1);
-                        $('#rolesDetalles #'+item[key].id).removeClass('selected')
+                        item.setSelectedRow(rows[key],'');
                     }
-                })
+
+                });
 
             $('#displayRoles').html('').html('<span style="text-align:center;font-size: 18px">'+asoc.length+'  row(s) selected</span>');
 
             $('#dataJPHRoles').click( function () {
                 //alert(asoc);
                 //alert( onTabla.rows('.selected').data().length +' row(s) selected' );
-                var msj = onTabla.rows('.selected').data().length +' row(s) selected';
-                $('#displayRoles').html('').html('<span style="text-align:center;font-size: 18px">'+msj+'</span>');
+                var cant=onTabla.rows('.selected').data().length
+               this.displayRoles(cant);
             } );
 
+        },
+        displayRoles: function(cant) {
+            var msj = cant +' row(s) selected';
+            $('#displayRoles').html('').html('<span style="text-align:center;font-size: 18px">'+msj+'</span>');
         },
         priClickProcesarForm:function () {
             var asoc = this.asociado;

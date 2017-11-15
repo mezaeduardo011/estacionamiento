@@ -53,7 +53,7 @@ login del sistema
         $(function () {
             <?php
             if(!empty($msjError)){
-                echo "mostrarError('$msjError');".PHP_EOL;
+                echo "mostrarError('$msjError');";
             }
             ?>
             $('input').iCheck({

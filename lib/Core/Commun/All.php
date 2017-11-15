@@ -12,4 +12,5 @@ namespace JPH\Core\Commun;
 class All extends Exceptions implements Constant
 {
  use Commun;
+ use Logs;
 }

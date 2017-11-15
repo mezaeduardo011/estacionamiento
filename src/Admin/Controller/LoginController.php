@@ -1,6 +1,6 @@
 <?php
 namespace APP\Admin\Controller;
-
+use JPH\Core\Commun\Constant;
 use JPH\Core\Commun\Security;
 use APP\Admin\Model AS Model;
 
@@ -20,6 +20,7 @@ class LoginController extends Controller
     {
         parent::__construct();
         $this->model = new Model\LoginModel();
+        $this->segLogin = new Model\SegLogAutenticacionModel();
     }
     /**
      * Permite mostrar el formulario de ingreso de session del usuario
@@ -43,6 +44,8 @@ class LoginController extends Controller
     */
    public function runLogout()
    {
+       $tmp = $this->getSession('usuario');
+       $this->cargaAuditoria($tmp->id,'CERRAR SESSION');
        $this->delSessionAll();
    }
 
@@ -50,7 +53,9 @@ class LoginController extends Controller
     {
         $this->setSession('lockscreen','SI');
         $this->tpl->addIni();
-        $this->tpl->add('usuario', $this->getSession('usuario'));
+        $tmp = $this->getSession('usuario');
+        $this->cargaAuditoria($tmp->id, 'BLOQUEAR PANTALLA');
+        $this->tpl->add('usuario', $tmp);
         $this->tpl->add('msjError',$this->cache->get('msjError'));
         $this->tpl->renders('view::home/lockscreen');
     }
@@ -61,20 +66,23 @@ class LoginController extends Controller
         {
             $this->model->usuario = $request->login;
             $this->model->password = $request->contra;
+
             if ($this->model->validarUsuario() == true)
             {
                 $this->cache->rm('msjError');
                 $tmp = $this->model->obtenerUser();
                 $this->setSession('usuario',$tmp);
+                $this->cargaAuditoria($tmp->id,'INICIAR SESSION');
                 $this->setSession('path',getcwd());
                 $this->setSession('autenticado','SI');
                 self::runLoadRoles();
                 $this->delSession('lockscreen');
                 $this->redirect($this->cache->get('urlWebs'));
             }else{
+                $uId = $this->model->obtenerUserLogin($request->login);
+                $this->cargaAuditoria($uId->id, 'INTENTO FALLIDO INICIAR SESSION');
                 $this->cache->set('msjError',$this->model->msjError);
                 $this->redirect($this->cache->get('urlAute'));
-                $this->cache->rm('msjError');
             }
         }else{
             $this->redirect($this->cache->get('urlAute'));
@@ -97,6 +105,7 @@ class LoginController extends Controller
             $this->cache->rm('msjError');
             $tmp = $this->model->obtenerUser();
             $this->setSession('usuario',$tmp);
+            $this->cargaAuditoria($tmp->id,'DESBLOQUEO DE PANTALLA');
             $this->setSession('path',getcwd());
             $this->setSession('autenticado','SI');
             self::runLoadRoles();
@@ -104,8 +113,18 @@ class LoginController extends Controller
             $this->redirect($this->cache->get('urlWebs'));
         }else{
             $this->cache->set('msjError',$this->model->msjError);
+            $uId = $this->model->obtenerUserLogin($request->login);
+            $this->cargaAuditoria($uId->id, 'INTENTO FALLIDO DESBLOQUEO DE PANTALLA');
             $this->redirect($this->cache->get('urlLock'));
         }
+    }
+    public function cargaAuditoria($usuario_id,$accion)
+    {
+        $nav = $this->detect();
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $bw = $nav['browser'].' '.$nav['version'].' '.$nav['os'];
+        $sistema =  Constant::FW;
+        $this->segLogin->segLogCreateLogin($ip,$bw,$accion,$sistema,$usuario_id);
     }
 
 }

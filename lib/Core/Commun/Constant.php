@@ -40,10 +40,14 @@ interface Constant
     // Server Path Web
     const PATH_SERVE = 'web'.DIRECTORY_SEPARATOR;
 
-    
-    
+    // Valores del Registro de log de Acciones
+    const LOG_CONS = 'Consulta de Registro';
+    const LOG_ALTA = 'Alta de Registro';
+    const LOG_MODI = 'Actualizacion de Registro';
+    const LOG_BAJA = 'Baja de Registro';
 
-
+    // Valores del LogFile
+    const LOG_DIR = '../logs/';
 
 }
 

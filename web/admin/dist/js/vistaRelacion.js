@@ -9,76 +9,73 @@ Core.VistaRelacion = {};
 Core.VistaRelacion = {
     pathR: '',
     columns: '',
+    myGridR : '',
     main: function (path,Config) {
         this.__pathR__ = path;
         this.__columns__ = Config.colums;
-        // Cantidad de listado de vista
-        var display = Config.show.display;
-        // Si se puede ver el buscador
-        var search = Config.show.search;
-        // Si se ve el paginado
-        var pagina = Config.show.pagina;
-        //Identificador del valor para el data
-        var rowid = Config.show.rowid;
-        this.listado(display,search,pagina,rowid,Config.relacionPadre);
+        Core.Vista.Select.priListaLoad();
+        this.listado(Config);
         this.procesar();
     },
-    listado : function (display,search,pagina,rowid,relacionPadre) {
+    listado : function (Config) {
         var temp = this.__pathR__;
         var rows = this.__columns__;
-        var datos = {'data':null};
-        if(relacionPadre.field.length>0){
-            datos={'campo':""+relacionPadre.field+"--"+relacionPadre.value};
+        var datos = {'data':null };
+
+        if(Config.relacionPadre.field.length>0){
+            datos=Config.relacionPadre.field+"|"+Config.relacionPadre.value+"|"+Config.relacionPadre.id;
         }
-        var table = $('#dataJPH'+temp+'').DataTable({
-            "ajax": {
-                "url": temp.toLowerCase()+'Listar',
-                "dataSrc": "",
-                "data": datos
-            },
-            "rowId": rowid,
-            "iDisplayLength": display,
-            "searching": search,
-            "paging": pagina,
-            "columns": rows,
-            "sServerMethod": "POST",
-            "language": {
-                "url": "/admin/dist/js/Spanish.json"
-            },
-            "destroy": true
+        /* START DE GRILLA DHTML */
+        var camp = '';
+        /* Procedemos a crear una cadena de texto paa enviar al procesador de la vista para enviar lo datos en json*/
+        $.each(rows, function (index,value) {
+            camp+='id:'+value.id+'|type:'+value.type+'|align:'+value.align+'|sort:'+value.sort+'|value:'+value.value+'#';
         });
+        // Quitamos el ultimo caracter de la cadena
+        var tmp = camp.substring(0,camp.length-1);
 
+        Core.VistaRelacion.myGridR = new dhtmlXGridObject('dataJPH'+Config.show.module);
+        Core.VistaRelacion.myGridR.enablePaging(true,10,5,'pagingArea'+Config.show.module,true,"recinfoArea");
+        Core.VistaRelacion.myGridR.setImagePath("/admin/dhtmlxSuite/codebase/imgs/");
+        Core.VistaRelacion.myGridR.attachHeader(Config.show.filter);
+        Core.VistaRelacion.myGridR.setPagingSkin("toolbar");
+        Core.VistaRelacion.myGridR.enableAutoWidth(Config.show.autoWidth);
+        Core.VistaRelacion.myGridR.enableMultiselect(Config.show.multiSelect);
+        Core.VistaRelacion.myGridR.attachEvent("onRowSelect", Core.VistaRelacion.doOnRowSelected);
+        Core.VistaRelacion.myGridR.submitOnlyRowID(true);
+        Core.VistaRelacion.myGridR.init();
+        Core.VistaRelacion.myGridR.enableSmartRendering(true);
+        var gridQString = '/'+Config.show.module.toLowerCase()+'Listar?relacion='+window.btoa(datos)+'&obj='+window.btoa(tmp)+''; // save query string to global variable (see step 5)
+        localStorage.setItem('showModule',Config.show.module);
+        localStorage.setItem('module',temp);
+        Core.VistaRelacion.myGridR.load(gridQString, 'json');
+        /* END  */
         localStorage.removeItem('id');
-        $('#dataJPH'+temp+' tbody').on('click', 'tr', function () {
-            var data = table.row($(this)).data();
-            var send = '';
-            $('table tr').css({'background':'', 'color':''});
-            $(this).css({'background':'#293A4A', 'color':'#ffffff'});
-            // Enviar peticion para ver el detalles delregistro
-            $.post('/'+temp.toLowerCase()+'Show',{'data':data.id},function (dataJson) {
-                if(dataJson.error==0) {
-                    $.each(dataJson.datos, function (key, valor) {
-                        $("#" + key).val(valor);
-                        if (key == 'id') {
-                            localStorage.setItem('id', valor);
-                        } else if (key == 'clave') {
-                            var item = $("#" + key + ",#re" + key);
-                            $("#" + key + ",#re" + key).val('').removeClass('requerido').siblings('label').children('div#campoRequerido').remove();
-                        }
-                    });
-                    send = 'form#send' + temp + 'Procesar';
+    },
+    doOnRowSelected: function (item) {
+        // Enviar peticion para ver el detalles delregistro
+        $.post('/'+localStorage.getItem('showModule').toLowerCase()+'Show',{'data':item},function (dataJson) {
+            if(dataJson.error==0) {
+                $.each(dataJson.datos, function (key, valor) {
+                    $("#" + key).val(valor);
+                    if (key == 'id') {
+                        localStorage.setItem('id', valor);
+                    } else if (key == 'clave') {
+                        var item = $("#" + key + ",#re" + key);
+                        $("#" + key + ",#re" + key).val('').removeClass('requerido').siblings('label').children('div#campoRequerido').remove();
+                    }
+                });
+                send = 'form#send' + localStorage.getItem('module') + 'Procesar';
 
-                    $(send).addClass('update');
-                    $(send).data('id', localStorage.getItem('id'))
-                    $(send+" button#submit").html('Actualizar Datos').fadeIn(909);
-                    $("#divDelete").html('<a id="sacarRegistroSeleccionado" data-registro="' + localStorage.getItem('id') + '" class="btn btn-danger">Eliminar registro</a>');
-                    Core.VistaRelacion.sacarRegistro();
-                }else{
-                    mostrarError(dataJson.msj);
-                }
-            },'JSON');
-
-        } );
+                $(send).addClass('update');
+                $(send).data('id', localStorage.getItem('id'))
+                $(send+" button#submit").html('Actualizar Datos').fadeIn(909);
+                $("#divDelete").html('<a id="sacarRegistroSeleccionado" data-registro="' + localStorage.getItem('id') + '" class="btn btn-danger">Eliminar registro</a>');
+                Core.VistaRelacion.sacarRegistro();
+            }else{
+                mostrarError(dataJson.msj);
+            }
+        },'JSON');
     },
     procesar: function () {
         var temp = this.__pathR__;

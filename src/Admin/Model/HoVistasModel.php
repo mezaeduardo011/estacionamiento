@@ -15,7 +15,7 @@ class HoVistasModel extends Main
    {
        $this->tabla = 'ho_vistas';
        $this->campoid = array('id');
-       $this->campos = array('apps','conexiones_id','entidad','nombre','field','type','dimension', 'restrincion', 'label','mascara','nulo','place_holder','relacionado','tabla_vista','vista_campo','cart_separacion','orden','hidden_form','hidden_list');
+       $this->campos = array('apps','conexiones_id','entidad','nombre','field','type','dimension', 'fijo','restrincion','label','mascara','nulo','place_holder','relacionado','tabla_vista','vista_campo','cart_separacion','orden','hidden_form','hidden_list');
        parent::__construct();
    }
 
@@ -38,6 +38,7 @@ class HoVistasModel extends Main
                 $this->fijarValor('field', $data->field[$a]);
                 $this->fijarValor('type', $data->type[$a]);
                 $this->fijarValor('dimension', $data->dimension[$a]);
+                $this->fijarValor('fijo', $data->fijo[$a]);
                 $this->fijarValor('restrincion', $data->restrincion[$a]);
                 $this->fijarValor('label', $data->etiqueta[$a]);
                 $this->fijarValor('mascara', $data->mascara[$a]);
@@ -81,15 +82,15 @@ class HoVistasModel extends Main
         for ($a=0;$a<count($data['entidad']);$a++) {
 
             // Hacemos las consultas para identificar cuales vistas tiene
-            $sql1 = "SELECT * FROM view_list_vist_gene WHERE conexiones_id=" . $data['connect'] . " AND entidad='" . $data['entidad'][$a] . "'";
+            $sql1 = "SELECT * FROM view_list_vist_gene WHERE conexiones_id=".$data['connect']." AND entidad='".$data['entidad'][$a]."'";
             $val[$data['entidad'][$a]] = $this->executeQuery($sql1);
 
-            $sql2 = "SELECT * FROM ho_entidades WHERE conexiones_id=" . $data['connect'] . " AND entidad='" . $data['entidad'][$a] . "'";
+            $sql2 = "SELECT * FROM ho_entidades WHERE conexiones_id=".$data['connect']." AND entidad='".$data['entidad'][$a]."'";
             $registro[$data['entidad'][$a]]['columnas'] = $this->executeQuery($sql2);
             //All::pp($this->executeQuery($sql1));
             foreach ($val AS $key => $value){
                 foreach ($value AS $key => $value2) {
-                    $sql = "SELECT * FROM ho_vistas WHERE conexiones_id=" . $value2->conexiones_id . " AND entidad='" . $value2->entidad . "' AND nombre='" . $value2->nombre . "'";
+                    $sql = "SELECT * FROM ho_vistas WHERE conexiones_id=".$value2->conexiones_id." AND entidad='".$value2->entidad."' AND nombre='".$value2->nombre."'";
                     $obj = $this->executeQuery($sql);
                     $registro[$value2->entidad][$value2->nombre] = $obj;
                 }

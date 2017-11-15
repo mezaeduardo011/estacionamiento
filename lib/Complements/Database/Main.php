@@ -1,5 +1,6 @@
 <?php
 namespace JPH\Complements\Database;
+use JPH\Core\Commun\Constant;
 use JPH\Core\Store\Cache;
 
 
@@ -11,7 +12,7 @@ use JPH\Core\Store\Cache;
  * @version: 4.1
  */
 
-class Main extends Comun
+class Main extends Comun implements Constant
 {
     use GenerateConexion, GenerateTablesConfigs, ConfigDatabase, Db ;
     /**

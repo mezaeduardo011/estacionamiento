@@ -1,6 +1,6 @@
 <?php
 namespace JPH\Core\Router;
-use JPH\Core\Commun\{All};
+use JPH\Core\Commun\{All,Logs};
 
 /**
  * Permite encargarse de procesar las rutas generadas que se cumpla su proceso de peticion de request
@@ -13,6 +13,7 @@ use JPH\Core\Commun\{All};
 class RouterGenerator
 {
     public $req, $url, $mod, $app, $met, $obj, $class, $file, $requestUrl, $petition;
+    use Logs;
 
     /**
      * Method encargado de encargarse de procesar las rutas del servicio permitiendo asi mejorar las rutas
@@ -49,6 +50,7 @@ class RouterGenerator
                     if (!file_exists($this->file)) {
                         $obj = array('controller' => $this->activ, 'method' => $mthod);
                         $msj = All::getMsjException('Core', 'error-cargar-ruta',$obj);
+                        $this->logError($msj);
                         throw new \TypeError($msj);
                     }
 
@@ -61,6 +63,7 @@ class RouterGenerator
                     }else{
                         $tmp = array('controller'=>$this->activ, 'class'=>$this->class);
                         $msj = All::getMsjException('Core', 'class-no-existe',$tmp);
+                        $this->logError($msj);
                         throw new \TypeError($msj);
                     }
                     
@@ -72,6 +75,7 @@ class RouterGenerator
                             All::statusHttp(404);
                             $tmp = array('controller'=>$this->activ, 'method'=>$mthod);
                             $msj = All::getMsjException('Core', 'method-no-existe',$tmp);
+                            $this->logError($msj);
                             throw new \TypeError($msj);
                         }
                         // Validar XSRF-TOKEN
@@ -84,6 +88,7 @@ class RouterGenerator
                             All::statusHttp(404);
                             $tmp = array('controller'=>$this->activ, 'method'=>$mthod);
                             $msj = All::getMsjException('Core', 'method-no-existe',$tmp);
+                            $this->logError($msj);
                             throw new \TypeError($msj);
                         }
 
@@ -91,6 +96,7 @@ class RouterGenerator
                         $tmp = array('methodActivo'=>$this->req->REQUEST_METHOD, 'methodRequerid'=>$this->petition);
                         All::statusHttp(405);
                         $msj = All::getMsjException('Resquest', '405',$tmp);
+                        $this->logError($msj);
                         throw new \TypeError($msj);
                     }
 

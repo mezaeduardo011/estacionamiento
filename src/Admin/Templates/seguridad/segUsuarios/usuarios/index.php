@@ -18,7 +18,6 @@ $breadcrumb=(object)array('actual'=>'Usuarios','titulo'=>'Vista de integrada de 
 </div>
 <?php $this->push('addJs') ?>
 
-
 <script>
 
      // Variable de configuracion
@@ -30,26 +29,26 @@ $breadcrumb=(object)array('actual'=>'Usuarios','titulo'=>'Vista de integrada de 
         { "id":"fech_nacimiento", "type":"ed", "align":"center", "sort":"str" , "value":"Nacimiento"},
         { "id":"correo", "type":"ed", "align":"center", "sort":"str" , "value":"Correo"},
         { "id":"usuario", "type":"ed", "align":"center", "sort":"str" , "value":"Login"},
-        { "id":"clave", "type":"ed", "align":"center", "sort":"str" , "value":"Clave"},
         { "id":"telefono", "type":"ed", "align":"center", "sort":"str" , "value":"telefono"},
     ];
-
 
     // Configuracion de visualizacion del grilla
     Config.show = {
         'module':'Usuarios',
         'tableTitle':'Listado de Registros.',
-        'filter':'#text_filter,#text_filter,&nbsp;,&nbsp;,#text_filter,#text_filter'
-    }
+        'filter':'#text_filter,#text_filter,&nbsp;,&nbsp;,#text_filter',
+        'autoWidth': true,
+        'multiSelect': false
+    };
 
     Core.Vista.Util = {
         priListaLoad: function () {
-
         },
         priListaClick: function (dataJson) {
             /* Funcionalidad adicional para la vista en la parte de listar*/
             if(typeof dataJson.perfiles != "undefined"){
                 var perfil = dataJson.perfiles.length;
+                $("#roles option").prop("selected",false);
                 if(perfil > 0){
                     $.each(dataJson.perfiles,function (key, valor) {
                         $("#roles option[value='"+valor.seg_perfil_id+"']").prop("selected",true);
@@ -58,11 +57,22 @@ $breadcrumb=(object)array('actual'=>'Usuarios','titulo'=>'Vista de integrada de 
                     $("#roles option").prop("selected",false);
                 }
             }
+
+            // Proceso encargado para procesar datos del panel
+            $("#divAuditoria").html('<a id="mostrarAuditoriaDelPerfil" data-registro="'+window.btoa(dataJson.datos.id+'|'+dataJson.datos.usuario+'|'+dataJson.datos.correo)+'" class="btn btn-default">Ver Seguimiento</a>');
+            this.modalAuditoria();
         },
         priClickProcesarForm:function () {
 
+        },
+        modalAuditoria:function () {
+            $('#mostrarAuditoriaDelPerfil').on('click',function(){
+                var itemSelect = $(this).data('registro');
+                //alert(itemSelect);
+                sessionStorage.setItem('usuarioId',itemSelect);
+                window.location.href = '/usuariosAuditoria';
+            })
         }
-
     };
     $(function () {
         Core.main();

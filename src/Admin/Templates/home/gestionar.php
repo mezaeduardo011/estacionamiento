@@ -29,11 +29,11 @@ Gestionar del Generador
                                     <i class="fa fa-database"></i> Configuración de conexion a Base de Datos
                                 </a>
                                 <a class="btn btn-block btn-social btn-github" id="optCrearModelo">
-                                    <i class="fa fa-plus-circle"></i> Crear nuevo Modelo
+                                    <i class="fa fa-certificate"></i> Gestionar Modelos
                                 </a>
-                                <a class="btn btn-block btn-social btn-github" id="optEditarModelo">
-                                    <i class="fa fa-edit"></i> Editar modelo Existente
-                                </a>
+                                <!--a class="btn btn-block btn-social btn-github" id="optEditarModelo">
+                                    <i class="fa fa-bars"></i> Gestion de Menu
+                                </a-->
                             </div>
                         </div>
                         <!-- /.box -->

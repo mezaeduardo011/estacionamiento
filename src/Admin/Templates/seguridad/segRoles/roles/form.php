@@ -12,7 +12,7 @@
            <div class="col-md-7">
                 <div class="form-group">
                     <label for="detalle">detalle</label>
-                    <input type="text" name="detalle" class="form-control default requerido " id="detalle" placeholder="Enter detalle">
+                    <input type="text" name="detalle" class="form-control default contar requerido " id="detalle" placeholder="Enter detalle" maxlength="100" data-item="100">
                 </div>
            </div>
            <!-- rigth column -->

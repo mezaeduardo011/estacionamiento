@@ -25,8 +25,9 @@ $breadcrumb=(object)array('actual'=>'Roles','titulo'=>'Vista de integrada de ges
     // Configuracion de visualizacion del grilla
     Config.show = {
         'module':'Roles',
-        'tableTitle':'Listado de Registros.',
-        'filter':'&nbsp;,#text_filter'
+        'filter':'#text_filter',
+        'autoWidth': true,
+        'multiSelect': false
     }
 
 

@@ -27,42 +27,50 @@ function notificar(mensaje, titulo) {
 
 var Core = {
     main: function () {
-        Core.valComunes();
-        Core.valInteger();
-        Core.valContador();
-        Core.valFecha();
-    },
-    valInteger : function () {
-        $('input.integer').on('input', function () {
-            this.value = this.value.replace(/[^0-9]/g,'');
-        });
+        this.valComunes();
     },
     valComunes: function () {//
         var ime = $('input.contar').parent('div').text();
         $('input.requerido, select.requerido').parent('div').children('label').append(' ')
         $('input.requerido, select.requerido').parent('div').children('label').append('<div id="campoRequerido"></div>')
         $('input.requerido, select.requerido').parent('div').children('label').children('div').html('<div class="requerido" title="Campo Requerido">*</div>');
+        Core.valContador();
+        Core.valInteger();
+        Core.valTexto();
+        Core.valFecha();
+        Core.valColor();
+        Core.valEmail();
+        /**/
 
-        /*$('input.contar').parent('div').append('<div id="contar"></div>')
-        $('input.contar').parent('div').children('div').html('<div  style=" float: right; margin-top: -12px; margin-right: -12px; font-size: 10px; z-index: 100;" title="Maxima cantidad de caracteres">20</div>');
+
+
+    },
+    valInteger : function () {
+        $('input.integer').on('input', function () {
+            this.value = this.value.replace(/[^0-9]/g,'');
+        });
+    },
+    valContador : function () {
+        $('input.contar').each(function(i, elem) {
+            var lg = $(this).data('item')-$(this).val().length;
+            var id = $(this).attr('id');
+            $('input.contar#'+id).parent('div').append('<div id="contar"></div>')
+            $('input.contar#'+id).parent('div').children('div').html('<div  title="Maxima cantidad de caracteres" class="contador '+id+'">'+lg+'</div>');
+        });
         $('input.contar').keyup(function() {
-            var id = $(this).data('item');
+            var id = $(this).attr('id');
+            var lg = $(this).data('item');
             var max_chars = $(this).attr('maxlength');
             var chars = $(this ).val().length;
             var diff = max_chars - chars;
-            $('#'+id ).html(diff);
-        });*/
-
-
-
-    },
-    valContador : function () {
-
+            $('#contar  .'+id).text(diff);
+        });
 
     },
     valTexto: function () {
+        // Validador que permite solo texto y espacio entre parte
         $('input.texto').on('input', function () {
-            this.value = this.value.replace(/[^a-zA-Z]/g,'');
+            this.value = this.value.replace(/[^a-zA-Z ]/g,'');
         });
     },
     valIp: function() {
@@ -71,8 +79,17 @@ var Core = {
     valTelefono:function() {
         
     },
+    valColor: function () {
+        $('input.color').each(function(i, elem) {
+            var id = $(this).attr('id');
+            new dhtmlXColorPicker({input: id});
+        });
+
+    },
     valEmail:function() {
-        
+        $('input.correo').on('input', function () {
+            this.value = this.type='email';
+        });
     },
     valFecha: function() {
         //Date picker
@@ -81,9 +98,7 @@ var Core = {
     valDesdeHasta: function() {
         
     },
-    valContador: function () {
-        
-    },
+
     valTextoEnriquecido:function () {
         
     },
@@ -91,14 +106,15 @@ var Core = {
 
         var error = 0;
         var datosOk = true;
-        $(send+'.requerido').each(function(i, elem){
-            if($(elem).val() == ''){
-                $(elem).css({'border':'1px solid red'});
+        $(send+' .requerido').each(function(i, elem){
+            if($(elem).val().length == 0 && typeof $(elem).attr('name')!='undefined'){
+                $(elem).addClass('isObligatorio');
                 $(elem).focus();
                 datosOk = false;
                 error++;
+                console.error('Campo '+$(elem).attr('name')+' requerido en el formulario.')
             }else{
-                $(elem).css({'border':''});
+                $(elem).removeClass('isObligatorio');
             }
         });
         /*if(error > 0){
@@ -136,7 +152,7 @@ toastr.options = {
     "positionClass": "toast-top-right",
     "preventDuplicates": false,
     "onclick": null,
-    "showDuration": "300",
+    "showDuration": "600",
     "hideDuration": "1000",
     "timeOut": "5000",
     "extendedTimeOut": "1000",

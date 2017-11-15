@@ -10,18 +10,32 @@ body {
 }
 /*Estilo de campo requerido del div que se arma para mostrar los datos*/
 div.requerido {
-position: absolute;
-float: left;
-font-size: 18px;
-z-index: 2;
-color: white;
-background: red;
-height: 14px;
-width: 14px;
-margin-left: -3px;
-padding-left: 4px;
-border-radius: 50%;
-line-height: 21px;
+    position: absolute;
+    float: left;
+    font-size: 18px;
+    z-index: 2;
+    color: white;
+    background: red;
+    height: 14px;
+    width: 14px;
+    margin-left: -3px;
+    padding-left: 4px;
+    border-radius: 50%;
+    line-height: 21px;
+}
+div.contador{
+    float: right;
+    margin-top: -12px;
+    margin-right: -6px;
+    font-size: 10px;
+    z-index: 100;
+    background-color: #0a0a0a;
+    color: white;
+    border-radius: 10%;
+    font-size: 12px;
+}
+.isObligatorio{
+    border: 1px solid red;
 }
 .dropdown-menu > li > a:hover
 {
@@ -162,4 +176,16 @@ input#extra{
     margin-right: -15px;
     display:none;
     height: 25px;
+}
+
+#addBtcAuditor{
+    float: right;
+    margin-top: -32px;
+}
+.optionAction{
+    float: left;
+    width:70px;
+}
+.optionAction .i{
+    margin-top: 0px; margin-bottom: 0px; !important
 }

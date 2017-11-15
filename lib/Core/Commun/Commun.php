@@ -13,6 +13,7 @@ namespace JPH\Core\Commun;
 trait Commun
 {
     public $resp;
+
     /**
      * Permite procesar un nombre de la clase basado en el namespace que se encuentra
      * ejemplo:JPH\Complement\Console\App, busca solo el nombre de la clase
@@ -27,34 +28,36 @@ trait Commun
 
     /**
      * Permite crear un directorios
-     * @param string $ruta, ruta donde procesara la creacion del directorio
+     * @param string $ruta , ruta donde procesara la creacion del directorio
      * @return boolean
      */
     static function mkddir(string $ruta)
     {
-        if (!file_exists($ruta))
-        {
+        if (!file_exists($ruta)) {
             mkdir($ruta, 0777, true);
             $resp = true;
-        }else{
+        } else {
             $resp = false;
         }
         return $resp;
     }
 
-    static function now(){
-        return date('d/m/Y h:i:s:u');
+    static function now()
+    {
+        return date('d/m/Y h:i:s');
     }
 
     /**
      * Permite imprimir objetos, arreglos, y valores enviados mostrado ordenadamente y parando el proceso
-     * @param array $dataArray, parametro de entrada para ser impreso
+     * @param array $dataArray , parametro de entrada para ser impreso
      * @return array valores
      */
     static function pp($dataArray)
     {
         self::statusHttp(201);
-        echo "<pre>"; print_r($dataArray); die();
+        echo "<pre>";
+        print_r($dataArray);
+        die();
     }
 
     /**
@@ -68,29 +71,22 @@ trait Commun
 
     /**
      * Permite cambiar tu texto de entrada en formato came case
-     * @param string $texto, lo que deseas cambiar de formato
+     * @param string $texto , lo que deseas cambiar de formato
      * @return string $came, texto formateado
      */
     static function cameCase(string $texto)
     {
-        $resul = str_replace(array('_'),array(' '),$texto);
-        $tmp = explode(' ',$resul);
+        $resul = str_replace(array('_'), array(' '), $texto);
+        $tmp = explode(' ', $resul);
         $res = '';
-        if(count($tmp)==0)
-        {
+        if (count($tmp) == 0) {
             $res = ucfirst($texto);
-        }
-        else
-        {
-             foreach ($tmp as $key => $value)
-             {
-                if($key==0)
-                {
-                    $res.=strtolower(self::sanear_string($value));
-                }
-                else
-                {
-                    $res.=ucfirst(self::sanear_string($value));
+        } else {
+            foreach ($tmp as $key => $value) {
+                if ($key == 0) {
+                    $res .= strtolower(self::sanear_string($value));
+                } else {
+                    $res .= ucfirst(self::sanear_string($value));
                 }
             }
         }
@@ -99,182 +95,179 @@ trait Commun
 
     /**
      * Permite cambiar tu texto de extrada en formato upper case
-     * @param string $texto, lo que deseas cambiar de formato
+     * @param string $texto , lo que deseas cambiar de formato
      * @return string $valor;
      */
     static function upperCase(string $texto)
     {
-        $resul = str_replace(array('_'),array(' '),$texto);
-        $tmp = explode(' ',$resul);
+        $resul = str_replace(array('_'), array(' '), $texto);
+        $tmp = explode(' ', $resul);
         $res = '';
-        if(count($tmp)==0)
-        {
+        if (count($tmp) == 0) {
             $res = ucfirst($texto);
-        }
-         else
-        {
-             foreach ($tmp as $key => $value) {
-                 $res.=ucfirst(self::sanear_string($value));
-             }
+        } else {
+            foreach ($tmp as $key => $value) {
+                $res .= ucfirst(self::sanear_string($value));
+            }
         }
         return $res;
     }
 
-   /**
-    *
-    */
-   static function headerJson()
-   {
-    header('Content-Type: application/json');
-   }
+    /**
+     *
+     */
+    static function headerJson()
+    {
+        header('Content-Type: application/json');
+    }
 
-   static function json($datos,$num=200)
-   {
-       self::headerJson();
-       self::statusHttp($num);
-       //$tmp = self::utf8enc($datos);
-       echo json_encode( $datos );
-       die();
-   }
+    static function json($datos, $num = 200)
+    {
+        self::headerJson();
+        self::statusHttp($num);
+        //$tmp = self::utf8enc($datos);
+        echo json_encode($datos);
+        die();
+    }
 
-    static function utf8enc($array) {
+    static function utf8enc($array)
+    {
         if (!is_array($array)) return;
         $helper = array();
         foreach ($array as $key => $value) $helper[\utf8_encode($key)] = is_array($value) ? utf8enc($value) : \utf8_encode($value);
         return $helper;
     }
 
-    static function utf8dec($array) {
+    static function utf8dec($array)
+    {
         if (!is_array($array)) return;
         $helper = array();
         foreach ($array as $key => $value) $helper[\utf8_decode($key)] = is_array($value) ? utf8enc($value) : \utf8_decode($value);
         return $helper;
     }
 
-   /**
-    *
-    */
-   static function compressResponse(string $html)
+    /**
+     *
+     */
+    static function compressResponse(string $html)
     {
-        $search = array('/\>[^\S ]+/s','/[^\S ]+\</s','/(\s)+/s','[\n|\r|\n\r|\t|\0|\x0B]');
-        $replace = array('>','<','\\1');
+        $search = array('/\>[^\S ]+/s', '/[^\S ]+\</s', '/(\s)+/s', '[\n|\r|\n\r|\t|\0|\x0B]');
+        $replace = array('>', '<', '\\1');
         return preg_replace($search, $replace, trim(trim($html)));
     }
 
-   /**
-    *
-    */
-   static function sanear_string(string $string)
-   {
-    $string = trim($string);
-    $string = str_replace(
-        array('ÃƒÂ¡', 'ÃƒÂ ', 'ÃƒÂ¤', 'ÃƒÂ¢', 'Ã‚Âª', 'Ãƒï¿½', 'Ãƒâ‚¬', 'Ãƒâ€š', 'Ãƒâ€ž'),
-        array('a', 'a', 'a', 'a', 'a', 'A', 'A', 'A', 'A'),
-        $string
+    /**
+     *
+     */
+    static function sanear_string(string $string)
+    {
+        $string = trim($string);
+        $string = str_replace(
+            array('ÃƒÂ¡', 'ÃƒÂ ', 'ÃƒÂ¤', 'ÃƒÂ¢', 'Ã‚Âª', 'Ãƒï¿½', 'Ãƒâ‚¬', 'Ãƒâ€š', 'Ãƒâ€ž'),
+            array('a', 'a', 'a', 'a', 'a', 'A', 'A', 'A', 'A'),
+            $string
         );
-    $string = str_replace(
-        array(utf8_decode('ÃƒÂ¡'), utf8_decode('ÃƒÂ '), utf8_decode('ÃƒÂ¤'), utf8_decode('ÃƒÂ¢'), utf8_decode('Ã‚Âª'), utf8_decode('Ãƒï¿½'), utf8_decode('Ãƒâ‚¬'), utf8_decode('Ãƒâ€š'), utf8_decode('Ãƒâ€ž')),
-        array('a', 'a', 'a', 'a', 'a', 'A', 'A', 'A', 'A'),
-        $string
+        $string = str_replace(
+            array(utf8_decode('ÃƒÂ¡'), utf8_decode('ÃƒÂ '), utf8_decode('ÃƒÂ¤'), utf8_decode('ÃƒÂ¢'), utf8_decode('Ã‚Âª'), utf8_decode('Ãƒï¿½'), utf8_decode('Ãƒâ‚¬'), utf8_decode('Ãƒâ€š'), utf8_decode('Ãƒâ€ž')),
+            array('a', 'a', 'a', 'a', 'a', 'A', 'A', 'A', 'A'),
+            $string
         );
-    $string = str_replace(
-        array('ÃƒÂ©', 'ÃƒÂ¨', 'ÃƒÂ«', 'ÃƒÂª', 'Ãƒâ€°', 'ÃƒË†', 'ÃƒÅ ', 'Ãƒâ€¹'),
-        array('e', 'e', 'e', 'e', 'E', 'E', 'E', 'E'),
-        $string
+        $string = str_replace(
+            array('ÃƒÂ©', 'ÃƒÂ¨', 'ÃƒÂ«', 'ÃƒÂª', 'Ãƒâ€°', 'ÃƒË†', 'ÃƒÅ ', 'Ãƒâ€¹'),
+            array('e', 'e', 'e', 'e', 'E', 'E', 'E', 'E'),
+            $string
         );
-    $string = str_replace(
-        array(utf8_decode('ÃƒÂ©'), utf8_decode('ÃƒÂ¨'), utf8_decode('ÃƒÂ«'), utf8_decode('ÃƒÂª'), utf8_decode('Ãƒâ€°'), utf8_decode('ÃƒË†'), utf8_decode('ÃƒÅ '), utf8_decode('Ãƒâ€¹')),
-        array('e', 'e', 'e', 'e', 'E', 'E', 'E', 'E'),
-        $string
+        $string = str_replace(
+            array(utf8_decode('ÃƒÂ©'), utf8_decode('ÃƒÂ¨'), utf8_decode('ÃƒÂ«'), utf8_decode('ÃƒÂª'), utf8_decode('Ãƒâ€°'), utf8_decode('ÃƒË†'), utf8_decode('ÃƒÅ '), utf8_decode('Ãƒâ€¹')),
+            array('e', 'e', 'e', 'e', 'E', 'E', 'E', 'E'),
+            $string
         );
-    $string = str_replace(
-        array('ÃƒÂ­', 'ÃƒÂ¬', 'ÃƒÂ¯', 'ÃƒÂ®', 'Ãƒï¿½', 'ÃƒÅ’', 'Ãƒï¿½', 'ÃƒÅ½'),
-        array('i', 'i', 'i', 'i', 'I', 'I', 'I', 'I'),
-        $string
+        $string = str_replace(
+            array('ÃƒÂ­', 'ÃƒÂ¬', 'ÃƒÂ¯', 'ÃƒÂ®', 'Ãƒï¿½', 'ÃƒÅ’', 'Ãƒï¿½', 'ÃƒÅ½'),
+            array('i', 'i', 'i', 'i', 'I', 'I', 'I', 'I'),
+            $string
         );
-    $string = str_replace(
-        array(utf8_decode('ÃƒÂ­'), utf8_decode('ÃƒÂ¬'), utf8_decode('ÃƒÂ¯'), utf8_decode('ÃƒÂ®'), utf8_decode('Ãƒï¿½'), utf8_decode('ÃƒÅ’'), utf8_decode('Ãƒï¿½'), utf8_decode('ÃƒÅ½')),
-        array('i', 'i', 'i', 'i', 'I', 'I', 'I', 'I'),
-        $string
+        $string = str_replace(
+            array(utf8_decode('ÃƒÂ­'), utf8_decode('ÃƒÂ¬'), utf8_decode('ÃƒÂ¯'), utf8_decode('ÃƒÂ®'), utf8_decode('Ãƒï¿½'), utf8_decode('ÃƒÅ’'), utf8_decode('Ãƒï¿½'), utf8_decode('ÃƒÅ½')),
+            array('i', 'i', 'i', 'i', 'I', 'I', 'I', 'I'),
+            $string
         );
-    $string = str_replace(
-        array('ÃƒÂ³', 'ÃƒÂ²', 'ÃƒÂ¶', 'ÃƒÂ´', 'Ãƒâ€œ', 'Ãƒâ€™', 'Ãƒâ€“', 'Ãƒâ€�'),
-        array('o', 'o', 'o', 'o', 'O', 'O', 'O', 'O'),
-        $string
+        $string = str_replace(
+            array('ÃƒÂ³', 'ÃƒÂ²', 'ÃƒÂ¶', 'ÃƒÂ´', 'Ãƒâ€œ', 'Ãƒâ€™', 'Ãƒâ€“', 'Ãƒâ€�'),
+            array('o', 'o', 'o', 'o', 'O', 'O', 'O', 'O'),
+            $string
         );
-    $string = str_replace(
-        array(utf8_decode('ÃƒÂ³'), utf8_decode('ÃƒÂ²'), utf8_decode('ÃƒÂ¶'), utf8_decode('ÃƒÂ´'), utf8_decode('Ãƒâ€œ'), utf8_decode('Ãƒâ€™'), utf8_decode('Ãƒâ€“'), utf8_decode('Ãƒâ€�')),
-        array('o', 'o', 'o', 'o', 'O', 'O', 'O', 'O'),
-        $string
+        $string = str_replace(
+            array(utf8_decode('ÃƒÂ³'), utf8_decode('ÃƒÂ²'), utf8_decode('ÃƒÂ¶'), utf8_decode('ÃƒÂ´'), utf8_decode('Ãƒâ€œ'), utf8_decode('Ãƒâ€™'), utf8_decode('Ãƒâ€“'), utf8_decode('Ãƒâ€�')),
+            array('o', 'o', 'o', 'o', 'O', 'O', 'O', 'O'),
+            $string
         );
-    $string = str_replace(
-        array('ÃƒÂº', 'ÃƒÂ¹', 'ÃƒÂ¼', 'ÃƒÂ»', 'ÃƒÅ¡', 'Ãƒâ„¢', 'Ãƒâ€º', 'ÃƒÅ“'),
-        array('u', 'u', 'u', 'u', 'U', 'U', 'U', 'U'),
-        $string
+        $string = str_replace(
+            array('ÃƒÂº', 'ÃƒÂ¹', 'ÃƒÂ¼', 'ÃƒÂ»', 'ÃƒÅ¡', 'Ãƒâ„¢', 'Ãƒâ€º', 'ÃƒÅ“'),
+            array('u', 'u', 'u', 'u', 'U', 'U', 'U', 'U'),
+            $string
         );
-    $string = str_replace(
-        array(utf8_decode('ÃƒÂº'), utf8_decode('ÃƒÂ¹'), utf8_decode('ÃƒÂ¼'), utf8_decode('ÃƒÂ»'), utf8_decode('ÃƒÅ¡'), utf8_decode('Ãƒâ„¢'), utf8_decode('Ãƒâ€º'), utf8_decode('ÃƒÅ“')),
-        array('u', 'u', 'u', 'u', 'U', 'U', 'U', 'U'),
-        $string
+        $string = str_replace(
+            array(utf8_decode('ÃƒÂº'), utf8_decode('ÃƒÂ¹'), utf8_decode('ÃƒÂ¼'), utf8_decode('ÃƒÂ»'), utf8_decode('ÃƒÅ¡'), utf8_decode('Ãƒâ„¢'), utf8_decode('Ãƒâ€º'), utf8_decode('ÃƒÅ“')),
+            array('u', 'u', 'u', 'u', 'U', 'U', 'U', 'U'),
+            $string
         );
-    $string = str_replace(
-        array('ÃƒÂ±', 'Ãƒâ€˜', 'ÃƒÂ§', 'Ãƒâ€¡','<','>'),
-        array('n', 'N', 'c', 'C','',''),
-        $string
+        $string = str_replace(
+            array('ÃƒÂ±', 'Ãƒâ€˜', 'ÃƒÂ§', 'Ãƒâ€¡', '<', '>'),
+            array('n', 'N', 'c', 'C', '', ''),
+            $string
         );
-    $string = str_replace(
-        array(utf8_decode('ÃƒÂ±'), utf8_decode('Ãƒâ€˜'), utf8_decode('ÃƒÂ§'), utf8_decode('Ãƒâ€¡'), utf8_decode('Ã‚Â°')),
-        array('n', 'N', 'c', 'C',''),
-        $string
+        $string = str_replace(
+            array(utf8_decode('ÃƒÂ±'), utf8_decode('Ãƒâ€˜'), utf8_decode('ÃƒÂ§'), utf8_decode('Ãƒâ€¡'), utf8_decode('Ã‚Â°')),
+            array('n', 'N', 'c', 'C', ''),
+            $string
         );
-    $string = str_replace(
-        array(utf8_decode('?'), utf8_decode('Ã‚Â¿'), utf8_decode('Ã‚Âº')),
-        array('', '', ''),
-        $string
+        $string = str_replace(
+            array(utf8_decode('?'), utf8_decode('Ã‚Â¿'), utf8_decode('Ã‚Âº')),
+            array('', '', ''),
+            $string
         );
-    $string = str_replace(
-        array("\\", "Ã‚Â¨", "Ã‚Âº", "~","Ã‚Âº",
-            "#", "@", "|", "!", "\"",
-            "Ã‚Â·", "$", "%", "&", "/",
-            "(", ")", "?","Ã‚Â¿", "'", "Ã‚Â¡",
-            "Ã‚Â¿", "[", "^", "`", "]",
-            "+", "}", "{", "Ã‚Â¨", "Ã‚Â´",
-            ">", "< ", ";", ",", ":",
-            "."),
-        '',
-        $string
+        $string = str_replace(
+            array("\\", "Ã‚Â¨", "Ã‚Âº", "~", "Ã‚Âº",
+                "#", "@", "|", "!", "\"",
+                "Ã‚Â·", "$", "%", "&", "/",
+                "(", ")", "?", "Ã‚Â¿", "'", "Ã‚Â¡",
+                "Ã‚Â¿", "[", "^", "`", "]",
+                "+", "}", "{", "Ã‚Â¨", "Ã‚Â´",
+                ">", "< ", ";", ",", ":",
+                "."),
+            '',
+            $string
         );
-    $string = str_replace(" ","-",$string);
-    return $string;
+        $string = str_replace(" ", "-", $string);
+        return $string;
     }
 
     /**
      * Unifica los eqiquetas con el valor pasado en el arreglo
-     * @param string $string, Cadena de texto que vamos a parcear
-     * @param array $options, Valores del arreglo a cambiar
+     * @param string $string , Cadena de texto que vamos a parcear
+     * @param array $options , Valores del arreglo a cambiar
      * @return string $result, cadena de texto con los datos reales
      */
-    static function  mergeTaps( $texto, $option)
+    static function mergeTaps($texto, $option)
     {
         $tmp = array();
         // Creamos las reglas en lote
-        foreach ($option as $key => $b)
-        {
-            $tmp[]='/{'.$key.'}/';
+        foreach ($option as $key => $b) {
+            $tmp[] = '/{' . $key . '}/';
         }
         $result = preg_replace($tmp, $option, $texto);
-        return  $result;
+        return $result;
     }
 
     /**
      * Methos encardado de eliminar recursivamente un directorio y sus archivos
-     * @param string $carpeta, ruta donde esta la carpeta a eliminar
+     * @param string $carpeta , ruta donde esta la carpeta a eliminar
      * @author http://aprendizdealquimia.es/blog/?p=231
-    */
+     */
     function eliminarDir(string $carpeta)
     {
-        foreach(glob($carpeta . "/*") as $archivos_carpeta)
-        {
+        foreach (glob($carpeta . "/*") as $archivos_carpeta) {
             //si es un directorio volvemos a llamar recursivamente
             if (is_dir($archivos_carpeta))
                 @eliminarDir($archivos_carpeta);
@@ -287,7 +280,7 @@ trait Commun
 
     static function statusHttp($num)
     {
-        static $http = array (
+        static $http = array(
             100 => "HTTP/1.1 100 Continue",
             101 => "HTTP/1.1 101 Switching Protocols",
             200 => "HTTP/1.1 200 OK",
@@ -323,7 +316,7 @@ trait Commun
             416 => "HTTP/1.1 416 Requested range not satisfiable",
             417 => "HTTP/1.1 417 Expectation Failed",
             500 => "HTTP/1.1 500 Internal Server Error",
-            501 => "HTTP/1.1 501 Not Implemented",
+            501 => "HTTP/1.1 501 Error de excepcion del servidor db",
             502 => "HTTP/1.1 502 Bad Gateway",
             503 => "HTTP/1.1 503 Service Unavailable",
             504 => "HTTP/1.1 504 Gateway Time-out"
@@ -333,74 +326,68 @@ trait Commun
 
     /**
      * Redireccionar un elemento de una solicitud web personalizando la cabecera
-     * @param string $url, Enlace donde quieres redireccionar
-     * @param integer $num, numero de proceso
+     * @param string $url , Enlace donde quieres redireccionar
+     * @param integer $num , numero de proceso
      */
 
-    static function redirect(string $url,  $num=200)
+    static function redirect(string $url, $num = 200)
     {
         self::statusHttp($num);
         @header("Location: $url");
     }
+
     /**
      * Permite hacer validaciones de campos basadao en los validadores de nativos de php
      * @param String $type
      * @param String $data
+     * @return bool true o false
      */
-    public static function validateRows(string $type,  $data)
+    public static function validateRows(string $type, $data)
     {
-        switch($type)
-        {
+        switch ($type) {
             case 'REQ': // Dato requ
-                $retorno=($data == '')? FALSE: TRUE;
+                $retorno = ($data == '') ? FALSE : TRUE;
                 break;
-
-            case 'NUM': // Solo nÃºmericos
-                $retorno=(filter_var($data, FILTER_VALIDATE_INT) === FALSE)? FALSE: TRUE;
+            case 'NUM': // Solo numericos
+                $retorno = (filter_var($data, FILTER_VALIDATE_INT) === FALSE) ? FALSE : TRUE;
                 break;
-
             case 'LET': // Solo letras
-                $retorno=(filter_var($data, FILTER_VALIDATE_INT) === FALSE)? FALSE: TRUE;
-
+                $retorno = (filter_var($data, FILTER_VALIDATE_INT) === FALSE) ? FALSE : TRUE;
                 break;
-
             case 'STR': // Solo String alfanumerico
-                $retorno=(filter_var($data, FILTER_SANITIZE_STRING) === FALSE)? FALSE: TRUE;
-
+                $retorno = (filter_var($data, FILTER_SANITIZE_STRING) === FALSE) ? FALSE : TRUE;
                 break;
-
             case 'EMA': // Solo correos electrinico
-                $retorno=(filter_var($data, FILTER_VALIDATE_EMAIL) === FALSE)? FALSE: TRUE;
+                $retorno = (filter_var($data, FILTER_VALIDATE_EMAIL) === FALSE) ? FALSE : TRUE;
                 break;
-
             case 'URL': // Solo direcciones de internet
-                $retorno=(filter_var($data, FILTER_VALIDATE_URL,FILTER_FLAG_QUERY_REQUIRED) === FALSE)? FALSE: TRUE;
+                $retorno = (filter_var($data, FILTER_VALIDATE_URL, FILTER_FLAG_QUERY_REQUIRED) === FALSE) ? FALSE : TRUE;
                 break;
-
             case 'BOO': // Identificar si el registro es booleano
-                $retorno=(filter_var($data, FILTER_VALIDATE_BOOLEAN) === FALSE)? FALSE: TRUE;
+                $retorno = (filter_var($data, FILTER_VALIDATE_BOOLEAN) === FALSE) ? FALSE : TRUE;
                 break;
             case 'URLACT':
-                $retorno=(@get_headers($data))? TRUE : FALSE;
+                $retorno = (@get_headers($data)) ? TRUE : FALSE;
                 break;
             case 'IP':
-                $retorno=(filter_var($data, FILTER_VALIDATE_IP));
+                $retorno = (filter_var($data, FILTER_VALIDATE_IP));
                 break;
         }
         return $retorno;
     }
+
     /**
      * Permite setear lasrutas absoluta de los archivo de configurcion cuando falla la hechas en las constastes
-     * @param String $ruta, ruta que desea setear
+     * @param String $ruta , ruta que desea setear
      * @return Object $valor, rutas seteadas en objeto
      */
     public static function parseRutaAbsolut($ruta)
     {
-        $valor = (object)str_replace('\lib\Core\Commun\..\..\..','' ,$ruta);
+        $valor = (object)str_replace('\lib\Core\Commun\..\..\..', '', $ruta);
         return $valor;
     }
 
-    public static function deleteEndCaracter(String $texto):String
+    public static function deleteEndCaracter(String $texto): String
     {
         $myString = substr($texto, 0, -1);
         return $myString;  // 'number 1, number 2, number 3'
@@ -411,13 +398,13 @@ trait Commun
      **/
     public static function pathApps($dir)
     {
-        $vista=@end(explode(DIRECTORY_SEPARATOR,dirname($dir)));
+        $vista = @end(explode(DIRECTORY_SEPARATOR, dirname($dir)));
         return $vista;
     }
 
     public static function pathVista()
     {
-        $vista=str_replace(array('/','Index', 'Listar', 'Create', 'Update','Show','Delete'),array('','','','','','',''),$_SERVER['PATH_INFO']);
+        $vista = str_replace(array('/', 'Index', 'Listar', 'Create', 'Update', 'Show', 'Delete'), array('', '', '', '', '', '', ''), $_SERVER['PATH_INFO']);
         return $vista;
     }
 
@@ -428,33 +415,33 @@ trait Commun
     {
         // Bloque encargado de extraer el el primer parte del arreglo
         $menu = array();
-        foreach ($_SESSION['roles'] AS $kry => $value1 ){
+        foreach ($_SESSION['roles'] AS $kry => $value1) {
             $item = explode('-', $value1);
-            $v = count($item)-1;
+            $v = count($item) - 1;
             unset($item[$v]);
-            $menu[]=implode('|',$item);
+            $menu[] = implode('|', $item);
         }
-        $bufer=array_unique($menu);
+        $bufer = array_unique($menu);
 
         $menu2 = array();
 
         // Bloque de proceso del sub menu
-        foreach ($bufer AS $key=>$value2){
+        foreach ($bufer AS $key => $value2) {
             $item2 = explode('|', $value2);
-            $v = count($item2)-1;
+            $v = count($item2) - 1;
             $it = $item2[0];
             unset($item2[0]);
-            $menu2[$it][]=implode('|',$item2);
+            $menu2[$it][] = implode('|', $item2);
         }
 
         $menu3 = array();
         // Bloque encargado del ultimo menu
-        foreach ($menu2 AS $key3=>$value3){
-            for ($a=0;$a<count($value3);$a++){
+        foreach ($menu2 AS $key3 => $value3) {
+            for ($a = 0; $a < count($value3); $a++) {
                 $item3 = explode('|', $value3[$a]);
                 $it2 = $item3[0];
                 unset($item3[0]);
-                $menu3[$key3][$it2][$a]=implode($item3);
+                $menu3[$key3][$it2][$a] = implode($item3);
 
             }
         }
@@ -469,26 +456,68 @@ trait Commun
     public function formatRows($obj)
     {
         $str = base64_decode($obj);
-        $temp = explode('#',$str);
+        $temp = explode('#', $str);
         $select = array();
         $campos = array();
-        foreach($temp AS $index=>$value){
+        foreach ($temp AS $index => $value) {
             // obtengo el segundo valor para el item
-            $rest = explode('|',$value);
-            $select[] = str_replace('id:','',$rest[0]);
-            $campos[] = array('id'=>str_replace('id:','',$rest[0]),
-                'type'=>str_replace('type:','',$rest[1]),
-                'align'=>str_replace('align:','',$rest[2]),
-                'sort'=>str_replace('sort:','',$rest[3]) ,
-                'value'=>str_replace('value:','',$rest[4])
+            $rest = explode('|', $value);
+            $select[] = str_replace('id:', '', $rest[0]);
+            $campos[] = array('id' => str_replace('id:', '', $rest[0]),
+                'type' => str_replace('type:', '', $rest[1]),
+                'align' => str_replace('align:', '', $rest[2]),
+                'sort' => str_replace('sort:', '', $rest[3]),
+                'value' => str_replace('value:', '', $rest[4])
             );
 
         }
-        return array('select'=>$select,'campos'=>$campos);
+        return array('select' => $select, 'campos' => $campos);
+    }
+
+    public static function formatRelacio($obj)
+    {
+        $str = base64_decode($obj);
+        $valor=explode('|',$str);
+        return $valor;
     }
 
 
+    /**
+     * Funcion que devuelve un array con los valores:
+     *    os => sistema operativo
+     *    browser => navegador
+     *    version => version del navegador
+     */
+    public function detect()
+    {
+        $browser = array("IE", "OPERA", "MOZILLA", "NETSCAPE", "FIREFOX", "SAFARI", "CHROME");
+        $os = array("WIN", "MAC", "LINUX");
 
+        # definimos unos valores por defecto para el navegador y el sistema operativo
+        $info['browser'] = "OTHER";
+        $info['os'] = "OTHER";
+
+        # buscamos el navegador con su sistema operativo
+        foreach ($browser as $parent) {
+            $s = strpos(strtoupper($_SERVER['HTTP_USER_AGENT']), $parent);
+            $f = $s + strlen($parent);
+            $version = substr($_SERVER['HTTP_USER_AGENT'], $f, 15);
+            $version = preg_replace('/[^0-9,.]/', '', $version);
+            if ($s) {
+                $info['browser'] = $parent;
+                $info['version'] = $version;
+            }
+        }
+
+        # obtenemos el sistema operativo
+        foreach ($os as $val) {
+
+            if (strpos(strtoupper($_SERVER['HTTP_USER_AGENT']), $val) !== false)
+                $info['os'] = $val;
+            }
+
+        # devolvemos el array de valores
+        return $info;
+    }
 }
-
 ?>

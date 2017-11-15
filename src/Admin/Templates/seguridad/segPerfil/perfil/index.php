@@ -27,7 +27,6 @@ $breadcrumb=(object)array('actual'=>'Perfil','titulo'=>'Vista de integrada de ge
     // Configuracion de visualizacion del grilla
     Config.show = {
         'module':'Perfil',
-        'tableTitle':'Listado de Registros.',
         'filter':'#text_filter'
     }
     // Configuración personalizada del entorno privado de la vista

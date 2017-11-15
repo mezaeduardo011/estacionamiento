@@ -9,7 +9,7 @@
 <input type="hidden" id="id" name="id">
 <div class="form-group">
 <label for="detalle">detalle</label>
-<input type="text" name="detalle" class="form-control default requerido " id="detalle" placeholder="Enter detalle">
+<input type="text" name="detalle" class="form-control contar default requerido " id="detalle" placeholder="Enter detalle" maxlength="50" data-item="50">
 </div>
   </div>
   <!-- /.box-body -->

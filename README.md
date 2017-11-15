@@ -3,6 +3,7 @@
 
 Es una estructura de desarrollo basada en MVC, muy cómodo para trabajar basado en Programación Orientada a Objeto al 100%, posee varios estándares de desarrollo en PHP en el cual tenemos las siguientes implementaciones:
 	
+	PSR-3  Estandar de Registro de Logs
 	PSR-4  Estándar de carga automática
 	PSR-7  Interfaz de mensajes HTTP.
 	PSR-16 Caché Simple.

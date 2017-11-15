@@ -90,11 +90,43 @@
     type varchar(20) NOT NULL,
     nulo varchar(10) NOT NULL,
     dimension int,
+    fijo varchar(60) NULL,
     restrincion varchar(10),
     CONSTRAINT pk_ho_entidades PRIMARY KEY(id)
   );
+
+
   ALTER TABLE ho_entidades
     ADD UNIQUE (conexiones_id,tabla,field)
+
+  --- START AUDITORIA ----------
+  CREATE TABLE seg_log_autenticacion (
+    id BIGINT Identity(1,1) NOT NULL,
+    host varchar(30) NOT NULL,
+    navegador varchar(164) NOT NULL,
+    accion varchar(100) NOT NULL,
+    sistema varchar(30) NOT NULL,
+    usuario varchar(30) NOT NULL,
+    created_at DATETIME2(7) NOT NULL,
+    CONSTRAINT pk_ho_seg_log_autenticacion PRIMARY KEY(id)
+  );
+
+
+  CREATE TABLE seg_log_eventos (
+    id BIGINT Identity(1,1) NOT NULL,
+    host varchar(30) NOT NULL,
+    base_datos varchar(100) NOT NULL,
+    entidad varchar(60) NOT NULL,
+    entidad_id int ,
+    new_value text,
+    old_value text,
+    usuario_id int,
+    proceso varchar(60) NOT NULL,
+    created_at DATETIME2(7) NOT NULL,
+    CONSTRAINT pk_ho_seg_log_eventos PRIMARY KEY(id)
+  );
+
+  --- END AUDITORIA ----------
 
 
   CREATE TABLE ho_vistas (
@@ -106,6 +138,7 @@
     field varchar(64) NOT NULL,
     type varchar(20) NOT NULL,
     dimension int,
+    fijo varchar(60) NULL,
     restrincion varchar(10),
     label varchar(50) NOT NULL,
     mascara varchar(50) NOT NULL,

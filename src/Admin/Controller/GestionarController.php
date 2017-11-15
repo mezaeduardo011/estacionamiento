@@ -2,12 +2,10 @@
 namespace APP\admin\Controller;
 use APP\Admin\Model;
 use APP\Admin\Controller\Controller;
-//use APP\Admin\Controller\LoginController;
-use JPH\Core\Commun\Constant;
-use JPH\Core\Commun\Security;
-use JPH\Core\Console\App;
-use JPH\Core\Console\AppCrudVista;
+use JPH\Core\Commun\{Constant,Security};
+use JPH\Core\Console\{App,AppCrudVista};
 use JPH\Core\Load\Configuration;
+
 /**
  * Generador de codigo de Controller de Hornero 1.0
  * @propiedad: Hornero 1.0
@@ -61,6 +59,7 @@ class GestionarController extends Controller
    {
 
        $schema = $this->hoVistasModel->extraerDetalleEntidadListado((array)$request);
+       //$this->pp($schema);
        if(count($schema)>0) {
            foreach ($schema AS $entidad => $views) {
                $columnsReal = NULL;
@@ -70,12 +69,15 @@ class GestionarController extends Controller
                // sleep(20);
 
                foreach ($views AS $nombreVista => $campos) {
+                   //$this->pp($views);
                    if (count($campos) > 0) {
-                       // Aplicacion seleccionada
-                       $aplicativo = $campos[0]->apps;
+                       // Nombre de la Aplicacion seleccionada
+                       $aplicativo = @$campos[0]->apps;
 
                        // Instanciar la clase de generacion de vista
                        $crudVista = new AppCrudVista();
+
+                       //$this->pp($campos);
 
                        // Crear estructura de la vista
                        $crudVista->createStructuraFileCRUD($aplicativo, $nombreVista, $entidad, $campos, $columnsReal);
@@ -261,6 +263,7 @@ class GestionarController extends Controller
                 'name' =>$value->field ,
                 'tipo' =>$value->type,
                 'dimension' => $value->dimension,
+                'fijo' => (empty($value->fijo))?'':@$value->fijo,
                 'restrincion' => $value->restrincion,
                 'nombre' => (empty($value->nombre))?'':$value->nombre,
                 'label' => (empty($value->label))?'':@$value->label,

@@ -1,7 +1,11 @@
 <?php
 namespace JPH\Complements\Database;
 use JPH\Complements\Database\Query;
-use JPH\Core\Commun\All;
+use JPH\Core\Commun\{
+    All, Logs
+};
+use JPH\Core\Store\Cache;
+
 /**
  * Driver que permite hacer la conexion con la base de datos  
  */
@@ -21,6 +25,7 @@ trait Db  {
     public $pass;
     public $db;
     public $encoding;
+    use Logs;
 
     public function connect($datos) {
         $this->host = $datos->host;
@@ -32,7 +37,7 @@ trait Db  {
  
         switch ($this->motor) {
             case "maria":
-            $this->conn = new mysqli($host, $user, $pass, $db);
+            $this->conn = new mysqli($this->host, $this->user, $this->pass, $this->db);
 
             if ($this->conn->connect_error) {
                 $this->error = true;
@@ -52,12 +57,17 @@ trait Db  {
                         $this->error = true;
                         $this->inited = false;
                         $this->message = sqlsrv_errors();
-                        throw new \TypeError('<b>Exepción Capturada Error en Conexion</b>:, no se puede conectar al servidor de base de datos revisar los parametros de config');
+                        $msj = "<b>Exepción Capturada Error en Conexion</b>:, no se puede conectar al servidor de base de datos revisar los parametros de config";
+                        $this->logError($msj);
+                        throw new \TypeError();
+
                     } else {
                         $this->inited = true;
                         $this->elserror = false;
                     }
                 }catch (\TypeError  $t){
+                    All::statusHttp(501);
+                    $this->logError($t->getMessage());
                     die($t->getMessage());
                 }
 
@@ -110,12 +120,18 @@ trait Db  {
                     break;
                 case "sql":
                     $this->resultSet = sqlsrv_query($this->conn, $query);
+                    // variables de proceso de auditoria de registro de las accciones en base de datos guardar en log
+                    if((bool)Cache::get('debug')){
+                        $this->logInfo($query);
+                    }
                     if (count(sqlsrv_errors())>0) {
                         $erro = sqlsrv_errors();
                         $this->error = true;
                         $this->inited = false;
                         $this->message = sqlsrv_errors();
-                        throw new \TypeError('Exepcion capturadad de base de datos, code error:'.$erro[0]['SQLSTATE'].', mensaje:'.$erro[0]['message']);
+                        $msj = 'Exepcion capturadad de base de datos, code error:'.$erro[0]['SQLSTATE'].', mensaje:'.$erro[0]['message'];
+                        $this->logError($msj);
+                        throw new \TypeError($msj);
 
                     } else {
                         $this->error = false;
@@ -126,15 +142,22 @@ trait Db  {
                     break;
             }
         }catch (\TypeError $t){
+            All::statusHttp(501);
+            $this->logError($t->getMessage());
             die($t->getMessage());
         }
     }
 
     /**
      * Es para ejecutar store procedure
-     * @param type $query 
+     * @param type $query
+     * @return object $this
      */
     public function execute($query) {
+        // variables de proceso de auditoria de registro de las accciones en base de datos guardar en log
+        if((bool)Cache::get('debug')){
+            $this->logInfo($query);
+        }
         if (!$this->inited) {
             $this->init();
         }
@@ -160,7 +183,9 @@ trait Db  {
                         $this->error = true;
                         $this->inited = false;
                         $this->message = sqlsrv_errors();
-                        throw new \TypeError('Exepcion capturadad de base de datos, code error:'.$erro[0]['SQLSTATE'].', mensaje:'.$erro[0]['message']);
+                        $msj = 'Exepcion capturadad de base de datos, code error:'.$erro[0]['SQLSTATE'].', mensaje:'.$erro[0]['message'];
+                        $this->logError($msj);
+                        throw new \TypeError($msj);
                     } else {
                         $this->error = false;
                         $this->errorno = 0;
@@ -169,6 +194,7 @@ trait Db  {
                     break;
             }
         }catch (\TypeError $t){
+            All::statusHttp(501);
             die($t->getMessage());
         }
 

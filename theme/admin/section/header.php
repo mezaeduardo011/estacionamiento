@@ -7,7 +7,7 @@
                 <span class="sr-only">Toggle navigation</span>
             </a>
             <!-- Logo -->
-            <a href="index2.html" class="logo">
+            <a href="/" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>J</b>RH+</span>
                 <!-- logo for regular state and mobile devices -->

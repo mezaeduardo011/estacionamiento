@@ -9,19 +9,15 @@ Core.Vista = {};
 Core.Vista = {
     pathR: '',
     columns: '',
+    myGrid: '',
+    currentRequest: '',
     main: function (path,Config) {
         this.__pathR__ = path;
         this.__columns__ = Config.colums;
-        // Cantidad de listado de vista
-        var module = Config.show.module;
-        // Si se puede ver el buscador
-        var tableTitle = Config.show.tableTitle;
-        // Filtros de la tabla
-        var filterTable = Config.show.filter;
-        this.listado(module,tableTitle,filterTable);
+        this.listado(Config.show);
         this.procesar();
     },
-    listado : function (module,tableTitle,filterTable) {
+    listado : function (show) {
         var temp = this.__pathR__;
         var rows = this.__columns__;
 
@@ -34,30 +30,33 @@ Core.Vista = {
         // Quitamos el ultimo caracter de la cadena
         var tmp = camp.substring(0,camp.length-1);
 
-        var myLayout = new dhtmlXLayoutObject('dataJPH'+module, '1C');
-        myLayout.cells("a").setText(tableTitle);
-        myLayout.cells("a").attachStatusBar({
+        Core.Vista.myGrid = new dhtmlXGridObject('dataJPH'+show.module);
+        Core.Vista.myGrid.enablePaging(true,10,5,'pagingArea'+show.module,true,"recinfoArea");
+        //Core.myGrid.cells("a").setText(show.tableTitle);
+        /*myLayout.cells("a").attachStatusBar({
             text: "<div id='pagingArea'></div>",
             paging: true
-        });
+        });*/
 
-        var myGrid = myLayout.cells("a").attachGrid();
-        myGrid.setImagePath("/admin/dhtmlxSuite/codebase/imgs/");
+        //var myGrid = myLayout.cells("a").attachGrid();
+        Core.Vista.myGrid.setImagePath("/admin/dhtmlxSuite/codebase/imgs/");
         // Filtro de la tabla
-        myGrid.attachHeader(filterTable);
+        Core.Vista.myGrid.attachHeader(show.filter);
         // Campos id Mostrar
         //myGrid.setColumnIds("col1,col2,col3");
 
-        myGrid.enablePaging(true, 10, 3, "pagingArea");
-        myGrid.setPagingSkin("toolbar");
-        myGrid.enableAutoWidth(true);
-        myGrid.enableMultiselect(true);
-        myGrid.attachEvent("onRowSelect", Core.Vista.doOnRowSelected);
-        myGrid.init();
-        myGrid.enableSmartRendering(true);
-        // Evniamos los parametros de configuracion
-        var gridQString = '/'+module.toLowerCase()+'Listar?obj='+window.btoa(tmp); // save query string to global variable (see step 5)
-        myGrid.load(gridQString, 'json');
+        //Core.myGrid.enablePaging(true, 10, 3, "pagingArea");
+        Core.Vista.myGrid.setPagingSkin("toolbar");
+        Core.Vista.myGrid.enableAutoWidth(show.autoWidth);
+        Core.Vista.myGrid.enableMultiselect(show.multiSelect);
+        Core.Vista.myGrid.attachEvent("onRowSelect", Core.Vista.doOnRowSelected);
+        Core.Vista.myGrid.submitOnlyRowID(true);
+        Core.Vista.myGrid.init();
+        Core.Vista.myGrid.enableSmartRendering(true);
+        var gridQString = '/'+show.module.toLowerCase()+'Listar?obj='+window.btoa(tmp)+''; // save query string to global variable (see step 5)
+        localStorage.setItem('gridQString',gridQString);
+        Core.Vista.myGrid.load(gridQString, 'json');
+
         /* END  */
 
         // Configuracion personalizada local de la vista
@@ -67,18 +66,16 @@ Core.Vista = {
         localStorage.setItem('temp',temp);
     },
     doOnRowSelected: function (id) {
-        //var data = table.row($(this)).data();
-        //alert("Rows with id: "+id+" was selected by user")
-
-
+        // Proceso mediante el cual permite cancelar peticiones enviadas y le da prioridad a las nuevas
         var send = '';
-        $('table tr').css({'background':'', 'color':''});
-        $(this).css({'background':'#293A4A', 'color':'#ffffff'});
-        // Enviar peticion para ver el detalles delregistro
-        $.post('/'+localStorage.getItem('temp').toLowerCase()+'Show',{'data':id},function (dataJson) {
+        if(Core.Vista.currentRequest){
+            Core.Vista.currentRequest.abort();
+        }
+
+        Core.Vista.currentRequest = $.post('/'+localStorage.getItem('temp').toLowerCase()+'Show',{'data':id},function (dataJson) {
             if(dataJson.error==0) {
                 $.each(dataJson.datos, function (key, valor) {
-                    $("#" + key).val(valor);
+                    $("#" + key).val(valor).keyup();
                     if (key == 'id') {
                         localStorage.setItem('id', valor);
                     } else if (key == 'clave') {
@@ -111,17 +108,16 @@ Core.Vista = {
             if ($(send).hasClass('update')) {
                 ruta = temp.toLowerCase() + 'Update';
                 token = tockeA;
-                //alert('UPDATE SI');
             } else {
                 ruta = temp.toLowerCase() + 'Create';
                 token = tockeR;
-                //alert('CREAR SI');
             }
             Core.Vista.Util.priClickProcesarForm(send);
             if (Core.valCamposObligatoriosCompletos(send)) {
+
                 var campos = new FormData();
 
-                $(send).find(':input, select, textarea').each(function() {
+                $(send).find('input, select, textarea').each(function() {
                     var elemento= this;
                     //alert("elemento.id="+ elemento.name + ", elemento.value=" + elemento.value);
                     if(elemento.id=='id' || elemento.value!='') {
@@ -147,10 +143,6 @@ Core.Vista = {
                         }
                     }
                 });
-                //$.post('/' + ruta, window.btoa($(this).serialize() + '&act=' + token), function (dataJson) {
-                /*$.post('/' + ruta, $(this).serialize() + '&act=' + token, function (dataJson) {
-
-                }, 'JSON');*/
             }
             return false;
             e.preventDefault();
@@ -185,4 +177,5 @@ Core.Vista = {
     }
 };
 document.write("<"+"script type='text/javascript' src='admin/dist/js/vistaRelacion.js'><"+"/script>")
+document.write("<"+"script type='text/javascript' src='admin/dist/js/vistaAuditoria.js'><"+"/script>")
 

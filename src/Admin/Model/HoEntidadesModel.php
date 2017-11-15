@@ -18,25 +18,31 @@ class HoEntidadesModel extends Main
        $this->campos = array('conexiones_id','entidad','field','type', 'nulo', 'dimension','restrincion');
        parent::__construct();
    }
+
     /**
      * Permite Agregar entidades nueva a la tabla de configuracion
-     * @param Integer $db, Identificador de la base de datos
-     * @param String $data, entidad encargada de procesar los datos
+     * @param Integer $db , Identificador de la base de datos
+     * @param String $data , entidad encargada de procesar los datos
+     * @return bool
      */
     public function registrarEntidadesConfig($db,$data )
     {
+        // Seleccu
         $sql = "SELECT * FROM ho_conexiones WHERE id=".$db;
         $conect = $this->executeQuery($sql);
+        // Esta linea permite eliminar cada vez que se porcesa para volver a registrar
         $sql = "DELETE FROM ho_entidades WHERE conexiones_id=$db";
         $this->execute($sql);
         for ($a=0;$a<count($data);$a++) {
-
             $t = $this->showColumns($data[$a],$conect[0]->db);
             $sql = "";
             foreach ($t AS $key => $value) {
                 $da = explode('(', $value->Type);
                 $dim = str_replace(')', ' ', $da[1]);
-                $sql = "INSERT INTO ho_entidades (conexiones_id,entidad,field,type,nulo,dimension,restrincion) VALUES($db,'" . $data[$a] . "','" . $value->Field . "','" . $da[0] . "','" . $value->Null . "',$dim,'" . $value->Key . "');";
+                $bus = array("(",")","'");
+                $rem = array('','','');
+                $fijo = str_replace($bus,$rem,$value->Default);
+                $sql = "INSERT INTO ho_entidades (conexiones_id,entidad,field,type,nulo,dimension,fijo,restrincion) VALUES($db,'".$data[$a]."','".$value->Field."','".$da[0]."','".$value->Null."','".$dim."','".$fijo."','".$value->Key."');";
                 $return = $this->execute($sql);
             }
         }
@@ -53,15 +59,15 @@ class HoEntidadesModel extends Main
         $data['entidad']=explode(',',$data['entidad']);
         $val = array();
         for ($a=0;$a<count($data['entidad']);$a++) {
-           $sql = "SELECT * FROM view_list_enti_regi AS a
-                    WHERE a.entidad='".$data['entidad'][$a]."' AND conexiones_id=".$data['conn'];
+           $sql = "SELECT * FROM view_list_enti_regi AS a WHERE a.entidad='".$data['entidad'][$a]."' AND conexiones_id=".$data['conn'];
             $val[$data['entidad'][$a]] = $this->executeQuery($sql);
         }
         return $val;
     }
 
     /**
-     * Permite extraer el detalle completo de la entidad que ya esta registrada
+     * Permite extraer el detalle completo de la entidad que ya esta registrant
+     * @param array $data, Valores del arreglo de la entidad
      * @return array $tmp, informacion de los diferentes entidades
      */
     public function extraerDetalleEntidade($data)
@@ -72,9 +78,9 @@ class HoEntidadesModel extends Main
     }
 
     /**
-     * Permite armar una estructura de entidad a partir de una configuracion desde la vista del generador
+     * Permite crear la una estructura de la entidad a partir de una configuracion desde la vista del generador
      * @param objeto $data
-     * @return array $tmp, informacion de los diferentes entidades
+     * @return bool
      */
     public function setEstructuraCreateTabla($data)
     {
@@ -92,10 +98,14 @@ class HoEntidadesModel extends Main
             }elseif ($data->index[$key]=='UNIQUE'){
                 array_push($unico,$value);
             }
+            // Asignacion de elementos autoincremento
             $autoIncreme = (!empty($data->extra[$key]))?"$incremento ":'';
+            // Definicion para la cantidad de varchar
             $cantVarchar = (!empty($data->varcharValor[$key]))?'('.$data->varcharValor[$key].')':'';
+            // Valore default
+            $valoDefault = (!empty($data->default[$key]))?'DEFAULT \''.$data->default[$key].'\'':'';
 
-            $ldd0.='  '.$value.' '.strtoupper($data->tipos[$key]).$cantVarchar.' '.$autoIncreme.''.$data->requerido[$key].','.PHP_EOL;
+            $ldd0.='  '.$value.' '.strtoupper($data->tipos[$key]).$cantVarchar.' '.$autoIncreme.''.$data->requerido[$key].' '.$valoDefault.','.PHP_EOL;
         }
         $ldd0.='  CONSTRAINT '.$data->entidad.'_PK PRIMARY KEY('.implode(',',$constraint).')'.PHP_EOL;
         $ldd0.=');';

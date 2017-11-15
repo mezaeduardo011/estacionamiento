@@ -4,7 +4,7 @@ use JPH\Core\Commun\{All,SimpleXMLExtended};
 
 /**
  * Permite integrar un conjunto de funcionalidades de la consola pero en las aplicaciones
- * @Author: Gregorio Bolívar <elalconxvii@gmail.com>
+ * @Author: Ing. Gregorio Bolívar <elalconxvii@gmail.com>
  * @Author: Blog: <http://gbbolivar.wordpress.com>
  * @created Date: 09/08/2017
  * @updated Date: 29/08/2017
@@ -65,7 +65,7 @@ class AppCrud extends App
         fputs($ar, '/**'.PHP_EOL);
         fputs($ar, ' * Generador de codigo de Controller de '.All::FW.' '.All::VERSION.''.PHP_EOL);
         fputs($ar, ' * @propiedad: '.All::FW.' '.All::VERSION.''.PHP_EOL);
-        fputs($ar, ' * @utor: Gregorio Bolivar <elalconxvii@gmail.com>'.PHP_EOL);
+        fputs($ar, ' * @autor: Ing. Gregorio Bolivar <elalconxvii@gmail.com>'.PHP_EOL);
         fputs($ar, ' * @created: ' .date('d/m/Y') .''.PHP_EOL);
         fputs($ar, ' * @version: 1.0'.PHP_EOL);
         fputs($ar, ' */ '.PHP_EOL.PHP_EOL);
@@ -208,7 +208,7 @@ class AppCrud extends App
         fputs($ar, '/**'.PHP_EOL);
         fputs($ar, ' * Generador de codigo del Modelo de la App '.$app.PHP_EOL);
         fputs($ar, ' * @propiedad: '.All::FW.' '.All::VERSION.''.PHP_EOL);
-        fputs($ar, ' * @utor: Gregorio Bolivar <elalconxvii@gmail.com>'.PHP_EOL);
+        fputs($ar, ' * @autor: Ing. Gregorio Bolivar <elalconxvii@gmail.com>'.PHP_EOL);
         fputs($ar, ' * @created: ' .date('d/m/Y') .''.PHP_EOL);
         fputs($ar, ' * @version: 1.0'.PHP_EOL);
         fputs($ar, ' */ '.PHP_EOL.PHP_EOL);
