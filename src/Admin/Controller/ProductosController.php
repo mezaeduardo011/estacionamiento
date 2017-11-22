@@ -6,7 +6,7 @@ use APP\Admin\Model AS Model;
 /**
  * Generador de codigo de Controller de Hornero 1.0
  * @propiedad: Hornero 1.0
- * @utor: Gregorio Bolivar <elalconxvii@gmail.com>
+ * @autor: Ing. Gregorio Bolivar <elalconxvii@gmail.com>
  * @created: 15/11/2017
  * @version: 2.0
  */ 
@@ -44,6 +44,7 @@ class ProductosController extends Controller
    {
      $this->permisos = 'CONSULTA|CONTROL TOTAL';
      $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos));
+
      $this->tpl->addIni();
      $this->tpl->add('usuario', $this->getSession('usuario'));
      $this->tpl->renders('view::vistas/productos/'.$this->pathVista().'/index');
@@ -59,6 +60,7 @@ class ProductosController extends Controller
       // Validar roles de acceso;
       $this->permisos = 'CONSULTA|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
+
       // Bloque de proceso de la grilla
       $result = $this->formatRows($request->obj);
       $rows = $this->hoProductosModel->getProductosListar($request,$result);
@@ -78,6 +80,7 @@ class ProductosController extends Controller
    {
       $this->permisos = 'ALTA|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
+
       $result = $this->hoProductosModel->setProductosCreate($request);
       if(is_null($result)){
         $dataJson['error']='1';
@@ -98,6 +101,7 @@ class ProductosController extends Controller
    {
       $this->permisos = 'CONSULTA|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
+
       $result = $this->hoProductosModel->getProductosShow($request);
       $this->json($result);
    }
@@ -111,6 +115,7 @@ class ProductosController extends Controller
    {
       $this->permisos = 'BAJA|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
+
       $result = $this->hoProductosModel->remProductosDelete($request);
       if(is_null($result)){
         $dataJson['error']='0';
@@ -131,6 +136,7 @@ class ProductosController extends Controller
    {
       $this->permisos = 'MODIFICACION|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
+
       $result = $this->hoProductosModel->setProductosUpdate($request);
       if(is_null($result)){
         $dataJson['error']='0';

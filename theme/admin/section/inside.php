@@ -2,7 +2,7 @@
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-        <!-- Sidebar user panel -->
+        <!-- Sidebar user panel
         <div class="user-panel">
             <div class="pull-left image">
                 <img src="/admin/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
@@ -12,7 +12,7 @@
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
-        <!-- search form -->
+        <!-- search form
         <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
                 <input type="text" name="q" class="form-control" placeholder="Search...">
@@ -21,12 +21,12 @@
             </button>
           </span>
             </div>
-        </form>
+        </form>-->
         <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
-        <ul class="sidebar-menu" data-widget="tree">
-            <li class="header">MAIN NAVIGATION</li>
-            <li class="active treeview">
+        <ul class="sidebar-menu" data-widget="tree" id="menu">
+
+            <!--li class="active treeview">
                 <a href="#">
                     <i class="fa fa-files-o"></i>
                     <span>Layout Options</span>
@@ -52,7 +52,7 @@
                     <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
                     <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
                 </ul>
-            </li>
+            </li-->
         </ul>
     </section>
     <!-- /.sidebar -->

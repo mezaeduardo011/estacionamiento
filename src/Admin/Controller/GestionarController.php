@@ -1,11 +1,4 @@
 <?php
-namespace APP\admin\Controller;
-use APP\Admin\Model;
-use APP\Admin\Controller\Controller;
-use JPH\Core\Commun\{Constant,Security};
-use JPH\Core\Console\{App,AppCrudVista};
-use JPH\Core\Load\Configuration;
-
 /**
  * Generador de codigo de Controller de Hornero 1.0
  * @propiedad: Hornero 1.0
@@ -13,6 +6,15 @@ use JPH\Core\Load\Configuration;
  * @created: 16/09/2017
  * @version: 1.0
  */ 
+
+namespace APP\admin\Controller;
+use JPH\Core\Console\App;
+use JPH\Core\Console\AppCrudVista;
+use JPH\Core\Load\Configuration;
+use APP\Admin\Model AS Model;
+use JPH\Core\Commun\{Constant,Security};
+
+
 class GestionarController extends Controller
 {
     public $model;
@@ -27,8 +29,8 @@ class GestionarController extends Controller
        $this->session = $this->authenticated();
        $this->model = new Model\HomeModel();
        $this->hoConexionesModel = new Model\HoConexionesModel();
-       $this->hoEntidadesModel = new model\HoEntidadesModel();
-       $this->hoVistasModel = new model\HoVistasModel();
+       $this->hoEntidadesModel = new Model\HoEntidadesModel();
+       $this->hoVistasModel = new Model\HoVistasModel();
        $this->hoSegRolesModel = new Model\SegRolesModel();
    }
 
@@ -50,6 +52,7 @@ class GestionarController extends Controller
         $this->tpl->add('usuario', $this->getSession('usuario'));
         $this->tpl->renders('view::home/gestionar');
     }
+    
     /**
      * Proceso encargado de controlar la generacion de la vistas luego de leer la base de datos de las configuraciones
      * @param resource $request

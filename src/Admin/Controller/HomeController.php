@@ -1,8 +1,4 @@
 <?php
-namespace APP\Admin\Controller;
-use JPH\Core\Commun\Security;
-
-
 /**
  * Generador de codigo de Controller de Hornero 0.8
  * @propiedad: Hornero 0.8
@@ -10,6 +6,10 @@ use JPH\Core\Commun\Security;
  * @created: 04/08/2017
  * @version: 1.0
  */
+
+namespace APP\Admin\Controller;
+use JPH\Core\Commun\Security;
+
 class HomeController extends Controller{
      public $model;
      public $session;

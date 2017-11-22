@@ -486,6 +486,7 @@ Config.Box3 = {
                         //$('table.table#'+item.val()).append('<tr><td><i class="fa fa-circle" aria-hidden="true"></i> <a class="cursor" data-tabla="'+item.val()+'" data-id="1">'+name.val()+'</a></td></tr>').fadeIn(1000)
                         //Config.selecionarItemTabla();
                         //setTimeout(function(){ $('#box3 #accordionTablas #'+procesada+'-titulo').click(); }, 1000);
+                        Core.Menu.main();
                         Config.desactivarSegundo('box3');
                     }else{
                         mostrarError(dataJson.msj)

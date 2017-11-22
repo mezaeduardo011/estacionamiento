@@ -419,7 +419,7 @@ trait Commun
             $item = explode('-', $value1);
             $v = count($item) - 1;
             unset($item[$v]);
-            $menu[] = implode('|', $item);
+            $menu[] = trim(implode('|', $item)) ;
         }
         $bufer = array_unique($menu);
 
@@ -429,23 +429,27 @@ trait Commun
         foreach ($bufer AS $key => $value2) {
             $item2 = explode('|', $value2);
             $v = count($item2) - 1;
-            $it = $item2[0];
+            $it = trim($item2[0]);
             unset($item2[0]);
-            $menu2[$it][] = implode('|', $item2);
+            $menu2[$it][] = trim(implode('|', $item2));
         }
 
         $menu3 = array();
+        $menu4 = array();
         // Bloque encargado del ultimo menu
         foreach ($menu2 AS $key3 => $value3) {
             for ($a = 0; $a < count($value3); $a++) {
                 $item3 = explode('|', $value3[$a]);
                 $it2 = $item3[0];
                 unset($item3[0]);
-                $menu3[$key3][$it2][$a] = implode($item3);
+
+                $menu3[$it2][] = trim(implode($item3));
+                //print_r($menu3);
 
             }
+            $menu4[$key3]=$menu3;
         }
-        return $menu3;
+        return $menu4;
     }
 
     /**

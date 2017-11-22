@@ -24,6 +24,7 @@ $breadcrumb=(object)array('actual'=>'Usuarios','titulo'=>'Vista de integrada de 
 </div>
 <?php $this->push('addJs') ?>
 <script>
+    Core.Menu.main();
     var userId=sessionStorage.getItem('usuarioId');
     //alert(userId);
     if(userId.length<2){
@@ -54,7 +55,8 @@ $breadcrumb=(object)array('actual'=>'Usuarios','titulo'=>'Vista de integrada de 
     myGrid1 = new dhtmlXGridObject('dataJPHUsuariosLogSession');
     myGrid1.setImagePath("/admin/dhtmlxSuite/codebase/imgs/");
     myGrid1.attachHeader('#combo_filter,#combo_filter,#combo_filter,#text_filter');
-    myGrid1.enablePaging(true,10,5,'pagingAreaUsuariosLogSession',true,"recinfoArea");
+    myGrid1.enablePaging(true,15,5,"pagingAreaUsuariosLogSession",true);
+    myGrid1.setPagingSkin("bricks");
     myGrid1.enableAutoWidth(true);
     myGrid1.enableMultiselect(true);
     myGrid1.init();
@@ -87,7 +89,8 @@ $breadcrumb=(object)array('actual'=>'Usuarios','titulo'=>'Vista de integrada de 
     myGrid2 = new dhtmlXGridObject('dataJPHUsuariosAcciones');
     myGrid2.setImagePath("/admin/dhtmlxSuite/codebase/imgs/");
     myGrid2.attachHeader('#combo_filter,#combo_filter,#combo_filter,#text_filter');
-    myGrid2.enablePaging(true,10,5,'pagingAreaUsuariosAcciones',true,"recinfoArea");
+    myGrid2.enablePaging(true,15,5,"pagingAreaUsuariosAcciones",true);
+    myGrid2.setPagingSkin("bricks");
     myGrid2.attachEvent("onRowSelect", doOnRowSelected);
     myGrid2.enableAutoWidth(true);
     myGrid2.enableMultiselect(true);

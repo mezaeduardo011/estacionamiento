@@ -1,6 +1,6 @@
 <?php
 namespace APP\Admin\Controller;
-use APP\Admin\Model;
+use APP\Admin\Model AS Model;;
 use JPH\Core\Commun\Security;
 
 /**

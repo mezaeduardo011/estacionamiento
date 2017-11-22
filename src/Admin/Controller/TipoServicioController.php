@@ -62,11 +62,11 @@ class TipoServicioController extends Controller
       // Bloque de proceso de la grilla
       $result = $this->formatRows($request->obj);
       $rows = $this->hoTipoServicioModel->getTipoServicioListar($request,$result);
-      $valor = array();
+      $valor = array('total_count'=>$rows['countAll'],'pos'=>$rows['posStart']);
       $valor['head']=$result['campos'];
-      $valor['rows']=$rows; 
-      $this->json($valor);
-      $this->json($result);
+      $valor['rows']=$rows['data'];
+
+       $this->json($valor);
    }
 
     /**

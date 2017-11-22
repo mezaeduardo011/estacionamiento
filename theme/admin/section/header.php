@@ -18,36 +18,7 @@
                 <li><a href="/gestionar"><i class="fa fa-cogs" aria-hidden="true"></i> Generador</a></li>
                 <li><a href="#"><i class="fa fa-desktop" aria-hidden="true"></i> Monitor</a></li>
                 <li><a href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i> Reportes</a></li>
-               <?php 
-                $menu=\JPH\Core\Commun\All::extrerMenu();
-                  $htmlMenu = '';
-                   foreach ($menu['ADMIN '] AS $key0 => $value0)
-                   {                 
-                       $htmlMenu .= '<li class="dropdown">';
-                       $htmlMenu .= '<a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-address-card" aria-hidden="true"></i> '.$key0.' <span class="caret"></span></a>';
-                       if(count($value0)>0){
-                           $htmlMenu .= '<ul class="dropdown-menu">';
-                               foreach ($value0 AS $key1 => $value1)
-                               {  
-                                   $htmlMenu .= '<li class="dropdown">';
-                                   $htmlMenu .= ' <a href="/'.trim(strtolower($value1)).'Index">'.$value1.'</a>';
-                                   $htmlMenu .= '</li>';
-                                   // Reserva otro nivel
-                                   /*foreach ($value1 AS $key2 => $value2)
-                                   {
-                                       echo '<ul class="dropdown-menu">';
-                                       echo '<li class="dropdown">';
-                                       echo '   <a href="/usuariosIndex">USUARIOS</a>';
-                                       echo '</li>';
-                                       echo '</ul>';
-                                   }*/
-                               }
-                               $htmlMenu .= '</ul>';
-                       }
-                       $htmlMenu .= '</li>';
-                   }
-                   echo $htmlMenu;
-                ?>
+
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-address-card" aria-hidden="true"></i> Seguridad <span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -147,7 +118,7 @@
                             <li class="footer"><a href="#">See All Messages</a></li>
                         </ul>
                     </li>
-                    <!-- Notifications: style can be found in dropdown.less -->
+                    <!-- Notifications: style can be found in dropdown.less
                     <li class="dropdown notifications-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-bell-o"></i>
@@ -156,7 +127,7 @@
                         <ul class="dropdown-menu">
                             <li class="header">You have 10 notifications</li>
                             <li>
-                                <!-- inner menu: contains the actual data -->
+                                <!-- inner menu: contains the actual data --
                                 <ul class="menu notificaciones">
                                     <li>
                                         <a href="#">
@@ -188,9 +159,9 @@
                             </li>
                             <li class="footer"><a href="#">View all</a></li>
                         </ul>
-                    </li>
+                    </li>-->
                     <!-- Tasks: style can be found in dropdown.less -->
-                    <li class="dropdown tasks-menu">
+                    <!--li class="dropdown tasks-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-flag-o"></i>
                             <span class="label label-danger">9</span>
@@ -198,9 +169,9 @@
                         <ul class="dropdown-menu">
                             <li class="header">You have 9 tasks</li>
                             <li>
-                                <!-- inner menu: contains the actual data -->
+                                <!-- inner menu: contains the actual data --
                                 <ul class="menu">
-                                    <li><!-- Task item -->
+                                    <li><!-- Task item --
                                         <a href="#">
                                             <h3>
                                                 Design some buttons
@@ -214,8 +185,8 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <!-- end task item -->
-                                    <li><!-- Task item -->
+                                    <!-- end task item --
+                                    <li><!-- Task item --
                                         <a href="#">
                                             <h3>
                                                 Create a nice theme
@@ -229,8 +200,8 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <!-- end task item -->
-                                    <li><!-- Task item -->
+                                    <!-- end task item --
+                                    <li><!-- Task item --
                                         <a href="#">
                                             <h3>
                                                 Some task I need to do
@@ -244,8 +215,8 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <!-- end task item -->
-                                    <li><!-- Task item -->
+                                    <!-- end task item --
+                                    <li><!-- Task item --
                                         <a href="#">
                                             <h3>
                                                 Make beautiful transitions
@@ -259,14 +230,14 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <!-- end task item -->
+                                    <!-- end task item --
                                 </ul>
                             </li>
                             <li class="footer">
                                 <a href="#">View all tasks</a>
                             </li>
                         </ul>
-                    </li>
+                    </li-->
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -316,9 +287,9 @@
                         </ul>
                     </li>
                     <!-- Control Sidebar Toggle Button -->
-                    <li>
+                    <!--li>
                         <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                    </li>
+                    </li-->
                 </ul>
             </div>
         </nav>

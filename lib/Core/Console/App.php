@@ -22,7 +22,7 @@ class App
         public $ruta;
         // Constante de la clase
         const SUBITEM = __CLASS__;
-        
+
     /**
      * App constructor.
      */

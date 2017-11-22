@@ -28,6 +28,7 @@ function notificar(mensaje, titulo) {
 var Core = {
     main: function () {
         this.valComunes();
+        Core.Menu.main();
     },
     valComunes: function () {//
         var ime = $('input.contar').parent('div').text();
@@ -162,4 +163,6 @@ toastr.options = {
     "hideMethod": "fadeOut"
 }
 <!-- Notificaciones -->
-document.write("<"+"script type='text/javascript' src='admin/dist/js/notificaciones.js'><"+"/script>")
+document.write("<"+"script type='text/javascript' src='admin/dist/js/notificaciones.js'><"+"/script>");
+document.write("<"+"script type='text/javascript' src='admin/dist/js/menu.js'><"+"/script>");
+

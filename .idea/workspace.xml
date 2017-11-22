@@ -2,89 +2,209 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a749c4c3-432a-4351-8765-53532cfff998" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Admin/Model/EmpleadosModel.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Admin/Model/LegajosModel.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Admin/Model/ProductosModel.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Admin/Model/PruebaModel.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Admin/Model/SegLogAccionesModel.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Admin/Model/SegLogAutenticacionModel.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Admin/Model/TipoEstatusModel.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Admin/Model/TipoServicioModel.php" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/legajos/legajo/assent.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/legajos/legajo/form.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/legajos/legajo/index.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/legajos/legajo/listado.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/modelos/modelos/assent.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/modelos/modelos/form.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/modelos/modelos/index.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/modelos/modelos/listado.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/personal/clientes/assent.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/personal/clientes/form.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/personal/clientes/index.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/personal/clientes/listado.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/prueba/hugo/assent.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/prueba/hugo/form.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/prueba/hugo/index.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/prueba/hugo/listado.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dist/js/vistaOld.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/getGridRecords2.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/hornero.iml" afterPath="$PROJECT_DIR$/.idea/hornero.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Controller/ProductosController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Model/ProductosModel.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxacc_skyblue/dhxacc_btns.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxacc_skyblue/dhxacc_cell_progress.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxcalendar_skyblue/dhxcalendar_arrow_left.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxcalendar_skyblue/dhxcalendar_arrow_right.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxcalendar_skyblue/dhxcalendar_clock.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxcalendar_skyblue/dhxcalendar_mark.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxcalendar_skyblue/dhxcalendar_selector_bottom.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxcalendar_skyblue/dhxcalendar_selector_top.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxcarousel_skyblue/dhxcarousel_cell_progress.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxcombo_skyblue/dhxcombo_arrow_down.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxcombo_skyblue/dhxcombo_arrow_down_dis.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxcombo_skyblue/dhxcombo_chbx.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxcp_skyblue/dhxcp_colors.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxcp_skyblue/dhxcp_icon_save.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxdataview_skyblue/dnd_selector.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxdataview_skyblue/dnd_selector_cells.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxdataview_skyblue/dnd_selector_lines.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxdataview_skyblue/marker.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxeditor_skyblue/align_center.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxeditor_skyblue/align_justify.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxeditor_skyblue/align_left.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxeditor_skyblue/align_right.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxeditor_skyblue/bold.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxeditor_skyblue/buttons.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxeditor_skyblue/clear.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxeditor_skyblue/h1.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxeditor_skyblue/h2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxeditor_skyblue/h3.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxeditor_skyblue/h4.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxeditor_skyblue/indent_dec.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxeditor_skyblue/indent_inc.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxeditor_skyblue/italic.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxeditor_skyblue/list_bullet.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxeditor_skyblue/list_number.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxeditor_skyblue/script_sub.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxeditor_skyblue/script_super.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxeditor_skyblue/strike.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxeditor_skyblue/underline.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxform_skyblue/dhxform_chbxrd.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxform_skyblue/dhxform_image_uploading.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxform_skyblue/dhxform_upload_buttons.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxform_skyblue/dhxform_upload_uploading.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/ar_left.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/ar_left_abs.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/ar_left_abs_dis.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/ar_left_dis.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/ar_right.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/ar_right_abs.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/ar_right_abs_dis.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/ar_right_dis.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/blank.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/combo_select_dhx_skyblue.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/dyn_.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/dyn_down.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/dyn_up.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/imageloaderror.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/item_chk0.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/item_chk0_dis.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/item_chk1.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/item_chk1_dis.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/minus.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/paging_page.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/paging_pages.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/paging_rows.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/plus.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/radio_chk0.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/radio_chk0_dis.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/radio_chk1.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/radio_chk1_dis.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/sort_asc.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/sort_desc.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/tree/blank.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/tree/folder.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/tree/leaf.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/tree/line.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/tree/line1.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/tree/line2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/tree/line3.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/tree/line4.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/tree/minus.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/tree/minus1.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/tree/minus2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/tree/minus3.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/tree/minus4.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/tree/minus5.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/tree/plus.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/tree/plus1.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/tree/plus2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/tree/plus3.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/tree/plus4.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxgrid_skyblue/tree/plus5.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxlayout_skyblue/dhxlayout_cell_btns.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxlayout_skyblue/dhxlayout_cell_progress.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxlayout_skyblue/dhxlayout_sep_h.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxlayout_skyblue/dhxlayout_sep_v.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxmenu_skyblue/dhxmenu_arrow_down.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxmenu_skyblue/dhxmenu_arrow_down_dis.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxmenu_skyblue/dhxmenu_arrow_up.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxmenu_skyblue/dhxmenu_arrow_up_dis.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxmenu_skyblue/dhxmenu_chrd.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxmenu_skyblue/dhxmenu_loader.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxmenu_skyblue/dhxmenu_subar.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxpopup_skyblue/dhxpopup_arrow_bottom.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxpopup_skyblue/dhxpopup_arrow_left.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxpopup_skyblue/dhxpopup_arrow_right.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxpopup_skyblue/dhxpopup_arrow_top.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxribbon_skyblue/dhxribbon_arrow.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxribbon_skyblue/dhxribbon_checked.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxribbon_skyblue/dhxribbon_checked_dis.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxsidebar_skyblue/dhxsidebar_arrow_down.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxsidebar_skyblue/dhxsidebar_arrow_up.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxsidebar_skyblue/dhxsidebar_cell_progress.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxsidebar_skyblue/dhxsidebar_side_icon.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtabbar_skyblue/dhxtabbar_arrows.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtabbar_skyblue/dhxtabbar_button_close.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtabbar_skyblue/dhxtabbar_cell_progress.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtoolbar_skyblue/dhxtoolbar_arrow.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtoolbar_skyblue/dhxtoolbar_arrow_dis.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/blank.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/but_cut.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/folderClosed.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/folderOpen.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/iconCheckAll.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/iconCheckDis.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/iconCheckGray.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/iconUncheckAll.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/iconUncheckDis.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/leaf.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/line.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/line1.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/line1_rtl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/line2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/line2_rtl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/line3.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/line3_rtl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/line4.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/line4_rtl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/lock.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/minus.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/minus1.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/minus2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/minus2_rtl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/minus3.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/minus3_rtl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/minus4.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/minus4_rtl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/minus5.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/minus5_rtl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/plus.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/plus1.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/plus2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/plus2_rtl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/plus3.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/plus3_rtl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/plus4.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/plus4_rtl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/plus5.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/plus5_rtl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/radio_off.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtree_skyblue/radio_on.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtreeview_skyblue/icon_chbx_0.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtreeview_skyblue/icon_chbx_1.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtreeview_skyblue/icon_chbx_dis_0.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtreeview_skyblue/icon_chbx_dis_1.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtreeview_skyblue/icon_file.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtreeview_skyblue/icon_folder_closed.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtreeview_skyblue/icon_folder_opened.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtreeview_skyblue/icon_minus.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtreeview_skyblue/icon_plus.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxtreeview_skyblue/loading.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxwins_skyblue/dhxwins_buttons.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxwins_skyblue/dhxwins_icon.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/admin/dhtmlxSuite/skins/skyblue/imgs/dhxwins_skyblue/dhxwins_progress.gif" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/app.ini" afterPath="$PROJECT_DIR$/config/app.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/database.sql" afterPath="$PROJECT_DIR$/config/database.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Complements/Database/Comun.php" afterPath="$PROJECT_DIR$/lib/Complements/Database/Comun.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Complements/Database/ConfigDatabase.php" afterPath="$PROJECT_DIR$/lib/Complements/Database/ConfigDatabase.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Complements/Database/ConfigDatabaseTmp.php" afterPath="$PROJECT_DIR$/lib/Complements/Database/ConfigDatabaseTmp.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Complements/Database/Db.php" afterPath="$PROJECT_DIR$/lib/Complements/Database/Db.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Complements/Database/Main.php" afterPath="$PROJECT_DIR$/lib/Complements/Database/Main.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Complements/Database/Usuarios.php" afterPath="$PROJECT_DIR$/lib/Complements/Database/Usuarios.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Core/Commun/All.php" afterPath="$PROJECT_DIR$/lib/Core/Commun/All.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Core/Commun/Commun.php" afterPath="$PROJECT_DIR$/lib/Core/Commun/Commun.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Core/Commun/Constant.php" afterPath="$PROJECT_DIR$/lib/Core/Commun/Constant.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Core/Console/App.php" afterPath="$PROJECT_DIR$/lib/Core/Console/App.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Core/Console/AppCrud.php" afterPath="$PROJECT_DIR$/lib/Core/Console/AppCrud.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Core/Console/AppCrudVista.php" afterPath="$PROJECT_DIR$/lib/Core/Console/AppCrudVista.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Core/Router/Route.php" afterPath="$PROJECT_DIR$/lib/Core/Router/Route.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Core/Router/RouterGenerator.php" afterPath="$PROJECT_DIR$/lib/Core/Router/RouterGenerator.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Cache/AdminRouter.class.php" afterPath="$PROJECT_DIR$/src/Admin/Cache/AdminRouter.class.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Cache/AdminRouter.classTMP.php" afterPath="$PROJECT_DIR$/src/Admin/Cache/AdminRouter.classTMP.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Controller/GestionarController.php" afterPath="$PROJECT_DIR$/src/Admin/Controller/GestionarController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Controller/HomeController.php" afterPath="$PROJECT_DIR$/src/Admin/Controller/HomeController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Controller/LoginController.php" afterPath="$PROJECT_DIR$/src/Admin/Controller/LoginController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Controller/SegUsuariosController.php" afterPath="$PROJECT_DIR$/src/Admin/Controller/SegUsuariosController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Model/HoEntidadesModel.php" afterPath="$PROJECT_DIR$/src/Admin/Model/HoEntidadesModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Model/HoVistasModel.php" afterPath="$PROJECT_DIR$/src/Admin/Model/HoVistasModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Model/SegRolesModel.php" afterPath="$PROJECT_DIR$/src/Admin/Model/SegRolesModel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Controller/SegRolesController.php" afterPath="$PROJECT_DIR$/src/Admin/Controller/SegRolesController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Controller/TipoServicioController.php" afterPath="$PROJECT_DIR$/src/Admin/Controller/TipoServicioController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Model/SegUsuariosModel.php" afterPath="$PROJECT_DIR$/src/Admin/Model/SegUsuariosModel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Model/TipoServicioModel.php" afterPath="$PROJECT_DIR$/src/Admin/Model/TipoServicioModel.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Router/Router.xml" afterPath="$PROJECT_DIR$/src/Admin/Router/Router.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Templates/home/gestionar.php" afterPath="$PROJECT_DIR$/src/Admin/Templates/home/gestionar.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Templates/home/login.php" afterPath="$PROJECT_DIR$/src/Admin/Templates/home/login.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Templates/seguridad/segPerfil/perfil/asignarRolesPerfil.php" afterPath="$PROJECT_DIR$/src/Admin/Templates/seguridad/segPerfil/perfil/asignarRolesPerfil.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Templates/seguridad/segPerfil/perfil/form.php" afterPath="$PROJECT_DIR$/src/Admin/Templates/seguridad/segPerfil/perfil/form.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Templates/seguridad/segPerfil/perfil/index.php" afterPath="$PROJECT_DIR$/src/Admin/Templates/seguridad/segPerfil/perfil/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Templates/seguridad/segPerfil/perfil/listado.php" afterPath="$PROJECT_DIR$/src/Admin/Templates/seguridad/segPerfil/perfil/listado.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Templates/seguridad/segPerfil/perfil/listadoRoles.php" afterPath="$PROJECT_DIR$/src/Admin/Templates/seguridad/segPerfil/perfil/listadoRoles.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Templates/seguridad/segRoles/roles/form.php" afterPath="$PROJECT_DIR$/src/Admin/Templates/seguridad/segRoles/roles/form.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Templates/seguridad/segRoles/roles/index.php" afterPath="$PROJECT_DIR$/src/Admin/Templates/seguridad/segRoles/roles/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Templates/seguridad/segRoles/roles/listado.php" afterPath="$PROJECT_DIR$/src/Admin/Templates/seguridad/segRoles/roles/listado.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Templates/seguridad/segUsuarios/usuarios/form.php" afterPath="$PROJECT_DIR$/src/Admin/Templates/seguridad/segUsuarios/usuarios/form.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Templates/seguridad/segUsuarios/usuarios/index.php" afterPath="$PROJECT_DIR$/src/Admin/Templates/seguridad/segUsuarios/usuarios/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Templates/seguridad/segUsuarios/usuarios/listado.php" afterPath="$PROJECT_DIR$/src/Admin/Templates/seguridad/segUsuarios/usuarios/listado.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Templates/home/home.php" afterPath="$PROJECT_DIR$/src/Admin/Templates/home/home.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Templates/seguridad/segUsuarios/usuarios/auditoria.php" afterPath="$PROJECT_DIR$/src/Admin/Templates/seguridad/segUsuarios/usuarios/auditoria.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/theme/admin/base.php" afterPath="$PROJECT_DIR$/theme/admin/base.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/theme/admin/section/header.php" afterPath="$PROJECT_DIR$/theme/admin/section/header.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/theme/admin/section/modal.php" afterPath="$PROJECT_DIR$/theme/admin/section/modal.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/installed.json" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/theme/admin/section/inside.php" afterPath="$PROJECT_DIR$/theme/admin/section/inside.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/admin/dist/css/estilos.css" afterPath="$PROJECT_DIR$/web/admin/dist/css/estilos.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/admin/dist/js/config.js" afterPath="$PROJECT_DIR$/web/admin/dist/js/config.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/admin/dist/js/configBox3.js" afterPath="$PROJECT_DIR$/web/admin/dist/js/configBox3.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/admin/dist/js/core.js" afterPath="$PROJECT_DIR$/web/admin/dist/js/core.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/admin/dist/js/gestionTablas.js" afterPath="$PROJECT_DIR$/web/admin/dist/js/gestionTablas.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/admin/dist/js/vista.js" afterPath="$PROJECT_DIR$/web/admin/dist/js/vista.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/admin/dist/js/vistaRelacion.js" afterPath="$PROJECT_DIR$/web/admin/dist/js/vistaRelacion.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -109,48 +229,103 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="PruebaController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Admin/Controller/PruebaController.php">
+      <file leaf-file-name="GestionarController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Admin/Controller/GestionarController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="61" column="6" lean-forward="false" selection-start-line="61" selection-start-column="6" selection-end-line="61" selection-end-column="6" />
+            <state relative-caret-position="3757">
+              <caret line="225" column="16" lean-forward="false" selection-start-line="225" selection-start-column="14" selection-end-line="225" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AppCrudVista.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/Core/Console/AppCrudVista.php">
+      <file leaf-file-name="HoEntidadesModel.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Admin/Model/HoEntidadesModel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+            <state relative-caret-position="1173">
+              <caret line="70" column="66" lean-forward="false" selection-start-line="70" selection-start-column="66" selection-end-line="70" selection-end-column="66" />
               <folding>
-                <marker date="1510757943702" expanded="true" signature="45476:45999" ph="..." />
-                <marker date="1510757943702" expanded="true" signature="45760:45791" ph="..." />
-                <marker date="1510757943702" expanded="true" signature="45760:45926" ph="..." />
-                <marker date="1510757943702" expanded="true" signature="45862:45887" ph="..." />
-                <marker date="1510757943702" expanded="true" signature="46433:46441" ph="ó" />
+                <marker date="1510934221383" expanded="true" signature="897:934" ph="SELECT * FRO... ho_conexiones" />
+                <marker date="1510934221383" expanded="true" signature="1089:1134" ph="DELETE FROM " />
+                <marker date="1510934221383" expanded="true" signature="1618:1830" ph="INSERT INTO ho_entidades... " />
+                <marker date="1510934221383" expanded="true" signature="2393:2493" ph="SELECT * FRO... view_list_enti_regi" />
+                <marker date="1510934221383" expanded="true" signature="2912:3017" ph="SELECT * FRO... ${$this-&gt;tabla}" />
+                <marker date="1510934221383" expanded="true" signature="3375:3408" ph="CREATE TABLE... ${$data-&gt;entidad}" />
+                <marker date="1510934221383" expanded="true" signature="4733:4745" ph="ALTER TABLE ${$data-&gt;entidad}... " />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AppCrud.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/Core/Console/AppCrud.php">
+      <file leaf-file-name="menu.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/admin/dist/js/menu.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+            <state relative-caret-position="68">
+              <caret line="4" column="12" lean-forward="false" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+              <folding>
+                <marker date="1510845068581" expanded="true" signature="281:289" ph="Ó" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="configMenu.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web/admin/dist/js/configMenu.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-51">
+              <caret line="42" column="66" lean-forward="false" selection-start-line="42" selection-start-column="66" selection-end-line="42" selection-end-column="66" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <marker date="1511297115335" expanded="true" signature="5602:5608" ph=" " />
+                <marker date="1511297115335" expanded="true" signature="5608:5614" ph=" " />
+                <marker date="1511297115335" expanded="true" signature="6184:6201" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gestionTablas.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/admin/dist/js/gestionTablas.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3672">
+              <caret line="222" column="3" lean-forward="false" selection-start-line="222" selection-start-column="3" selection-end-line="222" selection-end-column="5" />
+              <folding>
+                <marker date="1511296777439" expanded="true" signature="1034:1040" ph=" " />
+                <marker date="1511296777439" expanded="true" signature="1040:1046" ph=" " />
+                <marker date="1511296777439" expanded="true" signature="1569:1578" ph="..." />
+                <marker date="1511296777439" expanded="true" signature="1639:1648" ph="..." />
+                <marker date="1511296777439" expanded="true" signature="1707:1716" ph="..." />
+                <marker date="1511296777439" expanded="true" signature="1804:1813" ph="..." />
+                <marker date="1511296777439" expanded="true" signature="1872:1881" ph="..." />
+                <marker date="1511296777439" expanded="true" signature="1941:1951" ph="..." />
+                <marker date="1511296777439" expanded="true" signature="2011:2020" ph="..." />
+                <marker date="1511296777439" expanded="true" signature="2269:2286" ph="..." />
+                <marker date="1511296777439" expanded="true" signature="9664:9739" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="estilos.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/admin/dist/css/estilos.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4505">
+              <caret line="265" column="5" lean-forward="false" selection-start-line="265" selection-start-column="1" selection-end-line="265" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="App.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/Core/Console/App.php">
+      <file leaf-file-name="vista.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/admin/dist/js/vista.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="24" column="8" lean-forward="false" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
-              <folding />
+            <state relative-caret-position="136">
+              <caret line="14" column="22" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="22" />
+              <folding>
+                <element signature="e#5125#5226#0" expanded="false" />
+                <element signature="e#6838#7391#0" expanded="false" />
+                <element signature="e#7423#7762#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -161,47 +336,51 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>priListaClick</find>
-      <find>listado</find>
-      <find>procesar</find>
-      <find>Opciones del sistema</find>
-      <find>getConfiguracionVista</find>
-      <find>vista_campo</find>
-      <find>mostrarSelectores</find>
-      <find>enviarUniversoTablas</find>
-      <find>sendVistaNuevaConfigurada</find>
-      <find>VA_6</find>
-      <find>selectVistaCampos</find>
-      <find>items</find>
-      <find>Model</find>
-      <find>runVistaNuevaConfigurada</find>
-      <find>Constant</find>
-      <find>runProductosShow</find>
-      <find>productossShow</find>
-      <find>LOG_</find>
-      <find>LOG_MODI</find>
-      <find>Constant::</find>
-      <find>tipo_estatus--estatus--id</find>
-      <find>var html</find>
-      <find>DataTable</find>
-      <find>relacionPadre</find>
-      <find>userId</find>
-      <find>Config.relacionPadre</find>
-      <find>execute</find>
-      <find>model</find>
-      <find>SegLogAccionesModel</find>
-      <find>utor:</find>
+      <find>activar</find>
+      <find>menuPrincipal</find>
+      <find>getEntidadesSeleccionadas</find>
+      <find>view_list_enti_regi</find>
+      <find>listadoUniversoTablas</find>
+      <find>runExtraerDetalleVistas</find>
+      <find>runEntidadesSeleccionadas</find>
+      <find>optEditarModelo</find>
+      <find>actRegresarVitaPrincipal</find>
+      <find>optGestorConfigMenu</find>
+      <find>addItemTabla</find>
+      <find>addItemPrimeraTabla</find>
+      <find>camposEntidad</find>
+      <find>menuFinal</find>
+      <find>addItem</find>
+      <find>regresar</find>
+      <find>primerMenu</find>
+      <find>delItem</find>
+      <find>deleteRows</find>
+      <find>plusPuntoMenu</find>
+      <find>agregarContenido</find>
+      <find>__</find>
+      <find>contaM1</find>
+      <find>addItemPrimerMenu</find>
+      <find>addItemMenu</find>
+      <find>tbody</find>
+      <find>tabs</find>
+      <find>ul</find>
+      <find>refres</find>
+      <find>dragable</find>
     </findStrings>
     <replaceStrings>
       <replace>preg_match</replace>
       <replace>strpos</replace>
       <replace>&quot;</replace>
       <replace>'</replace>
+      <replace>' optGestionMenu</replace>
+      <replace>optGestionMenu</replace>
+      <replace>primerMenu</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -210,36 +389,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Admin/Templates/seguridad/segUsuarios/usuarios/logSession.php" />
-        <option value="$PROJECT_DIR$/src/Admin/Templates/seguridad/segPerfil/perfil/asignarRolesPerfil.php" />
-        <option value="$PROJECT_DIR$/theme/admin/section/modal.php" />
-        <option value="$PROJECT_DIR$/src/Admin/Templates/seguridad/segUsuarios/usuarios/index.php" />
-        <option value="$PROJECT_DIR$/src/Admin/Model/SegLogAccionesModel.php" />
-        <option value="$PROJECT_DIR$/src/Admin/Model/SegUsuariosModel.php" />
-        <option value="$PROJECT_DIR$/src/Admin/Templates/seguridad/segUsuarios/usuarios/auditoria.php" />
-        <option value="$PROJECT_DIR$/src/Admin/Model/SegLogAutenticacionModel.php" />
-        <option value="$PROJECT_DIR$/src/Admin/Model/SegLogFallaModel.php" />
-        <option value="$PROJECT_DIR$/src/Admin/Model/SegLogFallasModel.php" />
-        <option value="$PROJECT_DIR$/composer.json" />
-        <option value="$PROJECT_DIR$/config/database.sql" />
-        <option value="$PROJECT_DIR$/lib/Core/Commun/Constant.php" />
-        <option value="$PROJECT_DIR$/lib/Core/Commun/All.php" />
-        <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/lib/Core/Router/Route.php" />
-        <option value="$PROJECT_DIR$/lib/Complements/Database/Comun.php" />
-        <option value="$PROJECT_DIR$/lib/Core/Commun/Logs.php" />
         <option value="$PROJECT_DIR$/logs/info_2017-11-13.log" />
         <option value="$PROJECT_DIR$/src/Admin/Templates/seguridad/segUsuarios/usuarios/logAcciones.php" />
-        <option value="$PROJECT_DIR$/theme/admin/section/header.php" />
-        <option value="$PROJECT_DIR$/src/Admin/Templates/home/gestionar.php" />
-        <option value="$PROJECT_DIR$/src/Admin/Router/Router.xml" />
         <option value="$PROJECT_DIR$/src/Admin/Controller/SegUsuariosController.php" />
         <option value="$PROJECT_DIR$/lib/Core/Router/RouterGenerator.php" />
         <option value="$PROJECT_DIR$/logs/error_2017-11-13.log" />
         <option value="$PROJECT_DIR$/src/Admin/Templates/seguridad/segUsuarios/usuarios/perfil.php" />
-        <option value="$PROJECT_DIR$/src/Admin/Templates/vistas/tipoServicio/tipo/listado.php" />
-        <option value="$PROJECT_DIR$/src/Admin/Controller/TipoServicioController.php" />
-        <option value="$PROJECT_DIR$/web/admin/dist/js/configBox3.js" />
         <option value="$PROJECT_DIR$/src/Admin/Model/HoVistasModel.php" />
         <option value="$PROJECT_DIR$/src/Admin/Controller/ProductosController.php" />
         <option value="$PROJECT_DIR$/lib/Complements/Database/Main.php" />
@@ -247,20 +402,44 @@
         <option value="$PROJECT_DIR$/src/Admin/Templates/vistas/productos/productoss/index.php" />
         <option value="$PROJECT_DIR$/src/Admin/Templates/vistas/productos/productoss/assent.php" />
         <option value="$PROJECT_DIR$/src/Admin/Templates/vistas/tipoEstatus/unida/index.php" />
-        <option value="$PROJECT_DIR$/lib/Core/Commun/Commun.php" />
         <option value="$PROJECT_DIR$/web/admin/dist/js/vistaRelacion.js" />
         <option value="$PROJECT_DIR$/src/Admin/Model/ProductosModel.php" />
-        <option value="$PROJECT_DIR$/src/Admin/Model/TipoServicioModel.php" />
         <option value="$PROJECT_DIR$/logs/info_2017-11-14.log" />
         <option value="$PROJECT_DIR$/lib/Complements/Database/Db.php" />
         <option value="$PROJECT_DIR$/config/app.ini" />
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/web/admin/dist/js/vista.js" />
         <option value="$PROJECT_DIR$/src/Admin/Model/PruebaModel.php" />
         <option value="$PROJECT_DIR$/src/Admin/Controller/PruebaController.php" />
-        <option value="$PROJECT_DIR$/lib/Core/Console/AppCrudVista.php" />
         <option value="$PROJECT_DIR$/lib/Core/Console/AppCrud.php" />
         <option value="$PROJECT_DIR$/lib/Core/Console/App.php" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/theme/admin/section/header.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Controller/LoginController.php" />
+        <option value="$PROJECT_DIR$/lib/Complements/Database/Usuarios.php" />
+        <option value="$PROJECT_DIR$/lib/Core/Console/AppCrudVista.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Model/SegUsuariosModel.php" />
+        <option value="$PROJECT_DIR$/theme/admin/section/inside.php" />
+        <option value="$PROJECT_DIR$/theme/admin/base.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Controller/MenuController.php" />
+        <option value="$PROJECT_DIR$/lib/Core/Commun/Commun.php" />
+        <option value="$PROJECT_DIR$/web/admin/dist/js/core.js" />
+        <option value="$PROJECT_DIR$/src/Admin/Templates/home/home.php" />
+        <option value="$USER_HOME$/Downloads/main.php" />
+        <option value="$USER_HOME$/Downloads/main (1).php" />
+        <option value="$PROJECT_DIR$/src/Admin/Templates/seguridad/segUsuarios/usuarios/auditoria.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Templates/vistas/tipoServicio/tipo/listado.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Controller/TipoServicioController.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Model/TipoServicioModel.php" />
+        <option value="$PROJECT_DIR$/web/admin/dist/js/vista.js" />
+        <option value="$PROJECT_DIR$/web/admin/dist/js/menu.js" />
+        <option value="$PROJECT_DIR$/web/admin/dist/js/configBox3.js" />
+        <option value="$PROJECT_DIR$/src/Admin/Templates/home/gestionar.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Model/HoEntidadesModel.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Controller/GestionarController.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Router/Router.xml" />
+        <option value="$PROJECT_DIR$/web/admin/dist/js/config.js" />
+        <option value="$PROJECT_DIR$/web/admin/dist/css/estilos.css" />
+        <option value="$PROJECT_DIR$/web/admin/dist/js/gestionTablas.js" />
+        <option value="$PROJECT_DIR$/web/admin/dist/js/configMenu.js" />
       </list>
     </option>
   </component>
@@ -314,7 +493,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -338,6 +516,13 @@
               <item name="hornero" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="lib" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Complements" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="hornero" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hornero" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="lib" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Complements" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Database" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="hornero" type="b2602c69:ProjectViewProjectNode" />
@@ -380,6 +565,71 @@
             <path>
               <item name="hornero" type="b2602c69:ProjectViewProjectNode" />
               <item name="hornero" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Admin" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Router" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="hornero" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hornero" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Admin" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Templates" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="hornero" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hornero" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Admin" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Templates" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="dashboard" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="hornero" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hornero" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Admin" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Templates" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="home" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="hornero" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hornero" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Admin" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Templates" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="seguridad" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="hornero" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hornero" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Admin" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Templates" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="vistas" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="hornero" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hornero" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Admin" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Templates" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="vistas" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="tipoServicio" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="hornero" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hornero" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Admin" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Templates" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="vistas" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="tipoServicio" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="tipo" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="hornero" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hornero" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="web" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
@@ -394,6 +644,14 @@
               <item name="web" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="admin" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="dist" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="hornero" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hornero" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="web" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="admin" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="dist" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="css" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="hornero" type="b2602c69:ProjectViewProjectNode" />
@@ -426,6 +684,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -438,10 +697,10 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\www\hornero\web\admin\dist\js" />
       <recent name="E:\www\hornero\src\Admin\Templates\seguridad\segUsuarios\usuarios" />
       <recent name="E:\www\hornero\src\Admin\Model" />
       <recent name="E:\www\ejemplos\navegador" />
-      <recent name="E:\www\hornero\web\admin\dist\js" />
       <recent name="C:\Users\Gregorio\Desktop" />
     </key>
   </component>
@@ -478,12 +737,13 @@
       <workItem from="1508853879273" duration="2083000" />
       <workItem from="1508858646806" duration="10567000" />
       <workItem from="1508935625765" duration="174405000" />
-      <workItem from="1509977114911" duration="182762000" />
+      <workItem from="1509977114911" duration="273745000" />
+      <workItem from="1511355530927" duration="26000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="452988000" />
+    <option name="totallyTimeSpent" value="543997000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -498,22 +758,23 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23676248" sideWeight="0.7299509" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18078668" sideWeight="0.7299509" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.05237316" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.4902439" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23676248" sideWeight="0.2700491" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1785174" sideWeight="0.2700491" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -573,421 +834,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Admin/Templates/vistas/tipoServicio/tipo/assent.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="15" lean-forward="false" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Templates/vistas/tipoServicio/tipo/listado.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/admin/dist/js/config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="27" column="69" lean-forward="false" selection-start-line="27" selection-start-column="69" selection-end-line="27" selection-end-column="69" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <marker date="1508270190380" expanded="true" signature="1298:1311" ph="..." />
-            <marker date="1508270190380" expanded="true" signature="1426:1441" ph="..." />
-            <marker date="1508270190380" expanded="true" signature="1628:1641" ph="..." />
-            <marker date="1508270190380" expanded="true" signature="5348:5354" ph=" " />
-            <marker date="1508270190380" expanded="true" signature="5830:5836" ph=" " />
-            <marker date="1508270190380" expanded="true" signature="6333:6339" ph=" " />
-            <marker date="1508270190380" expanded="true" signature="6762:6768" ph=" " />
-            <marker date="1508270190380" expanded="true" signature="7117:7123" ph=" " />
-            <marker date="1508270190380" expanded="true" signature="7598:7604" ph=" " />
-            <marker date="1508270190380" expanded="true" signature="9739:9753" ph="..." />
-            <marker date="1508270190380" expanded="true" signature="9847:9861" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/admin/dist/js/configBox3.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="200" column="121" lean-forward="false" selection-start-line="200" selection-start-column="121" selection-end-line="200" selection-end-column="121" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="e#532#692#0" expanded="false" />
-            <element signature="e#733#5810#0" expanded="false" />
-            <element signature="e#18264#18656#0" expanded="false" />
-            <element signature="e#18705#19030#0" expanded="false" />
-            <element signature="e#19091#19662#0" expanded="false" />
-            <element signature="e#20769#25248#0" expanded="false" />
-            <element signature="e#25391#25624#0" expanded="false" />
-            <element signature="e#26007#26195#0" expanded="false" />
-            <element signature="e#26223#26472#0" expanded="false" />
-            <element signature="e#27615#28315#0" expanded="false" />
-            <element signature="e#28351#29362#0" expanded="false" />
-            <element signature="e#29405#31049#0" expanded="false" />
-            <element signature="e#31090#31627#0" expanded="false" />
-            <element signature="e#31664#32187#0" expanded="false" />
-            <marker date="1510671478180" expanded="true" signature="2046:2052" ph=" " />
-            <marker date="1510671478180" expanded="true" signature="2171:2177" ph=" " />
-            <marker date="1510671478180" expanded="true" signature="3987:4004" ph="..." />
-            <marker date="1510671478180" expanded="true" signature="6706:6712" ph=" " />
-            <marker date="1510671478180" expanded="true" signature="8429:8441" ph="..." />
-            <marker date="1510671478180" expanded="true" signature="13205:13290" ph="..." />
-            <marker date="1510671478180" expanded="true" signature="19187:19215" ph="..." />
-            <marker date="1510671478180" expanded="true" signature="19467:19480" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Controller/TipoEstatusController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#38#67#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Router/Router.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="388" column="28" lean-forward="false" selection-start-line="388" selection-start-column="12" selection-end-line="388" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Model/HoVistasModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="28" column="5" lean-forward="false" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
-          <folding>
-            <marker date="1510671565980" expanded="true" signature="3259:3391" ph="SELECT * FRO... ${$this-&gt;tabla}" />
-            <marker date="1510671565980" expanded="true" signature="3952:4065" ph="SELECT * FRO... view_list_vist_gene" />
-            <marker date="1510671565980" expanded="true" signature="4159:4265" ph="SELECT * FRO... ho_entidades" />
-            <marker date="1510671565980" expanded="true" signature="4533:4671" ph="SELECT * FRO... ho_vistas" />
-            <marker date="1510671565980" expanded="true" signature="5068:5234" ph="SELECT entid... view_list_vist_gene" />
-            <marker date="1510671565980" expanded="true" signature="5273:5480" ph="SELECT entid... view_selec_grilla" />
-            <marker date="1510671565980" expanded="true" signature="6125:6381" ph="SELECT field... ho_vistas" />
-            <marker date="1510671565980" expanded="true" signature="6650:6769" ph="UPDATE ho_vi... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Core/Commun/All.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="6" lean-forward="false" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Core/Commun/Constant.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="48" column="26" lean-forward="false" selection-start-line="48" selection-start-column="26" selection-end-line="48" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Core/Router/RouterGenerator.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Complements/Database/Main.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="509">
-          <caret line="47" column="30" lean-forward="false" selection-start-line="47" selection-start-column="30" selection-end-line="47" selection-end-column="30" />
-          <folding>
-            <element signature="e#42#71#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Model/TipoEstatusModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-403">
-          <caret line="99" column="101" lean-forward="false" selection-start-line="99" selection-start-column="101" selection-end-line="99" selection-end-column="101" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Templates/vistas/productos/productoss/form.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="11" column="96" lean-forward="false" selection-start-line="11" selection-start-column="71" selection-end-line="11" selection-end-column="96" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Templates/vistas/productos/productoss/listado.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Templates/seguridad/segUsuarios/usuarios/auditoria.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="96" column="66" lean-forward="false" selection-start-line="96" selection-start-column="50" selection-end-line="96" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Templates/vistas/tipoServicio/tipo/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="458">
-          <caret line="33" column="21" lean-forward="false" selection-start-line="33" selection-start-column="21" selection-end-line="33" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Templates/vistas/tipoEstatus/unida/listado.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Templates/vistas/tipoEstatus/unida/form.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Templates/vistas/productos/productoss/assent.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="26" column="16" lean-forward="false" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Templates/vistas/productos/productoss/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="44" column="11" lean-forward="false" selection-start-line="44" selection-start-column="11" selection-end-line="44" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Templates/vistas/tipoEstatus/unida/assent.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="19" lean-forward="false" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Core/Commun/Commun.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="480" column="22" lean-forward="false" selection-start-line="480" selection-start-column="22" selection-end-line="480" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Controller/ProductosController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="63" column="45" lean-forward="false" selection-start-line="63" selection-start-column="45" selection-end-line="63" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/admin/dist/js/vistaRelacion.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-247">
-          <caret line="21" column="36" lean-forward="false" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Model/ProductosModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="56" selection-end-column="5" />
-          <folding>
-            <element signature="e#33#67#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Templates/vistas/tipoEstatus/unida/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="713">
-          <caret line="42" column="26" lean-forward="false" selection-start-line="42" selection-start-column="26" selection-end-line="42" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Controller/TipoServicioController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="63" column="60" lean-forward="false" selection-start-line="63" selection-start-column="60" selection-end-line="63" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Model/TipoServicioModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="49" column="19" lean-forward="false" selection-start-line="49" selection-start-column="19" selection-end-line="49" selection-end-column="19" />
-          <folding>
-            <element signature="e#33#67#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/error_2017-11-14.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="210" column="27" lean-forward="false" selection-start-line="210" selection-start-column="27" selection-end-line="212" selection-end-column="89" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/info_2017-11-14.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-18787">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/error_2017-11-13.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-155">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/info_2017-11-13.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Model/HoEntidadesModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-221">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1509991067451" expanded="true" signature="897:934" ph="SELECT * FRO... ho_conexiones" />
-            <marker date="1509991067451" expanded="true" signature="1089:1134" ph="DELETE FROM " />
-            <marker date="1509991067451" expanded="true" signature="1618:1830" ph="INSERT INTO ho_entidades... " />
-            <marker date="1509991067451" expanded="true" signature="2393:2493" ph="SELECT * FRO... view_list_enti_regi" />
-            <marker date="1509991067451" expanded="true" signature="2912:3017" ph="SELECT * FRO... ${$this-&gt;tabla}" />
-            <marker date="1509991067451" expanded="true" signature="3375:3408" ph="CREATE TABLE... ${$data-&gt;entidad}" />
-            <marker date="1509991067451" expanded="true" signature="4733:4745" ph="ALTER TABLE ${$data-&gt;entidad}... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Complements/Database/Comun.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="94" column="30" lean-forward="false" selection-start-line="94" selection-start-column="23" selection-end-line="94" selection-end-column="30" />
-          <folding>
-            <element signature="e#42#86#0#PHP" expanded="true" />
-            <marker date="1510593327267" expanded="true" signature="2561:2635" ph="INSERT INTO ${$this-&gt;tabla}... " />
-            <marker date="1510593327267" expanded="true" signature="4646:4658" ph="DELETE FROM " />
-            <marker date="1510593327267" expanded="true" signature="10117:10259" ph="SELECT (CASE... TABLES" />
-            <marker date="1510593327267" expanded="true" signature="10922:10936" ph="SELECT * FRO... ${$this-&gt;tabla}" />
-            <marker date="1510593327267" expanded="true" signature="12224:12269" ph="INSERT INTO debug... " />
-            <marker date="1510593327267" expanded="true" signature="12402:12475" ph="select isnul... seleccionfiltro" />
-            <marker date="1510593327267" expanded="true" signature="12685:12818" ph="INSERT INTO seleccionfiltro... " />
-            <marker date="1510593327267" expanded="true" signature="16654:16693" ph="SELECT * fro... TABLES" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Complements/Database/Db.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="117" column="44" lean-forward="false" selection-start-line="117" selection-start-column="44" selection-end-line="117" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/info_2017-11-15.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/app.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="17" lean-forward="false" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/admin/dist/js/vista.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="68" column="103" lean-forward="false" selection-start-line="68" selection-start-column="103" selection-end-line="68" selection-end-column="103" />
-          <folding>
-            <element signature="e#4763#4864#0" expanded="false" />
-            <element signature="e#6476#7029#0" expanded="false" />
-            <element signature="e#7061#7400#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Model/SegUsuariosModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#33#67#0#PHP" expanded="true" />
-            <marker date="1510577222061" expanded="true" signature="1829:1859" ph="Select count... ${$this-&gt;tabla}" />
-            <marker date="1510577222061" expanded="true" signature="2147:2264" ph="SELECT * FRO... ROW_NUMBER" />
-            <marker date="1510577222061" expanded="true" signature="2167:2251" ph="SELECT ROW_N... " />
-            <marker date="1510577222061" expanded="true" signature="4254:4290" ph="SELECT * FRO... ${$this-&gt;tabla}" />
-            <marker date="1510577222061" expanded="true" signature="4445:4519" ph="SELECT a.seg... seg_usuarios_perfil" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Model/PruebaModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="122" column="46" lean-forward="false" selection-start-line="122" selection-start-column="33" selection-end-line="122" selection-end-column="46" />
-          <folding>
-            <element signature="e#33#67#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Admin/Model/SegRolesModel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="348">
@@ -1031,14 +877,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Controller/GestionarController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="228" column="55" lean-forward="false" selection-start-line="228" selection-start-column="55" selection-end-line="228" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Admin/Model/SegLogAutenticacionModel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-119">
@@ -1061,25 +899,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Controller/PruebaController.php">
+    <entry file="file://$PROJECT_DIR$/theme/admin/section/header.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="61" column="6" lean-forward="false" selection-start-line="61" selection-start-column="6" selection-end-line="61" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Core/Console/AppCrudVista.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-          <folding>
-            <marker date="1510757943702" expanded="true" signature="45476:45999" ph="..." />
-            <marker date="1510757943702" expanded="true" signature="45760:45791" ph="..." />
-            <marker date="1510757943702" expanded="true" signature="45760:45926" ph="..." />
-            <marker date="1510757943702" expanded="true" signature="45862:45887" ph="..." />
-            <marker date="1510757943702" expanded="true" signature="46433:46441" ph="ó" />
-          </folding>
+        <state relative-caret-position="340">
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1094,8 +917,451 @@
     <entry file="file://$PROJECT_DIR$/lib/Core/Console/App.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
-          <caret line="24" column="8" lean-forward="false" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
+          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="19" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Controller/ProductosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="407">
+          <caret line="65" column="48" lean-forward="false" selection-start-line="65" selection-start-column="48" selection-end-line="65" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Core/Commun/All.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="6" lean-forward="false" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Core/Commun/Security.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="21" column="20" lean-forward="false" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Controller/PruebaController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="80" column="6" lean-forward="false" selection-start-line="80" selection-start-column="6" selection-end-line="80" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Core/Console/AppCrudVista.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="241" column="10" lean-forward="false" selection-start-line="241" selection-start-column="10" selection-end-line="241" selection-end-column="10" />
+          <folding>
+            <marker date="1510772588673" expanded="true" signature="45478:46001" ph="..." />
+            <marker date="1510772588673" expanded="true" signature="45762:45793" ph="..." />
+            <marker date="1510772588673" expanded="true" signature="45762:45928" ph="..." />
+            <marker date="1510772588673" expanded="true" signature="45864:45889" ph="..." />
+            <marker date="1510772588673" expanded="true" signature="46435:46443" ph="ó" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Model/LoginModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Model/ProductosModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="31" column="5" lean-forward="false" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="13" />
+          <folding>
+            <marker date="1510766255297" expanded="true" signature="1580:1610" ph="Select count... ${$this-&gt;tabla}" />
+            <marker date="1510766255297" expanded="true" signature="1897:2009" ph="SELECT * FRO... ROW_NUMBER" />
+            <marker date="1510766255297" expanded="true" signature="1912:1996" ph="SELECT ROW_N... " />
+            <marker date="1510766255297" expanded="true" signature="3589:3629" ph="SELECT * FRO... ${$this-&gt;tabla}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Controller/LoginController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="467">
+          <caret line="93" column="51" lean-forward="false" selection-start-line="93" selection-start-column="51" selection-end-line="93" selection-end-column="51" />
+          <folding>
+            <element signature="e#38#73#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Complements/Database/Usuarios.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="95" column="9" lean-forward="false" selection-start-line="88" selection-start-column="8" selection-end-line="95" selection-end-column="9" />
+          <folding>
+            <element signature="e#524#3166#0#PHP" expanded="false" />
+            <marker date="1510771994680" expanded="true" signature="958:1077" ph="select id,cu... seg_usuarios" />
+            <marker date="1510771994680" expanded="true" signature="1483:1663" ph="select id fr... seg_usuarios" />
+            <marker date="1510771994680" expanded="true" signature="1831:1957" ph="Update seg_u... " />
+            <marker date="1510771994680" expanded="true" signature="2217:2323" ph="Update seg_u... " />
+            <marker date="1510771994680" expanded="true" signature="2571:2690" ph="Update seg_u... " />
+            <marker date="1510771994680" expanded="true" signature="3227:3267" ph="select * fro... view_seguridad" />
+            <marker date="1510771994680" expanded="true" signature="4070:4093" ph="UPDATE seg_u... " />
+            <marker date="1510771994680" expanded="true" signature="4907:5037" ph="INSERT INTO seg_usuarios... " />
+            <marker date="1510771994680" expanded="true" signature="5765:5839" ph="DELETE FROM " />
+            <marker date="1510771994680" expanded="true" signature="5991:6067" ph="SELECT * FRO... seg_usuarios" />
+            <marker date="1510771994680" expanded="true" signature="6533:6609" ph="SELECT * FRO... seg_usuarios" />
+            <marker date="1510771994680" expanded="true" signature="7048:7103" ph="SELECT * FRO... seg_usuarios" />
+            <marker date="1510771994680" expanded="true" signature="7506:7549" ph="select * fro... SegUsuarios" />
+            <marker date="1510771994680" expanded="true" signature="7871:7940" ph="UPDATE seg_u... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Controller/SegUsuariosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="373">
+          <caret line="206" column="79" lean-forward="false" selection-start-line="206" selection-start-column="79" selection-end-line="206" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Model/SegUsuariosModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="509">
+          <caret line="197" column="27" lean-forward="false" selection-start-line="197" selection-start-column="27" selection-end-line="197" selection-end-column="27" />
+          <folding>
+            <element signature="e#33#67#0#PHP" expanded="true" />
+            <element signature="e#402#979#0#PHP" expanded="false" />
+            <element signature="e#985#1075#0#PHP" expanded="false" />
+            <element signature="e#1080#1195#0#PHP" expanded="false" />
+            <element signature="e#1200#1420#0#PHP" expanded="false" />
+            <element signature="e#1424#3245#0#PHP" expanded="false" />
+            <element signature="e#3251#3360#0#PHP" expanded="false" />
+            <element signature="e#3365#4078#0#PHP" expanded="false" />
+            <element signature="e#4084#4189#0#PHP" expanded="false" />
+            <element signature="e#4194#4905#0#PHP" expanded="false" />
+            <element signature="e#4911#5014#0#PHP" expanded="false" />
+            <element signature="e#5019#5463#0#PHP" expanded="false" />
+            <element signature="e#5469#5576#0#PHP" expanded="false" />
+            <element signature="e#5581#6212#0#PHP" expanded="false" />
+            <marker date="1510774600500" expanded="true" signature="1829:1859" ph="Select count... ${$this-&gt;tabla}" />
+            <marker date="1510774600500" expanded="true" signature="2147:2264" ph="SELECT * FRO... ROW_NUMBER" />
+            <marker date="1510774600500" expanded="true" signature="2167:2251" ph="SELECT ROW_N... " />
+            <marker date="1510774600500" expanded="true" signature="4254:4290" ph="SELECT * FRO... ${$this-&gt;tabla}" />
+            <marker date="1510774600500" expanded="true" signature="4445:4519" ph="SELECT a.seg... seg_usuarios_perfil" />
+            <marker date="1510774600500" expanded="true" signature="6277:6322" ph="select * fro... view_seguridad" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Complements/Database/Comun.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="139" column="0" lean-forward="false" selection-start-line="139" selection-start-column="0" selection-end-line="139" selection-end-column="0" />
+          <folding>
+            <element signature="e#42#86#0#PHP" expanded="true" />
+            <marker date="1510593327267" expanded="true" signature="2561:2635" ph="INSERT INTO ${$this-&gt;tabla}... " />
+            <marker date="1510593327267" expanded="true" signature="4646:4658" ph="DELETE FROM " />
+            <marker date="1510593327267" expanded="true" signature="10117:10259" ph="SELECT (CASE... TABLES" />
+            <marker date="1510593327267" expanded="true" signature="10922:10936" ph="SELECT * FRO... ${$this-&gt;tabla}" />
+            <marker date="1510593327267" expanded="true" signature="12224:12269" ph="INSERT INTO debug... " />
+            <marker date="1510593327267" expanded="true" signature="12402:12475" ph="select isnul... seleccionfiltro" />
+            <marker date="1510593327267" expanded="true" signature="12685:12818" ph="INSERT INTO seleccionfiltro... " />
+            <marker date="1510593327267" expanded="true" signature="16654:16693" ph="SELECT * fro... TABLES" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/theme/admin/section/inside.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="33">
+          <caret line="26" column="60" lean-forward="false" selection-start-line="26" selection-start-column="56" selection-end-line="26" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/theme/admin/base.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="36" column="30" lean-forward="false" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Core/Commun/Commun.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="424">
+          <caret line="449" column="18" lean-forward="false" selection-start-line="449" selection-start-column="18" selection-end-line="449" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="68">
+            <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="8" selection-end-column="24" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/main.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="952">
+          <caret line="61" column="58" lean-forward="false" selection-start-line="61" selection-start-column="7" selection-end-line="61" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/main (1).php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="52" column="9" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="62" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Templates/seguridad/segUsuarios/usuarios/logAcciones.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="43" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Templates/seguridad/segUsuarios/usuarios/auditoria.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="354">
+          <caret line="58" column="33" lean-forward="false" selection-start-line="58" selection-start-column="27" selection-end-line="58" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ejemplos/dhtml/dhtmlxGrid_v51_pro_eval/sources/dhtmlxGrid/codebase/ext/dhtmlxgrid_export.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="8" column="27" lean-forward="false" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ejemplos/dhtml/dhtmlxSuite/codebase/dhtmlx.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="902" column="7" lean-forward="true" selection-start-line="902" selection-start-column="7" selection-end-line="902" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Controller/MenuController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="28" column="28" lean-forward="false" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="28" />
+          <folding>
+            <element signature="e#39#68#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Templates/vistas/tipoServicio/tipo/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="373">
+          <caret line="33" column="20" lean-forward="false" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Templates/vistas/tipoServicio/tipo/listado.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Controller/TipoServicioController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-749">
+          <caret line="64" column="76" lean-forward="false" selection-start-line="64" selection-start-column="76" selection-end-line="64" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Model/TipoServicioModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-392">
+          <caret line="50" column="22" lean-forward="false" selection-start-line="50" selection-start-column="17" selection-end-line="50" selection-end-column="22" />
+          <folding>
+            <marker date="1510865025114" expanded="true" signature="1371:1401" ph="Select count... ${$this-&gt;tabla}" />
+            <marker date="1510865025114" expanded="true" signature="1672:1784" ph="SELECT * FRO... ROW_NUMBER" />
+            <marker date="1510865025114" expanded="true" signature="1687:1771" ph="SELECT ROW_N... " />
+            <marker date="1510865025114" expanded="true" signature="3522:3562" ph="SELECT * FRO... ${$this-&gt;tabla}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Templates/home/home.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="21" lean-forward="false" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/database.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="173" column="4" lean-forward="false" selection-start-line="173" selection-start-column="4" selection-end-line="176" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Templates/home/gestionar.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="107" column="102" lean-forward="false" selection-start-line="107" selection-start-column="102" selection-end-line="107" selection-end-column="102" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Controller/GestionarController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3757">
+          <caret line="225" column="16" lean-forward="false" selection-start-line="225" selection-start-column="14" selection-end-line="225" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/admin/dist/js/configBox2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="27" column="85" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/admin/dist/js/core.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-17">
+          <caret line="30" column="25" lean-forward="false" selection-start-line="30" selection-start-column="7" selection-end-line="30" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/admin/dist/js/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1105">
+          <caret line="65" column="4" lean-forward="false" selection-start-line="65" selection-start-column="4" selection-end-line="65" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Router/Router.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="10" column="19" lean-forward="false" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/admin/dist/js/configBox3.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3825">
+          <caret line="225" column="15" lean-forward="true" selection-start-line="225" selection-start-column="15" selection-end-line="225" selection-end-column="15" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+            <element signature="e#18264#18656#0" expanded="false" />
+            <element signature="e#18705#19030#0" expanded="false" />
+            <element signature="e#19091#19662#0" expanded="false" />
+            <element signature="e#20769#25248#0" expanded="false" />
+            <element signature="e#25391#25624#0" expanded="false" />
+            <element signature="e#26007#26195#0" expanded="false" />
+            <element signature="e#26223#26472#0" expanded="false" />
+            <element signature="e#27615#28315#0" expanded="false" />
+            <element signature="e#28351#29362#0" expanded="false" />
+            <marker date="1510867329567" expanded="true" signature="2046:2052" ph=" " />
+            <marker date="1510867329567" expanded="true" signature="2171:2177" ph=" " />
+            <marker date="1510867329567" expanded="true" signature="3987:4004" ph="..." />
+            <marker date="1510867329567" expanded="true" signature="6706:6712" ph=" " />
+            <marker date="1510867329567" expanded="true" signature="8429:8441" ph="..." />
+            <marker date="1510867329567" expanded="true" signature="13205:13290" ph="..." />
+            <marker date="1510867329567" expanded="true" signature="19187:19215" ph="..." />
+            <marker date="1510867329567" expanded="true" signature="19467:19480" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/admin/dist/js/vista.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="14" column="22" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="22" />
+          <folding>
+            <element signature="e#5125#5226#0" expanded="false" />
+            <element signature="e#6838#7391#0" expanded="false" />
+            <element signature="e#7423#7762#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Model/HoEntidadesModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1173">
+          <caret line="70" column="66" lean-forward="false" selection-start-line="70" selection-start-column="66" selection-end-line="70" selection-end-column="66" />
+          <folding>
+            <marker date="1510934221383" expanded="true" signature="897:934" ph="SELECT * FRO... ho_conexiones" />
+            <marker date="1510934221383" expanded="true" signature="1089:1134" ph="DELETE FROM " />
+            <marker date="1510934221383" expanded="true" signature="1618:1830" ph="INSERT INTO ho_entidades... " />
+            <marker date="1510934221383" expanded="true" signature="2393:2493" ph="SELECT * FRO... view_list_enti_regi" />
+            <marker date="1510934221383" expanded="true" signature="2912:3017" ph="SELECT * FRO... ${$this-&gt;tabla}" />
+            <marker date="1510934221383" expanded="true" signature="3375:3408" ph="CREATE TABLE... ${$data-&gt;entidad}" />
+            <marker date="1510934221383" expanded="true" signature="4733:4745" ph="ALTER TABLE ${$data-&gt;entidad}... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/admin/dist/css/estilos.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4505">
+          <caret line="265" column="5" lean-forward="false" selection-start-line="265" selection-start-column="1" selection-end-line="265" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/admin/dist/js/gestionTablas.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3672">
+          <caret line="222" column="3" lean-forward="false" selection-start-line="222" selection-start-column="3" selection-end-line="222" selection-end-column="5" />
+          <folding>
+            <marker date="1511296777439" expanded="true" signature="1034:1040" ph=" " />
+            <marker date="1511296777439" expanded="true" signature="1040:1046" ph=" " />
+            <marker date="1511296777439" expanded="true" signature="1569:1578" ph="..." />
+            <marker date="1511296777439" expanded="true" signature="1639:1648" ph="..." />
+            <marker date="1511296777439" expanded="true" signature="1707:1716" ph="..." />
+            <marker date="1511296777439" expanded="true" signature="1804:1813" ph="..." />
+            <marker date="1511296777439" expanded="true" signature="1872:1881" ph="..." />
+            <marker date="1511296777439" expanded="true" signature="1941:1951" ph="..." />
+            <marker date="1511296777439" expanded="true" signature="2011:2020" ph="..." />
+            <marker date="1511296777439" expanded="true" signature="2269:2286" ph="..." />
+            <marker date="1511296777439" expanded="true" signature="9664:9739" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/admin/dist/js/menu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="12" lean-forward="false" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+          <folding>
+            <marker date="1510845068581" expanded="true" signature="281:289" ph="Ó" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/admin/dist/js/configMenu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-51">
+          <caret line="42" column="66" lean-forward="false" selection-start-line="42" selection-start-column="66" selection-end-line="42" selection-end-column="66" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <marker date="1511297115335" expanded="true" signature="5602:5608" ph=" " />
+            <marker date="1511297115335" expanded="true" signature="5608:5614" ph=" " />
+            <marker date="1511297115335" expanded="true" signature="6184:6201" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

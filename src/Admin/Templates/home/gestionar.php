@@ -31,9 +31,9 @@ Gestionar del Generador
                                 <a class="btn btn-block btn-social btn-github" id="optCrearModelo">
                                     <i class="fa fa-certificate"></i> Gestionar Modelos
                                 </a>
-                                <!--a class="btn btn-block btn-social btn-github" id="optEditarModelo">
+                                <a class="btn btn-block btn-social btn-github" id="optGestionMenu">
                                     <i class="fa fa-bars"></i> Gestion de Menu
-                                </a-->
+                                </a>
                             </div>
                         </div>
                         <!-- /.box -->
@@ -99,6 +99,32 @@ Gestionar del Generador
                         </div>
                     </div>
                 </div>
+                <div class="box-body pad table-responsive" id="box4" style="display: none">
+                    <div class="col-md-4" id="menuPrincipal">
+                        <!-- social buttons -->
+
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title" id="menuPrincipalTitulo"> Opciones para el menu.</h3>
+                            </div>
+                            <div class="box-body" id="menuPrincipalBody">
+                                cargando ..
+                            </div>
+
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                    <div class="col-md-8" id="menuSegundario" style="display: none">
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title" id="menuSegundarioTilulo"> Cargando ... </h3>
+                            </div>
+                            <div class="box-body" id="menuSegundarioBody">
+                                Cargando ...
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- /.box -->
         </div>
@@ -114,6 +140,7 @@ Gestionar del Generador
 <script type="text/javascript">
     $(function () {
         Config.main();
+        Core.Menu.main();
     });
 </script>
 <?php $this->end()?>

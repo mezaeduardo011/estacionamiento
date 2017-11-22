@@ -31,26 +31,32 @@ Core.Vista = {
         var tmp = camp.substring(0,camp.length-1);
 
         Core.Vista.myGrid = new dhtmlXGridObject('dataJPH'+show.module);
-        Core.Vista.myGrid.enablePaging(true,10,5,'pagingArea'+show.module,true,"recinfoArea");
-        //Core.myGrid.cells("a").setText(show.tableTitle);
-        /*myLayout.cells("a").attachStatusBar({
-            text: "<div id='pagingArea'></div>",
-            paging: true
-        });*/
-
-        //var myGrid = myLayout.cells("a").attachGrid();
+        Core.Vista.myGrid.i18n.paging={
+            results:"Resultados",
+            records:"Registros de ",
+            to:" a ",
+            page:"Página ",
+            perpage:"filas por página",
+            first:"Para la primera página",
+            previous:"Pagina anterior",
+            found:"Registros encontrados",
+            next:"Siguiente página",
+            last:"Para la última página",
+            of:" de ",
+            notfound:"No se encontrarón archivos"
+        };
+        Core.Vista.myGrid.enablePaging(true,500,5,'pagingArea'+show.module,true);
         Core.Vista.myGrid.setImagePath("/admin/dhtmlxSuite/codebase/imgs/");
         // Filtro de la tabla
         Core.Vista.myGrid.attachHeader(show.filter);
+        //Core.Vista.myGrid.setColSorting("server");
         // Campos id Mostrar
-        //myGrid.setColumnIds("col1,col2,col3");
-
-        //Core.myGrid.enablePaging(true, 10, 3, "pagingArea");
-        Core.Vista.myGrid.setPagingSkin("toolbar");
+        Core.Vista.myGrid.setPagingSkin("modern");
         Core.Vista.myGrid.enableAutoWidth(show.autoWidth);
-        Core.Vista.myGrid.enableMultiselect(show.multiSelect);
+        //Core.Vista.myGrid.enableMultiselect(show.multiSelect);
         Core.Vista.myGrid.attachEvent("onRowSelect", Core.Vista.doOnRowSelected);
-        Core.Vista.myGrid.submitOnlyRowID(true);
+        //Core.Vista.myGrid.submitOnlyRowID(true);
+        //Core.Vista.myGrid.attachEvent("onBeforeSorting",Core.Vista.sortGridOnServer);
         Core.Vista.myGrid.init();
         Core.Vista.myGrid.enableSmartRendering(true);
         var gridQString = '/'+show.module.toLowerCase()+'Listar?obj='+window.btoa(tmp)+''; // save query string to global variable (see step 5)
@@ -64,6 +70,9 @@ Core.Vista = {
 
         localStorage.removeItem('id');
         localStorage.setItem('temp',temp);
+    },
+    sortGridOnServer: function (ind,gridObj,direct) {
+        alert(ind+'--'+gridObj+'--'+direct);
     },
     doOnRowSelected: function (id) {
         // Proceso mediante el cual permite cancelar peticiones enviadas y le da prioridad a las nuevas

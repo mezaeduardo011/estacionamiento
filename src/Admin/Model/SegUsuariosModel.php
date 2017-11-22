@@ -183,5 +183,19 @@ class SegUsuariosModel extends Main
         $this->segLogAccionesModel->cargaAcciones($this->tabla, $datos->id,'', json_encode($datos), $user->id,Constant::LOG_MODI);
         return $val;
    }
+
+    public function reCargarRoles($id)
+    {
+        $query = "select  roles from view_seguridad WHERE id = ".$id;
+        $this->db->get($query);
+        $rows = $this->db->numRows();
+
+        if ($rows > 0) {
+            while ($row = $this->db->fetch()) {
+                $this->roles[] = $row->roles;
+            }
+        }
+        return $this->roles;
+    }
 }
 ?>

@@ -95,6 +95,8 @@ trait Usuarios
             }
         }
     }
+
+
     /**
      * Verificar si existe roles asociados a ese perfil 
      * @param string $rol

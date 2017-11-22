@@ -1,8 +1,4 @@
 <?php
-namespace APP\Admin\Controller;
-use JPH\Core\Commun\Constant;
-use JPH\Core\Commun\Security;
-use APP\Admin\Model AS Model;
 
 /**
  * Generador de codigo de Controller de Hornero 1.0
@@ -11,6 +7,11 @@ use APP\Admin\Model AS Model;
  * @created: 28/08/2017
  * @version: 1.0
  */
+
+namespace APP\Admin\Controller;
+use JPH\Core\Commun\{All,Security};
+use APP\Admin\Model AS Model;
+
 class LoginController extends Controller
 {
     public $model;
@@ -123,7 +124,7 @@ class LoginController extends Controller
         $nav = $this->detect();
         $ip = $_SERVER['REMOTE_ADDR'];
         $bw = $nav['browser'].' '.$nav['version'].' '.$nav['os'];
-        $sistema =  Constant::FW;
+        $sistema =  parent::FW;
         $this->segLogin->segLogCreateLogin($ip,$bw,$accion,$sistema,$usuario_id);
     }
 

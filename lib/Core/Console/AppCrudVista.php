@@ -239,7 +239,7 @@ class AppCrudVista extends App
         fputs($ar, '      $valor[\'head\']=$result[\'campos\'];'.PHP_EOL);
         fputs($ar, '      $valor[\'rows\']=$rows; '.PHP_EOL);
         fputs($ar, '      $this->json($valor);'.PHP_EOL);
-        fputs($ar, '      $this->json($result);'.PHP_EOL);
+        //fputs($ar, '      $this->json($result);'.PHP_EOL);
         fputs($ar, '   }'.PHP_EOL.PHP_EOL);
 
         fputs($ar, '    /**'.PHP_EOL);

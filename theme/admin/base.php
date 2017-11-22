@@ -35,7 +35,6 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-
 	<?=$this->insert('section/footer') ?>
     <?=$this->insert('section/modal') ?>
 </div>
@@ -45,6 +44,7 @@
 <?php $this->insert('section/script') ?>
 
 <!-- javascript extra -->
+
 <?=$this->section('addJs')?>
 </body>
 </html>

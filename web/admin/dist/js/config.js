@@ -19,7 +19,7 @@ Config = {
         // Opciones del menu
         var optBaseDatos = $('#box1 #optBaseDatos');
         var optCrearModelo = $('#box1 #optCrearModelo');
-        var optEditarModelo = $('#box1 #optEditarModelo');
+
         console.log('Loading del Config.menu');
         // Accion del menu Base de datos
         optBaseDatos.click(function(){
@@ -49,23 +49,15 @@ Config = {
             Config.Box2.configurarUniversoTablas(texto);
             Config.desactivarSegundo('box2');
         });
-        // Accion del menu, Editar entidad existente
-        optEditarModelo.click(function(){
-            Config.html = '';
-            Config.html +=' <a class="btn btn-block btn-social btn-github" id="optEditarUniverso">';
-            Config.html +='     <i class="fa fa-database"></i> Editar el universo de las tablas';
-            Config.html +=' </a>';
-            Config.html +=' <a class="btn btn-block btn-social btn-github" id="optEditarVistas">';
-            Config.html +='     <i class="fa fa-plug"></i> Editar las Vistas existentes';
-            Config.html +=' </a>';
+        // Gestionador de Menu
+        Config.GestionMenu.main();
 
-            // Agregar contenido a la vista secundaria
-            Config.agregarContenido(optEditarModelo.text(), Config.html,'box1');
-            $('#box1 #menuPrincipal .btn-github').removeClass('active')
-            optEditarModelo.addClass('active');
-            Config.activarSegundo('box1');
-        });
     },
+    /** Permite agregar contenido en el segundo contenedor de cada bloque
+     * @param String titulo, el contenido del titulo para mostrar
+     * @param String contenido, el bloque que desea activar
+     * @param String contenedor, el contenido en html que vas a cargar
+     */
     agregarContenido: function (titulo, contenido, contenedor) {
         console.log('Loading del Config.agregarContenido '+contenedor);
         $('#'+contenedor+' #menuSegundarioTilulo').html(' ').html(titulo);
@@ -211,7 +203,7 @@ Config = {
     },
 
     actRegresarVitaPrincipal: function () {
-        var optRegresarVitaPrincipal = $('#box2 #menuPrincipalBody #optRegresarVitaPrincipal');
+        var optRegresarVitaPrincipal = $('#menuPrincipalBody #optRegresarVitaPrincipal');
         optRegresarVitaPrincipal.click(function () {
             Config.regresarVitaPrincipal();
             informar('regresar a la vista principal', 'informar')
@@ -220,11 +212,12 @@ Config = {
     regresarVitaPrincipal: function(){
         console.log('Loading del Config.activarSegundoBloque');
         $('#box1').show(900);
-        $('#box3, #box2, #box2 #menuPrincipal').hide(900);
+        $('#box4, #box3, #box2, #box2 #menuPrincipal').hide(900);
     },
 
 
 };
-document.write("<"+"script type='text/javascript' src='admin/dist/js/configBox2.js'><"+"/script>")
-document.write("<"+"script type='text/javascript' src='admin/dist/js/configBox3.js'><"+"/script>")
-document.write("<"+"script type='text/javascript' src='admin/dist/js/gestionTablas.js'><"+"/script>")
+document.write("<script type='text/javascript' src='admin/dist/js/configMenu.js'></script>");
+document.write("<script type='text/javascript' src='admin/dist/js/configBox2.js'></script>");
+document.write("<script type='text/javascript' src='admin/dist/js/configBox3.js'></script>");
+document.write("<script type='text/javascript' src='admin/dist/js/gestionTablas.js'></script>");

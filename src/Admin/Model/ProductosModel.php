@@ -5,8 +5,8 @@ use JPH\Core\Commun\{All,Security};
 /**
  * Generador de codigo del Modelo de la App Admin
  * @propiedad: Hornero 1.0
- * @utor: Gregorio Bolivar <elalconxvii@gmail.com>
- * @created: 14/11/2017
+ * @autor: Ing. Gregorio Bolivar <elalconxvii@gmail.com>
+ * @created: 15/11/2017
  * @version: 1.0
  */ 
 
@@ -48,18 +48,17 @@ class ProductosModel extends Main
         $count = $request->count;
     else
         $count = 100;
-
     // Elemento cuando hay relacion
-    $relation = All::formatRelacio($request->relacion);
+    $relation = All::formatRelacio(@$request->relacion);
     $where = '';
-    if(count($relation)>0){
+    if(!empty($relation[2])){
         $where="  WHERE $relation[1]=$relation[2]";
     }
     // Primero extraer la cantidad de registros
-    $sqlCount = "Select count(*) as items FROM ".$this->tabla.$where;
+    $sqlCount = "Select count(*) as items FROM ".$this->tabla.$where ;
     $resCount = $this->executeQuery($sqlCount);
     //create query to products table
-    $sql = implode(',', $result['select']).", id FROM ".$this->tabla.$where;
+    $sql = implode(',', $result['select']).", id FROM ".$this->tabla.$where ;
     //if this is the first query - get total number of records in the query result
     $sqlCount = "SELECT * FROM (SELECT ROW_NUMBER() OVER( ORDER BY id ASC ) AS row, ".$resCount[0]->items." AS cnt, $sql ) AS sub";
     $resQuery = $this->get($sqlCount);
@@ -137,7 +136,7 @@ class ProductosModel extends Main
       $val = $this->borrar();
       // Registro de Auditoria
       $user = $this->getSession('usuario');
-      $this->segLogAccionesModel->cargaAcciones($this->tabla, $valor,'','', $user->id,parent::LOG_BAJA);
+      $this->segLogAccionesModel->cargaAcciones($this->tabla, $valor,'','', $user->id, parent::LOG_BAJA);
       return $val;
    }
 

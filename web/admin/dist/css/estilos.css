@@ -71,12 +71,10 @@ li.dropdown .notifications-menu
     
 }
 .sidebar-mini.sidebar-collapse .content-wrapper, .sidebar-mini.sidebar-collapse .right-side, .sidebar-mini.sidebar-collapse .main-footer {
-    margin-left: 0px !important;
-    
+   /* margin-left: 0px !important;*/
 }
 .main-sidebar {
-    
-    left: -52px;
+   /* left: -52px;*/
 }
 .sidebar-mini.sidebar-collapse .main-header .navbar {
     margin-left: 0px;
@@ -188,4 +186,83 @@ input#extra{
 }
 .optionAction .i{
     margin-top: 0px; margin-bottom: 0px; !important
+}
+
+.capit{
+    text-transform: capitalize;
+}
+
+#box4 .tree, .tree ul {
+    margin:0;
+    padding:0;
+    list-style:none
+}
+#box4 .tree ul {
+    margin-left:1em;
+    position:relative
+}
+#box4 .tree ul ul {
+    margin-left:.5em
+}
+#box4 .tree ul:before {
+    content:"";
+    display:block;
+    width:0;
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    border-left:1px solid
+}
+#box4 .tree li {
+    margin:0;
+    padding:0 1em;
+    line-height:2em;
+    color:#369;
+    font-weight:700;
+    position:relative
+}
+#box4 .tree ul li:before {
+    content:"";
+    display:block;
+    width:10px;
+    height:0;
+    border-top:1px solid;
+    margin-top:-1px;
+    position:absolute;
+    top:1em;
+    left:0
+}
+#box4 .tree ul li:last-child:before {
+    background:#fff;
+    height:auto;
+    top:1em;
+    bottom:0
+}
+.indicator {
+    margin-right:5px;
+}
+#box4 .tree li a {
+    text-decoration: none;
+    color:#369;
+}
+#box4 .tree li button, .tree li button:active, .tree li button:focus  {
+    text-decoration: none;
+    color:#369;
+    border:none;
+    background:transparent;
+    margin:0px 0px 0px 0px;
+    padding:0px 0px 0px 0px;
+    outline: 0;
+}
+
+#box4 div.menuFinal  {
+    text-align: left;
+    border: 1px solid #D9D9D9;
+    margin-top: -10px;
+    padding-left: 5px;
+
+}
+#box4 .boxItemSubMenu{
+    float: right;
 }

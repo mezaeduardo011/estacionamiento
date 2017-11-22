@@ -27,11 +27,11 @@ class TipoServicioModel extends Main
     * Extraer todos los registros de TipoServicio
     * @return array $tablas
     */ 
-   public function getTipoServicioListarCombo($request,$result)
+   /*public function getTipoServicioListarCombo($request,$result)
    {
      $tablas=$this->leerTodos($datos);
      return $tablas;
-   }
+   }*/
 
     /**
     * Extraer todos los registros de TipoServicio
@@ -44,10 +44,12 @@ class TipoServicioModel extends Main
         $posStart = $request->posStart;
     else
         $posStart = 0;
+
     if(isset($request->count))
-        $count = $request->count;
+        $count = $request->posStart + 10000;
     else
-        $count = 1000;
+        $count = 10000;
+
     // Primero extraer la cantidad de registros
     $sqlCount = "Select count(*) as items FROM ".$this->tabla;
     $resCount = $this->executeQuery($sqlCount);
@@ -60,10 +62,10 @@ class TipoServicioModel extends Main
     $totalCount = (empty($rowCount->cnt))?0:$rowCount->cnt;
     //add limits to query to get only rows necessary for the output
     $sqlCount.= " WHERE row>=".$posStart." AND row<=".$count;
-    $sqlCount;
     $res = $this->get($sqlCount);
     //output data in XML format
     $items = array();
+    $temp = array();
     while($row=$this->fetch($res)){
         $tmp['id'] = $row->id;
         $tep = array();
@@ -78,8 +80,13 @@ class TipoServicioModel extends Main
             }
         }
         $tmp['data'] = $tep;
-        array_push($items,$tmp);
+        array_push($temp,$tmp);
+
     }
+    $items['data'] = $temp;
+    $items['countAll'] = $resCount[0]->items;
+    $items['count'] = $count;
+    $items['posStart'] = $posStart;
     return $items;
 
    }
