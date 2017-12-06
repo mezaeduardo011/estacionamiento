@@ -25,7 +25,8 @@
     },
     "exepciones" : {
         "Model" : {
-            "app-model-vacia" : "Exepción Capturada Model: En el modelo <b>{modelo}</b> de la aplicacion <b>{app}</b> hay un error en la definicion de la entidad <b>{entidad}</b> no existe en la base de datos <b>{database}</b>."
+            "app-model-vacia" : "Exepción Capturada Model: En el modelo <b>{modelo}</b> de la aplicacion <b>{app}</b> hay un error en la definicion de la entidad <b>{entidad}</b> no existe en la base de datos <b>{database}</b>.",
+            "type-data-vacia" : "Exepción Capturada Model: Hay una advertencia para el tipo de datos {type} no esta definido."
         },
         "Controller" : {
 

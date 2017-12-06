@@ -18,7 +18,7 @@ $connectionInfo = array( "Database"=>"test_crud2", "UID"=>"sa", "PWD"=>"s3rv3r..
 $conn = sqlsrv_connect( $serverName, $connectionInfo);
 
 if( $conn ) {
-	$sql = 'SELECT * FROM view_seguridad';
+	$sql = 'SELECT * FROM tipo_servicio';
 	$stmt = sqlsrv_query( $conn, $sql);
 
 	$datos = array();
@@ -30,7 +30,7 @@ if( $conn ) {
 
 	//if this is the first query - get total number of records in the query result
 	if($posStart==0){
-	    $sqlCount = "Select count(*) as cnt FROM view_seguridad";
+	    $sqlCount = "Select count(*) as cnt FROM tipo_servicio";
 	    $resCount = sqlsrv_query ($sqlCount);
 	    $rowCount=sqlsrv_fetch_array($resCount);
 	    $totalCount = $rowCount["cnt"];

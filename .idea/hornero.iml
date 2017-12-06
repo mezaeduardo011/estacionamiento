@@ -4,10 +4,5 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="Shawn" />
-    <orderEntry type="module" module-name="ejemplos" />
-    <orderEntry type="module" module-name="cordova" />
-    <orderEntry type="module" module-name="Shawn" />
-    <orderEntry type="module" module-name="JphDev" />
   </component>
 </module>

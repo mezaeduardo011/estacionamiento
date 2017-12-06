@@ -1,7 +1,6 @@
 <?php
 namespace APP\Admin\Model;
 use JPH\Complements\Database\Main;
-use JPH\Core\Commun\All;
 /**
  * Generador de codigo del Modelo de la App Admin
  * @propiedad: Hornero 1.0
@@ -78,6 +77,36 @@ class SegUsuariosPerfilModel extends Main
         $datos=$this->executeQuery($sql);
         $this->free();
         return $datos[0];
+    }
+
+    /**
+     * Permite consultar los perfiles asociados a un usuario
+     * @param Int $id, identificador del usuario
+     * @return Array $datos
+     */
+    public function getPerfilesAsociados($id)
+    {
+        $sql = "SELECT seg_perfil_id FROM seg_usuarios_perfil WHERE seg_usuarios_id = $id";
+        $datos=$this->executeQuery($sql);
+        $this->free();
+        return $datos;
+    }
+
+
+    /**
+     * Permite ver las aplicaciones que tiene acceso los usuarios
+     * @param Array $perfilId, identificador del usuario que inicia session
+     * @return array $datos, solo las aplicaciones que tiene acceso del primer nivel
+     */
+    public function reCargarMenuApp($perfilId)
+    {
+        $tmp = array();
+        foreach ($perfilId as $item => $value) {
+            $tmp[$item] = $value->seg_perfil_id;
+        }
+        $sql = "select * from view_seguridad WHERE perfil_id in(".implode(',',$tmp).")";
+        $datos=$this->executeQuery($sql);
+        return $datos;
     }
 }
 ?>

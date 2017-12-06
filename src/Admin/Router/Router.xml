@@ -7,16 +7,67 @@
     <method>runIndex</method>
     <request>GET</request>
   </link>
-  <link>
-    <name>/showMenu</name>
-    <controller>menu</controller>
-    <method>runIndex</method>
-    <request>POST</request>
-  </link>
+  <!-- Permite ver el menu -->
   <link>
     <name>/refreshMenu</name>
     <controller>menu</controller>
-    <method>runIndex</method>
+    <method>runRefreshMenu</method>
+    <request>POST</request>
+  </link>
+  <!-- Permite gestionar actualizar los datos del menu principal gestionado por el usuario -->
+  <link>
+    <name>/setProcesarPrincipalMenu</name>
+    <controller>menu</controller>
+    <method>runSetProcesarPrincipalMenu</method>
+    <request>POST</request>
+  </link>
+  <!-- Permite gestionar el menu principal del sistema -->
+  <link>
+    <name>/sendProcesarPrincipalMenu</name>
+    <controller>menu</controller>
+    <method>runSendProcesarPrincipalMenu</method>
+    <request>POST</request>
+  </link>
+  <!-- Rutas del proceso del Menu Permite setear los valores encargados de procesar los datos-->
+  <link>
+    <name>/sendProcesarSubMenu</name>
+    <controller>menu</controller>
+    <method>runSetProcesarSubMenu</method>
+    <request>POST</request>
+  </link>
+  <!-- Permite actualizar las item del menu -->
+  <link>
+    <name>/sendGestionMenu</name>
+    <controller>menu</controller>
+    <method>runSetGestionMenu</method>
+    <request>POST</request>
+  </link>
+  <!-- Permite gestionar la parte de las mascara ver las mascara -->
+  <link>
+    <name>/mascarasListar</name>
+    <controller>mascara</controller>
+    <method>runMascaraListar</method>
+    <request>POST</request>
+  </link>
+  <!-- Permite procesar las nuevas mascaras -->
+  <link>
+    <name>/mascaraCreate</name>
+    <controller>mascara</controller>
+    <method>runMascaraCreate</method>
+    <request>POST</request>
+  </link>
+  <!-- Permite ver las mascaras de datos disponibles para un tipo de mascara especifica -->
+  <link>
+    <name>/mascaraShow</name>
+    <controller>mascara</controller>
+    <method>runMascaraShow</method>
+    <request>POST</request>
+  </link>
+  <!-- Permite listas los tipos de datos disponibles para ser usado en el generador -->
+  <link>
+    <name>/tipoDatosListar</name>
+    <controller>tipoDatos</controller>
+    <method>runTipoDatosListar</method>
     <request>POST</request>
   </link>
   <!-- Bloque de encargado de gestionar las parte de inicio de session -->
@@ -263,6 +314,12 @@
     <controller>segUsuarios</controller>
     <method>runSegUsuariosShowAuditoria</method>
     <request>POST</request>
+  </link>
+  <link>
+    <name>/showAuditoria</name>
+    <controller>segUsuarios</controller>
+    <method>runSegShowAuditoria</method>
+    <request>GET</request>
   </link>
   <link>
     <name>/showAccionesAuditoria</name>
@@ -559,6 +616,43 @@
     <name>/ggggUpdate</name>
     <controller>prueba</controller>
     <method>runPruebaUpdate</method>
+    <request>POST</request>
+  </link>
+  <!-- Bloque de configuracion de la ruta del controller Socios-->
+  <link>
+    <name>/sociosIndex</name>
+    <controller>socios</controller>
+    <method>runSociosIndex</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/sociosListar</name>
+    <controller>socios</controller>
+    <method>runSociosListar</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/sociosCreate</name>
+    <controller>socios</controller>
+    <method>runSociosCreate</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/sociosShow</name>
+    <controller>socios</controller>
+    <method>runSociosShow</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/sociosDelete</name>
+    <controller>socios</controller>
+    <method>runSociosDelete</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/sociosUpdate</name>
+    <controller>socios</controller>
+    <method>runSociosUpdate</method>
     <request>POST</request>
   </link>
 </route>

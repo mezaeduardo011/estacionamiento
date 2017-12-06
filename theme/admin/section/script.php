@@ -35,16 +35,19 @@
 <!-- AdminLTE App -->
 <script src="<?=JPH\Core\Store\Cache::get('srcJs')?>dist/js/adminlte.min.js"></script>
 <!-- Notificciones toastr -->
-<script src="<?=JPH\Core\Store\Cache::get('srcJs')?>dist/js/toastr.min.js"></script>
+<script src="<?=JPH\Core\Store\Cache::get('srcJs')?>dist/js/core/toastr.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes)
 <script src="<?=JPH\Core\Store\Cache::get('srcJs')?>dist/js/pages/dashboard.js"></script>
 -->
 <!-- AdminLTE for demo purposes -->
 <script src="<?=JPH\Core\Store\Cache::get('srcJs')?>dist/js/demo.js"></script>
 
-<script src="<?=JPH\Core\Store\Cache::get('srcJs')?>dist/js/core.js"></script>
-<script src="<?=JPH\Core\Store\Cache::get('srcJs')?>dist/js/vista.js"></script>
-<script src="<?=JPH\Core\Store\Cache::get('srcJs')?>dist/js/session.js"></script>
+<script src="<?=JPH\Core\Store\Cache::get('srcJs')?>dhtmlxSuite/codebase/dhtmlxgrid.js"></script>
+
+<script src="<?=JPH\Core\Store\Cache::get('srcJs')?>dist/js/core/core.js"></script>
+<script src="<?=JPH\Core\Store\Cache::get('srcJs')?>dist/js/core/vista.js"></script>
+<script src="<?=JPH\Core\Store\Cache::get('srcJs')?>dist/js/core/session.js"></script>
 <!--script src="<?=JPH\Core\Store\Cache::get('srcJs')?>bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?=JPH\Core\Store\Cache::get('srcJs')?>bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script-->
-<script src="<?=JPH\Core\Store\Cache::get('srcJs')?>dhtmlxSuite/codebase/dhtmlx.js"></script>
+<!--script src="<?=JPH\Core\Store\Cache::get('srcJs')?>dhtmlxSuite/codebase/dhtmlx.js"></script-->
+

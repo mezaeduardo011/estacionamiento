@@ -4,7 +4,6 @@ use JPH\Complements\Database\Main;
 use JPH\Core\Commun\{
     All, Constant, Security
 };
-use APP\Admin\Model\SegUsuariosPerfilModel;
 /**
  * Generador de codigo del Modelo de la App Admin
  * @propiedad: Hornero 1.0
@@ -37,7 +36,7 @@ class SegUsuariosModel extends Main
     }
     /**
     * Extraer todos los registros de SegUsuarios
-     * @param Request $request los datos enviado por el navegador
+     * @param Array $request los datos enviado por el navegador
      * @param Array $result inluyendo el resultado de los campos
      * @return array $tablas
      */
@@ -184,18 +183,30 @@ class SegUsuariosModel extends Main
         return $val;
    }
 
-    public function reCargarRoles($id)
-    {
-        $query = "select  roles from view_seguridad WHERE id = ".$id;
-        $this->db->get($query);
-        $rows = $this->db->numRows();
-
-        if ($rows > 0) {
-            while ($row = $this->db->fetch()) {
-                $this->roles[] = $row->roles;
-            }
-        }
-        return $this->roles;
-    }
+   public function reCargarRoles($id)
+   {
+       $query = "select  roles from view_seguridad WHERE id = ".$id;
+       $this->db->get($query);
+       $rows = $this->db->numRows();
+       
+       if ($rows > 0) {
+           while ($row = $this->db->fetch()) {
+               $this->roles[] = $row->roles;
+           }
+       }
+       return $this->roles;
+   }
+   
+   /**
+    * Permite extraer los perfiles dosponibles para los usuarios para asociar al menu
+    * @return array $roles
+    */
+   
+   public function reCargarPerfiles()
+   {
+       $query = "select * from seg_perfil";
+       $roles = $this->executeQuery($query);
+       return $roles;
+   }
 }
 ?>

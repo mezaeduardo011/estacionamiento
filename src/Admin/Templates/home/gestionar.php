@@ -26,13 +26,13 @@ Gestionar del Generador
                             <div class="box-body">
 
                                 <a class="btn btn-block btn-social btn-github" id="optBaseDatos">
-                                    <i class="fa fa-database"></i> Configuración de conexion a Base de Datos
+                                    <i class="fa fa-database"></i> Configuraci&oacute;n de conexion a Base de Datos
                                 </a>
                                 <a class="btn btn-block btn-social btn-github" id="optCrearModelo">
                                     <i class="fa fa-certificate"></i> Gestionar Modelos
                                 </a>
-                                <a class="btn btn-block btn-social btn-github" id="optGestionMenu">
-                                    <i class="fa fa-bars"></i> Gestion de Menu
+                                <a class="btn btn-block btn-social btn-github" id="optGestionMascara">
+                                    <i class="fa fa-bars"></i> Gesti&oacute;n de Mascaras
                                 </a>
                             </div>
                         </div>
@@ -100,12 +100,12 @@ Gestionar del Generador
                     </div>
                 </div>
                 <div class="box-body pad table-responsive" id="box4" style="display: none">
-                    <div class="col-md-4" id="menuPrincipal">
+                    <div class="col-md-5" id="menuPrincipal">
                         <!-- social buttons -->
 
                         <div class="box">
                             <div class="box-header">
-                                <h3 class="box-title" id="menuPrincipalTitulo"> Opciones para el menu.</h3>
+                                <h3 class="box-title" id="menuPrincipalTitulo"> Opciones para las Mascaras.</h3>
                             </div>
                             <div class="box-body" id="menuPrincipalBody">
                                 cargando ..
@@ -114,7 +114,7 @@ Gestionar del Generador
                         </div>
                         <!-- /.box -->
                     </div>
-                    <div class="col-md-8" id="menuSegundario" style="display: none">
+                    <div class="col-md-7" id="menuSegundario" style="display: none">
                         <div class="box">
                             <div class="box-header">
                                 <h3 class="box-title" id="menuSegundarioTilulo"> Cargando ... </h3>
@@ -131,8 +131,8 @@ Gestionar del Generador
     </div>
 </section>
 <?php $this->push('addJs')?>
-<script src="/admin/dist/js/config.js"></script>
-<script src="/admin/dist/js/gestionTablas.js"></script>
+<script src="/admin/dist/js/core/config.js"></script>
+<script src="/admin/dist/js/core/gestionTablas.js"></script>
 <!-- InputMask -->
 <script src="/admin/plugins/input-mask/jquery.inputmask.js"></script>
 <script src="/admin/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
@@ -141,6 +141,7 @@ Gestionar del Generador
     $(function () {
         Config.main();
         Core.Menu.main();
+        Core.Teclado.main();
     });
 </script>
 <?php $this->end()?>

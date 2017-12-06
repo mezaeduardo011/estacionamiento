@@ -15,16 +15,15 @@ Home del Sistema Hornero
     	
 	</div>
     <div class="row">
-
     </div>
 </div>
 </div>
 
 <?php $this->push('addJs')?>
 <!-- Notificciones toastr -->
-<script src="/admin/dist/js/core.js"></script>
 <script type="text/javascript">
     informar('Bienvenido al Sistema','Bienvenido');
     Core.Menu.main();
+    Core.Teclado.main();
 </script>
 <?php $this->end()?>

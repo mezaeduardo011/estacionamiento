@@ -10,6 +10,7 @@
 namespace APP\admin\Controller;
 use JPH\Core\Console\App;
 use JPH\Core\Console\AppCrudVista;
+use JPH\Core\Http\Request;
 use JPH\Core\Load\Configuration;
 use APP\Admin\Model AS Model;
 use JPH\Core\Commun\{Constant,Security};
@@ -17,8 +18,14 @@ use JPH\Core\Commun\{Constant,Security};
 
 class GestionarController extends Controller
 {
-    public $model;
     public $session;
+    public $model;
+    public $hoConexionesModel;
+    public $hoEntidadesModel;
+    public $hoVistasModel;
+    public $hoSegRolesModel;
+    public $hoMascaraModel;
+    public $segUsuariosModel;
     public $result;
     public $pathActivo;
     use Security;
@@ -32,9 +39,11 @@ class GestionarController extends Controller
        $this->hoEntidadesModel = new Model\HoEntidadesModel();
        $this->hoVistasModel = new Model\HoVistasModel();
        $this->hoSegRolesModel = new Model\SegRolesModel();
+       $this->hoMascaraModel = new Model\HoMascaraModel();
+       $this->hoSegUsuariosModel = new Model\SegUsuariosModel();
    }
 
-    public function runInformarProceso($resquest){
+    public function runInformarProceso($request){
        $data['msj']='Procesando la Vista:'.$this->cache->get('proceso');
        $data['proceso']=$this->cache->get('proceso');
        $data['alter'] = $this->cache->get('alter');
@@ -52,7 +61,7 @@ class GestionarController extends Controller
         $this->tpl->add('usuario', $this->getSession('usuario'));
         $this->tpl->renders('view::home/gestionar');
     }
-    
+
     /**
      * Proceso encargado de controlar la generacion de la vistas luego de leer la base de datos de las configuraciones
      * @param resource $request
@@ -60,9 +69,11 @@ class GestionarController extends Controller
      */
     public function runProcesarCrudVistas($request)
    {
+       $user=$this->getSession('usuario');
+       // Definicion de todas las vistas disponibles en el sistema
+       $schema = $this->hoVistasModel->extraerDetalleEntidadListado((array)$request->postParameter());
 
-       $schema = $this->hoVistasModel->extraerDetalleEntidadListado((array)$request);
-       //$this->pp($schema);
+      // $this->pp($schema);
        if(count($schema)>0) {
            foreach ($schema AS $entidad => $views) {
                $columnsReal = NULL;
@@ -80,10 +91,13 @@ class GestionarController extends Controller
                        // Instanciar la clase de generacion de vista
                        $crudVista = new AppCrudVista();
 
-                       //$this->pp($campos);
+                       // Mascaras disponibles dentro del sistemas para poder hacer comparacion con los definidos en la vista
+                       $mascaras = $this->hoMascaraModel->getMascarasShowVista($nombreVista);
+
+                       //$this->pp($mascaras);
 
                        // Crear estructura de la vista
-                       $crudVista->createStructuraFileCRUD($aplicativo, $nombreVista, $entidad, $campos, $columnsReal);
+                       $crudVista->createStructuraFileCRUD($aplicativo, $nombreVista, $entidad, $campos, $columnsReal, $mascaras);
 
                        // Actualizar el registro donde se notifica que ya fue generado
                        $this->hoVistasModel->updateStatusVista($aplicativo, $campos[0]->conexiones_id, $entidad, $nombreVista);
@@ -95,8 +109,9 @@ class GestionarController extends Controller
                // Elemto encargado de procesar los roles automaticos de usuarios
            }
            // Refrescar datos
-           // ### $cla = new LoginController();
-           // ### $cla -> runLoadRoles();
+           $data = $this->hoSegUsuariosModel->reCargarRoles($user->id);
+           $this->setSession('roles', $data);
+
            $result = true;
            if (is_null($result)) {
                $dataJson['error'] = '1';
@@ -116,12 +131,12 @@ class GestionarController extends Controller
     public function runConfiguracionConexiones($request)
     {
         $this->verificarConfiguracionDataBase();
-        if(empty($request->conexion)) {
+        if(empty(@$request->postParameter('conexion'))) {
             $dataJson['data'] = $schema=$this->hoConexionesModel->getExtraerConexiones();
             $dataJson['items'] = count($schema);
             $this->json($dataJson);
         }else{
-            $dataJson['data'] = $schema=$this->hoConexionesModel->getExtraerConexiones($request->conexion);
+            $dataJson['data'] = $schema=$this->hoConexionesModel->getExtraerConexiones($request->postParameter('conexion'));
             $dataJson['items'] = count($schema);
             $this->json($dataJson);
         }
@@ -130,12 +145,12 @@ class GestionarController extends Controller
 
     /**
      * Permite registrar las entidades seleccionadas dependiendo de la conexion
-     * @param $request $request
+     * @param request $request
      * @param \JsonSerializable $return
      */
     public function runSetEntidadesProcesar($request)
     {
-        $result = $this->hoEntidadesModel->registrarEntidadesConfig($request->db, $request->entidad);
+        $result = $this->hoEntidadesModel->registrarEntidadesConfig($request->postParameter('db'), $request->postParameter('entidad'));
         $this->json($result);
     }
 
@@ -158,8 +173,8 @@ class GestionarController extends Controller
                 $conf['db'] = $value['db'];
                 $conf['usuario'] = $value['user'];
                 $conf['clave'] = $value['pass'];
-                $request = (object)$conf;
-                $result=$this->hoConexionesModel->setDataBase($request);
+                $conector = (object)$conf;
+                $result=$this->hoConexionesModel->setDataBase($conector);
             }
         }
     }
@@ -170,7 +185,7 @@ class GestionarController extends Controller
      * @return \JsonSerializable $dataJson
      */
     public function runAllUniverso($request){
-        $result=$this->hoConexionesModel->getAllUniverso($request);
+        $result=$this->hoConexionesModel->getAllUniverso($request->postParameter());
         if(is_null($result)){
             $dataJson['error']='2';
             $dataJson['msj']='No existen registros relacionados';
@@ -184,7 +199,7 @@ class GestionarController extends Controller
 
     public function runVistaNuevaConfigurada($request)
     {
-        $result=$this->hoVistasModel->setConfiguracionVistaNew($request);
+        $result=$this->hoVistasModel->setConfiguracionVistaNew($request->postParameter());
         if(is_null($result)){
             $dataJson['error']='0';
             $dataJson['msj']='¡Bien!, Registro actualizado exitosamente';
@@ -204,18 +219,18 @@ class GestionarController extends Controller
         $conf = array();
         $fil = Configuration::fileConfigApp();
         $temp = $this->parseRutaAbsolut($fil);
-        $result=$this->hoConexionesModel->setDataBase($request);
+        $result=$this->hoConexionesModel->setDataBase($request->postParameter());
         if(is_null($result)){
             $dataJson['error']='1';
-            $dataJson['msj']='¡Uff!, ya el registro se encuentra registrado';
+            $dataJson['msj']='Uff!, ya el registro se encuentra registrado';
         }else{
 
             $itemsDB = parse_ini_file($temp->db,true);
             foreach ($itemsDB AS $key => $value){
                 $conf[]=$key;
             }
-            if (!in_array($request->label, $conf)) {
-                App::createNewConexionItemApp($request->label,  $request->driver,  $request->host,  $request->db,  $request->usuario,  $request->clave);
+            if (!in_array($request->postParameter('label'), $conf)) {
+                App::createNewConexionItemApp($request->postParameter('label'), $request->postParameter('driver'), $request->postParameter('host'), $request->postParameter('db'), $request->postParameter('usuario'), $request->postParameter('clave'));
             }
 
             $dataJson['error']='0';
@@ -231,19 +246,19 @@ class GestionarController extends Controller
      */
     public function runEntidadesSeleccionadas($request)
     {
-        $schema=$this->hoEntidadesModel->extraerTodasLasEntidades((array)$request);
+        $schema=$this->hoEntidadesModel->extraerTodasLasEntidades((array)$request->postParameter());
         $this->json($schema);
     }
 
     public function runConfiguracionVista($request)
     {
         // stdClass Object(    [connect] => 1    [tabla] => test_abm    [vista] => 0)
-        if($request->vista==0) {
+        if(@$request->postParameter('vista')==0) {
             // Consulta cuando es nuevo
-            $schema = $this->hoEntidadesModel->extraerDetalleEntidade((array)$request);
+            $schema = $this->hoEntidadesModel->extraerDetalleEntidade((array)$request->postParameter());
         }else{
             // Consulta cuando existe la vista
-            $schema = $this->hoVistasModel->extraerDetalleEntidade((array)$request);
+            $schema = $this->hoVistasModel->extraerDetalleEntidade((array)$request->postParameter());
         }
 
         /*Array(    [0] => stdClass Object
@@ -265,7 +280,7 @@ class GestionarController extends Controller
                 'id' =>$value->id ,
                 'name' =>$value->field ,
                 'tipo' =>$value->type,
-                'dimension' => $value->dimension,
+                'dimension' => $this->hoVistasModel->validarDimensionCampo($value->type,$value->dimension),
                 'fijo' => (empty($value->fijo))?'':@$value->fijo,
                 'restrincion' => $value->restrincion,
                 'nombre' => (empty($value->nombre))?'':$value->nombre,
@@ -293,14 +308,15 @@ class GestionarController extends Controller
 
     public function runShowVista($request)
     {
-        $dataJson = $this->hoVistasModel->getShowVista($request);
+        $dataJson = $this->hoVistasModel->getShowVista($request->postParameter());
         $this->json($dataJson);
     }
 
     public function runGetVistasColumns($request){
-        $dataJson = $this->hoVistasModel->getShowVistaRow($request);
+        $dataJson = $this->hoVistasModel->getShowVistaRow($request->postParameter());
         $this->json($dataJson);
     }
+
     /**
      * Permite visualizar las aplicaciones que existen dentro del sistema
      */
@@ -316,22 +332,22 @@ class GestionarController extends Controller
         $this->json($dataJson);
     }
 
-    public function runCreateTablas($request )
+    public function runCreateTablas($request)
     {
-        $result = $this->hoEntidadesModel->setEstructuraCreateTabla($request);
+        $result = $this->hoEntidadesModel->setEstructuraCreateTabla($request->postParameter());
         if(is_null($result)){
             $dataJson['error']='1';
-            $dataJson['msj']='¡Uff!, ya el registro se encuentra registrado';
+            $dataJson['msj']='Uff, ya el registro se encuentra registrado';
         }else{
             $dataJson['error']='0';
-            $dataJson['msj']='¡Bien!, entidad creada exitosamente';
+            $dataJson['msj']='Bien, entidad creada exitosamente';
         }
         $this->json($dataJson);
     }
 
     public  function runGetEntidadComun($request)
     {
-        $dataJson = $this->hoConexionesModel->getExtraerDetallesComun((array)$request);
+        $dataJson = $this->hoConexionesModel->getExtraerDetallesComun((array)$request->postParameter());
         $this->json($dataJson);
     }
 

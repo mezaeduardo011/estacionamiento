@@ -33,9 +33,10 @@ function microtime_float()
 		$cd_mask = "";
 	
 	//$_GET['count'];
-	
-	$link = mysql_pconnect($mysql_host, $mysql_user, $mysql_pasw);
-	$db = mysql_select_db ($mysql_db);
+	$link = new PDO("mysql:host=$mysql_host;dbname=$mysql_db;charset=utf8mb4", "$mysql_user", "$mysql_pasw");
+
+	//$link = mysql_pconnect($mysql_host, $mysql_user, $mysql_pasw);
+	//$db = mysql_select_db ($mysql_db);
 	
     if (!isset($_GET["orderBy"]))
       $_GET["orderBy"]=0;
@@ -46,12 +47,12 @@ function microtime_float()
      
 
 	$fields=array("item_nm","","item_cd");
-    getDataFromDB('','',$fields[$_GET["orderBy"]],$_GET["direction"]);
-	mysql_close($link);
+    getDataFromDB('','',$fields[$_GET["orderBy"]],$_GET["direction"],$link);
+	
 	
 	
 	//print one level of the tree, based on parent_id
-function getDataFromDB($name_mask,$code_mask,$sort_by,$sort_dir){
+function getDataFromDB($name_mask, $code_mask, $sort_by, $sort_dir, $link){
 		GLOBAL $posStart,$count,$nm_mask,$cd_mask;
 		$sql = "SELECT  * FROM grid50000 Where 0=0";
 		if($nm_mask!='')
@@ -67,29 +68,33 @@ function getDataFromDB($name_mask,$code_mask,$sort_by,$sort_dir){
 		if($posStart==0){
 			$sqlCount = "Select count(*) as cnt from ($sql) as tbl";
 			//print($sqlCount);
-			$resCount = mysql_query ($sqlCount);
-			while($rowCount=mysql_fetch_array($resCount)){
-				$totalCount = $rowCount["cnt"];
+			$totalCount = 0;
+			$resCount = $link->query($sqlCount);
+			while($rowCount=$resCount->fetchAll(PDO::FETCH_ASSOC)){
+				$totalCount = $rowCount[0]["cnt"];
 			}
 		}
 		$sql.= " LIMIT ".$posStart.",".$count;
-		$res = mysql_query ($sql);
+		$res = $link->query($sql);
 		print("<rows total_count='".$totalCount."' pos='".$posStart."'>");
 		if($res){
-			while($row=mysql_fetch_array($res)){
-				print("<row id='".$row['item_id']."'>");
+			$row=$res->fetchAll(PDO::FETCH_ASSOC);
+				foreach ($row as $key => $value) {
+					
+					print("<row id='".$value['item_id']."'>");
 					print("<cell>");
-					print($row['item_nm']);//."[".$row['item_id']."]");	
+					print($value['item_nm']);//."[".$row['item_id']."]");	
 					print("</cell>");
 					print("<cell>");
-						print("index is ".$posStart);	
+					print("index is ".$posStart);	
 					print("</cell>");
 					print("<cell>");
-					print($row['item_cd']);	
+					print($value['item_cd']);	
 					print("</cell>");
-				print("</row>");
-				$posStart++;
-			}
+					print("</row>");
+					$posStart++;
+				}
+				
 		}else{
 			echo mysql_errno().": ".mysql_error()." at ".__LINE__." line in ".__FILE__." file<br>";
 		}

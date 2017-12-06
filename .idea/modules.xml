@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../JphDev/.idea/JphDev.iml" filepath="$PROJECT_DIR$/../JphDev/.idea/JphDev.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../sv/.idea/Shawn.iml" filepath="$PROJECT_DIR$/../sv/.idea/Shawn.iml" />
-      <module fileurl="file://E:/cordova/.idea/cordova.iml" filepath="E:/cordova/.idea/cordova.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../ejemplos/.idea/ejemplos.iml" filepath="$PROJECT_DIR$/../ejemplos/.idea/ejemplos.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/hornero.iml" filepath="$PROJECT_DIR$/.idea/hornero.iml" />
     </modules>
   </component>

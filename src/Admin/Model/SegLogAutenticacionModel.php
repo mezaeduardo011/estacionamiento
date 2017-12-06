@@ -45,13 +45,15 @@ class SegLogAutenticacionModel extends Main
         else
             $count = 100;
 
+        // If ternario para mostrar si filtra por persona o muestra el universo
+         $where = (empty($user[0]))?'':'WHERE usuario='.$user[0];
 
         // Primero extraer la cantidad de registros
-        $sqlCount = "Select count(*) as items FROM ".$this->tabla." WHERE usuario=".$user[0];
+        $sqlCount = "Select count(*) as items FROM ".$this->tabla." ".$where;
         $resCount = $this->executeQuery($sqlCount);
 
         //create query to products table
-        $sql = implode(',', $result['select']).", id FROM ".$this->tabla." WHERE usuario=".$user[0];
+        $sql = implode(',', $result['select']).", id FROM ".$this->tabla." ".$where;
 
         //if this is the first query - get total number of records in the query result
        $sqlCount = "SELECT * FROM (
@@ -62,7 +64,7 @@ class SegLogAutenticacionModel extends Main
         $totalCount = @$rowCount->cnt;
 
         //add limits to query to get only rows necessary for the output
-        $sqlCount.= " WHERE row>=".$posStart." AND row<=".$count;
+       echo  $sqlCount.= " WHERE row>=".$posStart." AND row<=".$count;
 
         $sqlCount;
 

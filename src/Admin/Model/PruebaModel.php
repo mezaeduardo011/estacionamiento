@@ -69,7 +69,7 @@ class PruebaModel extends Main
     $totalCount = (empty($rowCount->cnt))?0:$rowCount->cnt;
     //add limits to query to get only rows necessary for the output
     $sqlCount.= " WHERE row>=".$posStart." AND row<=".$count;
-    $sqlCount;
+
     $res = $this->get($sqlCount);
     //output data in XML format
     $items = array();

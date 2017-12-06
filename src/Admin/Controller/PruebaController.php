@@ -42,6 +42,7 @@ class PruebaController extends Controller
     */ 
    public function runPruebaIndex($request)
    {
+       // Validar roles de acceso;
      $this->permisos = 'CONSULTA|CONTROL TOTAL';
      $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos));
      $this->tpl->addIni();
@@ -59,13 +60,15 @@ class PruebaController extends Controller
       // Validar roles de acceso;
       $this->permisos = 'CONSULTA|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
+
       // Bloque de proceso de la grilla
-      $result = $this->formatRows($request->obj);
-      $rows = $this->hoPruebaModel->getPruebaListar($request,$result);
+      $result = $this->formatRows($request->getParameter('obj'));
+
+      $rows = $this->hoPruebaModel->getPruebaListar($request->getParameter(),$result);
       $valor = array();
       $valor['head']=$result['campos'];
-      $valor['rows']=$rows; 
-      $this->json($valor);
+       $valor['rows']=$rows;
+       $this->json($valor);
       $this->json($result);
    }
 
@@ -76,9 +79,14 @@ class PruebaController extends Controller
     */ 
    public function runPruebaCreate($request)
    {
+       // Verificar permisologia
       $this->permisos = 'ALTA|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
-      $result = $this->hoPruebaModel->setPruebaCreate($request);
+
+      // Verificar las mascaras
+      parent::runValidarMascarasVista($this->pathVista(),$request->postParameter());
+
+      $result = $this->hoPruebaModel->setPruebaCreate($request->postParameter());
       if(is_null($result)){
         $dataJson['error']='1';
         $dataJson['msj']='Error en procesar el registro';
@@ -96,9 +104,11 @@ class PruebaController extends Controller
     */ 
    public function runPruebaShow($request)
    {
+       // Verificar permisologia
       $this->permisos = 'CONSULTA|CONTROL TOTAL';
+
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
-      $result = $this->hoPruebaModel->getPruebaShow($request);
+      $result = $this->hoPruebaModel->getPruebaShow($request->postParameter());
       $this->json($result);
    }
 
@@ -109,9 +119,11 @@ class PruebaController extends Controller
     */ 
    public function runPruebaDelete($request)
    {
+       // Verificar permisologia
       $this->permisos = 'BAJA|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
-      $result = $this->hoPruebaModel->remPruebaDelete($request);
+
+      $result = $this->hoPruebaModel->remPruebaDelete($request->postParameter());
       if(is_null($result)){
         $dataJson['error']='0';
         $dataJson['msj']='Registro eliminado exitosamente';
@@ -129,9 +141,14 @@ class PruebaController extends Controller
     */ 
    public function runPruebaUpdate($request)
    {
+       // Verificar permisologia
       $this->permisos = 'MODIFICACION|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
-      $result = $this->hoPruebaModel->setPruebaUpdate($request);
+
+      // Verificar las mascaras
+       parent::runValidarMascarasVista($this->pathVista(),$request->postParameter());
+
+       $result = $this->hoPruebaModel->setPruebaUpdate($request->postParameter());
       if(is_null($result)){
         $dataJson['error']='0';
         $dataJson['msj']='Actualizacion efectuado exitosamente';
@@ -141,5 +158,6 @@ class PruebaController extends Controller
       }
         $this->json($dataJson);
    }
+
 }
 ?>

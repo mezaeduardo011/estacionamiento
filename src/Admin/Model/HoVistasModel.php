@@ -1,7 +1,9 @@
 <?php
 namespace APP\Admin\Model;
 use JPH\Complements\Database\Main;
-use JPH\Core\Commun\All;
+use JPH\Core\Commun\{
+    All, Commun, Logs
+};
 /**
  * Generador de codigo del Modelo de la App Admin
  * @propiedad: Hornero 1.0
@@ -11,6 +13,7 @@ use JPH\Core\Commun\All;
  */ 
 class HoVistasModel extends Main
 {
+   use Logs;
    public function __construct()
    {
        $this->tabla = 'ho_vistas';
@@ -37,7 +40,7 @@ class HoVistasModel extends Main
                 $this->fijarValor('nombre', $data->name);
                 $this->fijarValor('field', $data->field[$a]);
                 $this->fijarValor('type', $data->type[$a]);
-                $this->fijarValor('dimension', $data->dimension[$a]);
+                $this->fijarValor('dimension', self::validarDimensionCampo($data->type[$a],$data->dimension[$a]));
                 $this->fijarValor('fijo', $data->fijo[$a]);
                 $this->fijarValor('restrincion', $data->restrincion[$a]);
                 $this->fijarValor('label', $data->etiqueta[$a]);
@@ -152,6 +155,34 @@ class HoVistasModel extends Main
         $sql = "UPDATE ho_vistas SET procesado=1  WHERE apps='$apps' AND conexiones_id=$conn AND  entidad='$entidad' AND nombre='$vita'";
         $temp = $this->execute($sql);
         return $temp;
+    }
+
+    /**
+     * Permite validar y redimensionar campos que el manejador de base de datos no toma la dimension correcta y se le asigna la definida en los tipos de datos
+     * @param String $type, typo de dato a ser procesado
+     * @param String $dimension, dimension del capos actual
+     * @return Integer $dimension
+    */
+    public function validarDimensionCampo($type,$dimension)
+    {
+
+        if($dimension=='-1') {
+            $hoTipoDatoModel = new HoTipoDatosModel();
+            $data = $hoTipoDatoModel->getTipoDatosShow($type);
+            if(is_null($data)){
+                // Logs de Error
+                $obj = array('type' => $type);
+                $msj = All::getMsjException('Model', 'type-data-vacia',$obj);
+                $this->logInfo($msj);
+                return $dimension;
+            }else{;
+                return $data[0]->length;
+            }
+
+        }else{
+            return $dimension;
+        }
+
     }
 
 

@@ -1,7 +1,7 @@
 <?php
 namespace APP\Admin\Model;
 use JPH\Complements\Database\Main;
-use JPH\Core\Commun\{All,Security};
+use JPH\Core\Commun\Security;
 /**
  * Generador de codigo del Modelo de la App Admin
  * @propiedad: Hornero 1.0
@@ -19,6 +19,7 @@ class LegajosModel extends Main
        $this->campoid = array('id');
        $this->campos = array('nombres','apellidos','dni');
        parent::__construct();
+       $this->segLogAccionesModel = new SegLogAccionesModel();
    }
 
     /**

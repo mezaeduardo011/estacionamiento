@@ -16,7 +16,7 @@
 
             <ul class="menu">
                 <li><a href="/gestionar"><i class="fa fa-cogs" aria-hidden="true"></i> Generador</a></li>
-                <li><a href="#"><i class="fa fa-desktop" aria-hidden="true"></i> Monitor</a></li>
+                <li><a href="/showAuditoria"><i class="fa fa-desktop" aria-hidden="true"></i> Monitor</a></li>
                 <li><a href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i> Reportes</a></li>
 
                 <li class="dropdown">

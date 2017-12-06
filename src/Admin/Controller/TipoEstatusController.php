@@ -60,8 +60,8 @@ class TipoEstatusController extends Controller
       $this->permisos = 'CONSULTA|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
       // Bloque de proceso de la grilla
-      $result = $this->formatRows($request->obj);
-      $rows = $this->hoTipoEstatusModel->getTipoEstatusListar($request,$result);
+      $result = $this->formatRows($request->getParameter('obj'));
+      $rows = $this->hoTipoEstatusModel->getTipoEstatusListar($request->getParameter(),$result);
       $valor = array();
       $valor['head']=$result['campos'];
       $valor['rows']=$rows; 
@@ -78,7 +78,7 @@ class TipoEstatusController extends Controller
    {
       $this->permisos = 'ALTA|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
-      $result = $this->hoTipoEstatusModel->setTipoEstatusCreate($request);
+      $result = $this->hoTipoEstatusModel->setTipoEstatusCreate($request->postParameter());
       if(is_null($result)){
         $dataJson['error']='1';
         $dataJson['msj']='Error en procesar el registro';
@@ -98,7 +98,7 @@ class TipoEstatusController extends Controller
    {
       $this->permisos = 'CONSULTA|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
-      $result = $this->hoTipoEstatusModel->getTipoEstatusShow($request);
+      $result = $this->hoTipoEstatusModel->getTipoEstatusShow($request->postParameter());
       $this->json($result);
    }
 
@@ -111,7 +111,7 @@ class TipoEstatusController extends Controller
    {
       $this->permisos = 'BAJA|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
-      $result = $this->hoTipoEstatusModel->remTipoEstatusDelete($request);
+      $result = $this->hoTipoEstatusModel->remTipoEstatusDelete($request->postParameter());
       if(is_null($result)){
         $dataJson['error']='0';
         $dataJson['msj']='Registro eliminado exitosamente';
@@ -131,7 +131,7 @@ class TipoEstatusController extends Controller
    {
       $this->permisos = 'MODIFICACION|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
-      $result = $this->hoTipoEstatusModel->setTipoEstatusUpdate($request);
+      $result = $this->hoTipoEstatusModel->setTipoEstatusUpdate($request->postParameter());
       if(is_null($result)){
         $dataJson['error']='0';
         $dataJson['msj']='Actualizacion efectuado exitosamente';

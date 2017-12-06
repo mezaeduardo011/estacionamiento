@@ -19,7 +19,7 @@ interface Constant
     const DIR_THEME = Constant::DIR_INT.'theme'.DIRECTORY_SEPARATOR;
     const DIR_WEB = Constant::DIR_INT.'web'.DIRECTORY_SEPARATOR;
 
-    const VERSION = "1.0";
+    const VERSION = "4";
     const FW = "Hornero";
 
     // Constant necesaria para la generación de la aplicaciones

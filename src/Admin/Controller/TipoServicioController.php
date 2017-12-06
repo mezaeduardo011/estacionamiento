@@ -60,13 +60,12 @@ class TipoServicioController extends Controller
       $this->permisos = 'CONSULTA|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
       // Bloque de proceso de la grilla
-      $result = $this->formatRows($request->obj);
-      $rows = $this->hoTipoServicioModel->getTipoServicioListar($request,$result);
+      $result = $this->formatRows($request->getParameter('obj'));
+      $rows = $this->hoTipoServicioModel->getTipoServicioListar($request->getParameter(),$result);
       $valor = array('total_count'=>$rows['countAll'],'pos'=>$rows['posStart']);
       $valor['head']=$result['campos'];
       $valor['rows']=$rows['data'];
-
-       $this->json($valor);
+      $this->json($valor);
    }
 
     /**
@@ -78,7 +77,7 @@ class TipoServicioController extends Controller
    {
       $this->permisos = 'ALTA|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
-      $result = $this->hoTipoServicioModel->setTipoServicioCreate($request);
+      $result = $this->hoTipoServicioModel->setTipoServicioCreate($request->postParameter());
       if(is_null($result)){
         $dataJson['error']='1';
         $dataJson['msj']='Error en procesar el registro';
@@ -98,7 +97,7 @@ class TipoServicioController extends Controller
    {
       $this->permisos = 'CONSULTA|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
-      $result = $this->hoTipoServicioModel->getTipoServicioShow($request);
+      $result = $this->hoTipoServicioModel->getTipoServicioShow($request->postParameter());
       $this->json($result);
    }
 
@@ -111,7 +110,7 @@ class TipoServicioController extends Controller
    {
       $this->permisos = 'BAJA|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
-      $result = $this->hoTipoServicioModel->remTipoServicioDelete($request);
+      $result = $this->hoTipoServicioModel->remTipoServicioDelete($request->postParameter());
       if(is_null($result)){
         $dataJson['error']='0';
         $dataJson['msj']='Registro eliminado exitosamente';
@@ -131,7 +130,7 @@ class TipoServicioController extends Controller
    {
       $this->permisos = 'MODIFICACION|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
-      $result = $this->hoTipoServicioModel->setTipoServicioUpdate($request);
+      $result = $this->hoTipoServicioModel->setTipoServicioUpdate($request->postParameter());
       if(is_null($result)){
         $dataJson['error']='0';
         $dataJson['msj']='Actualizacion efectuado exitosamente';

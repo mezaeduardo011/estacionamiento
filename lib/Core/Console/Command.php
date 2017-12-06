@@ -3,7 +3,7 @@ namespace JPH\Core\Console;
 
 /**
  * Permite recibir los comandos ingresado por los usuarios del sistema
- * @Author: Gregorio Bolívar <elalconxvii@gmail.com>
+ * @Author: Ing. Gregorio Bolivar <elalconxvii@gmail.com>
  * @Author: Blog: <http://gbbolivar.wordpress.com>
  * @Creation Date: 22/08/2017
  * @version: 4.1

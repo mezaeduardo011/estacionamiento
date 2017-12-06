@@ -8,8 +8,9 @@
    <div class="box-body">
 <input type="hidden" id="id" name="id">
 <div class="form-group">
-<label for="descripcion">descripcion</label>
-<input type="text" name="descripcion" class="form-control contar texto requerido" id="descripcion" placeholder="Por favor ingresar el/los descripcion"  maxlength="100" data-item="100">
+    <label for="descripcion">descripcion</label>
+    <input type="text" name="descripcion" class="form-control contar letraSpacio requerido" id="descripcion" placeholder="Por favor ingresar el/los descripcion"  maxlength="100" data-item="100">
+    <i class="help" id="help-descripcion"></i>
 </div>
   </div>
   <!-- /.box-body -->

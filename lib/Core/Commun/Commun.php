@@ -44,7 +44,8 @@ trait Commun
 
     static function now()
     {
-        return date('d/m/Y h:i:s');
+        $fe = date('d/m/Y h:i:s:v');
+        return $fe;
     }
 
     /**
@@ -408,49 +409,6 @@ trait Commun
         return $vista;
     }
 
-    /**
-     * Permite extraer el contenido del arreglo mutidimencional de la captura del rol de la session
-     */
-    public static function extrerMenu()
-    {
-        // Bloque encargado de extraer el el primer parte del arreglo
-        $menu = array();
-        foreach ($_SESSION['roles'] AS $kry => $value1) {
-            $item = explode('-', $value1);
-            $v = count($item) - 1;
-            unset($item[$v]);
-            $menu[] = trim(implode('|', $item)) ;
-        }
-        $bufer = array_unique($menu);
-
-        $menu2 = array();
-
-        // Bloque de proceso del sub menu
-        foreach ($bufer AS $key => $value2) {
-            $item2 = explode('|', $value2);
-            $v = count($item2) - 1;
-            $it = trim($item2[0]);
-            unset($item2[0]);
-            $menu2[$it][] = trim(implode('|', $item2));
-        }
-
-        $menu3 = array();
-        $menu4 = array();
-        // Bloque encargado del ultimo menu
-        foreach ($menu2 AS $key3 => $value3) {
-            for ($a = 0; $a < count($value3); $a++) {
-                $item3 = explode('|', $value3[$a]);
-                $it2 = $item3[0];
-                unset($item3[0]);
-
-                $menu3[$it2][] = trim(implode($item3));
-                //print_r($menu3);
-
-            }
-            $menu4[$key3]=$menu3;
-        }
-        return $menu4;
-    }
 
     /**
      * Permite darle formato al a los campos proveniente de la vista para adaptarlo a los parametros necesarios para la grilla
@@ -523,5 +481,6 @@ trait Commun
         # devolvemos el array de valores
         return $info;
     }
+
 }
 ?>

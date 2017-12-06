@@ -41,14 +41,14 @@ class TipoServicioModel extends Main
    {
     //define variables from incoming values
     if(isset($request->posStart))
-        $posStart = $request->posStart;
+        $posStart = $request->posStart + 300;
     else
         $posStart = 0;
 
     if(isset($request->count))
-        $count = $request->posStart + 10000;
+        $count = $request->posStart;
     else
-        $count = 10000;
+        $count = 300;
 
     // Primero extraer la cantidad de registros
     $sqlCount = "Select count(*) as items FROM ".$this->tabla;

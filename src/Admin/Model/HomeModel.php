@@ -1,7 +1,6 @@
 <?php
 namespace APP\Admin\Model;
 use JPH\Complements\Database\Main;
-use JPH\Core\Commun\all;
 /**
  * @propiedad: PROPIETARIO DEL CODIGO
  * @author Gregorio José Bolívar <elalconxvii@gmail.com>

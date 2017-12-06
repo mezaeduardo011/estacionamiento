@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="<?=JPH\Core\Store\Cache::get('srcCss')?>bower_components/Ionicons/css/ionicons.min.css">
 <!-- Theme style -->
 <link rel="stylesheet" href="<?=JPH\Core\Store\Cache::get('srcCss')?>dist/css/AdminLTE.min.css">
+<!-- flaticon -->
 <link rel="stylesheet" href="<?=JPH\Core\Store\Cache::get('srcCss')?>dist/css/flaticon.css">
 <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
 <link rel="stylesheet" href="<?=JPH\Core\Store\Cache::get('srcCss')?>dist/css/skins/_all-skins.min.css">
@@ -30,7 +31,7 @@
 <link rel="stylesheet" href="<?=JPH\Core\Store\Cache::get('srcCss')?>dist/css/estilos.css">
 <!-- Incluir elementos de diseño -->
 <link rel="stylesheet" href="<?=JPH\Core\Store\Cache::get('srcCss')?>dhtmlxSuite/codebase/fonts/font_roboto/roboto.css">
-<link rel="stylesheet" href="<?=JPH\Core\Store\Cache::get('srcCss')?>dhtmlxSuite/codebase/dhtmlx.css">
+<link rel="stylesheet" href="<?=JPH\Core\Store\Cache::get('srcCss')?>dhtmlxSuite/codebase/dhtmlxgrid.css">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

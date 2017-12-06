@@ -30,7 +30,7 @@ class SegRolesController extends Controller
    public function runSegRolesIndex($request)
    {
      $this->tpl->addIni();
-     //$listado = $this->hoSegRolesModel->getSegRolesListar($request);
+     //$listado = $this->hoSegRolesModel->getSegRolesListar($request->postParameter());
      $this->tpl->add('usuario', $this->getSession('usuario'));
      $this->tpl->renders('view::seguridad/segRoles/'.$this->pathVista().'/index');
    }
@@ -43,8 +43,8 @@ class SegRolesController extends Controller
     */ 
    public function runSegRolesListar($request)
    {
-       $result = $this->formatRows($request->obj);
-       $rows = $this->hoSegRolesModel->getSegRolesListar($request,$result);
+       $result = $this->formatRows($request->getParameter('obj'));
+       $rows = $this->hoSegRolesModel->getSegRolesListar($request->getParameter(),$result);
        $valor = array();
        $valor['head']=$result['campos'];
        $valor['rows']=$rows; // return del modelo
@@ -58,7 +58,7 @@ class SegRolesController extends Controller
     */ 
    public function runSegRolesCreate($request)
    {
-      $result = $this->hoSegRolesModel->setSegRolesCreate($request);
+      $result = $this->hoSegRolesModel->setSegRolesCreate($request->postParameter());
       if(is_null($result)){
         $dataJson['error']='1';
         $dataJson['msj']='Error en procesar el registro';
@@ -76,7 +76,7 @@ class SegRolesController extends Controller
     */ 
    public function runSegRolesShow($request)
    {
-      $result = $this->hoSegRolesModel->getSegRolesShow($request);
+      $result = $this->hoSegRolesModel->getSegRolesShow($request->postParameter());
       $this->json($result);
    }
 
@@ -87,7 +87,7 @@ class SegRolesController extends Controller
     */ 
    public function runSegRolesDelete($request)
    {
-      $result = $this->hoSegRolesModel->remSegRolesDelete($request);
+      $result = $this->hoSegRolesModel->remSegRolesDelete($request->postParameter());
       if(is_null($result)){
         $dataJson['error']='0';
         $dataJson['msj']='Registro eliminado exitosamente';
@@ -105,7 +105,7 @@ class SegRolesController extends Controller
     */ 
    public function runSegRolesUpdate($request)
    {
-      $result = $this->hoSegRolesModel->setSegRolesUpdate($request);
+      $result = $this->hoSegRolesModel->setSegRolesUpdate($request->postParameter());
       if(is_null($result)){
         $dataJson['error']='0';
         $dataJson['msj']='Actualizacion efectuado exitosamente';

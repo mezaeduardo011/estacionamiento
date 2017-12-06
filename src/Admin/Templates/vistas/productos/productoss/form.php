@@ -8,20 +8,22 @@
    <div class="box-body">
 <input type="hidden" id="id" name="id">
 <div class="form-group">
-<label for="tipo_servicio_id">tipo_servicio_id</label>
-<select  name="tipo_servicio_id" class="form-control integer requerido tipo_estatus--estatus--id " id="tipo_servicio_id"  placeholder="Por favor ingresar el/los tipo_servicio_id"><option value="0">Seleccionar</option></select>
+    <label for="tipo_servicio_id">tipo_servicio_id</label>
+    <select  name="tipo_servicio_id" class="form-control int requerido tipo_estatus--estatus--id " id="tipo_servicio_id"  placeholder="Por favor ingresar el/los tipo_servicio_id"><option value="0">Seleccionar</option></select>
 </div>
 <div class="form-group">
-<label for="descripcion">descripcion</label>
-<input type="text" name="descripcion" class="form-control contar texto requerido" id="descripcion" placeholder="Por favor ingresar el/los descripcion"  maxlength="100" data-item="100">
+    <label for="descripcion">descripcion</label>
+    <input type="text" name="descripcion" class="form-control contar letraSpacio requerido" id="descripcion" placeholder="Por favor ingresar el/los descripcion"  maxlength="100" data-item="100">
+    <i class="help" id="help-descripcion"></i>
 </div>
 <div class="form-group">
-<label for="codigo">codigo</label>
-<input type="text" name="codigo" class="form-control contar texto requerido" id="codigo" placeholder="Por favor ingresar el/los codigo"  maxlength="10" data-item="10">
+    <label for="codigo">codigo</label>
+    <input type="text" name="codigo" class="form-control contar letraSpacio requerido" id="codigo" placeholder="Por favor ingresar el/los codigo"  maxlength="10" data-item="10">
+    <i class="help" id="help-codigo"></i>
 </div>
 <div class="form-group">
-<label for="productos_id">productos_id</label>
-<select  name="productos_id" class="form-control integer productos--productoss--id " id="productos_id"  placeholder="Por favor ingresar el/los productos_id"><option value="0">Seleccionar</option></select>
+    <label for="productos_id">productos_id</label>
+    <select  name="productos_id" class="form-control int productos--productoss--id " id="productos_id"  placeholder="Por favor ingresar el/los productos_id"><option value="0">Seleccionar</option></select>
 </div>
   </div>
   <!-- /.box-body -->

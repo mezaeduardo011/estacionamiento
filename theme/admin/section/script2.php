@@ -5,5 +5,5 @@
 <!-- iCheck -->
 <script src="/admin/plugins/iCheck/icheck.min.js"></script>
 <!-- Notificciones toastr -->
-<script src="<?=JPH\Core\Store\Cache::get('srcJs')?>dist/js/toastr.min.js"></script>
-<script src="<?=JPH\Core\Store\Cache::get('srcJs')?>dist/js/core.js"></script>
+<script src="<?=JPH\Core\Store\Cache::get('srcJs')?>dist/js/core/toastr.min.js"></script>
+<script src="<?=JPH\Core\Store\Cache::get('srcJs')?>dist/js/core/core.js"></script>

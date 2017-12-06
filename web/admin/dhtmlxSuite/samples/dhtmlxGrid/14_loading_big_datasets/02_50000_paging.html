@@ -5,9 +5,9 @@
 	<title>50,000 records in grid with paging</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-	<link rel="stylesheet" type="text/css" href="../../../codebase/fonts/font_roboto/roboto.css"/>
-	<link rel="stylesheet" type="text/css" href="../../../codebase/dhtmlx.css"/>
-	<script src="../../../codebase/dhtmlx.js"></script>
+	<!--link rel="stylesheet" type="text/css" href="../../../codebase/fonts/font_roboto/roboto.css"/-->
+	<link rel="stylesheet" type="text/css" href="../../../codebase/dhtmlxgrid.css"/>
+	<script src="../../../codebase/dhtmlxgrid.js"></script>
 	<script>
 		var myGrid;
 		var timeoutHnd;
@@ -16,10 +16,11 @@
 			myGrid = new dhtmlXGridObject('gridbox');
 			myGrid.setImagePath("../../../codebase/imgs/");
 			myGrid.setHeader("Name,Index,Code");
-			myGrid.setInitWidths("150,150,*");
-			myGrid.setColAlign("left,left,right");
+			myGrid.attachHeader("#text_filter,#text_filter,#text_filter");
+			/*myGrid.setInitWidths("150,150,*");*/
+			/*myGrid.setColAlign("left,left,right");
 			myGrid.setColSorting("server,na,server");
-			myGrid.setColTypes("ro,ro,ro");
+			/*myGrid.setColTypes("ro,ro,ro");*/
 			//available in pro version only
 			if (myGrid.setColspan) myGrid.attachEvent("onBeforeSorting",customColumnSort);
 			myGrid.init();
@@ -106,12 +107,12 @@
 		Name<br>
 		<input type="text" id="search_nm" onKeyDown="doSearch(arguments[0]||event)">
 	</div>
-	<div>
+	<!--div>
 		Code<br>
 		<input type="text" id="search_cd" onKeyDown="doSearch(arguments[0]||event)">
 		<button onClick="reloadGrid()" id="submitButton" style="margin-left:30px;">Search</button>
 		<input type="checkbox" id="autosearch" onClick="enableAutosubmit(this.checked)"> Enable Autosearch
-	</div>
+	</div-->
 	<div id="gridbox" style="width:650px;height:450px;margin-top:20px;margin-bottom:10px;"></div>
 	<div><span id="pagingArea"></span>&nbsp;<span id="infoArea"></span></div>
 	<span id="recfound"></span>

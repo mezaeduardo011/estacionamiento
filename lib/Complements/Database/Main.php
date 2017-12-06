@@ -6,7 +6,7 @@ use JPH\Core\Store\Cache;
 
 /**
  * Clase integradora de herencia multiple de la conexion a base de datos
- * @author: Gregorio Bolívar <elalconxvii@gmail.com>
+ * @author: Ing Gregorio Bolivar <elalconxvii@gmail.com>
  * @author: Blog: <http://gbbolivar.wordpress.com>
  * @creation Date: 07/08/2017
  * @version: 4.1
@@ -46,7 +46,7 @@ class Main extends Comun implements Constant
 
             
         }catch(\Throwable $t){
-            die("Excepción capturadao: " . $t->getMessage());
+            die("Excepcion capturadao: " . $t->getMessage());
         }
         return $this;
     }

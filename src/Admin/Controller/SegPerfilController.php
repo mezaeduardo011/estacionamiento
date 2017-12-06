@@ -31,7 +31,7 @@ class SegPerfilController extends Controller
    public function runSegPerfilIndex($request)
    {
      $this->tpl->addIni();
-     $listado = $this->hoSegPerfilModel->getSegPerfilListarCombo($request);
+     $listado = $this->hoSegPerfilModel->getSegPerfilListarCombo($request->getParameter());
      $this->tpl->add('usuario', $this->getSession('usuario'));
      $this->tpl->renders('view::seguridad/segPerfil/'.$this->pathVista().'/index');
    }
@@ -43,7 +43,7 @@ class SegPerfilController extends Controller
     public function runSegRolesAsignarRolesPerfil($request)
     {
         $this->tpl->addIni();
-        $listado = $this->hoSegPerfilModel->getSegPerfilListarCombo($request);
+        $listado = $this->hoSegPerfilModel->getSegPerfilListarCombo($request->getParameter());
         $this->tpl->add('usuario', $this->getSession('usuario'));
         $this->tpl->renders('view::seguridad/segPerfil/perfil/asignarRolesPerfil');
     }
@@ -55,8 +55,8 @@ class SegPerfilController extends Controller
     */ 
    public function runSegPerfilListar($request)
    {
-       $result = $this->formatRows($request->obj);
-       $rows = $this->hoSegPerfilModel->getSegPerfilListar($request,$result);
+       $result = $this->formatRows($request->getParameter('obj'));
+       $rows = $this->hoSegPerfilModel->getSegPerfilListar($request->getParameter(),$result);
        $valor = array();
        $valor['head']=$result['campos'];
        $valor['rows']=$rows; // return del modelo
@@ -70,7 +70,7 @@ class SegPerfilController extends Controller
     */ 
    public function runSegPerfilCreate($request)
    {
-      $result = $this->hoSegPerfilModel->setSegPerfilCreate($request);
+      $result = $this->hoSegPerfilModel->setSegPerfilCreate($request->postParameter());
       if(is_null($result)){
         $dataJson['error']='1';
         $dataJson['msj']='Error en procesar el registro';
@@ -88,7 +88,7 @@ class SegPerfilController extends Controller
      */
     public function runSetAsociarRolesPerfil($request)
     {
-        $result = $this->hoSegPerfilRolesModel->getSegPerfilRolesCreate($request);
+        $result = $this->hoSegPerfilRolesModel->getSegPerfilRolesCreate($request->postParameter());
         if(is_null($result)){
             $dataJson['error']='1';
             $dataJson['msj']='Error en procesar el registro';
@@ -107,7 +107,7 @@ class SegPerfilController extends Controller
     */ 
    public function runSegPerfilShow($request)
    {
-      $result = $this->hoSegPerfilModel->getSegPerfilShow($request);
+      $result = $this->hoSegPerfilModel->getSegPerfilShow($request->postParameter());
       $this->json($result);
    }
 
@@ -118,7 +118,7 @@ class SegPerfilController extends Controller
     */ 
    public function runSegPerfilDelete($request)
    {
-      $result = $this->hoSegPerfilModel->remSegPerfilDelete($request);
+      $result = $this->hoSegPerfilModel->remSegPerfilDelete($request->postParameter());
       if(is_null($result)){
         $dataJson['error']='0';
         $dataJson['msj']='Registro eliminado exitosamente';
@@ -136,7 +136,7 @@ class SegPerfilController extends Controller
     */ 
    public function runSegPerfilUpdate($request)
    {
-      $result = $this->hoSegPerfilModel->setSegPerfilUpdate($request);
+      $result = $this->hoSegPerfilModel->setSegPerfilUpdate($request->postParameter());
       if(is_null($result)){
         $dataJson['error']='0';
         $dataJson['msj']='Actualizacion efectuado exitosamente';

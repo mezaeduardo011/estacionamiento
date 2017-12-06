@@ -1,7 +1,7 @@
 <?php
 namespace APP\Admin\Controller;
-use JPH\Core\Commun\{All,Security};
-use APP\Admin\Model AS Model;
+use APP\Admin\Model;
+use JPH\Core\Commun\Security;
 
 /**
  * Generador de codigo de Controller de Hornero 1.0
@@ -61,8 +61,8 @@ class SegUsuariosController extends Controller
     */
    public function runSegUsuariosListar($request)
    {
-       $result = $this->formatRows($request->obj);
-       $rows = $this->hoSegUsuariosModel->getSegUsuariosListar($request,$result);
+       $result = $this->formatRows($request->getParameter('obj'));
+       $rows = $this->hoSegUsuariosModel->getSegUsuariosListar($request->getParameter(),$result);
        $valor = array();
        $valor['head']=$result['campos'];
        $valor['rows']=$rows; // return del modelo
@@ -76,8 +76,8 @@ class SegUsuariosController extends Controller
      */
     public function runSegLogAutenticacion($request)
     {
-        $result = $this->formatRows($request->obj);
-        $rows = $this->hoSegLogUsuariosModel->getSegLogUsuariosListar($request,$result);
+        $result = $this->formatRows($request->getParameter('obj'));
+        $rows = $this->hoSegLogUsuariosModel->getSegLogUsuariosListar($request->getParameter(),$result);
         $valor = array();
         $valor['head']=$result['campos'];
         $valor['rows']=$rows; // return del modelo
@@ -91,8 +91,8 @@ class SegUsuariosController extends Controller
      */
     public function runSegUsuariosShowAcciones($request)
     {
-        $result = $this->formatRows($request->obj);
-        $rows = $this->hoSegLogAccionesModel->getSegLogUsuariosAccionesListar($request,$result);
+        $result = $this->formatRows($request->getParameter('obj'));
+        $rows = $this->hoSegLogAccionesModel->getSegLogUsuariosAccionesListar($request->getParameter(),$result);
         $valor = array();
         $valor['head']=$result['campos'];
         $valor['rows']=$rows; // return del modelo
@@ -107,7 +107,7 @@ class SegUsuariosController extends Controller
    public function runSegUsuariosCreate($request)
    {
       //$this->hoSegPerfilsModel->getSegPerfilRelacionUser($request->roles);
-      $result = $this->hoSegUsuariosModel->setSegUsuariosCrsegLogCreateLogineate($request);
+      $result = $this->hoSegUsuariosModel->setSegUsuariosCrsegLogCreateLogineate($request->postParameter());
       if(is_null($result)){
         $dataJson['error']='1';
         $dataJson['msj']='Error en procesar el registro';
@@ -125,7 +125,7 @@ class SegUsuariosController extends Controller
     */ 
    public function runSegUsuariosShow($request)
    {
-      $result = $this->hoSegUsuariosModel->getSegUsuariosShow($request);
+      $result = $this->hoSegUsuariosModel->getSegUsuariosShow($request->postParameter());
       $this->json($result);
    }
 
@@ -136,9 +136,9 @@ class SegUsuariosController extends Controller
      */
    public function runShowAccionesAuditoria($request)
    {
-       $id = $this->validateRows('NUM', $request->item);
+       $id = $this->validateRows('NUM', $request->getParameter('item'));
        if($id) {
-           $result = $this->hoSegLogAccionesModel->showAcciones($request->item);
+           $result = $this->hoSegLogAccionesModel->showAcciones($request->getParameter('item'));
            $this->json($result);
        }else{
            // Non-Authoritative Information
@@ -148,6 +148,19 @@ class SegUsuariosController extends Controller
        }
 
    }
+   
+   /**
+    * Methodo encargado de mostrar  la auditoria general del sistema el monitor
+    * @return view de auditoria del todo el sistema
+    */
+   public  function runSegShowAuditoria($request){
+       $this->tpl->addIni();
+       //$listado = $this->hoSegUsuariosModel->getSegUsuariosListar($request);
+       //$roles = $this->hoSegPerfilsModel->getSegPerfilListarCombo();
+       $this->tpl->add('usuario', $this->getSession('usuario'));
+       //$this->tpl->add('roles', $roles);
+       $this->tpl->renders('view::seguridad/segUsuarios/usuarios/auditoriaAll');
+   }
 
     /**
     * Eliminar registros de SegUsuarios
@@ -156,7 +169,7 @@ class SegUsuariosController extends Controller
     */ 
    public function runSegUsuariosDelete($request)
    {
-      $result = $this->hoSegUsuariosModel->remSegUsuariosDelete($request);
+      $result = $this->hoSegUsuariosModel->remSegUsuariosDelete($request->postParameter());
       if(is_null($result)){
         $dataJson['error']='0';
         $dataJson['msj']='Registro eliminado exitosamente';
@@ -174,7 +187,7 @@ class SegUsuariosController extends Controller
     */ 
    public function runSegUsuariosUpdate($request)
    {
-      $result = $this->hoSegUsuariosModel->setSegUsuariosUpdate($request);
+      $result = $this->hoSegUsuariosModel->setSegUsuariosUpdate($request->postParameter());
       if(is_null($result)){
         $dataJson['error']='0';
         $dataJson['msj']='Actualizacion efectuado exitosamente';
@@ -202,7 +215,7 @@ class SegUsuariosController extends Controller
      */
     public function runSegUsuariosShowAuditoria($request)
     {
-       $datos=explode('|',base64_decode($request->getItemShow));
+       $datos=explode('|',base64_decode($request->getParameter('getItemShow')));
        $valor['data']=$datos[0];
        $result = $this->hoSegUsuariosModel->getSegUsuariosShow((object)$valor);
        $this->json($result);

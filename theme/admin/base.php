@@ -7,14 +7,15 @@
     <title>JRH+<?=$this->section('title')?></title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- CSS Main-->
-    <?php $this->insert('section/link') ?>
-
-    <!-- CSS Extends-->
-    <?=$this->section('addCss')?>
 
     <!-- NoScript Extends-->
     <?=$this->insert('section/noscript')?>
+    <!-- CSS Main-->
+    <?php $this->insert('section/link') ?>
+    <!-- CSS Extends-->
+    <?=$this->section('addCss')?>
+
+
 
 </head>
 <body class="hold-transition skin-blue sidebar-collapse sidebar-mini">

@@ -8,12 +8,14 @@
    <div class="box-body">
 <input type="hidden" id="id" name="id">
 <div class="form-group">
-<label for="apellido">apellido</label>
-<input type="text" name="apellido" class="form-control contar color requerido" id="apellido" placeholder="Por favor ingresar el/los apellido"  maxlength="50" data-item="50">
+    <label for="apellido">apellido</label>
+    <input type="text" name="apellido" class="form-control contar letraSpacio requerido" id="apellido" placeholder="Por favor ingresar el/los apellido"  maxlength="50" data-item="50">
+    <i class="help" id="help-apellido"></i>
 </div>
 <div class="form-group">
-<label for="nombre">nombre</label>
-<input type="text" name="nombre" class="form-control contar color requerido" id="nombre" placeholder="Por favor ingresar el/los nombre" value="pablo" maxlength="50" data-item="50">
+    <label for="nombre">nombre</label>
+    <input type="text" name="nombre" class="form-control contar correo requerido" id="nombre" placeholder="Por favor ingresar el/los nombre" value="pablo" maxlength="50" data-item="50">
+    <i class="help" id="help-nombre"></i>
 </div>
   </div>
   <!-- /.box-body -->

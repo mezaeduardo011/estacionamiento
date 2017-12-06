@@ -19,7 +19,7 @@ class Exceptions extends \Error implements \Throwable
      * Se encarga de leer los mensajes de exepciones
      * @param string $index indice del grupo de mensaje
      * @param string $subIndex sub indice del mensaje
-     * @param array %obj, arreglo con los datos que pasa los indice de los tab del mensaje
+     * @param array $obj, arreglo con los datos que pasa los indice de los tab del mensaje
      * @return string
      */
         static public function getMsjException($index, $subIndex, $obj = array())

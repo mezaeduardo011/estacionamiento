@@ -1,6 +1,8 @@
 <?php
 namespace JPH\Core\Router;
-use JPH\Core\Commun\{All,Logs};
+use JPH\Core\Commun\All;
+use JPH\Core\Commun\Logs;
+use JPH\Core\Http\Request;
 
 /**
  * Permite encargarse de procesar las rutas generadas que se cumpla su proceso de peticion de request
@@ -70,7 +72,8 @@ class RouterGenerator
                     // Verificamos si el method es GET
                     if($this->petition==ALL::METHOD_GET AND $this->req->REQUEST_METHOD==ALL::METHOD_GET){
                         if(method_exists($obj,$mthod)){
-                            $obj->$mthod((object)$_GET);
+                            $req = New Request();
+                            $obj->$mthod($req);
                         }else{
                             All::statusHttp(404);
                             $tmp = array('controller'=>$this->activ, 'method'=>$mthod);
@@ -83,7 +86,8 @@ class RouterGenerator
                     // Verificamossi el method es POST
                     }elseif($this->petition==ALL::METHOD_POST AND $this->req->REQUEST_METHOD==ALL::METHOD_POST){
                         if(method_exists($obj,$mthod)) {
-                            $obj->$mthod((object)$_POST);
+                            $req = New Request();
+                            $obj->$mthod($req);
                         }else{
                             All::statusHttp(404);
                             $tmp = array('controller'=>$this->activ, 'method'=>$mthod);

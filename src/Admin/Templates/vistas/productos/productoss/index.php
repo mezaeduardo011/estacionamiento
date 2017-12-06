@@ -43,7 +43,21 @@ $breadcrumb=(object)array('actual'=>'Productoss','titulo'=>'Vista de integrada d
         },
         priListaClick: function (dataJson){
         }, 
-        priClickProcesarForm: function(){ } 
+        priClickProcesarForm: function(){ }, 
+        validateMascaras: function () {
+            var item = true;
+            $.each(Core.Vista.Mascara,function (keys, values) {
+            var expreg = new RegExp(values.mascara);
+            var campo = $('[name="'+values.campo+'"], #'+values.campo).val();
+            if(!expreg.test(campo)) {
+                alertar(values.mensaje,'Validación del campo '+values.campo);
+                $('[name="'+values.campo+'"], #'+values.campo).focus();
+                $('i#help-'+values.campo).html(values.mensaje);
+                    item = false;
+                }
+            });
+            return item;
+        }
     };
     $(function () {
         Core.main();

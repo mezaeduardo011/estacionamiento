@@ -1,10 +1,8 @@
 <?php 
 namespace JPH\Complements\Template;
-use JPH\Core\Store\Cache;
 use JPH\Core\Commun\All;
-use League\{
-    Plates\Engine, Plates\Extension\ExtensionInterface
-};
+use JPH\Core\Store\Cache;
+use League\Plates\Engine;
 
 
 /**
@@ -37,7 +35,7 @@ class Plate extends Engine
          * Permite renderizar la vista e imprimir el resultado en html en vista
          * @param array $object, valores de datos que van a la vista
          * @param boolean $cifrar, opcion para permitir cifrar html
-         * @return html $html 
+         * @return resource $html 
          */
         public function renders($vista, $cifrar=false)
         {
@@ -56,9 +54,9 @@ class Plate extends Engine
         }
         /**
          * Permite agregar datos 
-         * @param type $key 
-         * @param type $data 
-         * @return type
+         * @param string $key 
+         * @param string $data 
+         * @return resource $this
          */
         public function add($key,$data)
         {
@@ -77,7 +75,7 @@ class Plate extends Engine
 
         /**
          * Description
-         * @return type
+         * @return object $this
          */
         public function addExtends(){
               $this->item['Commun'] = new All();

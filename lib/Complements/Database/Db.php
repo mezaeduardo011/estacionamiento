@@ -1,10 +1,9 @@
 <?php
 namespace JPH\Complements\Database;
-use JPH\Complements\Database\Query;
-use JPH\Core\Commun\{
-    All, Logs
-};
+use JPH\Core\Commun\All;
+use JPH\Core\Commun\Logs;
 use JPH\Core\Store\Cache;
+use mysqli;
 
 /**
  * Driver que permite hacer la conexion con la base de datos  
@@ -96,8 +95,8 @@ trait Db  {
     }
     /**
      * Executa el query y trae el valor
-     * @param type $query 
-     * @return objeto boolean
+     * @param string $query 
+     * @return bool boolean
      */
     public function get($query) {
         if (!$this->inited) {
@@ -150,7 +149,7 @@ trait Db  {
 
     /**
      * Es para ejecutar store procedure
-     * @param type $query
+     * @param string $query
      * @return object $this
      */
     public function execute($query) {

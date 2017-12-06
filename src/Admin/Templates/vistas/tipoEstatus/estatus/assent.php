@@ -1,4 +1,4 @@
-    // Definicion los campos del DataTable de esta vista
+    // Definicion de las variables necesarias para la grilla y validacion de mascaras
     var Config = {};
     Config.colums = [
         { 'id':'nombre', 'type':'ed', 'align':'left', 'sort':'str', 'value':'nombre' },
@@ -10,7 +10,7 @@
     Config.show = {
         'module':'Estatus',
         'tableTitle':'Listado de Registros.',
-        'filter':'#text_filter,&nbsp;',
+        'filter':'&nbsp;,&nbsp;',
         'autoWidth':true,
         'multiSelect':false
     }
@@ -25,3 +25,14 @@
         priListaLoad: function (){ 
         },
      }
+<?php
+       $fies = file_get_contents(__DIR__.'/mascaras.json');
+       $dataJson = json_decode($fies);
+ ?>
+Core.Vista.Mascara = [
+<?php
+foreach ($dataJson->mascaras AS $key => $val){
+    echo "{'type':'".$val->type."','mascara':'".base64_decode($val->mascaraJS)."','mensaje':'".$val->mensaje."','input':'".$val->input."','campo':'".$val->campo."'},".PHP_EOL;
+}
+?>
+];

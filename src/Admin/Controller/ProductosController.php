@@ -62,8 +62,8 @@ class ProductosController extends Controller
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
 
       // Bloque de proceso de la grilla
-      $result = $this->formatRows($request->obj);
-      $rows = $this->hoProductosModel->getProductosListar($request,$result);
+      $result = $this->formatRows($request->getParameter('obj'));
+      $rows = $this->hoProductosModel->getProductosListar($request->getParameter(),$result);
       $valor = array();
       $valor['head']=$result['campos'];
       $valor['rows']=$rows; 
@@ -81,7 +81,7 @@ class ProductosController extends Controller
       $this->permisos = 'ALTA|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
 
-      $result = $this->hoProductosModel->setProductosCreate($request);
+      $result = $this->hoProductosModel->setProductosCreate($request->postParameter());
       if(is_null($result)){
         $dataJson['error']='1';
         $dataJson['msj']='Error en procesar el registro';
@@ -102,7 +102,7 @@ class ProductosController extends Controller
       $this->permisos = 'CONSULTA|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
 
-      $result = $this->hoProductosModel->getProductosShow($request);
+      $result = $this->hoProductosModel->getProductosShow($request->postParameter());
       $this->json($result);
    }
 
@@ -116,7 +116,7 @@ class ProductosController extends Controller
       $this->permisos = 'BAJA|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
 
-      $result = $this->hoProductosModel->remProductosDelete($request);
+      $result = $this->hoProductosModel->remProductosDelete($request->postParameter());
       if(is_null($result)){
         $dataJson['error']='0';
         $dataJson['msj']='Registro eliminado exitosamente';
@@ -137,7 +137,7 @@ class ProductosController extends Controller
       $this->permisos = 'MODIFICACION|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
 
-      $result = $this->hoProductosModel->setProductosUpdate($request);
+      $result = $this->hoProductosModel->setProductosUpdate($request->postParameter());
       if(is_null($result)){
         $dataJson['error']='0';
         $dataJson['msj']='Actualizacion efectuado exitosamente';

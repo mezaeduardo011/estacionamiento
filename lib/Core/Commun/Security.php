@@ -87,7 +87,6 @@ trait Security
     // Method encargado de mostrar mensaje de error si tiene permiso o no al acceder a un lugar Index
     public function validatePermisos($acceso, bool $returnJson=false)
     {
-
         if($returnJson==false AND $acceso->permiso=='NO'){
             // Proceso solo cuando se procesa una pagina normal
             die('!Uff¡ No tienes acceso a esta acción contactar al administrador del sistema y solicitar acceso. ');
@@ -101,9 +100,6 @@ trait Security
         }
     }
 
-    public function __destruct()
-    {
 
-    }
 
 }

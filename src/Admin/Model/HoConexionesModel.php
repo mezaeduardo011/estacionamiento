@@ -1,6 +1,9 @@
 <?php
 namespace APP\Admin\Model;
 use JPH\Complements\Database\Main;
+use JPH\Core\Commun\{
+    All, Constant, Security
+};
 /**
  * Generador de codigo del Modelo de la App Admin
  * @propiedad: Hornero 1.0

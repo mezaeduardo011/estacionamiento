@@ -30,9 +30,10 @@ class AppCrudVista extends App
      * @param string $tabla, nombre de la tabla
      * @param array $campos, arrego de los campos que tiene la la vista
      * @param array $columnsReal, arrego de los campos que tiene la vista
+     * @param array $mascaras, Mascaras disponibles para validar los campos
      * @return bool true
      */
-    public function createStructuraFileCRUD($app,$crud,$tabla,$campos,$columnsReal)
+    public function createStructuraFileCRUD($app,$crud,$tabla,$campos,$columnsReal, $mascaras)
     {
        // echo 'App:'.$app.'--,Crud:'.$crud.'--,tabla:'.$tabla; //die();
         foreach ($campos AS $key=>$value)
@@ -83,11 +84,11 @@ class AppCrudVista extends App
         $this->app = All::upperCase($app);
         $ruta = $this->pathapp.$app.All::APP_CONTR;
 
-        // Permite valirar si existe la app donde va el controller
+        // Permite validar si existe la app donde va el controller
         if (!file_exists($ruta)) {
             die(sprintf('The application "%s" does not exist.', $this->app));
         }else{
-            // Variables necesarias para enviar generar las Vistas
+            // Variables necesarias para poder generar la vista
             $controller = All::upperCase($crud);
             $entidad = All::upperCase($tabla);
             $rutaApp = $this->pathapp.$app;
@@ -125,15 +126,18 @@ class AppCrudVista extends App
             }
             // Permite crear la carpeta donde estará la vistas generadas
             self::createDirViews($rutaPadre,$rutaHija);
+
             // Permite crear los archivos necesarios de la vista en especifico
             // Generacion del Index
             self::createFileViewIndex($rutaHija, $campos, $rutaVista, $requerido);
             // Generacion del Assent
             self::createFileViewAssent($rutaHija, $campos, $rutaVista, $requerido);
             // Generacion del Form
-            self::createFileViewForm($rutaHija, $campos,$requerido);
+            self::createFileViewForm($rutaHija, $campos, $requerido);
             // Generacion del Listado
             self::createFileViewListado($rutaHija, $campos);
+            // Generacion del Json ecargado de procesar las mascaras
+            self::createFileViewJsonMascaras($rutaHija, $mascaras);
 
             $msj=Interprete::getMsjConsole($this->active,'app:crud-creado');
 
@@ -215,7 +219,7 @@ class AppCrudVista extends App
         fputs($ar, '     $this->permisos = \'CONSULTA|CONTROL TOTAL\';'.PHP_EOL);
         fputs($ar, '     $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos));'.PHP_EOL.PHP_EOL);
         fputs($ar, '     $this->tpl->addIni();'.PHP_EOL);
-        //fputs($ar, '     $listado = $this->ho'.$controller.'Model->get'.$controller.'Listar($request);'.PHP_EOL);
+        //fputs($ar, '     $listado = $this->ho'.$controller.'Model->get'.$controller.'Listar($request->postParameter());'.PHP_EOL);
         //fputs($ar, '     $this->tpl->add(\'listado\', $listado);;'.PHP_EOL);
         fputs($ar, '     $this->tpl->add(\'usuario\', $this->getSession(\'usuario\'));'.PHP_EOL);//
         fputs($ar, '     $this->tpl->renders(\'view::'.$rutaVista.'\'.$this->pathVista().\'/index\');'.PHP_EOL);
@@ -233,8 +237,8 @@ class AppCrudVista extends App
         fputs($ar, '      $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);'.PHP_EOL.PHP_EOL);
 
         fputs($ar, '      // Bloque de proceso de la grilla'.PHP_EOL);
-        fputs($ar, '      $result = $this->formatRows($request->obj);'.PHP_EOL);
-        fputs($ar, '      $rows = $this->ho'.$controller.'Model->get'.$controller.'Listar($request,$result);'.PHP_EOL);
+        fputs($ar, '      $result = $this->formatRows($request->getParameter(\'obj\'));'.PHP_EOL);
+        fputs($ar, '      $rows = $this->ho'.$controller.'Model->get'.$controller.'Listar($request->getParameter(),$result);'.PHP_EOL);
         fputs($ar, '      $valor = array();'.PHP_EOL);
         fputs($ar, '      $valor[\'head\']=$result[\'campos\'];'.PHP_EOL);
         fputs($ar, '      $valor[\'rows\']=$rows; '.PHP_EOL);
@@ -249,9 +253,12 @@ class AppCrudVista extends App
         fputs($ar, '    */ '.PHP_EOL);
         fputs($ar, '   public function run'.$controller.'Create($request)'.PHP_EOL);
         fputs($ar, '   {'.PHP_EOL);
+        fputs($ar, '      // Verificar permisologia'.PHP_EOL);
         fputs($ar, '      $this->permisos = \'ALTA|CONTROL TOTAL\';'.PHP_EOL);
         fputs($ar, '      $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);'.PHP_EOL.PHP_EOL);
-        fputs($ar, '      $result = $this->ho'.$controller.'Model->set'.$controller.'Create($request);'.PHP_EOL);
+        fputs($ar, '      // Verificar las mascaras'.PHP_EOL);
+        fputs($ar, '      parent::runValidarMascarasVista($this->pathVista(),$request->postParameter());'.PHP_EOL.PHP_EOL);
+        fputs($ar, '      $result = $this->ho'.$controller.'Model->set'.$controller.'Create($request->postParameter());'.PHP_EOL);
         fputs($ar, '      if(is_null($result)){'.PHP_EOL);
         fputs($ar, '        $dataJson[\'error\']=\'1\';'.PHP_EOL);
         fputs($ar, '        $dataJson[\'msj\']=\'Error en procesar el registro\';'.PHP_EOL);
@@ -269,9 +276,10 @@ class AppCrudVista extends App
         fputs($ar, '    */ '.PHP_EOL);
         fputs($ar, '   public function run'.$controller.'Show($request)'.PHP_EOL);
         fputs($ar, '   {'.PHP_EOL);
+        fputs($ar, '      // Verificar permisologia'.PHP_EOL);
         fputs($ar, '      $this->permisos = \'CONSULTA|CONTROL TOTAL\';'.PHP_EOL);
         fputs($ar, '      $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);'.PHP_EOL.PHP_EOL);
-        fputs($ar, '      $result = $this->ho'.$controller.'Model->get'.$controller.'Show($request);'.PHP_EOL);
+        fputs($ar, '      $result = $this->ho'.$controller.'Model->get'.$controller.'Show($request->postParameter());'.PHP_EOL);
         fputs($ar, '      $this->json($result);'.PHP_EOL);
         fputs($ar, '   }'.PHP_EOL.PHP_EOL);
 
@@ -282,9 +290,10 @@ class AppCrudVista extends App
         fputs($ar, '    */ '.PHP_EOL);
         fputs($ar, '   public function run'.$controller.'Delete($request)'.PHP_EOL);
         fputs($ar, '   {'.PHP_EOL);
+        fputs($ar, '      // Verificar permisologia'.PHP_EOL);
         fputs($ar, '      $this->permisos = \'BAJA|CONTROL TOTAL\';'.PHP_EOL);
         fputs($ar, '      $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);'.PHP_EOL.PHP_EOL);
-        fputs($ar, '      $result = $this->ho'.$controller.'Model->rem'.$controller.'Delete($request);'.PHP_EOL);
+        fputs($ar, '      $result = $this->ho'.$controller.'Model->rem'.$controller.'Delete($request->postParameter());'.PHP_EOL);
         fputs($ar, '      if(is_null($result)){'.PHP_EOL);
         fputs($ar, '        $dataJson[\'error\']=\'0\';'.PHP_EOL);
         fputs($ar, '        $dataJson[\'msj\']=\'Registro eliminado exitosamente\';'.PHP_EOL);
@@ -302,9 +311,12 @@ class AppCrudVista extends App
         fputs($ar, '    */ '.PHP_EOL);
         fputs($ar, '   public function run'.$controller.'Update($request)'.PHP_EOL);
         fputs($ar, '   {'.PHP_EOL);
+        fputs($ar, '      // Verificar permisologia'.PHP_EOL);
         fputs($ar, '      $this->permisos = \'MODIFICACION|CONTROL TOTAL\';'.PHP_EOL);
         fputs($ar, '      $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);'.PHP_EOL.PHP_EOL);
-        fputs($ar, '      $result = $this->ho'.$controller.'Model->set'.$controller.'Update($request);'.PHP_EOL);
+        fputs($ar, '      // Verificar las mascaras'.PHP_EOL);
+        fputs($ar, '      parent::runValidarMascarasVista($this->pathVista(),$request->postParameter());'.PHP_EOL.PHP_EOL);
+        fputs($ar, '      $result = $this->ho'.$controller.'Model->set'.$controller.'Update($request->postParameter());'.PHP_EOL);
         fputs($ar, '      if(is_null($result)){'.PHP_EOL);
         fputs($ar, '        $dataJson[\'error\']=\'0\';'.PHP_EOL);
         fputs($ar, '        $dataJson[\'msj\']=\'Actualizacion efectuado exitosamente\';'.PHP_EOL);
@@ -318,7 +330,6 @@ class AppCrudVista extends App
         fputs($ar, '?>'.PHP_EOL);
         // Cierro el archivo y la escritura
         fclose($ar);
-
     }
 
 
@@ -329,7 +340,6 @@ class AppCrudVista extends App
      */
     private function createFileModelCRUD(string $archivoModel, string $app, string $modelo , $campos)
     {
-
         unset($campos['campos'][0]);
         $app = All::upperCase($app);
 
@@ -380,17 +390,17 @@ class AppCrudVista extends App
         fputs($ar, '   public function get'.$modelo.'Listar($request,$result)'.PHP_EOL);
         fputs($ar, '   {'.PHP_EOL);
         fputs($ar, '    //define variables from incoming values'.PHP_EOL);
-        fputs($ar, '    if(isset($request->posStart))'.PHP_EOL);
-        fputs($ar, '        $posStart = $request->posStart;'.PHP_EOL);
+        fputs($ar, '    if(isset($request->postParameter(\'posStart\')))'.PHP_EOL);
+        fputs($ar, '        $posStart = $request->postParameter(\'posStart\');'.PHP_EOL);
         fputs($ar, '    else'.PHP_EOL);
         fputs($ar, '        $posStart = 0;'.PHP_EOL);
-        fputs($ar, '    if(isset($request->count))'.PHP_EOL);
-        fputs($ar, '        $count = $request->count;'.PHP_EOL);
+        fputs($ar, '    if(isset($request->postParameter(\'count\')))'.PHP_EOL);
+        fputs($ar, '        $count = $request->postParameter(\'count\');'.PHP_EOL);
         fputs($ar, '    else'.PHP_EOL);
         fputs($ar, '        $count = 100;'.PHP_EOL);
         
         fputs($ar, '    // Elemento cuando hay relacion'.PHP_EOL);
-        fputs($ar, '    $relation = All::formatRelacio(@$request->relacion);'.PHP_EOL);
+        fputs($ar, '    $relation = All::formatRelacio(@$request->postParameter(\'relacion\'));'.PHP_EOL);
         fputs($ar, '    $where = \'\';'.PHP_EOL);
         fputs($ar, '    if(!empty($relation[2])){'.PHP_EOL);
         fputs($ar, '        $where="  WHERE $relation[1]=$relation[2]";'.PHP_EOL);
@@ -670,8 +680,24 @@ class AppCrudVista extends App
         }
     }
     fputs($ar, '        }, ' . PHP_EOL);
-    // Fing de Fragento de codigo para extraer los datos del click del padre
-    fputs($ar, '        priClickProcesarForm: function(){ } ' . PHP_EOL);
+    // Fin de Fragento de codigo para extraer los datos del click del padre
+    fputs($ar, '        priClickProcesarForm: function(){ }, ' . PHP_EOL);
+
+    // Codigo encargado para validar las mascaras
+    fputs($ar, '        validateMascaras: function () {' . PHP_EOL);
+    fputs($ar, '            var item = true;' . PHP_EOL);
+    fputs($ar, '            $.each(Core.Vista.Mascara,function (keys, values) {' . PHP_EOL);
+    fputs($ar, '            var expreg = new RegExp(values.mascara);' . PHP_EOL);
+    fputs($ar, '            var campo = $(\'[name="\'+values.campo+\'"], #\'+values.campo).val();' . PHP_EOL);
+    fputs($ar, '            if(!expreg.test(campo)) {' . PHP_EOL);
+    fputs($ar, '                alertar(values.mensaje,\'Validación del campo \'+values.campo);' . PHP_EOL);
+    fputs($ar, '                $(\'[name="\'+values.campo+\'"], #\'+values.campo).focus();' . PHP_EOL);
+    fputs($ar, '                $(\'i#help-\'+values.campo).html(values.mensaje);' . PHP_EOL);
+    fputs($ar, '                    item = false;' . PHP_EOL);
+    fputs($ar, '                }' . PHP_EOL);
+    fputs($ar, '            });' . PHP_EOL);
+    fputs($ar, '            return item;' . PHP_EOL);
+    fputs($ar, '        }' . PHP_EOL);
     fputs($ar, '    };' . PHP_EOL);
 
     fputs($ar, '    $(function () {' . PHP_EOL);
@@ -688,7 +714,7 @@ class AppCrudVista extends App
     {
         $ar = fopen($rutaHija . DIRECTORY_SEPARATOR . "assent.php", "w+") or die("Problemas en la creaci&oacute;n del view index.php");
         // Inicio la escritura en el activo
-        fputs($ar, '    // Definicion los campos del DataTable de esta vista' . PHP_EOL);
+        fputs($ar, '    // Definicion de las variables necesarias para la grilla y validacion de mascaras' . PHP_EOL);
         fputs($ar, '    var Config = {};' . PHP_EOL);
         fputs($ar, '    Config.colums = [' . PHP_EOL);
         $filtro = array();
@@ -743,6 +769,19 @@ class AppCrudVista extends App
         fputs($ar, '        },' . PHP_EOL);
         fputs($ar, '     }' . PHP_EOL);
         // Fin de combo dinamicos
+
+        // Configuracion de las mascaras
+        fputs($ar, '<?php'.PHP_EOL);
+        fputs($ar, '       $fies = file_get_contents(__DIR__.\'/mascaras.json\');'.PHP_EOL);
+        fputs($ar, '       $dataJson = json_decode($fies);'.PHP_EOL);
+        fputs($ar, ' ?>' . PHP_EOL);
+        fputs($ar, 'Core.Vista.Mascara = ['.PHP_EOL);
+        fputs($ar, '<?php'.PHP_EOL);
+        fputs($ar, 'foreach ($dataJson->mascaras AS $key => $val){'.PHP_EOL);
+        fputs($ar, '    echo "{\'type\':\'".$val->type."\',\'mascara\':\'".base64_decode($val->mascaraJS)."\',\'mensaje\':\'".$val->mensaje."\',\'input\':\'".$val->input."\',\'campo\':\'".$val->campo."\'},".PHP_EOL;'.PHP_EOL);
+        fputs($ar, '}'.PHP_EOL);
+        fputs($ar, '?>'.PHP_EOL);
+        fputs($ar, '];'.PHP_EOL);
         fclose($ar);
     }
 
@@ -778,16 +817,18 @@ class AppCrudVista extends App
 
                 if($mostrar[0]==0 AND $mostrar[2]==0 AND $mostrar[2]!='combo' AND $mostrar[2]!='grilla') { // mostrar Si y no es relacionado
                     fputs($ar, '<div class="form-group">'.PHP_EOL);
-                    fputs($ar, '<label for="'.$value->label.'">'.$value->label.'</label>'.PHP_EOL);
+                    fputs($ar, '    <label for="'.$value->label.'">'.$value->label.'</label>'.PHP_EOL);
                     $default = (!empty($value->fijo))?'value="'.$value->fijo.'"':'';
                     $maxlength = ($value->dimension!=-1)?'maxlength="'.$value->dimension.'" data-item="'.$value->dimension.'"':'';
-                    fputs($ar, '<input type="text" name="'.$value->field.'" class="form-control contar '.$classes.'" id="'.$value->field.'" placeholder="'.$value->place_holder.'" '.$default.' '.$maxlength.'>'.PHP_EOL);
+                    fputs($ar, '    <input type="text" name="'.$value->field.'" class="form-control contar '.$classes.'" id="'.$value->field.'" placeholder="'.$value->place_holder.'" '.$default.' '.$maxlength.'>'.PHP_EOL);
+                    fputs($ar, '    <i class="help" id="help-'.$value->field.'"></i>'.PHP_EOL);
+
                     fputs($ar, '</div>'.PHP_EOL);
                 }elseif ($mostrar[0]==0 AND $mostrar[2]=='combo'){ // mostrar Si y es relacionado
                     //print_r($mostrar[0].'-'.$mostrar[2].' \n');
                     fputs($ar, '<div class="form-group">'.PHP_EOL);
-                    fputs($ar, '<label for="'.$value->label.'">'.$value->label.'</label>'.PHP_EOL);
-                    fputs($ar, '<select  name="'.$value->field.'" class="form-control '.$classes.' '.$mostrar[3].' " id="'.$value->field.'"  placeholder="'.$value->place_holder.'"><option value="0">Seleccionar</option></select>'.PHP_EOL);
+                    fputs($ar, '    <label for="'.$value->label.'">'.$value->label.'</label>'.PHP_EOL);
+                    fputs($ar, '    <select  name="'.$value->field.'" class="form-control '.$classes.' '.$mostrar[3].' " id="'.$value->field.'"  placeholder="'.$value->place_holder.'"><option value="0">Seleccionar</option></select>'.PHP_EOL);
                     fputs($ar, '</div>'.PHP_EOL);
                 }
             }
@@ -804,7 +845,7 @@ class AppCrudVista extends App
     }
 
     /**
-     * Method encargado de crear un archivo index donde se mostrará la grilla
+     * Method encargado de crear un archivo listado donde se mostrará la grilla
      * @param string $rutaHija, Indica donde se debe general la vista generada
      * @campos array $campos, indica toda la configuracion de la vista, campos y detalle en generall
      * @return bool true
@@ -820,6 +861,30 @@ class AppCrudVista extends App
         fputs($ar, '        <div id=\'pagingArea'.ALL::upperCase($campos['vista']).'\'></div>'.PHP_EOL);
         fputs($ar, '    </div>'.PHP_EOL);
         fputs($ar, '</div>'.PHP_EOL);
+        fclose($ar);
+        return true;
+    }
+
+    /**
+     * Method encargado de crear un archivo JsonMascara donde se mostrará las mascaras de la vista
+     * @param string $rutaHija, Indica donde se debe general la vista generada
+     * @campos array $campos, indica toda la configuracion de la vista, campos y detalle en generall
+     * @return bool true
+     */
+    private function createFileViewJsonMascaras($rutaHija, $mascaras){
+        $ar = fopen($rutaHija.DIRECTORY_SEPARATOR."mascaras.json", "w+") or die("Problemas en la creaci&oacute;n del view listado.php");
+        fputs($ar, '{'.PHP_EOL);
+        fputs($ar, '    "mascaras" : ['.PHP_EOL);
+        $tmpItem = '';
+        foreach ($mascaras AS $key => $value){
+            if($value->hidden=='NO') {
+                $tmpItem .= '{"type":"' . $value->type . '","mascaraJS":"' . base64_encode($value->mascaraJS) . '","mascaraPHP":"' . base64_encode($value->mascaraPHP) . '","mensaje":"' . $value->mensaje . '","input":"' . $value->clase_input . '","campo":"' . $value->label . '"},';
+            }
+        }
+        $tmp = All::deleteEndCaracter($tmpItem);
+        fputs($ar, '        '.$tmp.PHP_EOL);
+        fputs($ar, '    ]'.PHP_EOL);
+        fputs($ar, '}'.PHP_EOL);
         fclose($ar);
         return true;
     }

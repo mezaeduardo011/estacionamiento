@@ -38,7 +38,7 @@
 
 -- #### END SEGURIDAD #### ----
 
-
+-- Es importante que la recuperaci�n de clave sea por correos y fecha de nacimiento
   create table seg_usuarios (
     id                 INT IDENTITY (1, 1) NOT NULL,
     apellidos          VARCHAR(50)         NOT NULL,
@@ -47,7 +47,7 @@
     usuario            VARCHAR(20)         NOT NULL,
     clave              CHAR(50)            NOT NULL,
     correo             VARCHAR(50)         NOT NULL,
-    telefono           VARCHAR(50)         NULL,
+    telefono           VARCHAR(50)         NULL NULL,
     fvence_clave        DATETIME2(7)        NULL,
     ivence_clave        CHAR(1)             NULL,
     cambiar_clave       CHAR(1)             NULL,
@@ -63,9 +63,14 @@
     dactive            TEXT                NULL, --active directory
     CONSTRAINT pk_seg_usuarios_1 PRIMARY KEY(id)
   );
+  
+  ALTER TABLE seg_usuarios
+    ADD UNIQUE (usuario,correo,telefono);
+    
   --- END
 
 
+  
 
   CREATE TABLE ho_conexiones (
     id int Identity(1,1) NOT NULL,
@@ -77,9 +82,86 @@
     clave varchar(50) NOT NULL,
     CONSTRAINT pk_ho_conexiones PRIMARY KEY(id)
   );
+  
+    ALTER TABLE ho_conexiones
+    ADD UNIQUE (label,driver,host)
+    
+    -- Entidad encargada de mostrar el menu
+    CREATE TABLE ho_menu (
+    id int Identity(1,1) NOT NULL,
+    app varchar(60) NOT NULL,
+    entidad varchar(60) NOT NULL,
+    vista varchar(60)  NULL,
+    nombre varchar(60) NOT NULL,
+    icon_fa varchar(60) NOT NULL,
+    targe varchar(20)  NULL,
+    ho_menu_id  NULL,
+    created_usuario_id INT NOT NULL,
+    updated_usuario_id INT  NULL,
+    created_at DATETIME2(7) NOT NULL,
+    updated_at  DATETIME2(7)        NULL,
+    CONSTRAINT pk_ho_menu PRIMARY KEY(id)
+  );
+  -- app: Admin, entidad: personal, nombre:demo, vista: ddd, ico_fa: fa-plus, target:__new
+  
+   ALTER TABLE ho_menu
+    ADD UNIQUE (app,entidad,vista,nombre)
+  
+    -- Gestion de mascaras
+    CREATE TABLE ho_mascaras (
+    id int Identity(1,1) NOT NULL,
+    ho_tipo_dato_type varchar(20) NOT NULL,
+    label varchar(20) NOT NULL,
+    mascara varchar(30) NOT NULL,
+    mensaje varchar(200) NOT NULL,
+    clase_input varchar(30) NOT NULL,
+    created_usuario_id INT NOT NULL,
+    updated_usuario_id INT  NULL,
+    created_at  DATETIME2(7)        NOT NULL,
+    updated_at  DATETIME2(7)        NULL,
+    CONSTRAINT pk_ho_mascaras PRIMARY KEY(id)
+  );
+  -- typr:varchar, label:integer, mensaje: Campo Integer, mascara: /[0-9]/, clase_input: integer
+  
+    ALTER TABLE ho_mascaras
+    ADD UNIQUE (ho_tipo_dato_type,label,mascara,clase_input)
 
-  ALTER TABLE ho_conexiones
+
+      -- Gestion de mascaras
+    CREATE TABLE ho_tipo_dato (
+    type  varchar(20) NOT NULL,
+    label varchar(20) NOT NULL,
+    length INT NOT NULL,
+    orden INT NOT NULL,
+    created_usuario_id INT NOT NULL,
+    created_at  DATETIME2(7)        NOT NULL,
+    CONSTRAINT pk_ho_tipo_dato PRIMARY KEY(type)
+  );
+  -- Label:Integer, type:int, : Campo Integer, mascara: /[0-9]/, clase_input: integer
+
+    ALTER TABLE ho_tipo_dato
     ADD UNIQUE (label)
+
+  
+    -- Gestion de combinaciones de teclas del sistema
+    CREATE TABLE ho_Keyboard (
+    id int Identity(1,1) NOT NULL,
+    menu_item_id INT NULL,
+    combinacion varchar(30) NOT NULL,
+    ruta_token varchar(20) NOT NULL,
+    created_usuario_id INT NOT NULL,
+    updated_usuario_id INT  NULL,
+    created_at  DATETIME2(7)        NOT NULL,
+    updated_at  DATETIME2(7)        NULL,
+    CONSTRAINT pk_ho_Keyboard PRIMARY KEY(id)
+  );
+  
+  -- menu_item_id: 12, combinacion:Ctrl_b, ruta_token: /logout
+  
+    ALTER TABLE ho_keyboard
+    ADD UNIQUE (combinacion,ruta_token)
+
+
 
   -- Entidades registro de entidd
   CREATE TABLE ho_entidades (
@@ -171,10 +253,10 @@
 
   -- Vista encargadas de extraer las entidades seleccionada por el cliente en el momento
   CREATE VIEW view_list_enti_regi AS
-    SELECT b.conexiones_id, a.entidad, (SELECT COUNT(conexiones_id) FROM view_list_vist_gene AS c WHERE c.entidad=a.entidad ) AS catidad, b.nombre, b.procesado FROM ho_entidades AS a
+   SELECT b.apps, b.conexiones_id, a.entidad, (SELECT COUNT(conexiones_id) FROM view_list_vist_gene AS c WHERE c.entidad=a.entidad ) AS catidad, b.nombre, b.procesado FROM ho_entidades AS a
       LEFT JOIN view_list_vist_gene AS b ON a.entidad=b.entidad
     --WHERE a.entidad='test_abm'
-    GROUP BY b.conexiones_id, a.entidad, b.nombre, b.procesado
+    GROUP BY b.apps,b.conexiones_id, a.entidad, b.nombre, b.procesado
 
 
 -- Vistas encargada de mostrar los campos cuando se selecciona drilla en la definicion
@@ -184,3 +266,8 @@
  INNER JOIN INFORMATION_SCHEMA.COLUMNS AS a ON a.TABLE_NAME=c.entidad
  WHERE COLUMN_NAME NOT IN('update_at','created_at','created_usuario_id','updated_usuario_id')
  GROUP BY c.apps,c.conexiones_id, c.entidad, c.nombre, a.COLUMN_NAME, a.ORDINAL_POSITION, c.procesado
+
+ -- Vista encargada de Procesar las mascaras para PHP y JS
+  CREATE VIEW view_list_mascaras AS
+  SELECT a.nombre AS vista, b.ho_tipo_dato_type AS type, b.mascara AS mascaraJS, REPLACE(b.mascara,'\\','\') AS  mascaraPHP, b.mensaje, b.clase_input, a.label, CASE WHEN hidden_form=1 THEN 'SI' ELSE 'NO' END hidden FROM ho_vistas AS a
+  INNER JOIN ho_mascaras  AS b ON b.clase_input=a.mascara

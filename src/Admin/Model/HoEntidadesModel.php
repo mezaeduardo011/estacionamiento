@@ -1,7 +1,9 @@
 <?php
 namespace APP\Admin\Model;
 use JPH\Complements\Database\Main;
-use JPH\Core\Commun\All;
+use JPH\Core\Commun\{
+    All, Constant, Security
+};
 /**
  * Generador de codigo del Modelo de la App Admin
  * @propiedad: Hornero 1.0
@@ -79,7 +81,7 @@ class HoEntidadesModel extends Main
 
     /**
      * Permite crear la una estructura de la entidad a partir de una configuracion desde la vista del generador
-     * @param objeto $data
+     * @param object $data
      * @return bool
      */
     public function setEstructuraCreateTabla($data)

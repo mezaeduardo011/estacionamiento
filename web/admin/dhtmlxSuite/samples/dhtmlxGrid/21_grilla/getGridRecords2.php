@@ -19,13 +19,13 @@
 		$link = sqlsrv_connect( $serverName, $connectionInfo);
 
 		// Primero extraer la cantidad de registros
-		$sqlCount = "Select count(*) as items FROM seg_usuarios";
+		$sqlCount = "Select count(*) as items FROM view_seguridad";
 	    $resCount = sqlsrv_query ($link,$sqlCount);
 	    $rowCount=sqlsrv_fetch_object($resCount);
 
 
         //create query to products table
-        $sql = "id,nombres,apellidos,fech_nacimiento,correo,usuario,clave,telefono FROM seg_usuarios";
+        $sql = " nombres,apellidos,idioma,correo,perfil,roles,roles_id FROM view_seguridad";
  
         //if this is the first query - get total number of records in the query result
         $sqlCount = "SELECT * FROM (
@@ -44,7 +44,7 @@
         //output data in XML format   
         $items = array();
         while($row=sqlsrv_fetch_object($res)){
-        	$tmp['id'] = $row->id;
+        	$tmp['id'] = $row->roles_id;
         	$tep = array();
         	foreach ($row as $key => $value) {
         		if($key!='id' AND $key!='cnt' AND $key!='row'){

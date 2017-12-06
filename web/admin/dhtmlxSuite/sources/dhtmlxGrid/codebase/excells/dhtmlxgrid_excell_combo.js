@@ -1,5 +1,5 @@
 /*
-Product Name: dhtmlxSuite 
+Product Name: dhtmlxGrid 
 Version: 5.1.0 
 Edition: Professional 
 License: content of this file is covered by DHTMLX Commercial or Enterprise license. Usage without proper license is prohibited. To obtain it contact sales@dhtmlx.com

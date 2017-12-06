@@ -1,4 +1,4 @@
-    // Definicion los campos del DataTable de esta vista
+    // Definicion de las variables necesarias para la grilla y validacion de mascaras
     var Config = {};
     Config.colums = [
         { 'id':'tipo_servicio_id', 'type':'ed', 'align':'left', 'sort':'str', 'value':'tipo_servicio_id' },
@@ -12,7 +12,7 @@
     Config.show = {
         'module':'Productoss',
         'tableTitle':'Listado de Registros.',
-        'filter':'&nbsp;,#text_filter,#text_filter,&nbsp;',
+        'filter':'&nbsp;,&nbsp;,&nbsp;,&nbsp;',
         'autoWidth':true,
         'multiSelect':false
     }
@@ -43,3 +43,14 @@
             });
         },
      }
+<?php
+       $fies = file_get_contents(__DIR__.'/mascaras.json');
+       $dataJson = json_decode($fies);
+ ?>
+Core.Vista.Mascara = [
+<?php
+foreach ($dataJson->mascaras AS $key => $val){
+    echo "{'type':'".$val->type."','mascara':'".base64_decode($val->mascaraJS)."','mensaje':'".$val->mensaje."','input':'".$val->input."','campo':'".$val->campo."'},".PHP_EOL;
+}
+?>
+];
