@@ -4,7 +4,7 @@ namespace JPH\Complements\Database;
  * Configuracion de las conexiones bb Hornero 4
  * @propiedad: Hornero 4
  * @utor: Gregorio Bolivar <elalconxvii@gmail.com>
- * @created: 06/12/2017
+ * @created: 10/12/2017
  * @version: 1.0
  */ 
 trait ConfigDatabase

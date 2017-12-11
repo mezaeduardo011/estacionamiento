@@ -6,8 +6,14 @@
 ## to Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
 ## Desarrollado por JPH - Ing. - Gregorio Jose Bolivar
 ######
- Encargado de controlar las funcionalidades de Gestion de Menu de la vista box4
 */
+/**
+ * Esto es un namespace que hace parte de otro. Encargado de controlar las funcionalidades de Gestion de Menu de la vista box4 del html,
+ * pero este gestionador de instancia de la vista 3 del generdor de vista
+ *
+ * @namespace GestionMenu
+ * @memberOf Config
+ */
 Config.GestionMenu = {
     main: function () {
         var optPrincipalMenu = $('#box3 #itemPrincipalMenu')

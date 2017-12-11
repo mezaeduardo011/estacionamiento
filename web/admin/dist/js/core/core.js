@@ -6,24 +6,11 @@
 //## Desarrollado por JPH - Ing. - Gregorio Jose Bolivar
 //######
 
-function informar(mensaje, titulo) {
-    Command: toastr["info"](mensaje, titulo);
- }
-
- function alertar(mensaje, titulo) {
-    Command: toastr["success"](mensaje, titulo);
-}
-
-function mostrarError(mensaje, titulo) {
-    Command: toastr["error"](mensaje, titulo);
-}
-function mostrarBug(mensaje, titulo) {
-    Command: toastr["warning"](mensaje, titulo);
-}
-
-function notificar(mensaje, titulo) {
-    alerta(titulo,mensaje);
-}
+/**
+ * Un namespace, Encargado de tener todas las configuraciones del módulo del generador del sistema
+ * este es el namespace principal donde te tendrás las opciones iniciales
+ * @namespace
+ */
 
 var Core = {
     main: function () {
@@ -41,8 +28,6 @@ var Core = {
         Core.valFecha();
         Core.valColor();
         /**/
-
-
 
     },
     valInteger : function () {
@@ -133,28 +118,14 @@ var Core = {
             return datosOk;
         });
     }
-}
+};
 
-toastr.options = {
-    "closeButton": true,
-    "debug": false,
-    "newestOnTop": true,
-    "progressBar": true,
-    "positionClass": "toast-top-right",
-    "preventDuplicates": false,
-    "onclick": null,
-    "showDuration": "600",
-    "hideDuration": "1000",
-    "timeOut": "5000",
-    "extendedTimeOut": "1000",
-    "showEasing": "swing",
-    "hideEasing": "linear",
-    "showMethod": "fadeIn",
-    "hideMethod": "fadeOut"
-}
 <!-- Notificaciones -->
 document.write("<"+"script type='text/javascript' src='admin/dist/js/core/notificaciones.js'><"+"/script>");
 document.write("<"+"script type='text/javascript' src='admin/dist/js/core/menu.js'><"+"/script>");
 document.write("<"+"script type='text/javascript' src='admin/dist/js/core/jquery.hotkeys.js'><"+"/script>");
 document.write("<"+"script type='text/javascript' src='admin/dist/js/core/teclado.js'><"+"/script>");
+document.write("<"+"script type='text/javascript' src='admin/dist/js/core/vistaGrid.js'><"+"/script>")
+document.write("<"+"script type='text/javascript' src='admin/dist/js/core/vistaRelacion.js'><"+"/script>")
+document.write("<"+"script type='text/javascript' src='admin/dist/js/core/vistaAuditoria.js'><"+"/script>")
 

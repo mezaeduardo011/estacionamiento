@@ -6,8 +6,13 @@
 ## to Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
 ## Desarrollado por JPH - Ing. - Gregorio Jose Bolivar
 ######
- Encargado de controlar las funcionalidades de la vista de las tipos de datos del sistema.
 */
+/**
+ * Esto es un namespace que hace parte de otro. Encargado de controlar las funcionalidades de la vista de las tipos de datos del sistema.
+ *
+ * @namespace TipoDatos
+ * @memberOf Config
+ */
 Config.TipoDatos = {};
 Config.TipoDatos = {
     main:function () {

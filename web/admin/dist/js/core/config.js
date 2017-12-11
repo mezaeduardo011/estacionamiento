@@ -6,8 +6,12 @@
 ## to Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
 ## Desarrollado por JPH - Ing. - Gregorio Jose Bolivar
 ######
- Encargado de controlar las funcionalidades de la vista box1 de de configuracion de parametros
 */
+/**
+ * Un namespace, Encargado de tener todas las configuraciones del módulo del generador del sistema
+ * este es el namespace principal donde te tendrás las opciones iniciales
+ * @namespace
+ */
 var Config;
 Config = {
     html: null,

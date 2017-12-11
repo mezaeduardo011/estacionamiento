@@ -115,20 +115,75 @@ trait Commun
     }
 
     /**
-     *
+     * Permite formatar la cabecera http para diferentes formatos
+     * @param String $type, Permite indicar los formato que deseas procesar, ejemplo: xml, json u otros
      */
-    static function headerJson()
+    static function headerFormat($type)
     {
-        header('Content-Type: application/json');
+        switch ($type){
+            case 'json':
+                header('Content-Type: application/json');
+            break;
+            case 'xml':
+                header('Content-type:text/xml');
+            break;
+        }
     }
 
-    static function json($datos, $num = 200)
+    /**
+     * Permite formatear la salida en json
+     * @param array $datosJson, Arreglo de los datos que quieres darle el formato esto es la fuente
+     * @param integer $num, Numero de respuesta del protocolo http 200 por default
+     * @return \JsonSerializable $buffer, xml del registro del grid
+     */
+    static function json($datosJson, $num = 200)
     {
-        self::headerJson();
+        self::headerFormat('json');
         self::statusHttp($num);
         //$tmp = self::utf8enc($datos);
-        echo json_encode($datos);
+        echo json_encode($datosJson);
         die();
+    }
+
+    /**
+     * Permite formatear la salida del modelo para adaptado para el formato en xml de la grid
+     * @param array $datosXml, Arreglo de resultado de la consulta a base de datos
+     * @param integer $num, Numero de respuesta del protocolo http 200 por default
+     * @return \XMLWriter $buffer, xml del registro del grid
+     */
+    static function xmlGridList($datosXml, $num = 200)
+    {
+        self::headerFormat('xml');
+        self::statusHttp($num);
+        $tmp = self::settingListXml($datosXml);
+        //$xml = new \SimpleXMLElement($tmp);
+        //echo $xml->asXML();
+        print $tmp;
+    }
+
+    /**
+     * Permite formatear la salida del modelo para adaptado para el formato en xml de la grid
+     * @param array $data, Arreglo de resultado de la consulta a base de datos
+     * @return \XMLWriter $buffer, xml del registro del grid
+     */
+    static function settingListXml($data)
+    {
+
+        //$xmlTmp="<?xml version=\"1.0\" encoding=\"UTF-8\">";
+        $xmlTmp='<rows total_count="'.$data['totalCount'].'" pos="'.$data['posStart'].'">';
+        foreach ($data['data'] AS $key =>$value){
+            unset($value->row);
+            unset($value->cnt);
+            $xmlTmp.='<row id="'.$value->id.'">';
+            unset($value->id);
+            foreach ($value AS $key2 =>$value2){
+                $xmlTmp.='<cell>'.$value2.'</cell>';
+            }
+            $xmlTmp.='</row>';
+        }
+        $xmlTmp.='</rows>';
+        return $xmlTmp;
+
     }
 
     static function utf8enc($array)
@@ -420,20 +475,20 @@ trait Commun
         $str = base64_decode($obj);
         $temp = explode('#', $str);
         $select = array();
-        $campos = array();
+        //$campos = array();
         foreach ($temp AS $index => $value) {
             // obtengo el segundo valor para el item
             $rest = explode('|', $value);
             $select[] = str_replace('id:', '', $rest[0]);
-            $campos[] = array('id' => str_replace('id:', '', $rest[0]),
+            /*$campos[] = array('id' => str_replace('id:', '', $rest[0]),
                 'type' => str_replace('type:', '', $rest[1]),
                 'align' => str_replace('align:', '', $rest[2]),
                 'sort' => str_replace('sort:', '', $rest[3]),
                 'value' => str_replace('value:', '', $rest[4])
-            );
+            );*/
 
         }
-        return array('select' => $select, 'campos' => $campos);
+        return array('select' => $select);
     }
 
     public static function formatRelacio($obj)

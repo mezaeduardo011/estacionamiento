@@ -5,11 +5,17 @@
 //## to Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
 //## Desarrollado por JPH - Ing. - Gregorio Jose Bolivar
 //######
+/**
+ * Esto es un namespace que hace parte de otro. Esta vista enta encargada de procesar un conjunto de funcionalidades
+ * encargadas del funcionamiento de la vista de procesar los datos generales del los ABM.
+ *
+ * @namespace Vista
+ * @memberOf Core
+ */
 Core.Vista = {};
 Core.Vista = {
     pathR: '',
     columns: '',
-    myGrid: '',
     currentRequest: '',
     main: function (path,Config) {
         this.__pathR__ = path;
@@ -20,73 +26,8 @@ Core.Vista = {
     listado : function (show) {
         var temp = this.__pathR__;
         var rows = this.__columns__;
-
-        /* START DE GRILLA DHTML */
-        var camp = '';
-        /* Procedemos a crear una cadena de texto paa enviar al procesador de la vista para enviar lo datos en json*/
-        $.each(rows, function (index,value) {
-            camp+='id:'+value.id+'|type:'+value.type+'|align:'+value.align+'|sort:'+value.sort+'|value:'+value.value+'#';
-        });
-        // Quitamos el ultimo caracter de la cadena
-        var tmp = camp.substring(0,camp.length-1);
-
-        Core.Vista.myGrid = new dhtmlXGridObject('dataJPH'+show.module);
-
-
-        Core.Vista.myGrid.setImagePath("/admin/dhtmlxSuite/codebase/imgs/");
-        // Filtro de la tabla
-        Core.Vista.myGrid.attachHeader(show.filter);
-        //Core.Vista.myGrid.setColSorting("server");
-        // Campos id Mostrar
-        Core.Vista.myGrid.enableAutoWidth(show.autoWidth);
-
-        //Core.Vista.myGrid.enableMultiselect(show.multiSelect);
-        Core.Vista.myGrid.attachEvent("onRowSelect", Core.Vista.doOnRowSelected);
-        Core.Vista.myGrid.setColSorting("server");
-        Core.Vista.myGrid.attachHeader("#text_filter");
-        //Core.Vista.myGrid.submitOnlyRowID(true);
-        //Core.Vista.myGrid.attachEvent("onBeforeSorting",Core.Vista.sortGridOnServer);
-        Core.Vista.myGrid.init();
-        Core.Vista.myGrid.i18n.paging={
-            results:"Resultados",
-            records:"Registros de ",
-            to:" a ",
-            page:"Página ",
-            perpage:"filas por página",
-            first:"Para la primera página",
-            previous:"Pagina anterior",
-            found:"Registros encontrados",
-            next:"Siguiente página",
-            last:"Para la última página",
-            of:" de ",
-            notfound:"No se encontrarón archivos"
-        };
-
-        Core.Vista.myGrid.enablePaging(true,50,10,"pagingArea"+show.module,true,"infoArea"+show.module);
-        // Disenio de paginador
-        Core.Vista.myGrid.setPagingSkin("toolbar");
-        Core.Vista.myGrid.enableSmartRendering(true);
-        var gridQString = '/'+show.module.toLowerCase()+'Listar?obj='+window.btoa(tmp)+''; // save query string to global variable (see step 5)
-        localStorage.setItem('gridQString',gridQString);
-        // Cargando evento antes de cargar la grilla
-        Core.Vista.myGrid.attachEvent("onXLE",showLoading);
-        Core.Vista.myGrid.attachEvent("onXLS",function(){showLoading(true)});//setOnLoadingStart(function(){showLoading(true)})
-        Core.Vista.myGrid.load(gridQString, 'json');
-
-        function showLoading(fl){
-            var span = document.getElementById("recfound"+show.module);
-            if (!span) return;
-            if(!Core.Vista.myGrid._serialise){
-                span.innerHTML = "<i>Loading... available in Professional Edition of dhtmlxGrid</i>"
-                return;
-            }
-            span.style.color = "red";
-            if(fl===true)
-                span.innerHTML = "loading...";
-            else
-                span.innerHTML = "";
-        }
-        /* END  */
+        // Permite instanciar las funcionalidades de la Grid
+        Core.VistaGrid.main(temp,rows,show);
 
         // Configuracion personalizada local de la vista
         Core.Vista.Util.priListaLoad();
@@ -212,6 +153,5 @@ Core.Vista = {
         }
     }
 };
-document.write("<"+"script type='text/javascript' src='admin/dist/js/core/vistaRelacion.js'><"+"/script>")
-document.write("<"+"script type='text/javascript' src='admin/dist/js/core/vistaAuditoria.js'><"+"/script>")
+
 

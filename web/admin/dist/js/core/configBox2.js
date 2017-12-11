@@ -6,8 +6,14 @@
 ## to Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
 ## Desarrollado por JPH - Ing. - Gregorio Jose Bolivar
 ######
- Encargado de controlar las funcionalidades de la vista box2 de de configuracion de parametros
 */
+/**
+ * Esto es un namespace que hace parte de otro. Encargado de controlar las funcionalidades de la vista box2 de de
+ * configuracion de parametros.
+ *
+ * @namespace Box2
+ * @memberOf Config
+ */
 Config.Box2 = {
     configurarUniversoTablas: function () {
         Config.activarSegundoBloque();
@@ -130,7 +136,7 @@ Config.Box2 = {
             Config.Box2.seleccionarTodoUniverso();
             Config.Box2.sendUniversoSeleccionado();
             // ### Otro namespace encargado de Procesar la creacion de tablas ###
-            Config.gestionaTablas.main();
+            Config.GestionaTablas.main();
         },'JSON');
     },
     seleccionarTodoUniverso: function () {

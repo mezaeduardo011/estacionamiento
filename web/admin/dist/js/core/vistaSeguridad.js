@@ -5,6 +5,13 @@
 //## to Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
 //## Desarrollado por JPH - Ing. - Gregorio Jose Bolivar
 //######
+/**
+ * Esto es un namespace que hace parte de otro. Encargado de controlar las funcionalidades de la vista box2 de de
+ * configuracion de parametros.
+ *
+ * @namespace VistaSeguridad
+ * @memberOf Core
+ */
 Core.VistaSeguridad = {
     pathR: '',
     columns: '',

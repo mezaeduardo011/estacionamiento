@@ -6,8 +6,14 @@
 ## to Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
 ## Desarrollado por JPH - Ing. - Gregorio Jose Bolivar
 ######
- Encargado de controlar las funcionalidades de la vista de las mascaras de funcionalidades y configuraciones las definicion de las vista.
 */
+/**
+ * Esto es un namespace que hace parte de otro.  Encargado de controlar las funcionalidades de la
+ * vista de las mascaras de funcionalidades y configuraciones las definicion de las vista.
+ *
+ * @namespace Mascaras
+ * @memberOf Config
+ */
 Config.Mascaras = {}
 Config.Mascaras = {
     main: function () {

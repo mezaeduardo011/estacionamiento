@@ -5,7 +5,14 @@
 //## to Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
 //## Desarrollado por JPH - Ing. - Gregorio Jose Bolivar
 //######
-Config.gestionaTablas = {
+/**
+ * Esto es un namespace que hace parte de otro.  Encargado de controlar las funcionalidades del diseñador de
+ * tablas que se instancia desde el listado de tablas
+ *
+ * @namespace GestionaTablas
+ * @memberOf Config
+ */
+Config.GestionaTablas = {
     html: null,
     progreso : null,
     main: function() {
@@ -38,18 +45,18 @@ Config.gestionaTablas = {
         Config.html += '  </table>';
         Config.html += '</form>';
 
-        // Acciones de la tabla dinamica que se instancia desde el config.js line 344 Config.gestionaTablas.main();
+        // Acciones de la tabla dinamica que se instancia desde el config.js line 344 Config.GestionaTablas.main();
         addEntidad.click(function () {
             //Carga la tabla dinamica a cabecera
             $('#box2 #menuSegundarioBody').html(' ').html(Config.html);
 
             // Agregar item cuando es primera vez
-            Config.gestionaTablas.addItemTabla('PRI');
+            Config.GestionaTablas.addItemTabla('PRI');
 
             // Accion cuando hace click en la opciones de la tabla dinamica
             $('#box2 #addItem').click(function(){
                     // Agregar item cuando es la segunda vez
-                    Config.gestionaTablas.addItemTabla('SEG');
+                    Config.GestionaTablas.addItemTabla('SEG');
                     // Accion cuando quiere eliminar un elemento de la tabla dinamica
                     $('#box2 #delItem').click(function(){
                         $(this).parent('td').parent('tr').hide(900).remove();
@@ -69,9 +76,9 @@ Config.gestionaTablas = {
                         }
                     });
             });
-            Config.gestionaTablas.sendCreacionData();
-            Config.gestionaTablas.addRowsAuditor();
-            Config.gestionaTablas.dragable();
+            Config.GestionaTablas.sendCreacionData();
+            Config.GestionaTablas.addRowsAuditor();
+            Config.GestionaTablas.dragable();
       });
 
     },
@@ -98,7 +105,7 @@ Config.gestionaTablas = {
                 //alert($('#box2 #sendCreacionEntidad #camposEntidad').find('tr').hasClass('auditory'));
                 if(!$('#box2 #sendCreacionEntidad #camposEntidad').find('tr').hasClass('auditory')) {
                     for (i = 1; i <= 4; i++) {
-                        Config.gestionaTablas.addItemTabla();
+                        Config.GestionaTablas.addItemTabla();
                         var item = $('#box2 #sendCreacionEntidad #camposEntidad').find('tr');
                         var tema = item.length;
                         // Opciones necesaria para los campos de auditoria de la creacion de la entidad 4 Campos
@@ -186,8 +193,8 @@ Config.gestionaTablas = {
             $('#index').val('PRIMARY KEY');
             $('#extra').val('AUTO INCREMENTO');
         }
-        Config.gestionaTablas.deleteRows();
-        Config.gestionaTablas.optionForeingKey();
+        Config.GestionaTablas.deleteRows();
+        Config.GestionaTablas.optionForeingKey();
     },
     deleteRows:function () {
         $('#box2 #delItem').click(function(){

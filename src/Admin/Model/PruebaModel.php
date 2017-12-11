@@ -69,10 +69,14 @@ class PruebaModel extends Main
     $totalCount = (empty($rowCount->cnt))?0:$rowCount->cnt;
     //add limits to query to get only rows necessary for the output
     $sqlCount.= " WHERE row>=".$posStart." AND row<=".$count;
-
-    $res = $this->get($sqlCount);
-    //output data in XML format
+    // Definir las variables para el uso para el XML
     $items = array();
+    $items['data'] = $this->executeQuery($sqlCount);
+    $items['totalCount'] = $totalCount;
+    $items['posStart'] = $posStart;
+    //$res = $this->get($sqlCount);
+    //output data in XML format
+    /*$items = array();
     while($row=$this->fetch($res)){
         $tmp['id'] = $row->id;
         $tep = array();
@@ -88,9 +92,9 @@ class PruebaModel extends Main
         }
         $tmp['data'] = $tep;
         array_push($items,$tmp);
-    }
-    return $items;
+    }*/
 
+    return $items;
    }
 
     /**

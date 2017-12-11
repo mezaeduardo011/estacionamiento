@@ -5,5 +5,7 @@
     <div class="box-body">
         <div id="dataJPHTipo" style="width:100%; height:450px;margin-top:20px;margin-bottom:10px;"></div>
         <div id='pagingAreaTipo'></div>
+        <div id='pagingAreaTipo'></div>
+        <div id='recfoundTipo'></div>
     </div>
 </div>

@@ -65,11 +65,11 @@ class PruebaController extends Controller
       $result = $this->formatRows($request->getParameter('obj'));
 
       $rows = $this->hoPruebaModel->getPruebaListar($request->getParameter(),$result);
-      $valor = array();
-      $valor['head']=$result['campos'];
-       $valor['rows']=$rows;
-       $this->json($valor);
-      $this->json($result);
+      //$valor = array();
+      //$valor['head']=$result['campos'];
+       //$valor['rows']=$rows;
+       //$this->json($valor);
+      $this->xmlGridList($rows);
    }
 
     /**
