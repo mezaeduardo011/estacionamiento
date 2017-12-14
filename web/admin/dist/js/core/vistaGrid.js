@@ -13,18 +13,36 @@
  * @memberOf Core
  */
 Core.VistaGrid = {
+    /**
+     * Esto es una variable global que permite instanciar la grid pero en variable
+     * @memberof Core.VistaGrid.myGrid
+     */
     myGrid: [],
-    main: function (temp,rows,show) {
-        Core.VistaGrid.run(temp,rows,show);
+    /**
+     * Esto es una variable global que definir si esta autosearch
+     * @memberof Core.VistaGrid.flAuto
+     */
+    flAuto: false,
+    /**
+     * Esto es una variable global para tiempo de ejecucion
+     * @memberof Core.VistaGrid.timeoutHnd
+     */
+    timeoutHnd: '',
+    main: function (urlVistaTmp,rows,show) {
+        // Cargar local Store del la vista que esta activa
+        localStorage.setItem('urlVistaTmp',show.vista);
+
+        // Cargar las configuracion para la grid
+        Core.VistaGrid.run(urlVistaTmp,rows,show);
     },
     /**
      * Esto es una función que permite ejecutar la configuración de la grid principal para levantar su funcionamiento
-     * @param string temp, Ruta temporal de donde se procesaran los datos
+     * @param string urlVistaTmp, Ruta temporal de donde se procesaran los datos
      * @param object rows, Campo definidos en el assent del cliente
      * @param object show, Objetos definidos en la vista del cliente
      * @memberof Core.VistaGrid.run
      */
-    run: function (temp,rows,show) {
+    run: function (urlVistaTmp,rows,show) {
         /* START DE GRILLA DHTML */
         var camp = '';
         var colHeadTmp = '';
@@ -59,63 +77,83 @@ Core.VistaGrid = {
         var colWidths = colWidthsTmp.substring(0,colWidthsTmp.length-1);
         var colColTypes = colColTypesTmp.substring(0,colColTypesTmp.length-1);
 
-        // Ref: https://docs.dhtmlx.com/grid__basic_initialization.html
-        Core.VistaGrid.myGrid[show.module] = new dhtmlXGridObject('dataJPH'+show.module);
+        // @link [URI] https://docs.dhtmlx.com/grid__basic_initialization.html
+        Core.VistaGrid.myGrid[show.vista] = new dhtmlXGridObject('dataJPH'+show.vista);
 
-        // Ref: https://docs.dhtmlx.com/api__dhtmlxwindows_setimagepath.html
-        Core.VistaGrid.myGrid[show.module].setImagePath("/admin/dhtmlxSuite/codebase/imgs/");
+        // @link [URI] https://docs.dhtmlx.com/api__dhtmlxwindows_setimagepath.html
+        Core.VistaGrid.myGrid[show.vista].setImagePath("/admin/dhtmlxSuite/codebase/imgs/");
 
         // Header del Grid
-        // Ref: https://docs.dhtmlx.com/api__link__dhtmlxtreegrid_setheader.html
-        Core.VistaGrid.myGrid[show.module].setHeader(colHead);
+        // @link [URI] https://docs.dhtmlx.com/api__link__dhtmlxtreegrid_setheader.html
+        Core.VistaGrid.myGrid[show.vista].setHeader(colHead);
+
+        // Tamanio del campo
+        // @link [URI] https://docs.dhtmlx.com/api__link__dhtmlxtreegrid_setinitwidths.html
+        Core.VistaGrid.myGrid[show.vista].setInitWidths(colWidths);
 
         // Alinacion del contenido de la GRID
-        // Ref: https://docs.dhtmlx.com/api__link__dhtmlxtreegrid_setcolalign.html
-        Core.VistaGrid.myGrid[show.module].setColAlign(colAling);
+        // @link [URI] https://docs.dhtmlx.com/api__link__dhtmlxtreegrid_setcolalign.html
+        Core.VistaGrid.myGrid[show.vista].setColAlign(colAling);
 
         // Filtrado de datos del ladodel servidor
-        // Ref: https://docs.dhtmlx.com/api__link__dhtmlxtreegrid_setcolsorting.html
-        Core.VistaGrid.myGrid[show.module].setColSorting(colSorting);
+        // @link [URI] https://docs.dhtmlx.com/api__link__dhtmlxtreegrid_setcolsorting.html
+
+        Core.VistaGrid.myGrid[show.vista].setColSorting(colSorting);
 
         // Tipo de los campos
         // Ref : https://docs.dhtmlx.com/api__link__dhtmlxtreegrid_setcoltypes.html
-        Core.VistaGrid.myGrid[show.module].setColTypes(colColTypes);
+        Core.VistaGrid.myGrid[show.vista].setColTypes(colColTypes);
 
         // Acccion para ordenar campos
         //available in pro version only
-        if (Core.VistaGrid.myGrid[show.module].setColspan){
-            Core.VistaGrid.myGrid[show.module].attachEvent("onBeforeSorting",Core.VistaGrid.customColumnSort);
+        if (Core.VistaGrid.myGrid[show.vista].setColspan){
+            Core.VistaGrid.myGrid[show.vista].attachEvent("onBeforeSorting",Core.VistaGrid.customColumnSort);
         }
 
-        // Tamanio del campo
-        // Ref: https://docs.dhtmlx.com/api__link__dhtmlxtreegrid_setinitwidths.html
-        Core.VistaGrid.myGrid[show.module].setInitWidths(colWidths);
+
+        // link dataprocessor al component
+        // @link [URI] https://docs.dhtmlx.com/api__dataprocessor_init.html
+        Core.VistaGrid.myGrid[show.vista].init();
+
+        //Core.VistaGrid.myGrid[show.vista].splitAt(1);
+        Core.VistaGrid.myGrid[show.vista].attachEvent("onBeforePageChanged",function(){
+            if (!this.getRowsNum()) return false;
+            return true;
+        });
+
+        // Permite activar el paginado de la grid
+        // @link [URI] https://docs.dhtmlx.com/api__link__dhtmlxtreegrid_enablepaging.html
+        Core.VistaGrid.myGrid[show.vista].enablePaging(true,show.pageSize,show.pagesInGrp,"pagingArea"+show.vista,true,"infoArea"+show.vista);
+
+
+        // Disenio de paginador
+        // @link [URI] https://docs.dhtmlx.com/api__link__dhtmlxtreegrid_setpagingskin.html
+        Core.VistaGrid.myGrid[show.vista].setPagingSkin("bricks");
+
+
 
         // Filtro de la tabla
-        //Core.VistaGrid.myGrid[show.module].attachHeader(show.filter);
+        //Core.VistaGrid.myGrid[show.vista].attachHeader(show.filter);
 
         // Campos id Mostrar
-        // Ref: https://docs.dhtmlx.com/api__link__dhtmlxtreegrid_enableautowidth.html
-        Core.VistaGrid.myGrid[show.module].enableAutoWidth(show.autoWidth);
+        // @link [URI] https://docs.dhtmlx.com/api__link__dhtmlxtreegrid_enableautowidth.html
+        Core.VistaGrid.myGrid[show.vista].enableAutoWidth(show.autoWidth);
 
         // Permite activar si la grid se puede seleccionar varios item de la table
-        // Ref: https://docs.dhtmlx.com/api__dhtmlxtree_enablemultiselection.html
-        Core.VistaGrid.myGrid[show.module].enableMultiselect(show.multiSelect);
+        // @link [URI] https://docs.dhtmlx.com/api__dhtmlxtree_enablemultiselection.html
+        Core.VistaGrid.myGrid[show.vista].enableMultiselect(show.multiSelect);
 
         // Evento que permite cuando seleccionar el registro te permite hacer la consulta del registro
-        // Ref: https://docs.dhtmlx.com/api__common_attachevent.html
-        Core.VistaGrid.myGrid[show.module].attachEvent("onRowSelect", Core.Vista.doOnRowSelected);
+        // @link [URI] https://docs.dhtmlx.com/api__common_attachevent.html
+        Core.VistaGrid.myGrid[show.vista].attachEvent("onRowSelect", Core.Vista.doOnRowSelected);
 
         //Core.Vista.myGrid.submitOnlyRowID(true);
         //Core.Vista.myGrid.attachEvent("onBeforeSorting",Core.Vista.sortGridOnServer);
 
-        // link dataprocessor al component
-        // Ref: https://docs.dhtmlx.com/api__dataprocessor_init.html
-        Core.VistaGrid.myGrid[show.module].init();
 
         // Paginado cambiando el idioma
-        // Ref: https://docs.dhtmlx.com/grid__paging.html
-        Core.VistaGrid.myGrid[show.module].i18n.paging={
+        // @link [URI] https://docs.dhtmlx.com/grid__paging.html
+        Core.VistaGrid.myGrid[show.vista].i18n.paging={
             results:"Resultados",
             records:"Registros de ",
             to:" a ",
@@ -129,65 +167,66 @@ Core.VistaGrid = {
             of:" de ",
             notfound:"No se encontrarón archivos"
         };
-        // Permite activar el paginado de la grid
-        // Ref: https://docs.dhtmlx.com/api__link__dhtmlxtreegrid_enablepaging.html
-        Core.VistaGrid.myGrid[show.module].enablePaging(true,show.pageSize,show.pagesInGrp,"pagingArea"+show.module,true,"infoArea"+show.module);
 
-        // Disenio de paginador
-        // Ref: https://docs.dhtmlx.com/api__link__dhtmlxtreegrid_setpagingskin.html
-        Core.VistaGrid.myGrid[show.module].setPagingSkin("bricks");
+
 
         //code below written to support standard edtiton
         //it written especially for current sample and may not work
         //in other cases, DON'T USE it if you have pro version
-        Core.VistaGrid.myGrid[show.module].sortField_old=myGrid.sortField;
-        Core.VistaGrid.myGrid[show.module].sortField=function(){
-            Core.VistaGrid.myGrid[show.module].setColSorting("str,str,str");
-            if (Core.VistaGrid.customColumnSort(arguments[0])) Core.VistaGrid.myGrid[show.module].sortField_old.apply(this,arguments);
+        Core.VistaGrid.myGrid[show.vista].sortField_old=Core.VistaGrid.myGrid[show.vista].sortField;
+        Core.VistaGrid.myGrid[show.vista].sortField=function(){
+            Core.VistaGrid.myGrid[show.vista].setColSorting("str,str,str");
+            if (Core.VistaGrid.customColumnSort(arguments[0],show.vista))
+            {
+                Core.VistaGrid.myGrid[show.vista].sortField_old.apply(this,arguments);
+            }
         };
 
+        Core.VistaGrid.myGrid[show.vista].sortRows=function(col,type,order){};
+
         // habilita el modo de renderizado inteligente
-        // Ref: https://docs.dhtmlx.com/api__link__dhtmlxtreegrid_enablesmartrendering.html
-        Core.VistaGrid.myGrid[show.module].enableSmartRendering(true);
+        // @link [URI] https://docs.dhtmlx.com/api__link__dhtmlxtreegrid_enablesmartrendering.html
+        //Core.VistaGrid.myGrid[show.vista].enableSmartRendering(true);
 
         // Variable para ser enviado por parametros al controlador del modulo activo
-        var gridQString = '/'+show.module.toLowerCase()+'Listar?obj='+window.btoa(tmp)+''; // save query string to global variable (see step 5)
+        var gridQString = '/'+show.vista.toLowerCase()+'Listar?obj='+window.btoa(tmp)+'&un='+Date.parse(new Date()); // save query string to global variable (see step 5)
 
         // Ponerlo en local store
-        localStorage.setItem('gridQString-'+show.module,gridQString);
+        localStorage.setItem('gridQString-'+show.vista,gridQString);
+
 
         // Antes de cargar los datos
-        // Ref: https://docs.dhtmlx.com/api__dataloading_onxls_event.html
-        Core.VistaGrid.myGrid[show.module].attachEvent("onXLS",function(){
-            Core.VistaGrid.showLoading(true,show.module)}
+        // @link [URI] https://docs.dhtmlx.com/api__dataloading_onxls_event.html
+        Core.VistaGrid.myGrid[show.vista].attachEvent("onXLS",function(){
+            Core.VistaGrid.showLoading(true,show.vista)}
         );
 
         // Después de finalizar la carga y datos procesados ​​(antes de la devolución de llamada del usuario)
-        // Ref: https://docs.dhtmlx.com/api__dataloading_onxle_event.html
-        Core.VistaGrid.myGrid[show.module].attachEvent("onXLE",function () {
-            Core.VistaGrid.showLoading(false,show.module);
+        // @link [URI] https://docs.dhtmlx.com/api__dataloading_onxle_event.html
+        Core.VistaGrid.myGrid[show.vista].attachEvent("onXLE",function () {
+            Core.VistaGrid.showLoading(false,show.vista);
         });
 
         // Cargas los valores en el controlador
-        // Ref: https://docs.dhtmlx.com/api__dhtmlxgrid_load.html
-        Core.VistaGrid.myGrid[show.module].load(gridQString);
+        // @link [URI] https://docs.dhtmlx.com/api__dhtmlxgrid_load.html
+        Core.VistaGrid.myGrid[show.vista].load(gridQString);
 
     },
     /**
      * Esto es una función que permite ejecutar un loadin cargando en la parte del footer de la tabla
      * @memberof Core.VistaGrid.showLoading
      */
-    showLoading: function (fl,modulo) {
+    showLoading: function (fl,vista) {
 
-        var span = document.getElementById("recfound"+modulo);
+        var span = document.getElementById("recfound"+vista);
         if (!span) return;
-        if(!Core.VistaGrid.myGrid[modulo]._serialise){
+        if(!Core.VistaGrid.myGrid[vista]._serialise){
             span.innerHTML = "<i>Loading... available in Professional Edition of dhtmlxGrid</i>";
             return;
         }
         span.style.color = "red";
         if(fl===true)
-            span.innerHTML = "loading...";
+            span.innerHTML = "<b class='loading'>loading...</b>";
         else
             span.innerHTML = "";
     },
@@ -195,43 +234,70 @@ Core.VistaGrid = {
      * Esto es una función que permite ejecutar el search de los campos de la grid
      * @memberof Core.VistaGrid.doSearch
      */
-    doSearch:function () {
-        
+    doSearch:function (ev,vista){
+        //alert(ev);
+        if(!Core.VistaGrid.flAuto)
+            return;
+        var elem = ev.target||ev.srcElement;
+        if(Core.VistaGrid.timeoutHnd)
+            clearTimeout(Core.VistaGrid.timeoutHnd);
+        Core.VistaGrid.timeoutHnd = setTimeout(Core.VistaGrid.reloadGrid(vista),500)
     },
     /**
      * Esto es una función que permite ejecutar el reload de la grid
      * @memberof Core.VistaGrid.reloadGrid
      */
-    reloadGrid:function () {
-        var nm_mask = document.getElementById("search_nm").value;
-        var cd_mask = document.getElementById("search_cd").value;
-        showLoading(true);
-        myGrid.clearAndLoad("php/50000_load_grid.php?nm_mask="+nm_mask+"&cd_mask="+cd_mask+"&orderBy="+window.s_col+"&direction="+window.a_direction);
+    reloadGrid: function(vista) {
+        // Permite leer todos los campos de buscar que estan en la vista disponible
+        var tmpInput = $('#'+vista+' .search');
+
+        // Variable vacia para luego usar cuando haga el search
+        var search = '';
+
+        // Bugle encargado de componer los campos disponibles para el filtro en el server
+        $.each(tmpInput, function (item, key) {
+           search += '&'+key.getAttribute('id')+'='+key.value;
+        });
+
+        Core.VistaGrid.showLoading(true,vista);
+
+        // Ruta disonible en local store para la busqueda del registro
+        var urlTmpSearch = localStorage.getItem('gridQString-'+vista)+search;
+
+        // Volver a hacer la busqueda con los campos dinamico a buscar
+        if(Core.Vista.currentRequest){
+            Core.Vista.currentRequest.abort();
+        }
+
+        // Borra el estado de grilla existente y carga datos de un archivo externo (xml, json, jsarray, csv)
+        // @link [URI] https://docs.dhtmlx.com/api__link__dhtmlxtreegrid_clearandload.html
+        Core.Vista.currentRequest = Core.VistaGrid.myGrid[vista].clearAndLoad(urlTmpSearch+"&orderBy="+window.s_col+"&direction="+window.a_direction);
         if (window.a_direction)
-            myGrid.setSortImgState(true,window.s_col,window.a_direction);
+            Core.VistaGrid.myGrid[vista].setSortImgState(true,window.s_col,window.a_direction);
     },
     /**
      * Esto es una función que permite activar la acciones de autosearch
      * @memberof Core.VistaGrid.enableAutosubmit
      */
-    enableAutosubmit: function () {
-
+    enableAutosubmit: function (state,vista) {
+        Core.VistaGrid.flAuto = state;
+        document.getElementById("submitButton"+vista).disabled = state
     },
     /**
      * Esto es una función que permite efectuar el ordenamiento de la tabla A
      * @memberof Core.VistaGrid.customColumnSort
      */
-    customColumnSort:function (ind) {
-    if (ind==1) {
+    customColumnSort:function (ind,vista) {
+    /*if (ind==1) {
         alert("Table can't be sorted by this column.");
         if (window.s_col)
-            myGrid.setSortImgState(true,window.s_col,window.a_direction);
+            Core.VistaGrid.myGrid[vista].setSortImgState(true,window.s_col,window.a_direction);
         return false;
-    }
-    var a_state = myGrid.getSortingState();
+    }*/
+    var a_state = Core.VistaGrid.myGrid[vista].getSortingState(vista);
     window.s_col=ind;
     window.a_direction = ((a_state[1] == "des")?"asc":"des");
-    reloadGrid();
+        Core.VistaGrid.reloadGrid(vista);
     return true;
     }
 }

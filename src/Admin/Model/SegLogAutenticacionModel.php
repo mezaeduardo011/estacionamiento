@@ -1,6 +1,6 @@
 <?php
 namespace APP\Admin\Model;
-use JPH\Complements\Database\Main;
+use JPH\Complements\Database\Base;
 use JPH\Core\Commun\All;
 /**
  * Generador de codigo del Modelo de la App Admin
@@ -10,7 +10,7 @@ use JPH\Core\Commun\All;
  * @version: 1.0
  */
 
-class SegLogAutenticacionModel extends Main
+class SegLogAutenticacionModel extends Base
 {
     public function __construct()
     {

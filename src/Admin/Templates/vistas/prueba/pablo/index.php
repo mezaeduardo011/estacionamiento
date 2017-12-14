@@ -45,7 +45,7 @@ $breadcrumb=(object)array('actual'=>'Pablo','titulo'=>'Vista de integrada de ges
     };
     $(function () {
         Core.main();
-        Core.Vista.main(Config.show.module,Config);
+        Core.Vista.main(Config.show.vista,Config);
     })
 
 </script>

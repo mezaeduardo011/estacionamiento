@@ -1,18 +1,19 @@
     // Definicion de las variables necesarias para la grilla y validacion de mascaras
     var Config = {};
     Config.colums = [
-        { 'id':'apellido', 'type':'ed', 'align':'left', 'sort':'str', 'value':'apellido' },
-        { 'id':'nombre', 'type':'ed', 'align':'left', 'sort':'str', 'value':'nombre' },
+        { 'id':'apellido', 'type':'ro', 'align':'left', 'sort':'server', 'value':'apellido', 'widths':'*' },
+        { 'id':'nombre', 'type':'ro', 'align':'left', 'sort':'server', 'value':'nombre', 'widths':'*' },
     ];
 
     // Configuracion de visual de la grilla
     // #text_filter, #select_filter, #combo_filter, #text_search, #numeric_filter
     Config.show = {
-        'module':'Pablo',
+        'vista':'Pablo',
         'tableTitle':'Listado de Registros.',
-        'filter':'&nbsp;,&nbsp;',
         'autoWidth':true,
-        'multiSelect':false
+        'multiSelect':false,
+        'pageSize':50,
+        'pagesInGrp':10
     }
 
     // Configuracion de relacion de entidad

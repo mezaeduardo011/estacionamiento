@@ -1,6 +1,6 @@
 <?php
 namespace APP\Admin\Model;
-use JPH\Complements\Database\Main;
+use JPH\Complements\Database\Base;
 /**
  * @propiedad: PROPIETARIO DEL CODIGO
  * @author Gregorio José Bolívar <elalconxvii@gmail.com>
@@ -10,7 +10,7 @@ use JPH\Complements\Database\Main;
  * @package: RolesTable.class.php
  * @version: 3.0
  */
-class HomeModel extends Main
+class HomeModel extends Base
 {
         public $hcon;
         public $valor;

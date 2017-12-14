@@ -1,20 +1,21 @@
     // Definicion de las variables necesarias para la grilla y validacion de mascaras
     var Config = {};
     Config.colums = [
-        { 'id':'tipo_servicio_id', 'type':'ed', 'align':'left', 'sort':'str', 'value':'tipo_servicio_id' },
-        { 'id':'descripcion', 'type':'ed', 'align':'left', 'sort':'str', 'value':'descripcion' },
-        { 'id':'codigo', 'type':'ed', 'align':'left', 'sort':'str', 'value':'codigo' },
-        { 'id':'productos_id', 'type':'ed', 'align':'left', 'sort':'str', 'value':'productos_id' },
+        { 'id':'tipo_servicio_id', 'type':'ro', 'align':'left', 'sort':'server', 'value':'tipo_servicio_id', 'widths':'*' },
+        { 'id':'descripcion', 'type':'ro', 'align':'left', 'sort':'server', 'value':'descripcion', 'widths':'*' },
+        { 'id':'codigo', 'type':'ro', 'align':'left', 'sort':'server', 'value':'codigo', 'widths':'*' },
+        { 'id':'productos_id', 'type':'ro', 'align':'left', 'sort':'server', 'value':'productos_id', 'widths':'*' },
     ];
 
     // Configuracion de visual de la grilla
     // #text_filter, #select_filter, #combo_filter, #text_search, #numeric_filter
     Config.show = {
-        'module':'Productoss',
+        'vista':'Productoss',
         'tableTitle':'Listado de Registros.',
-        'filter':'&nbsp;,&nbsp;,&nbsp;,&nbsp;',
         'autoWidth':true,
-        'multiSelect':false
+        'multiSelect':false,
+        'pageSize':50,
+        'pagesInGrp':10
     }
 
     // Configuracion de relacion de entidad

@@ -2,8 +2,14 @@
     <div class="box-header with-border">
         <h3 class="box-title">Lista de Unida</h3>
     </div>
+    <div id="Unida" class="listFiltros">
+    <input type="text" class="search" id="search_nombre" placeholder="Nombre" onKeyDown="Core.VistaGrid.doSearch(arguments[0]||event,'Unida')">
+    <input type="text" class="search" id="search_color" placeholder="Color" onKeyDown="Core.VistaGrid.doSearch(arguments[0]||event,'Unida')">
+    <button onClick="Core.VistaGrid.reloadGrid('Unida')" id="submitButtonUnida" style="margin-left:30px;">Buscar</button>
+    </div>
     <div class="box-body">
-        <div id="dataJPHUnida" style="width:100%; height:450px;"></div>
+        <div id="dataJPHUnida" class="listGrid"></div>
         <div id='pagingAreaUnida'></div>
+        <div id='recfoundUnida'></div>
     </div>
 </div>

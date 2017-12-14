@@ -1,6 +1,6 @@
 <?php
 namespace APP\Admin\Model;
-use JPH\Complements\Database\Main;
+use JPH\Complements\Database\Base;
 use JPH\Core\Commun\All;
 /**
  * Generador de codigo del Modelo de la App Admin
@@ -10,14 +10,14 @@ use JPH\Core\Commun\All;
  * @version: 1.0
  */ 
 
-class SegPerfilModel extends Main
+class SegPerfilModel extends Base
 {
    public function __construct()
    {
        $this->tabla = 'seg_perfil';
        $this->campoid = array('id');
        $this->campos = array('detalle');
-       parent::__construct();
+       parent::__construct('admin');
        $this->segPerfilRolesModel = new SegPerfilRolesModel();
    }
 

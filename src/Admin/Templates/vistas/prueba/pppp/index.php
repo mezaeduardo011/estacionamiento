@@ -45,7 +45,7 @@ $breadcrumb=(object)array('actual'=>'Pppp','titulo'=>'Vista de integrada de gest
     };
     $(function () {
         Core.main();
-        Core.Vista.main(Config.show.module,Config);
+        Core.Vista.main(Config.show.vista,Config);
     })
 
 </script>

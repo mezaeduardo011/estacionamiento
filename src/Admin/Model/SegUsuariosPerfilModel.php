@@ -1,6 +1,6 @@
 <?php
 namespace APP\Admin\Model;
-use JPH\Complements\Database\Main;
+use JPH\Complements\Database\Base;
 /**
  * Generador de codigo del Modelo de la App Admin
  * @propiedad: Hornero 1.0
@@ -8,14 +8,15 @@ use JPH\Complements\Database\Main;
  * @created: 27/09/2017
  * @version: 1.0
  */ 
-class SegUsuariosPerfilModel extends Main
+class SegUsuariosPerfilModel extends Base
 {
+
    public function __construct()
    {
        $this->tabla = 'seg_usuarios_perfil';
        $this->campoid = array('seg_perfil_id','seg_usuarios_id');
        $this->campos = array();
-       parent::__construct();
+       parent::__construct('admin');
    }
 
     /**
@@ -74,6 +75,7 @@ class SegUsuariosPerfilModel extends Main
         $seg = explode('|',$roles);
         $temp = strtoupper($comps.' - '.implode("','".$comps.' - ',$seg));
         $sql = "SELECT CASE WHEN COUNT(roles) > 0 THEN 'SI' ELSE 'NO' END AS permiso  FROM view_seguridad WHERE roles IN('".$temp."') ";
+
         $datos=$this->executeQuery($sql);
         $this->free();
         return $datos[0];

@@ -1,6 +1,6 @@
 <?php
 namespace APP\Admin\Model;
-use JPH\Complements\Database\Main;
+use JPH\Complements\Database\Base;
 use JPH\Core\Commun\{
     All, Constant, Security
 };
@@ -12,7 +12,7 @@ use JPH\Core\Commun\{
  * @version: 1.0
  */ 
 
-class SegUsuariosModel extends Main
+class SegUsuariosModel extends Base
 {
    use Security;
    public function __construct()
@@ -20,7 +20,7 @@ class SegUsuariosModel extends Main
        $this->tabla = 'seg_usuarios';
        $this->campoid = array('id');
        $this->campos = array('apellidos','nombres','fech_nacimiento','usuario','clave','correo','telefono','created_usuario_id','created_at','cuenta_bloqueada','fvence_clave','ivence_clave','cambiar_clave','login_fallidos','idioma','updated_usuario_id','removed_at','updated_at','nsesion','dactive');
-       parent::__construct();
+       parent::__construct('admin');
        $this->segUsuariosPerfilModel = new SegUsuariosPerfilModel();
        $this->segLogAccionesModel = new SegLogAccionesModel();
    }

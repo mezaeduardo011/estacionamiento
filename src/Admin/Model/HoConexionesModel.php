@@ -1,6 +1,6 @@
 <?php
 namespace APP\Admin\Model;
-use JPH\Complements\Database\Main;
+use JPH\Complements\Database\Base;
 use JPH\Core\Commun\{
     All, Constant, Security
 };
@@ -11,7 +11,7 @@ use JPH\Core\Commun\{
  * @created: 14/09/2017
  * @version: 1.0
  */ 
-class HoConexionesModel extends Main
+class HoConexionesModel extends Base
 {
    public function __construct()
    {

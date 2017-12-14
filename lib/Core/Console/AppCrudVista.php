@@ -8,7 +8,7 @@ use JPH\Core\Commun\{All,SimpleXMLExtended};
  * @Author: Blog: <http://gbbolivar.wordpress.com>
  * @created Date: 09/08/2017
  * @updated Date: 16/09/2017
- * @version: 5.0.4
+ * @version: 5.0.5
  */
 
 
@@ -125,21 +125,21 @@ class AppCrudVista extends App
                 self::createNewRutaXmlCRUD($archivoRoute,$controller,$tabla);
             }
             // Permite crear la carpeta donde estará la vistas generadas
-            self::createDirViews($rutaPadre,$rutaHija);
+            //self::createDirViews($rutaPadre,$rutaHija);
 
             // Permite crear los archivos necesarios de la vista en especifico
             // Generacion del Index
             self::createFileViewIndex($rutaHija, $campos, $rutaVista, $requerido);
             // Generacion del Assent
-            self::createFileViewAssent($rutaHija, $campos, $rutaVista, $requerido);
+            //self::createFileViewAssent($rutaHija, $campos, $rutaVista, $requerido);
             // Generacion del Form
-            self::createFileViewForm($rutaHija, $campos, $requerido);
+            //self::createFileViewForm($rutaHija, $campos, $requerido);
             // Generacion del Listado
-            self::createFileViewListado($rutaHija, $campos);
+            //self::createFileViewListado($rutaHija, $campos, $campRealEnti);
             // Generacion del Json ecargado de procesar las mascaras
-            self::createFileViewJsonMascaras($rutaHija, $mascaras);
+            //self::createFileViewJsonMascaras($rutaHija, $mascaras);
 
-            $msj=Interprete::getMsjConsole($this->active,'app:crud-creado');
+            //$msj=Interprete::getMsjConsole($this->active,'app:crud-creado');
 
         }
         $msj=All::mergeTaps($msj,array('app'=>$this->app,'controller'=>$entidad));
@@ -211,7 +211,7 @@ class AppCrudVista extends App
         fputs($ar, '   }'.PHP_EOL.PHP_EOL);
 
         fputs($ar, '    /**'.PHP_EOL);
-        fputs($ar, '    * Listar registros de '.$controller.PHP_EOL);
+        fputs($ar, '    * Mostrar el index de la vista'.$controller.PHP_EOL);
         fputs($ar, '    * @param: GET $resquest'.PHP_EOL);
         fputs($ar, '    */ '.PHP_EOL);
         fputs($ar, '   public function run'.$controller.'Index($request)'.PHP_EOL);
@@ -228,7 +228,7 @@ class AppCrudVista extends App
         fputs($ar, '    /**'.PHP_EOL);
         fputs($ar, '    * Listar registros de '.$controller.PHP_EOL);
         fputs($ar, '    * @param: POST $resquest'.PHP_EOL);
-        fputs($ar, '    * @return: JSON $result'.PHP_EOL);
+        fputs($ar, '    * @return: XML $result'.PHP_EOL);
         fputs($ar, '    */ '.PHP_EOL);
         fputs($ar, '   public function run'.$controller.'Listar($request)'.PHP_EOL);
         fputs($ar, '   {'.PHP_EOL);
@@ -237,13 +237,13 @@ class AppCrudVista extends App
         fputs($ar, '      $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);'.PHP_EOL.PHP_EOL);
 
         fputs($ar, '      // Bloque de proceso de la grilla'.PHP_EOL);
-        fputs($ar, '      $result = $this->formatRows($request->getParameter(\'obj\'));'.PHP_EOL);
-        fputs($ar, '      $rows = $this->ho'.$controller.'Model->get'.$controller.'Listar($request->getParameter(),$result);'.PHP_EOL);
-        fputs($ar, '      $valor = array();'.PHP_EOL);
-        fputs($ar, '      $valor[\'head\']=$result[\'campos\'];'.PHP_EOL);
-        fputs($ar, '      $valor[\'rows\']=$rows; '.PHP_EOL);
-        fputs($ar, '      $this->json($valor);'.PHP_EOL);
-        //fputs($ar, '      $this->json($result);'.PHP_EOL);
+        fputs($ar, '      $result = $this->formatRows($request->getParameter(\'obj\'));'.PHP_EOL.PHP_EOL);
+
+        fputs($ar, '      // Procesar los datos del modelo para el paginado'.PHP_EOL);
+        fputs($ar, '      $rows = $this->ho'.$controller.'Model->get'.$controller.'Listar($request->getParameter(),$result);'.PHP_EOL.PHP_EOL);
+
+        fputs($ar, '      // Exportar el resultado en xml para mostrar los datos'.PHP_EOL);
+        fputs($ar, '      $this->xmlGridList($rows);'.PHP_EOL);
         fputs($ar, '   }'.PHP_EOL.PHP_EOL);
 
         fputs($ar, '    /**'.PHP_EOL);
@@ -388,66 +388,72 @@ class AppCrudVista extends App
         fputs($ar, '    * @return array $tablas'.PHP_EOL);
         fputs($ar, '    */ '.PHP_EOL);
         fputs($ar, '   public function get'.$modelo.'Listar($request,$result)'.PHP_EOL);
-        fputs($ar, '   {'.PHP_EOL);
-        fputs($ar, '    //define variables from incoming values'.PHP_EOL);
-        fputs($ar, '    if(isset($request->postParameter(\'posStart\')))'.PHP_EOL);
-        fputs($ar, '        $posStart = $request->postParameter(\'posStart\');'.PHP_EOL);
-        fputs($ar, '    else'.PHP_EOL);
-        fputs($ar, '        $posStart = 0;'.PHP_EOL);
-        fputs($ar, '    if(isset($request->postParameter(\'count\')))'.PHP_EOL);
-        fputs($ar, '        $count = $request->postParameter(\'count\');'.PHP_EOL);
-        fputs($ar, '    else'.PHP_EOL);
-        fputs($ar, '        $count = 100;'.PHP_EOL);
-        
-        fputs($ar, '    // Elemento cuando hay relacion'.PHP_EOL);
-        fputs($ar, '    $relation = All::formatRelacio(@$request->postParameter(\'relacion\'));'.PHP_EOL);
-        fputs($ar, '    $where = \'\';'.PHP_EOL);
-        fputs($ar, '    if(!empty($relation[2])){'.PHP_EOL);
-        fputs($ar, '        $where="  WHERE $relation[1]=$relation[2]";'.PHP_EOL);
-        fputs($ar, '    }'.PHP_EOL);
+        fputs($ar, '   {'.PHP_EOL.PHP_EOL);
 
-        fputs($ar, '    // Primero extraer la cantidad de registros'.PHP_EOL);
-        fputs($ar, '    $sqlCount = "Select count(*) as items FROM ".$this->tabla.$where ;'.PHP_EOL);
-        fputs($ar, '    $resCount = $this->executeQuery($sqlCount);'.PHP_EOL);
-
-        fputs($ar, '    //create query to products table'.PHP_EOL);
-        fputs($ar, '    $sql = implode(\',\', $result[\'select\']).", id FROM ".$this->tabla.$where ;'.PHP_EOL);
-
-        fputs($ar, '    //if this is the first query - get total number of records in the query result'.PHP_EOL);
-        fputs($ar, '    $sqlCount = "SELECT * FROM (SELECT ROW_NUMBER() OVER( ORDER BY id ASC ) AS row, ".$resCount[0]->items." AS cnt, $sql ) AS sub";'.PHP_EOL);
-        fputs($ar, '    $resQuery = $this->get($sqlCount);'.PHP_EOL);
-        fputs($ar, '    $rowCount =  $this->fetch();'.PHP_EOL);
-
-        fputs($ar, '    $totalCount = (empty($rowCount->cnt))?0:$rowCount->cnt;'.PHP_EOL);
-
-        fputs($ar, '    //add limits to query to get only rows necessary for the output'.PHP_EOL);
-        fputs($ar, '    $sqlCount.= " WHERE row>=".$posStart." AND row<=".$count;'.PHP_EOL);
-
-        fputs($ar, '    $sqlCount;'.PHP_EOL);
-
-        fputs($ar, '    $res = $this->get($sqlCount);'.PHP_EOL);
-
-        fputs($ar, '    //output data in XML format'.PHP_EOL);
-        fputs($ar, '    $items = array();'.PHP_EOL);
-        fputs($ar, '    while($row=$this->fetch($res)){'.PHP_EOL);
-        fputs($ar, '        $tmp[\'id\'] = $row->id;'.PHP_EOL);
-        fputs($ar, '        $tep = array();'.PHP_EOL);
-        fputs($ar, '        foreach ($row as $key => $value) {'.PHP_EOL);
-        fputs($ar, '            foreach ($row as $col => $val) {'.PHP_EOL);
-        fputs($ar, '                if (gettype($val) == "object" && get_class($val) == "DateTime") {'.PHP_EOL);
-        fputs($ar, '                $row->$col = $val->format("d/m/Y");'.PHP_EOL);
-        fputs($ar, '                }'.PHP_EOL);
-        fputs($ar, '            }'.PHP_EOL);
-        fputs($ar, '            if($key!=\'id\' AND $key!=\'cnt\' AND $key!=\'row\'){'.PHP_EOL);
-        fputs($ar, '                $tep[] = $value;'.PHP_EOL);
-        fputs($ar, '            }'.PHP_EOL);
+        fputs($ar, '        // Variables definidas para del paginador'.PHP_EOL);
+        fputs($ar, '        $limit = 100;'.PHP_EOL);
+        fputs($ar, '        if(isset($request->posStart)){'.PHP_EOL);
+        fputs($ar, '            $posStart = $request->posStart;'.PHP_EOL);
+        fputs($ar, '        }else{'.PHP_EOL);
+        fputs($ar, '            $posStart = 0;'.PHP_EOL);
         fputs($ar, '        }'.PHP_EOL);
+        fputs($ar, '        if(isset($request->count)){'.PHP_EOL);
+        fputs($ar, '            $count = $request->posStart+$limit;'.PHP_EOL);
+        fputs($ar, '        }else{'.PHP_EOL);
+        fputs($ar, '            $count = $limit;'.PHP_EOL);
+        fputs($ar, '        }'.PHP_EOL.PHP_EOL);
 
-        fputs($ar, '        $tmp[\'data\'] = $tep;'.PHP_EOL);
-        fputs($ar, '        array_push($items,$tmp);'.PHP_EOL);
-        fputs($ar, '    }'.PHP_EOL);
-        fputs($ar, '    return $items;'.PHP_EOL.PHP_EOL);
+        fputs($ar, '        // Permite identificar hay una definicion de busqueda de algun campo mediante el search'.PHP_EOL);
+        fputs($ar, '        $search= \'\';'.PHP_EOL);
+        fputs($ar, '        foreach ($request AS $key=>$value){'.PHP_EOL);
+        fputs($ar, '            if(\preg_match(\'/search_\w/\',$key) AND !empty($value)){'.PHP_EOL);
+        fputs($ar, '                $campo = str_replace(\'search_\',\'\', $key);'.PHP_EOL);
+        fputs($ar, '                $search.= " AND $campo like \'%$value%\'";'.PHP_EOL);
+        fputs($ar, '            }'.PHP_EOL);
+        fputs($ar, '        }'.PHP_EOL.PHP_EOL);
+        fputs($ar, '        // Variables definidas para el ordenamiento DESC y ASC'.PHP_EOL);
+        fputs($ar, '        $order = \'\';'.PHP_EOL);
+        fputs($ar, '        $by = \'\';'.PHP_EOL);
+        fputs($ar, '        if(!empty($request->orderBy) AND $request->orderBy!=\'undefined\'){'.PHP_EOL);
+        fputs($ar, '            $tmp = $this->campos[$request->orderBy];'.PHP_EOL);
+        fputs($ar, '            if (!isset($request->direction) || $request->direction=="asc") {'.PHP_EOL);
+        fputs($ar, '                $by = \'ASC\';'.PHP_EOL);
+        fputs($ar, '                $order = " ORDER BY $tmp ".$by;'.PHP_EOL);
+        fputs($ar, '            }else{'.PHP_EOL);
+        fputs($ar, '                $by = \'DESC\';'.PHP_EOL);
+        fputs($ar, '                $order = " ORDER BY $tmp ".$by;'.PHP_EOL);
+        fputs($ar, '            }'.PHP_EOL);
+        fputs($ar, '        }'.PHP_EOL.PHP_EOL);
+
+        fputs($ar, '        // Elemento cuando hay relacion'.PHP_EOL);
+        fputs($ar, '         $relation = All::formatRelacio(@$request->relacion);'.PHP_EOL);
+        fputs($ar, '         if(!empty($relation[2])){'.PHP_EOL);
+        fputs($ar, '            $search.="  AND $relation[1]=$relation[2]";'.PHP_EOL);
+        fputs($ar, '         }'.PHP_EOL.PHP_EOL);
+
+        fputs($ar, '         // Primero extraer la cantidad de registros'.PHP_EOL);
+        fputs($ar, '         $sqlCount = "Select count(*) as items FROM ".$this->tabla.\' WHERE 0=0 \'.$search ;'.PHP_EOL);
+        fputs($ar, '         $resCount = $this->executeQuery($sqlCount);'.PHP_EOL);
+
+        fputs($ar, '         //create query to products table'.PHP_EOL);
+        fputs($ar, '         $sql = implode(\',\', $result[\'select\']).", ".$this->campoid[0]." FROM ".$this->tabla.\' WHERE 0=0 \'.$search ;'.PHP_EOL);
+        fputs($ar, '         //if this is the first query - get total number of records in the query result'.PHP_EOL);
+        fputs($ar, '         $sqlCount = "SELECT * FROM (SELECT ROW_NUMBER() OVER( ORDER BY ".$this->campoid[0]." ".$by." ) AS row, ".$resCount[0]->items." AS cnt, $sql ) AS sub";'.PHP_EOL);
+        fputs($ar, '         $resQuery = $this->get($sqlCount);'.PHP_EOL);
+        fputs($ar, '         $rowCount =  $this->fetch();'.PHP_EOL);
+        fputs($ar, '         $totalCount = (empty($rowCount->cnt))?0:$rowCount->cnt;'.PHP_EOL);
+        fputs($ar, '         //add limits to query to get only rows necessary for the output'.PHP_EOL);
+        fputs($ar, '         $sqlCount.= " WHERE row>=".$posStart." AND row<=".$count;'.PHP_EOL);
+        fputs($ar, '         $sqlCount.= $order;'.PHP_EOL.PHP_EOL);
+
+        fputs($ar, '         // Definir las variables para el uso para el XML'.PHP_EOL);
+        fputs($ar, '         $items = array();'.PHP_EOL);
+        fputs($ar, '         $items[\'data\'] = $this->executeQuery($sqlCount);'.PHP_EOL);
+        fputs($ar, '         $items[\'totalCount\'] = (isset($request->posStart))?\'\':$totalCount;'.PHP_EOL);
+        fputs($ar, '         $items[\'posStart\'] = $posStart;'.PHP_EOL);
+        fputs($ar, '         return $items;'.PHP_EOL);
         fputs($ar, '   }'.PHP_EOL.PHP_EOL);
+
 
         fputs($ar, '    /**'.PHP_EOL);
         fputs($ar, '    * Crear registros nuevos de '.$modelo.PHP_EOL);
@@ -702,7 +708,7 @@ class AppCrudVista extends App
 
     fputs($ar, '    $(function () {' . PHP_EOL);
     fputs($ar, '        Core.main();' . PHP_EOL);
-    fputs($ar, '        Core.Vista.main(Config.show.module,Config);' . PHP_EOL);
+    fputs($ar, '        Core.Vista.main(Config.show.vista,Config);' . PHP_EOL);
     fputs($ar, '    })' . PHP_EOL);
     fputs($ar, '' . PHP_EOL);
     fputs($ar, '</script>' . PHP_EOL);
@@ -722,7 +728,7 @@ class AppCrudVista extends App
                 $mostrar = explode('#',$requerido[$value]);
                 //   [0][hidden_form] => 1 # [1][hidden_list] => 1 # [2][relacionado] (grilla|combo) # [3][tabla_vista] personal--personalD1 # [4][vista_campo] id # [5] [$cart_separacion] -
                 if((int)$mostrar[1]!=1) {
-                    fputs($ar, '        { \'id\':\''.$campos[$key]->field.'\', \'type\':\'ed\', \'align\':\'left\', \'sort\':\'str\', \'value\':\''.$campos[$key]->label.'\' },' . PHP_EOL);
+                    fputs($ar, '        { \'id\':\''.$campos[$key]->field.'\', \'type\':\'ro\', \'align\':\'left\', \'sort\':\'server\', \'value\':\''.$campos[$key]->label.'\', \'widths\':\'*\' },' . PHP_EOL);
                     if($campos[$key]->mascara=='texto' OR $campos[$key]->mascara=='varchar'){
                         array_push($filtro,'#text_filter');
                     }else{
@@ -734,11 +740,13 @@ class AppCrudVista extends App
         fputs($ar, '    // Configuracion de visual de la grilla' . PHP_EOL);
         fputs($ar, '    // #text_filter, #select_filter, #combo_filter, #text_search, #numeric_filter' . PHP_EOL);
         fputs($ar, '    Config.show = {' . PHP_EOL);
-        fputs($ar, '        \'module\':\''.All::upperCase($campos['vista']).'\',' . PHP_EOL);
+        fputs($ar, '        \'vista\':\''.All::upperCase($campos['vista']).'\',' . PHP_EOL);
         fputs($ar, '        \'tableTitle\':\'Listado de Registros.\',' . PHP_EOL);
-        fputs($ar, '        \'filter\':\''.implode(',',$filtro).'\',' . PHP_EOL);
+        //fputs($ar, '        \'autoWidth\':\''.implode(',',$filtro).'\',' . PHP_EOL);
         fputs($ar, '        \'autoWidth\':true,' . PHP_EOL);
-        fputs($ar, '        \'multiSelect\':false' . PHP_EOL);
+        fputs($ar, '        \'multiSelect\':false,' . PHP_EOL);
+        fputs($ar, '        \'pageSize\':50,' . PHP_EOL);
+        fputs($ar, '        \'pagesInGrp\':10' . PHP_EOL);
         fputs($ar, '    }' . PHP_EOL. PHP_EOL);
 
         fputs($ar, '    // Configuracion de relacion de entidad' . PHP_EOL);
@@ -847,18 +855,33 @@ class AppCrudVista extends App
     /**
      * Method encargado de crear un archivo listado donde se mostrará la grilla
      * @param string $rutaHija, Indica donde se debe general la vista generada
-     * @campos array $campos, indica toda la configuracion de la vista, campos y detalle en generall
+     * @param array $campos, indica toda la configuracion de la vista, campos y detalle en general
+     * @param array $campRealEnti, indica toda la configuracion de solo los campos reales
      * @return bool true
      */
-    private function createFileViewListado($rutaHija, $campos){
+    private function createFileViewListado($rutaHija, $campos, $campRealEnti){
         $ar = fopen($rutaHija.DIRECTORY_SEPARATOR."listado.php", "w+") or die("Problemas en la creaci&oacute;n del view listado.php");
         fputs($ar, '<div class="box box-primary">'.PHP_EOL);
         fputs($ar, '    <div class="box-header with-border">'.PHP_EOL);
         fputs($ar, '        <h3 class="box-title">Lista de '.ALL::upperCase($campos['vista']).'</h3>'.PHP_EOL);
         fputs($ar, '    </div>'.PHP_EOL);
+
+        // Bloque de filtros de busqueda
+        fputs($ar, '    <div id="'.ALL::upperCase($campos['vista']).'" class="listFiltros">'.PHP_EOL);
+        foreach ($campRealEnti['campos'] AS $key=>$value){
+            if($value!=$campRealEnti['pk']){
+                fputs($ar, '    <input type="text" class="search" id="search_'.$value.'" placeholder="'.ALL::upperCase($value).'" onKeyDown="Core.VistaGrid.doSearch(arguments[0]||event,\''.ALL::upperCase($campos['vista']).'\')">'.PHP_EOL);
+            }
+        }
+        fputs($ar, '    <button onClick="Core.VistaGrid.reloadGrid(\''.ALL::upperCase($campos['vista']).'\')" id="submitButton'.ALL::upperCase($campos['vista']).'" style="margin-left:30px;">Buscar</button>'.PHP_EOL);
+        //fputs($ar, '//<!--input type="checkbox" id="autosearch" onClick="Core.VistaGrid.enableAutosubmit(this.checked,\'Pppp\');"> Enable Autosearch-->'.PHP_EOL);
+        fputs($ar, '    </div>'.PHP_EOL);
+
+        // Bloque de Grid del contenido
         fputs($ar, '    <div class="box-body">'.PHP_EOL);
-        fputs($ar, '        <div id="dataJPH'.ALL::upperCase($campos['vista']).'" style="width:100%; height:450px;"></div>'.PHP_EOL);
+        fputs($ar, '        <div id="dataJPH'.ALL::upperCase($campos['vista']).'" class="listGrid"></div>'.PHP_EOL);
         fputs($ar, '        <div id=\'pagingArea'.ALL::upperCase($campos['vista']).'\'></div>'.PHP_EOL);
+        fputs($ar, '        <div id=\'recfound'.ALL::upperCase($campos['vista']).'\'></div>'.PHP_EOL);
         fputs($ar, '    </div>'.PHP_EOL);
         fputs($ar, '</div>'.PHP_EOL);
         fclose($ar);

@@ -64,10 +64,16 @@ trait Commun
     /**
      * Permite poner en modo desarrollador al sistema
      */
-    static function modDevelopment()
+    static function modDevelopment($opt=true)
     {
-        error_reporting(E_ALL);
-        ini_set("display_errors", 1);
+        if($opt){
+            error_reporting(E_ALL);
+            ini_set("display_errors", 1);
+        }else{
+            error_reporting(0);
+            ini_set("display_errors", 0);
+        }
+
     }
 
     /**

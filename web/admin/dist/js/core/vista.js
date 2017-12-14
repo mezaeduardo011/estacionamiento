@@ -24,16 +24,18 @@ Core.Vista = {
         this.procesar();
     },
     listado : function (show) {
-        var temp = this.__pathR__;
+        var urlVistaTmp = this.__pathR__;
         var rows = this.__columns__;
+        localStorage.setItem('urlVistaTmp',urlVistaTmp);
+
         // Permite instanciar las funcionalidades de la Grid
-        Core.VistaGrid.main(temp,rows,show);
+        Core.VistaGrid.main(urlVistaTmp,rows,show);
 
         // Configuracion personalizada local de la vista
         Core.Vista.Util.priListaLoad();
 
         localStorage.removeItem('id');
-        localStorage.setItem('temp',temp);
+
     },
     sortGridOnServer: function (ind,gridObj,direct) {
         alert(ind+'--'+gridObj+'--'+direct);
@@ -45,7 +47,7 @@ Core.Vista = {
             Core.Vista.currentRequest.abort();
         }
 
-        Core.Vista.currentRequest = $.post('/'+localStorage.getItem('temp').toLowerCase()+'Show',{'data':id},function (dataJson) {
+        Core.Vista.currentRequest = $.post('/'+localStorage.getItem('urlVistaTmp').toLowerCase()+'Show',{'data':id},function (dataJson) {
             if(dataJson.error==0) {
                 $.each(dataJson.datos, function (key, valor) {
                     $("#" + key).val(valor).keyup();
@@ -56,7 +58,7 @@ Core.Vista = {
                         $("#" + key + ",#re" + key).val('').removeClass('requerido').siblings('label').children('div#campoRequerido').remove();
                     }
                 });
-                send = 'form#send' + localStorage.getItem('temp') + 'Procesar';
+                send = 'form#send' + localStorage.getItem('urlVistaTmp') + 'Procesar';
 
                 $(send).addClass('update');
                 $(send).data('id', localStorage.getItem('id'))

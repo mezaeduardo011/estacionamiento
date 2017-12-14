@@ -177,8 +177,7 @@ class App
          */
         public function showApps()
         {
-            $tmp = $this->pathapp;
-            $list = array_diff(scandir($tmp), array('..', '.'));
+            $list = self::showAppsList();
             $msj=Interprete::getMsjConsole($this->active,'app:list');
             $item = array();
             
@@ -192,6 +191,32 @@ class App
                 }
             }
             return $item;
+        }
+
+        /**
+         * Permite visuaizar un listado de las aplicaciones existente dentro del sistema
+         * return Array $list, listado de aplicaciones disponible
+         */
+        private function showAppsList()
+        {
+            $tmp = $this->pathapp;
+            $list = array_diff(scandir($tmp), array('..', '.'));
+            return $list;
+        }
+
+        /**
+         * Permite verificar si existe o no una aplicacion
+         * @param String $app
+         * @return Bool $tmp;
+         */
+        public function existsApp($app)
+        {
+            $app = All::upperCase($app);
+            $appList = self::showAppsList();
+            $tmp = array_search($app,$appList);
+            $val = (isset($tmp))?true:false;
+            return $val;
+
         }
 
         /**

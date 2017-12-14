@@ -1,6 +1,6 @@
 <?php
 namespace APP\Admin\Model;
-use JPH\Complements\Database\Main;
+use JPH\Complements\Database\Base;
 use JPH\Core\Commun\{All,Security};
 /**
  * Generador de codigo del Modelo de la App Admin
@@ -10,7 +10,7 @@ use JPH\Core\Commun\{All,Security};
  * @version: 1.0
  */ 
 
-class TipoServicioModel extends Main
+class TipoServicioModel extends Base
 {
    use Security;
    public function __construct()
@@ -18,9 +18,9 @@ class TipoServicioModel extends Main
        $this->tabla = 'tipo_servicio';
        $this->campoid = array('id');
        $this->campos = array('descripcion');
+       parent::__construct();
        // Clase de registro de auditoria de las acciones
        $this->segLogAccionesModel = new SegLogAccionesModel();
-       parent::__construct();
    }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 namespace APP\Admin\Model;
-use JPH\Complements\Database\Main;
+use JPH\Complements\Database\Base;
 use JPH\Core\Commun\{
     All, Commun, Logs
 };
@@ -11,7 +11,7 @@ use JPH\Core\Commun\{
  * @created: 15/09/2017
  * @version: 1.0
  */ 
-class HoVistasModel extends Main
+class HoVistasModel extends Base
 {
    use Logs;
    public function __construct()

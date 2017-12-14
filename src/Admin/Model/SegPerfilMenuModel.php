@@ -1,6 +1,6 @@
 <?php
 namespace APP\Admin\Model;
-use JPH\Complements\Database\Main;
+use JPH\Complements\Database\Base;
 /**
  * Generador de codigo del Modelo de la App Admin del perfil menu
  * @propiedad: Hornero 1.0
@@ -8,14 +8,14 @@ use JPH\Complements\Database\Main;
  * @created: 27/09/2017
  * @version: 1.0
  */ 
-class SegPerfilMenuModel extends Main
+class SegPerfilMenuModel extends Base
 {
    public function __construct()
    {
        $this->tabla = 'seg_perfil_ho_menu';
        $this->campoid = array('seg_perfil_id','ho_menu_id');
        $this->campos = array();
-       parent::__construct();
+       parent::__construct('admin');
        $this->segLogAccionesModel = new SegLogAccionesModel();
    }
 

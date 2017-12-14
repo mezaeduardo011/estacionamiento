@@ -1,6 +1,6 @@
 <?php
 namespace APP\Admin\Model;
-use JPH\Complements\Database\Main;
+use JPH\Complements\Database\Base;
 use JPH\Core\Commun\{
     All, Constant, Security
 };/**
@@ -10,7 +10,7 @@ use JPH\Core\Commun\{
  * @created: 01/12/2017
  * @version: 1.0
  */ 
-class HoMascaraModel extends Main
+class HoMascaraModel extends Base
 {
     use Security;
     public function __construct()

@@ -1,6 +1,6 @@
 <?php
 namespace APP\Admin\Model;
-use JPH\Complements\Database\Main;
+use JPH\Complements\Database\Base;
 use JPH\Core\Commun\{
     All, Constant, Security
 };
@@ -13,7 +13,7 @@ use JPH\Core\Commun\{
  * @version: 1.0
  */ 
 
-class HoMenuModel extends Main
+class HoMenuModel extends Base
 {
     use Security;
    public function __construct()
@@ -21,7 +21,7 @@ class HoMenuModel extends Main
        $this->tabla = 'ho_menu';
        $this->campoid = array('id');
        $this->campos = array('app','entidad','vista','nombre','icon_fa','targe','ho_menu_id','created_usuario_id','updated_usuario_id','created_at','updated_at');
-       parent::__construct();
+       parent::__construct('admin');
        $this->segUsuariosPerfilModel = new SegUsuariosPerfilModel();
        $this->segPerfilMenuModel = new SegPerfilMenuModel();
        $this->segLogAccionesModel = new SegLogAccionesModel();

@@ -39,7 +39,9 @@
             "error-cargar-ruta" : "<b>Exepción capturada Core</b>: Error en cargar el controlador <b>{controller}</b>, al method <b>{method}</b>, verificar si esta creado. ",
             "ruta-no-existe" : "<b>Exepción capturada Core</b>: Ruta solicitada no existe, en la aplicacion {app}.",
             "class-no-existe" : "<center><b>Exepción capturada Core</b>: Error en cargar el controlador <b>{controller}</b>, <br> la clase no esta creada <b>{class}</b>, verificar el archivo, es necesario que la clase esta definida en ella.</center>",
-            "method-no-existe" : "<center><b>Exepción capturada Core</b>: Error en cargar el controlador <b>{controller}</b>, <br> el method  <b>{method}</b> no esta creada, verificar el archivo.</center>"
+            "method-no-existe" : "<center><b>Exepción capturada Core</b>: Error en cargar el controlador <b>{controller}</b>, <br> el method  <b>{method}</b> no esta creada, verificar el archivo.</center>",
+            "idx-conn-no-existe" : "<center><b>Exepción capturada Core</b>: Error en cargar la conexion <b>{idxConexion}</b>, <br>  verificar el archivo <b>config/databases.ini</b> si esta creado la configuracion solicitada.</center>",
+            "error-stnd-connect" : "<center><b>Exepción capturada Core</b>: Error en cargar tu componente de conexión,<br> estas intentando romper el standar del sistema debes cargar este elemento solo en el modelo,<br> no se puede instanciar desde el controlador.</center>"
         }
 
     }

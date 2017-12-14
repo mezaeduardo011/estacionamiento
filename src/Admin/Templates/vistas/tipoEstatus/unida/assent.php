@@ -1,18 +1,19 @@
     // Definicion de las variables necesarias para la grilla y validacion de mascaras
     var Config = {};
     Config.colums = [
-        { 'id':'nombre', 'type':'ed', 'align':'left', 'sort':'str', 'value':'nombre' },
-        { 'id':'color', 'type':'ed', 'align':'left', 'sort':'str', 'value':'color' },
+        { 'id':'nombre', 'type':'ro', 'align':'left', 'sort':'server', 'value':'nombre', 'widths':'*' },
+        { 'id':'color', 'type':'ro', 'align':'left', 'sort':'server', 'value':'color', 'widths':'*' },
     ];
 
     // Configuracion de visual de la grilla
     // #text_filter, #select_filter, #combo_filter, #text_search, #numeric_filter
     Config.show = {
-        'module':'Unida',
+        'vista':'Unida',
         'tableTitle':'Listado de Registros.',
-        'filter':'&nbsp;,&nbsp;',
         'autoWidth':true,
-        'multiSelect':false
+        'multiSelect':false,
+        'pageSize':50,
+        'pagesInGrp':10
     }
 
     // Configuracion de relacion de entidad

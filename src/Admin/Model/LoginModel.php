@@ -1,6 +1,6 @@
 <?php
 namespace APP\Admin\Model;
-use JPH\Complements\Database\{Main,Usuarios};
+use JPH\Complements\Database\{Base,Usuarios};
 /**
  * Generador de codigo del Modelo de la App Admin
  * @propiedad: Hornero 1.0
@@ -8,7 +8,7 @@ use JPH\Complements\Database\{Main,Usuarios};
  * @created: 28/08/2017
  * @version: 2.0
  */ 
-class LoginModel extends Main
+class LoginModel extends Base
 {
     use Usuarios;
 

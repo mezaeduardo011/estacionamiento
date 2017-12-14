@@ -2,9 +2,12 @@
     <div class="box-header with-border">
         <h3 class="box-title">Lista de Tipo</h3>
     </div>
+    <div id="Tipo" class="listFiltros">
+    <input type="text" class="search" id="search_descripcion" placeholder="Descripcion" onKeyDown="Core.VistaGrid.doSearch(arguments[0]||event,'Tipo')">
+    <button onClick="Core.VistaGrid.reloadGrid('Tipo')" id="submitButtonTipo" style="margin-left:30px;">Buscar</button>
+    </div>
     <div class="box-body">
-        <div id="dataJPHTipo" style="width:100%; height:450px;margin-top:20px;margin-bottom:10px;"></div>
-        <div id='pagingAreaTipo'></div>
+        <div id="dataJPHTipo" class="listGrid"></div>
         <div id='pagingAreaTipo'></div>
         <div id='recfoundTipo'></div>
     </div>

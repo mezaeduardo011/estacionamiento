@@ -1,6 +1,6 @@
 <?php
 namespace APP\Admin\Model;
-use JPH\Complements\Database\Main;
+use JPH\Complements\Database\Base;
 use JPH\Core\Commun\Security;
 /**
  * Generador de codigo del Modelo de la App Admin
@@ -10,7 +10,7 @@ use JPH\Core\Commun\Security;
  * @version: 1.0
  */ 
 
-class LegajosModel extends Main
+class LegajosModel extends Base
 {
    use Security;
    public function __construct()

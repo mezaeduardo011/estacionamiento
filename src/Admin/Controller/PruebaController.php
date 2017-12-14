@@ -34,6 +34,7 @@ class PruebaController extends Controller
        $this->entidad = $this->hoPruebaModel->tabla;
        $this->vista = $this->pathVista();
        $this->comps = $this->apps .' - '. $this->entidad .' - '. $this->vista;
+
    }
 
     /**
@@ -64,12 +65,11 @@ class PruebaController extends Controller
       // Bloque de proceso de la grilla
       $result = $this->formatRows($request->getParameter('obj'));
 
+      // Procesar los datos del modelo para el paginado
       $rows = $this->hoPruebaModel->getPruebaListar($request->getParameter(),$result);
-      //$valor = array();
-      //$valor['head']=$result['campos'];
-       //$valor['rows']=$rows;
-       //$this->json($valor);
-      $this->xmlGridList($rows);
+
+      // Exportar el resultado en xml para mostrar los datos
+       $this->xmlGridList($rows);
    }
 
     /**

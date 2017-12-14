@@ -1,6 +1,6 @@
 <?php
 namespace APP\Admin\Model;
-use JPH\Complements\Database\Main;
+use JPH\Complements\Database\Base;
 use JPH\Core\Commun\All;
 /**
  * Generador de codigo del Modelo de la App Admin
@@ -10,14 +10,15 @@ use JPH\Core\Commun\All;
  * @version: 1.0
  */
 
-class SegLogAccionesModel extends Main
+class SegLogAccionesModel extends Base
 {
     public function __construct()
     {
         $this->tabla = 'seg_log_eventos';
         $this->campoid = array('id');
         $this->campos = array('host','base_datos','entidad','entidad_id','new_value','old_value','usuario_id','proceso','created_at');
-        parent::__construct();
+        parent::__construct('admin');
+        return $this;
     }
 
     /**
@@ -103,7 +104,7 @@ class SegLogAccionesModel extends Main
      * @param string $proceso, que proceso se esta haciendo, UPDATE, CREATE, SELECT, DELETE
      * @return bool true o false;
      */
-    public function cargaAcciones($entidad,$entidad_id='',$new_value='',$old_value='',$usuario_id,$proceso)
+    public function cargaAcciones($entidad, $entidad_id='', $new_value='', $old_value='', $usuario_id, $proceso)
     {
         $host = $_SERVER['REMOTE_ADDR'];
         $name_db=$this->database;
@@ -126,7 +127,7 @@ class SegLogAccionesModel extends Main
     private function segLogCreateLogin($host,$name_db,$entidad,$entidad_id,$new_value,$old_value,$usuario_id,$proceso)
     {
         $query = "INSERT INTO seg_log_eventos(host,base_datos,entidad,entidad_id,new_value,old_value,usuario_id,proceso,created_at) VALUES('$host','$name_db','$entidad','$entidad_id','$new_value','$old_value','$usuario_id','$proceso','".All::now()."')";
-        $this->db->execute($query);
+        $this->execute($query);
         return true;
     }
 }

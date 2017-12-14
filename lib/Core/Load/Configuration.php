@@ -76,9 +76,15 @@ class Configuration extends Cache
                 Cache::set($key, $value);
             endforeach;
 
+            if (!isset($objFopen[$this->app])) {
+                // EXCEPCION FALTA
+                die(sprintf('Las variables de configuracion de la apliacion "%s" en curso no existen en el archivo app.ini .', $this->app));
+            }
             // Load the configuration values for the load block
             foreach ($objFopen[$this->app] AS $key => $value):
                 // VERIFICAR QUE LA CONFIGURACION CUMPLE EL FORMATO
+                // Variable compuesta para el cache automatico del nombre de la aplicacion seguido del nombre del clave de la configuracion. ejemplo: Admin:Base
+                //$token = $this->app.':'.$key;
                 Cache::set($key, $value);
             endforeach;
             # code...
@@ -88,9 +94,10 @@ class Configuration extends Cache
 
         switch ($proceso):
             case 'stable':
-                //require_once $file;
-                //$loadRouter = new $this->class;
-                //$loadRouter->Configure($app, $fold);
+                All::modDevelopment(false);
+                $temp = '\APP\\' . $this->app . '\Router\\' . $this->class;
+                $loadRouter = new $temp;
+                $loadRouter->initApp($this->app, $this->fold);
                 break;
 
             case 'mant':
@@ -102,9 +109,6 @@ class Configuration extends Cache
                 break;
             default:
                 All::modDevelopment();
-                //$this->templates = new \League\Plates\Engine(Store::get('dir_d_twig'));
-                //$this->templates->addFolder('theme1', Store::get('dir_s_twig'), true);
-                //require_once $file; APP\Admin\AdminConfiguration
                 $temp = '\APP\\' . $this->app . '\Router\\' . $this->class;
                 $loadRouter = new $temp;
                 $loadRouter->initApp($this->app, $this->fold);

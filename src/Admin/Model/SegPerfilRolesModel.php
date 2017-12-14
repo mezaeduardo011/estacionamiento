@@ -1,6 +1,6 @@
 <?php
 namespace APP\Admin\Model;
-use JPH\Complements\Database\Main;
+use JPH\Complements\Database\Base;
 use JPH\Core\Commun\All;
 /**
  * Generador de codigo del Modelo de la App Admin
@@ -9,7 +9,7 @@ use JPH\Core\Commun\All;
  * @created: 27/09/2017
  * @version: 1.0
  */ 
-class SegPerfilRolesModel extends Main
+class SegPerfilRolesModel extends Base
 {
    public function __construct()
    {
