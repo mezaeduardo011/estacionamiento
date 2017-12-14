@@ -1,5 +1,6 @@
 <?php
 namespace JPH\Core\Http;
+use JPH\Core\Commun\{All,Logs};
 
 /**
  * Permite contener un cunjunto de funcionalidades del protocolo http
@@ -12,6 +13,7 @@ namespace JPH\Core\Http;
 
 class Request
 {
+    use Logs;
     public $dataPost;
     public $dataGet;
     public function __construct()
@@ -27,8 +29,8 @@ class Request
      */
     public function getParameter($index='')
     {
-        $this->dataGet = (empty($index))?(object)$_GET:$_GET[$index];
-        return $this->dataGet;
+        $obj = self::complementsRequest($index,All::METHOD_GET);
+        return $obj;
     }
 
     /**
@@ -38,8 +40,60 @@ class Request
      */
     public function postParameter($index='')
     {
-        $this->dataPost = (empty($index))?(object)$_POST:$_POST[$index];
-        return $this->dataPost;
+        $obj = self::complementsRequest($index,All::METHOD_POST);
+        return $obj;
+
+    }
+
+    /**
+     * Permite unir todos los funcionamientos de captura de ddatos por POST,GET
+     * @param String $index, Permite identificar el valor de entrada del indece asociado solicitado
+     * @param String $method, Method recibido
+     * @return Strinf $data
+     */
+    private function complementsRequest($index,$method){
+        // Verificaoms si la solicitud esta vacio y le envia el objeto del proceso
+        try {
+            if (empty($index) AND $method == 'GET') {
+                return (object)$_GET;
+            } elseif (empty($index) AND $method == 'POST') {
+                return (object)$_POST;
+            } elseif (!empty($index)) {
+                $data = [];
+                $tmp = explode(',', $index);
+                foreach ($tmp AS $key) {
+                    if ($method == 'GET') {
+                        if(isset($_GET[$key])){
+                            $data[$key] = $_GET[$key];
+                        }else{
+                            $obj = array('idx' => $key);
+                            $msj = All::getMsjException('Core', 'get-val-no-existe',$obj);
+                            $this->logError($msj);
+                            throw new \TypeError($msj);
+                        }
+                    } else {
+                        if(isset($_POST[$key])){
+                            $data[$key] = $_POST[$key];
+                        }else{
+                            $obj = array('idx' => $key);
+                            $msj = All::getMsjException('Core', 'post-val-no-existe',$obj);
+                            $this->logError($msj);
+                            throw new \TypeError($msj);
+                        }
+                    }
+                }
+                // Validar si es un solo item o varios
+                if (count($tmp) < 2) {
+                    $temp = array_values($data);
+                    return $temp[0];
+                } else {
+                    return (object)$data;
+                }
+            }
+        }catch (\TypeError $t){
+            All::statusHttp(400);
+            die($t->getMessage());
+        }
 
     }
 

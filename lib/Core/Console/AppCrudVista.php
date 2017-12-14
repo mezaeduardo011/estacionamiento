@@ -348,7 +348,7 @@ class AppCrudVista extends App
         // Inicio la escritura en el activo
         fputs($ar, '<?php'.PHP_EOL);
         fputs($ar, 'namespace APP\\'.$app.'\\Model;'.PHP_EOL);
-        fputs($ar, 'use JPH\\Complements\\Database\\Main;'.PHP_EOL);
+        fputs($ar, 'use JPH\\Complements\\Database\\Base;'.PHP_EOL);
         fputs($ar, 'use JPH\\Core\\Commun\\{All,Security};'.PHP_EOL);
         fputs($ar, '/**'.PHP_EOL);
         fputs($ar, ' * Generador de codigo del Modelo de la App '.$app.PHP_EOL);
@@ -358,7 +358,7 @@ class AppCrudVista extends App
         fputs($ar, ' * @version: 1.0'.PHP_EOL);
         fputs($ar, ' */ '.PHP_EOL.PHP_EOL);
 
-        fputs($ar, "class ". $modelo."Model extends Main".PHP_EOL);
+        fputs($ar, "class ". $modelo."Model extends Base".PHP_EOL);
         fputs($ar, "{".PHP_EOL);
         fputs($ar, "   use Security;".PHP_EOL);
         fputs($ar, '   public function __construct()'.PHP_EOL);

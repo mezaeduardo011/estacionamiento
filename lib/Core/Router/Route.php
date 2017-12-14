@@ -1,7 +1,7 @@
 <?php
 namespace JPH\Core\Router;
 use JPH\Core\Commun\{
-    All, Commun, Logs
+    All, Logs
 };
 /**
  * Clase encargadad de procesar las rutas del sistema
@@ -58,7 +58,7 @@ class Route
             }
         
         }catch(\Throwable $t){
-            Commun::statusHttp(404);
+            All::statusHttp(404);
             $this->logError($t->getMessage());
             die($t->getMessage());
         }
