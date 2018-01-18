@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://C:/xampp/htdocs/apiAlcolemia/.idea/Shawn.iml" filepath="C:/xampp/htdocs/apiAlcolemia/.idea/Shawn.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../apiJRH/.idea/apiJRH.iml" filepath="$PROJECT_DIR$/../apiJRH/.idea/apiJRH.iml" />
+      <module fileurl="file://C:/xampp/htdocs/catatumbo/.idea/catatumbo.iml" filepath="C:/xampp/htdocs/catatumbo/.idea/catatumbo.iml" />
+      <module fileurl="file://C:/xampp/htdocs/ejemplo/.idea/ejemplo.iml" filepath="C:/xampp/htdocs/ejemplo/.idea/ejemplo.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/hornero.iml" filepath="$PROJECT_DIR$/.idea/hornero.iml" />
     </modules>
   </component>

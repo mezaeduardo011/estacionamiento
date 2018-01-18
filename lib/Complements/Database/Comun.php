@@ -9,9 +9,9 @@ use JPH\Core\Commun\{
  */
 class Comun{
 
-    public $db;
-    public $database;
 
+    public $database;
+    public $db;
     public $query;
     public $campoid;
     public $tabla;
@@ -24,14 +24,18 @@ class Comun{
     use Logs;
 
 
-    public function __construct($id = false) {
+    public function __construct($id = false)
+    {
 
-        
+
         $this->database = $this->db;
-        $this->db = $this;
+        $this->db = get_class($this);
         $this->id = true;
         $this->active = 'Model';
         $this->query = new Query();
+        /*echo "<pre>";
+        print_r($this); die();*/
+
         if (isset($_SESSION["usuario"])) {
             $this->usuario = $_SESSION["usuario"];
         }
@@ -132,7 +136,7 @@ class Comun{
                 $query = "UPDATE " . $this->tabla;
                 $query .= " SET " . $set;
                 $query .= " WHERE " . $this->where;
-                $this->db->execute($query);
+                $this->execute($query);
             }
         } else {
             return -1;
@@ -149,7 +153,7 @@ class Comun{
         if ($this->existe()) {
             $query = "DELETE FROM " . $this->tabla;
             $query .= " WHERE " . $this->where;
-            $this->db->execute($query);
+            $this->execute($query);
         }
     }
 
@@ -164,11 +168,10 @@ class Comun{
         $query .= is_array($this->campoid) ? implode(',', $this->campoid) : $this->campoid;
         $query .= " FROM " . $this->tabla;
         $query .= " WHERE " . $this->where;
-        echo $query;
-        $this->db->get($query);
+        $this->get($query);
 
-        if ($this->db->numRows() > 0) {
-            $row = $this->db->fetch();
+        if ($this->numRows() > 0) {
+            $row = $this->fetch();
 
             foreach ($row as $col => $val) {
                 if (gettype($val) == "object" && get_class($val) == "DateTime") {
@@ -177,7 +180,7 @@ class Comun{
             }
 
             $json = json_encode($row);
-            $this->db->free();
+            $this->free();
             return $json;
         }
     }
@@ -245,13 +248,13 @@ class Comun{
         $query .= " FROM " . $this->tabla;
         $query .= " WHERE " . $this->where;
 
-        $this->db->get($query);
-        if ($this->db->numRows() > 0) {
-            $row = $this->db->fetch();
+        $this->get($query);
+        if ($this->numRows() > 0) {
+            $row = $this->fetch();
             foreach ($row as $key => $value) {
                 $this->$key = $value;
             }
-            $this->db->free();
+            $this->free();
         } else {
             $this->id = false;
         }
@@ -268,9 +271,9 @@ class Comun{
             $q->where("$valores[0]=$valores[1]");
         }
 
-        $this->db->get($q->query());
+        $this->get($q->query());
 
-        while ($row = $this->db->fetch()) {
+        while ($row = $this->fetch()) {
             foreach ($row as $col => $val) {
                 if (gettype($val) == "object" && get_class($val) == "DateTime") {
                     $row->$col = $val->format("d/m/Y");
@@ -279,7 +282,7 @@ class Comun{
             $this->todos[] = $row;
         }
 
-        $this->db->free();
+        $this->free();
 
         return $this->todos;
     }
@@ -334,10 +337,10 @@ class Comun{
     protected function existeTable() {
         $query = "SELECT (CASE COUNT(TABLE_NAME) WHEN 1 THEN 'SI' ELSE 'NO' END) AS existe
  FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = '".$this->tabla."'";
-        $a=$this->db->get($query);
+        $a=$this->get($query);
        
-        $existe = $this->db->fetch();
-        $this->db->free();
+        $existe = $this->fetch();
+        $this->free();
         return $existe->existe;
     }
 
@@ -347,8 +350,7 @@ class Comun{
             $obj = array('modelo'=>get_class($this),'app'=>APP,'entidad'=>$this->tabla,'entidad'=>$this->tabla,'database'=>$this->database);
 
             $msj=All::getMsjException($this->active,'app-model-vacia',$obj);
-
-            $this->debug($msj); // {modelo} {app} {entidad} {database}
+            $this->logError($msj.' '.__CLASS__.' '.__LINE__);
             die("\n".$msj);
         }
     }
@@ -359,7 +361,7 @@ class Comun{
         $query .= " WHERE " . $this->where;
         //echo $query; die();
         $this->get($query);
-        $existe = ($this->db->numRows() > 0);
+        $existe = ($this->numRows() > 0);
         $this->free();
         return $existe && $id;
     }
@@ -395,14 +397,14 @@ class Comun{
     public function debug($msg)
     {
         $sql = "INSERT INTO debug (datos) VALUES ('".$msg."')";
-        $this->db->get($sql);
+        $this->get($sql);
     }
 
     public function grabarLegajosSeleccionados($idFiltro, $legajos) 
     {
         $query = "select isnull(max(idFiltroSel),0) + 1 as idFiltroSel from seleccionfiltro";
-        $this->db->get($query);
-        $row = $this->db->fetch();
+        $this->get($query);
+        $row = $this->fetch();
 
         $idFiltroSel = $row->idFiltroSel;
 
@@ -411,9 +413,9 @@ class Comun{
         for ($i = 0; $i < count($legajos); $i++) {
             $query .= "INSERT INTO seleccionfiltro(idFiltro, idFiltroSel, legajo) values ('" . $idFiltro . "','" . $idFiltroSel . "','" . $legajos[$i] . "'); \n";
         }
-        $this->db->execute_multi($query);
+        $this->execute_multi($query);
 
-        $this->db->free();
+        $this->free();
 
         return $idFiltroSel;
     }
@@ -542,7 +544,7 @@ class Comun{
      * @return objeto $elemento, valores de la entidad
      */
     public function showColumns($entidad,$schema=''){
-        $tmp = $this->db->describe($entidad,$schema);
+        $tmp = $this->describe($entidad,$schema);
         $elemento=(object)$this->executeQuery($tmp);
         return $elemento;
     }

@@ -15,6 +15,7 @@ Gestionar del Generador
                 <div class="box-header">
                     <i class="fa fa-list"></i>
                     <h3 class="box-title">Menu de gesti&oacute;n  de configuraci&oacute;n del modulo de generador<div id="optExtra"></div></h3>
+                    <?php JPH\Core\Http\SegCSRF::getTokenField()?>
                 </div>
                 <div class="box-body pad table-responsive" id="box1">
                     <div class="col-md-6" id="menuPrincipal">
@@ -131,12 +132,10 @@ Gestionar del Generador
     </div>
 </section>
 <?php $this->push('addJs')?>
-<script src="/admin/dist/js/core/config.js"></script>
-<script src="/admin/dist/js/core/gestionTablas.js"></script>
+<script src="<?=JPH\Core\Store\Cache::get('srcJs')?>js/core/config.js"></script>
+<script src="<?=JPH\Core\Store\Cache::get('srcJs')?>js/core/gestionTablas.js"></script>
 <!-- InputMask -->
-<script src="/admin/plugins/input-mask/jquery.inputmask.js"></script>
-<script src="/admin/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-<script src="/admin/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+
 <script type="text/javascript">
     $(function () {
         Config.main();

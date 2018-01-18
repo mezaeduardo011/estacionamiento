@@ -6,11 +6,13 @@ use League\Plates\Engine;
 
 
 /**
- * Clase encargada de procesar la parte de la vista con el sistema
+ * Clase que permite procesar la parte de los templeate del sistema
+ * @namespace JPH\Complements\Template
+ * @extends Composer del paquete Plates
  * @Author: Gregorio Bolívar <elalconxvii@gmail.com>
  * @Author: Blog: <http://gbbolivar.wordpress.com>
  * @Creation Date: 22/08/2017
- * @version: 0.3
+ * @version: 0.4
  */
 class Plate extends Engine
 {
@@ -52,6 +54,7 @@ class Plate extends Engine
         {
                 $this->item = null;
         }
+
         /**
          * Permite agregar datos 
          * @param string $key 

@@ -23,24 +23,11 @@ $breadcrumb=(object)array('actual'=>'Pablo','titulo'=>'Vista de integrada de ges
     <?php $this->insert('view::vistas/prueba/pablo/assent') ?>
     Core.Vista.Util = {}
     Core.Vista.Util = {
-        priListaLoad: function (){ 
-        },
-        priListaClick: function (dataJson){
-        }, 
+        priListaLoad: function (){ },
+        priListaClick: function (dataJson){ },
         priClickProcesarForm: function(){ }, 
-        validateMascaras: function () {
-            var item = true;
-            $.each(Core.Vista.Mascara,function (keys, values) {
-            var expreg = new RegExp(values.mascara);
-            var campo = $('[name="'+values.campo+'"], #'+values.campo).val();
-            if(!expreg.test(campo)) {
-                alertar(values.mensaje,'Validación del campo '+values.campo);
-                $('[name="'+values.campo+'"], #'+values.campo).focus();
-                $('i#help-'+values.campo).html(values.mensaje);
-                    item = false;
-                }
-            });
-            return item;
+        validateMascaras: function (send) {
+            return Core.VistaMascara.main(send);
         }
     };
     $(function () {

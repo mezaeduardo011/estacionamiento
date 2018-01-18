@@ -58,7 +58,7 @@ class SociosController extends Controller
    public function runSociosListar($request)
    {
       // Validar roles de acceso;
-      $this->permisos = 'CONSULTA|CONTROL TOTAL';
+      /*$this->permisos = 'CONSULTA|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
 
       // Bloque de proceso de la grilla
@@ -67,7 +67,20 @@ class SociosController extends Controller
       $valor = array();
       $valor['head']=$result['campos'];
       $valor['rows']=$rows; 
-      $this->json($valor);
+      $this->json($valor);*/
+
+       // Validar roles de acceso;
+       $this->permisos = 'CONSULTA|CONTROL TOTAL';
+       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
+
+       // Bloque de proceso de la grilla
+       $result = $this->formatRows($request->getParameter('obj'));
+
+       // Procesar los datos del modelo para el paginado
+       $rows = $this->hoSociosModel->getSociosListar($request->getParameter(),$result);
+
+       // Exportar el resultado en xml para mostrar los datos
+       $this->xmlGridList($rows);
    }
 
     /**

@@ -43,12 +43,25 @@ class SegRolesController extends Controller
     */ 
    public function runSegRolesListar($request)
    {
-       $result = $this->formatRows($request->getParameter('obj'));
+       /*$result = $this->formatRows($request->getParameter('obj'));
        $rows = $this->hoSegRolesModel->getSegRolesListar($request->getParameter(),$result);
        $valor = array();
        $valor['head']=$result['campos'];
        $valor['rows']=$rows; // return del modelo
-       $this->json($valor);
+       $this->json($valor);*/
+
+       // Validar roles de acceso;
+       $this->permisos = 'CONSULTA|CONTROL TOTAL';
+       //#$this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
+
+       // Bloque de proceso de la grilla
+       $result = $this->formatRows($request->getParameter('obj'));
+
+       // Procesar los datos del modelo para el paginado
+       $rows = $this->hoSegRolesModel->getSegRolesListar($request->getParameter(),$result);
+
+       // Exportar el resultado en xml para mostrar los datos
+       $this->xmlGridList($rows);
    }
 
     /**

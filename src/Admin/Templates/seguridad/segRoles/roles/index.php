@@ -19,17 +19,7 @@ $breadcrumb=(object)array('actual'=>'Roles','titulo'=>'Vista de integrada de ges
 <script>
     var Config = {};
     // Columnas para el grilla
-    Config.colums = [
-        { "id": "detalle", "type":"ed", "align":"left", "sort":"str" , "value":"Detalles" },
-    ];
-    // Configuracion de visualizacion del grilla
-    Config.show = {
-        'module':'Roles',
-        'filter':'#text_filter',
-        'autoWidth': true,
-        'multiSelect': false
-    }
-
+    <?php $this->insert('view::seguridad/segRoles/roles/assent') ?>
 
     Core.Vista.Util = {
         priListaLoad: function () {  },
@@ -45,7 +35,11 @@ $breadcrumb=(object)array('actual'=>'Roles','titulo'=>'Vista de integrada de ges
             $('#sendRolesProcesar #permisos').val(temp[temp2-1].trim())
 
         },
-        priClickProcesarForm:function () {}
+        priClickProcesarForm:function () {},
+        validateMascaras: function () {
+            var item = true;
+            return item;
+        }
     };
     $(function () {
         Core.main();

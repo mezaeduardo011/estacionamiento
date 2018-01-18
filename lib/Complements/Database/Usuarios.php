@@ -1,5 +1,6 @@
 <?php
 namespace JPH\Complements\Database;
+use JPH\Core\Commun\All;
 
 trait Usuarios
 {
@@ -184,6 +185,24 @@ trait Usuarios
         }
     }
 
+    public function obtenerUserRenovar($usuario,$correo)
+    {
+
+            $query = "SELECT * FROM seg_usuarios WHERE usuario='".$usuario."' AND correo = '".$correo."'";
+            $this->db->get($query);
+            $row = $this->db->fetch();
+            $cantRows = $this->db->numRows();
+            if($cantRows>0){
+                foreach ($row as $col => $val) {
+                    if (gettype($val) == "object" && get_class($val) == "DateTime") {
+                        $row->$col = $val->format("d/m/Y");
+                    }
+                }
+            }
+            return $row;
+
+    }
+
     public function obtenerUserLogin($login)
     {
         if ($this->id != 0) {
@@ -217,7 +236,7 @@ trait Usuarios
 
     public function cambiarClave()
     {
-        $query = "UPDATE seg_usuarios SET clave = '" . $this->password . "' WHERE id = " . $this->id;
+        $query = "UPDATE seg_usuarios SET clave = '" . $this->password . "', updated_at = '" . All::now() . "' WHERE id = " . $this->id;
         $this->db->execute($query);
     }
 

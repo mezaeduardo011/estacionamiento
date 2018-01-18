@@ -19,16 +19,9 @@ $breadcrumb=(object)array('actual'=>'Perfil','titulo'=>'Vista de integrada de ge
 <script>
     // Variable de configuracion
     var Config = {};
-
     // Columnas para el grilla
-    Config.colums = [
-        { "id": "detalle", "type":"ed", "align":"left", "sort":"str" , "value":"Detalles" },
-    ];
-    // Configuracion de visualizacion del grilla
-    Config.show = {
-        'module':'Perfil',
-        'filter':'#text_filter'
-    }
+    <?php $this->insert('view::seguridad/segPerfil/perfil/assent') ?>
+
     // Configuración personalizada del entorno privado de la vista
     Core.Vista.Util = {
         priListaLoad: function () {
@@ -41,6 +34,10 @@ $breadcrumb=(object)array('actual'=>'Perfil','titulo'=>'Vista de integrada de ge
         },
         priClickProcesarForm:function () {
 
+        },
+        validateMascaras: function () {
+            var item = true;
+            return item;
         }
     };
 

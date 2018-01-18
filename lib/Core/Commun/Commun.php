@@ -44,7 +44,7 @@ trait Commun
 
     static function now()
     {
-        $fe = date('d/m/Y h:i:s:v');
+        $fe = date('Y-m-d H:i:s:v');
         return $fe;
     }
 
@@ -497,6 +497,8 @@ trait Commun
         return array('select' => $select);
     }
 
+    /*
+     * Permite desencriptar y devolver el objeto de lo valores */
     public static function formatRelacio($obj)
     {
         $str = base64_decode($obj);

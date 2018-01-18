@@ -3,9 +3,10 @@
         <h3 class="box-title">Lista de Estatus</h3>
     </div>
     <div id="Estatus" class="listFiltros">
-    <input type="text" class="search" id="search_nombre" placeholder="Nombre" onKeyDown="Core.VistaGrid.doSearch(arguments[0]||event,'Estatus')">
-    <input type="text" class="search" id="search_color" placeholder="Color" onKeyDown="Core.VistaGrid.doSearch(arguments[0]||event,'Estatus')">
-    <button onClick="Core.VistaGrid.reloadGrid('Estatus')" id="submitButtonEstatus" style="margin-left:30px;">Buscar</button>
+        <input type="text" class="search" id="search_nombre" placeholder="Nombre" onKeyDown="Core.VistaGrid.doSearch(arguments[0]||event,'Estatus')">
+        <input type="text" class="search color" id="search_color" placeholder="Color" onKeyDown="Core.VistaGrid.doSearch(arguments[0]||event,'Estatus')">
+        <button onClick="Core.VistaGrid.reloadGrid('Estatus')" id="submitButtonEstatus" style="margin-left:30px;">Buscar</button>
+        <?php JPH\Core\Http\SegCSRF::getTokenField()?>
     </div>
     <div class="box-body">
         <div id="dataJPHEstatus" class="listGrid"></div>

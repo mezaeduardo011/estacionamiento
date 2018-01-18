@@ -1,10 +1,10 @@
     // Definicion de las variables necesarias para la grilla y validacion de mascaras
     var Config = {};
     Config.colums = [
-        { 'id':'tipo_servicio_id', 'type':'ro', 'align':'left', 'sort':'server', 'value':'tipo_servicio_id', 'widths':'*' },
+        { 'id':'tipo_servicio_id', 'type':'ro', 'align':'left', 'sort':'server', 'value':'Tipo de Servicios', 'widths':'*' },
         { 'id':'descripcion', 'type':'ro', 'align':'left', 'sort':'server', 'value':'descripcion', 'widths':'*' },
         { 'id':'codigo', 'type':'ro', 'align':'left', 'sort':'server', 'value':'codigo', 'widths':'*' },
-        { 'id':'productos_id', 'type':'ro', 'align':'left', 'sort':'server', 'value':'productos_id', 'widths':'*' },
+        { 'id':'productos_id', 'type':'ro', 'align':'left', 'sort':'server', 'value':'Productos', 'widths':'*' },
     ];
 
     // Configuracion de visual de la grilla
@@ -24,23 +24,58 @@
         "value": ""
     }
 
-    Core.Vista.Select = {
-        priListaLoad: function (){ 
+    Productoss = {}
+    Productoss = {
+        loadListaMenu: function (){ 
             // Configurar de los campos tipo_estatus--estatus--id ';
-            var html1 = '<option>Seleccionar</option>';
-            $.post("/getEntidadComun",{"tipo":"combo","tabla_vista":"tipo_estatus--estatus--id","vista_campo":"color|nombre","cart_separacion":"-"},function(dataJson){
-                $.each(dataJson.datos,function(key,value){
-                html1 += '<option value="'+value.id+'">'+value.nombre+'</option>;'
-                });
-                $(".tipo_estatus--estatus--id").html(html1)
+
+            var html1 = '<option value=" ">Seleccionar</option>';
+            $.ajax({
+              url: '/getEntidadComun',
+              type: "POST",
+              headers: {
+                       'X-Auth-Token' : $('#csrf_token').val()
+              },
+              data: {"tipo":"combo","tabla_vista":"tipo_estatus--estatus--id","vista_campo":"color|nombre","cart_separacion":"-"},
+              dataType: 'JSON',
+              success : function(dataJson) {
+                 $.each(dataJson.datos,function(key,value){
+                        html1 += '<option value="'+value.id+'">'+value.nombre+'</option>;'
+                 });
+                 var data = sessionStorage.getItem(".tipo_estatus--estatus--id");
+                 var cant = $(".tipo_estatus--estatus--id option").length;
+                 if(data == typeof null){
+                     sessionStorage.setItem(".tipo_estatus--estatus--id",window.btoa(html4));
+                     $(".tipo_estatus--estatus--id").html(html1);
+                 }else if(cant < 2 ){
+                     $(".tipo_estatus--estatus--id").html(html1);
+                 }
+              }
             });
             // Configurar de los campos productos--productoss--id ';
-            var html4 = '<option>Seleccionar</option>';
-            $.post("/getEntidadComun",{"tipo":"combo","tabla_vista":"productos--productoss--id","vista_campo":"descripcion","cart_separacion":" "},function(dataJson){
-                $.each(dataJson.datos,function(key,value){
-                html4 += '<option value="'+value.id+'">'+value.nombre+'</option>;'
-                });
-                $(".productos--productoss--id").html(html4)
+
+            var html4 = '<option value=" ">Seleccionar</option>';
+            $.ajax({
+              url: '/getEntidadComun',
+              type: "POST",
+              headers: {
+                       'X-Auth-Token' : $('#csrf_token').val()
+              },
+              data: {"tipo":"combo","tabla_vista":"productos--productoss--id","vista_campo":"descripcion","cart_separacion":" "},
+              dataType: 'JSON',
+              success : function(dataJson) {
+                 $.each(dataJson.datos,function(key,value){
+                        html4 += '<option value="'+value.id+'">'+value.nombre+'</option>;'
+                 });
+                 var data = sessionStorage.getItem(".productos--productoss--id");
+                 var cant = $(".productos--productoss--id option").length;
+                 if(data == typeof null){
+                     sessionStorage.setItem(".productos--productoss--id",window.btoa(html4));
+                     $(".productos--productoss--id").html(html4);
+                 }else if(cant < 2 ){
+                     $(".productos--productoss--id").html(html4);
+                 }
+              }
             });
         },
      }
@@ -55,3 +90,4 @@ foreach ($dataJson->mascaras AS $key => $val){
 }
 ?>
 ];
+    Productoss.loadListaMenu();

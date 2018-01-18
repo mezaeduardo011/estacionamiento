@@ -81,8 +81,7 @@ class RouterGenerator
                             $this->logError($msj);
                             throw new \TypeError($msj);
                         }
-                        // Validar XSRF-TOKEN
-                    //print_r(getallheaders());
+
                     // Verificamossi el method es POST
                     }elseif($this->petition==ALL::METHOD_POST AND $this->req->REQUEST_METHOD==ALL::METHOD_POST){
                         if(method_exists($obj,$mthod)) {

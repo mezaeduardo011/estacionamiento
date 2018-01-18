@@ -73,6 +73,7 @@ trait Db  {
             break;
 
         }
+
         return $this;
     }
     /**

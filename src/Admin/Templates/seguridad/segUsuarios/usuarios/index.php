@@ -23,29 +23,13 @@ $breadcrumb=(object)array('actual'=>'Usuarios','titulo'=>'Vista de integrada de 
      // Variable de configuracion
     var Config = {};
     // Columnas para el grilla
-    Config.colums = [
-        { "id":"nombres", "type":"ed", "align":"center", "sort":"str" , "value":"Nombres"},
-        { "id":"apellidos", "type":"ed", "align":"center", "sort":"str" , "value":"Apellidos"},
-        { "id":"fech_nacimiento", "type":"ed", "align":"center", "sort":"str" , "value":"Nacimiento"},
-        { "id":"correo", "type":"ed", "align":"center", "sort":"str" , "value":"Correo"},
-        { "id":"usuario", "type":"ed", "align":"center", "sort":"str" , "value":"Login"},
-        { "id":"telefono", "type":"ed", "align":"center", "sort":"str" , "value":"telefono"},
-    ];
-
-    // Configuracion de visualizacion del grilla
-    Config.show = {
-        'module':'Usuarios',
-        'tableTitle':'Listado de Registros.',
-        'filter':'#text_filter,#text_filter,&nbsp;,&nbsp;,#text_filter',
-        'autoWidth': true,
-        'multiSelect': false
-    };
+     <?php $this->insert('view::seguridad/segUsuarios/usuarios/assent') ?>
 
     Core.Vista.Util = {
         priListaLoad: function () {
         },
         priListaClick: function (dataJson) {
-            /* Funcionalidad adicional para la vista en la parte de listar*/
+            /* Funcionalidad adicional para la vista en la parte del perfil*/
             if(typeof dataJson.perfiles != "undefined"){
                 var perfil = dataJson.perfiles.length;
                 $("#roles option").prop("selected",false);
@@ -64,6 +48,10 @@ $breadcrumb=(object)array('actual'=>'Usuarios','titulo'=>'Vista de integrada de 
         },
         priClickProcesarForm:function () {
 
+        },
+        validateMascaras: function () {
+            var item = true;
+            return item;
         },
         modalAuditoria:function () {
             $('#mostrarAuditoriaDelPerfil').on('click',function(){

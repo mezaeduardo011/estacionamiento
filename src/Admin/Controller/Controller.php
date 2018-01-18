@@ -28,10 +28,12 @@ class Controller extends All
      * @param Request $request, Request con los parametros enviados
      * @return Bool $resultado
      */
-    public function runValidarMascarasVista($vista,$request)
+    public function runValidarMascarasVista($carpeta,$vista,$request)
     {
         $resultado = true;
-        $tmp = file_get_contents(__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'Templates'.DIRECTORY_SEPARATOR.'vistas'.DIRECTORY_SEPARATOR.'prueba'.DIRECTORY_SEPARATOR.$vista.DIRECTORY_SEPARATOR.'mascaras.json');
+        $carpeta = str_replace(array('vistas/','/'),array('',''),$carpeta);
+        $files = __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'Templates'.DIRECTORY_SEPARATOR.'vistas'.DIRECTORY_SEPARATOR.$carpeta.DIRECTORY_SEPARATOR.$vista.DIRECTORY_SEPARATOR.'mascaras.json';
+        $tmp = file_get_contents($files);
         $data = json_decode($tmp);
         $temp = (array)$request;
         foreach ($data->mascaras AS $key=>$value){

@@ -42,6 +42,9 @@ $breadcrumb=(object)array('actual'=>'Usuarios','titulo'=>'Vista de integrada de 
         },
         priClickProcesarForm:function () {
 
+        },
+        validateMascaras: function () {
+            var item = true;
         }
     };
     $(function () {

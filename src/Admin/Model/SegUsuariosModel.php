@@ -42,58 +42,70 @@ class SegUsuariosModel extends Base
      */
    public function getSegUsuariosListar($request,$result)
    {
-       //define variables from incoming values
-       if(isset($request->posStart))
+       // Variables definidas para del paginador
+       $limit = 100;
+       if(isset($request->posStart)){
            $posStart = $request->posStart;
-       else
+       }else{
            $posStart = 0;
-       if(isset($request->count))
-           $count = $request->count;
-       else
-           $count = 100;
+       }
+
+       if(isset($request->count)){
+           $count = $request->posStart+$limit;
+       }else{
+           $count = $limit;
+       }
+
+       // Permite identificar hay una definicion de busqueda de algun campo mediante el search
+       $search= '';
+       foreach ($request AS $key=>$value){
+           if(\preg_match('/search_\w/',$key) AND !empty($value)){
+               $campo = str_replace('search_','', $key);
+               $search.= " AND $campo like '%$value%'";
+           }
+       }
+
+       // Variables definidas para el ordenamiento DESC y ASC
+       $order = '';
+       $by = '';
+       if(!empty($request->orderBy) AND $request->orderBy!='undefined'){
+           $tmp = $this->campos[$request->orderBy];
+           if (!isset($request->direction) || $request->direction=="asc") {
+               $by = 'ASC';
+               $order = " ORDER BY $tmp ".$by;
+           }else {
+               $by = 'DESC';
+               $order = " ORDER BY $tmp ".$by;
+           }
+       }
+
+       // Elemento cuando hay relacion
+       $relation = All::formatRelacio(@$request->relacion);
+       if(!empty($relation[2])){
+           $search.="  AND $relation[1]=$relation[2]";
+       }
 
        // Primero extraer la cantidad de registros
-       $sqlCount = "Select count(*) as items FROM ".$this->tabla;
+       $sqlCount = "Select count(*) as items FROM ".$this->tabla.' WHERE 0=0 '.$search ;
        $resCount = $this->executeQuery($sqlCount);
-
        //create query to products table
-       $sql = implode(',', $result['select']).", id FROM ".$this->tabla;
-
+       $sql = implode(',', $result['select']).", ".$this->campoid[0]." FROM ".$this->tabla.' WHERE 0=0 '.$search ;
        //if this is the first query - get total number of records in the query result
-       $sqlCount = "SELECT * FROM (
-				SELECT ROW_NUMBER() OVER( ORDER BY id ASC ) AS row, ".$resCount[0]->items." AS cnt, $sql ) AS sub";
+       $sqlCount = "SELECT * FROM (SELECT ROW_NUMBER() OVER( ORDER BY ".$this->campoid[0]." ".$by." ) AS row, ".$resCount[0]->items." AS cnt, $sql ) AS sub";
        $resQuery = $this->get($sqlCount);
        $rowCount =  $this->fetch();
-
-       $totalCount = $rowCount->cnt;
-
+       $totalCount = (empty($rowCount->cnt))?0:$rowCount->cnt;
        //add limits to query to get only rows necessary for the output
        $sqlCount.= " WHERE row>=".$posStart." AND row<=".$count;
+       $sqlCount.= $order;
 
-       $sqlCount;
-
-       $res = $this->get($sqlCount);
-
-       //output data in XML format
+       // Definir las variables para el uso para el XML
        $items = array();
-       while($row=$this->fetch($res)){
-           $tmp['id'] = $row->id;
-           $tep = array();
-           foreach ($row as $key => $value) {
-               foreach ($row as $col => $val) {
-                   if (gettype($val) == "object" && get_class($val) == "DateTime") {
-                       $row->$col = $val->format("d/m/Y");
-                   }
-               }
-               if($key!='id' AND $key!='cnt' AND $key!='row'){
-                   $tep[] = $value;
-               }
-           }
+       $items['data'] = $this->executeQuery($sqlCount);
+       $items['totalCount'] = (isset($request->posStart))?'':$totalCount;
+       $items['posStart'] = $posStart;
 
-           $tmp['data'] = $tep;
-           array_push($items,$tmp);
-       }
-     return $items;
+       return $items;
    }
 
     /**
@@ -103,7 +115,6 @@ class SegUsuariosModel extends Base
     */ 
    public function setSegUsuariosCreate($datos)
    {
-       //print_r();
        $roles = $datos->roles;
        unset($datos->roles);
 
@@ -186,15 +197,17 @@ class SegUsuariosModel extends Base
    public function reCargarRoles($id)
    {
        $query = "select  roles from view_seguridad WHERE id = ".$id;
-       $this->db->get($query);
+       /*$this->db->get($query);
        $rows = $this->db->numRows();
        
        if ($rows > 0) {
            while ($row = $this->db->fetch()) {
                $this->roles[] = $row->roles;
            }
-       }
-       return $this->roles;
+       }*/
+       $roles = $this->executeQuery($query);
+       return $roles;
+       //return $this->roles;
    }
    
    /**

@@ -23,7 +23,8 @@ Home del Sistema Hornero
 <!-- Notificciones toastr -->
 <script type="text/javascript">
     informar('Bienvenido al Sistema','Bienvenido');
-    Core.Menu.main();
+    Core.main();
     Core.Teclado.main();
+    Core.Autologout.main();
 </script>
 <?php $this->end()?>

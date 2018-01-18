@@ -18,6 +18,7 @@ use JPH\Core\Commun\{Constant,Security};
 
 class GestionarController extends Controller
 {
+    use Security;
     public $session;
     public $model;
     public $hoConexionesModel;
@@ -28,7 +29,6 @@ class GestionarController extends Controller
     public $segUsuariosModel;
     public $result;
     public $pathActivo;
-    use Security;
 
     public function __construct()
    {
@@ -131,6 +131,7 @@ class GestionarController extends Controller
     public function runConfiguracionConexiones($request)
     {
         $this->verificarConfiguracionDataBase();
+
         if(empty(@$request->postParameter('conexion'))) {
             $dataJson['data'] = $schema=$this->hoConexionesModel->getExtraerConexiones();
             $dataJson['items'] = count($schema);

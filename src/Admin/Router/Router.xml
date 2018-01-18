@@ -71,29 +71,61 @@
     <request>POST</request>
   </link>
   <!-- Bloque de encargado de gestionar las parte de inicio de session -->
+  <!-- Permite mostrar el formulario de login -->
   <link>
     <name>/login</name>
     <controller>login</controller>
     <method>runIndex</method>
     <request>GET</request>
   </link>
+  <!-- Permite cerrar la sesion activa -->
   <link>
     <name>/logout</name>
     <controller>login</controller>
     <method>runLogout</method>
     <request>GET</request>
   </link>
+  <!--  Permite mostrar el boquedo de pantalla -->
   <link>
     <name>/lockscreen</name>
     <controller>login</controller>
     <method>runLockscreen</method>
     <request>GET</request>
   </link>
+  <!-- Permite recibir el post del login -->
   <link>
     <name>/loginPost</name>
     <controller>login</controller>
     <method>runIndexPost</method>
     <request>POST</request>
+  </link>
+  <!-- Permite mostrar el formulario de recuperar clave-->
+  <link>
+    <name>/recuperarClave</name>
+    <controller>login</controller>
+    <method>runRecuperarClave</method>
+    <request>GET</request>
+  </link>
+  <!-- Permite recibir peticion post de usuario para recuperar clave -->
+  <link>
+    <name>/recuperarPost</name>
+    <controller>login</controller>
+    <method>runRecuperarClavePost</method>
+    <request>POST</request>
+  </link>
+  <!-- Permite recibir peticion post de usuario para recuperar clave ya cambiada -->
+  <link>
+    <name>/recuperarPostNew</name>
+    <controller>login</controller>
+    <method>runRecuperarClavePostNew</method>
+    <request>POST</request>
+  </link>
+  <!-- Mostrar el formato del correo para recuperar clave-->
+  <link>
+    <name>/recuperarClaveToken</name>
+    <controller>login</controller>
+    <method>runRecuperarRecibirToken</method>
+    <request>GET</request>
   </link>
   <!-- Bloque de encargado de las configuraciones del generador -->
   <link>
@@ -118,7 +150,7 @@
     <name>/getListApp</name>
     <controller>gestionar</controller>
     <method>runGetListApp</method>
-    <request>POST</request>
+    <request>GET</request>
   </link>
   <link>
     <name>/getConfiguracionVista</name>
@@ -280,7 +312,7 @@
     <request>GET</request>
   </link>
   <link>
-    <name>/usuariosSegLogLogin</name>
+    <name>/usuariosseglogloginListar</name>
     <controller>segUsuarios</controller>
     <method>runSegLogAutenticacion</method>
     <request>GET</request>
@@ -322,13 +354,19 @@
     <request>GET</request>
   </link>
   <link>
+    <name>/getMetricaLog</name>
+    <controller>segUsuarios</controller>
+    <method>runLogMetrica</method>
+    <request>POST</request>
+  </link>
+  <link>
     <name>/showAccionesAuditoria</name>
     <controller>segUsuarios</controller>
     <method>runShowAccionesAuditoria</method>
     <request>POST</request>
   </link>
   <link>
-    <name>/usuariosShowAcciones</name>
+    <name>/usuariosshowaccionesListar</name>
     <controller>segUsuarios</controller>
     <method>runSegUsuariosShowAcciones</method>
     <request>GET</request>
@@ -653,6 +691,154 @@
     <name>/sociosUpdate</name>
     <controller>socios</controller>
     <method>runSociosUpdate</method>
+    <request>POST</request>
+  </link>
+  <!-- Bloque de configuracion de la ruta del controller Padreehijo-->
+  <link>
+    <name>/padreehijoIndex</name>
+    <controller>productos</controller>
+    <method>runProductosIndex</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/padreehijoListar</name>
+    <controller>productos</controller>
+    <method>runProductosListar</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/padreehijoCreate</name>
+    <controller>productos</controller>
+    <method>runProductosCreate</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/padreehijoShow</name>
+    <controller>productos</controller>
+    <method>runProductosShow</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/padreehijoDelete</name>
+    <controller>productos</controller>
+    <method>runProductosDelete</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/padreehijoUpdate</name>
+    <controller>productos</controller>
+    <method>runProductosUpdate</method>
+    <request>POST</request>
+  </link>
+  <!-- Bloque de configuracion de la ruta del controller Buscarhijo-->
+  <link>
+    <name>/buscarhijoIndex</name>
+    <controller>tipoServicio</controller>
+    <method>runTipoServicioIndex</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/buscarhijoListar</name>
+    <controller>tipoServicio</controller>
+    <method>runTipoServicioListar</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/buscarhijoCreate</name>
+    <controller>tipoServicio</controller>
+    <method>runTipoServicioCreate</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/buscarhijoShow</name>
+    <controller>tipoServicio</controller>
+    <method>runTipoServicioShow</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/buscarhijoDelete</name>
+    <controller>tipoServicio</controller>
+    <method>runTipoServicioDelete</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/buscarhijoUpdate</name>
+    <controller>tipoServicio</controller>
+    <method>runTipoServicioUpdate</method>
+    <request>POST</request>
+  </link>
+  <!-- Bloque de configuracion de la ruta del controller Canino-->
+  <link>
+    <name>/caninoIndex</name>
+    <controller>perro</controller>
+    <method>runPerroIndex</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/caninoListar</name>
+    <controller>perro</controller>
+    <method>runPerroListar</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/caninoCreate</name>
+    <controller>perro</controller>
+    <method>runPerroCreate</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/caninoShow</name>
+    <controller>perro</controller>
+    <method>runPerroShow</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/caninoDelete</name>
+    <controller>perro</controller>
+    <method>runPerroDelete</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/caninoUpdate</name>
+    <controller>perro</controller>
+    <method>runPerroUpdate</method>
+    <request>POST</request>
+  </link>
+  <!-- Bloque de configuracion de la ruta del controller Procesadores-->
+  <link>
+    <name>/procesadoresIndex</name>
+    <controller>procesador</controller>
+    <method>runProcesadorIndex</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/procesadoresListar</name>
+    <controller>procesador</controller>
+    <method>runProcesadorListar</method>
+    <request>GET</request>
+  </link>
+  <link>
+    <name>/procesadoresCreate</name>
+    <controller>procesador</controller>
+    <method>runProcesadorCreate</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/procesadoresShow</name>
+    <controller>procesador</controller>
+    <method>runProcesadorShow</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/procesadoresDelete</name>
+    <controller>procesador</controller>
+    <method>runProcesadorDelete</method>
+    <request>POST</request>
+  </link>
+  <link>
+    <name>/procesadoresUpdate</name>
+    <controller>procesador</controller>
+    <method>runProcesadorUpdate</method>
     <request>POST</request>
   </link>
 </route>

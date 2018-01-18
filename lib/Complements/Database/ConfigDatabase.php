@@ -4,11 +4,13 @@ namespace JPH\Complements\Database;
  * Configuracion de las conexiones bb Hornero 4
  * @propiedad: Hornero 4
  * @utor: Gregorio Bolivar <elalconxvii@gmail.com>
- * @created: 14/12/2017
+ * @created: 18/01/2018
  * @version: 1.0
  */ 
+
 trait ConfigDatabase
 {
+
   public $motor;
   public $host;
   public $port;
@@ -16,7 +18,6 @@ trait ConfigDatabase
   public $user;
   public $pass;
   public $encoding;
-
   function __construct()
   {
    $this->motor;
@@ -34,7 +35,7 @@ trait ConfigDatabase
    // Driver de Conexion con la de base de datos
    $this->motor = 'sql';
    // IP o HOST de comunicacion con el servidor de base de datos
-    $this->host = '192.168.169.124';
+    $this->host = 'localhost';
    // Puerto de comunicacion con el servidor de base de datos
    $this->port = '3305';
    // Nombre base de datos
@@ -48,7 +49,6 @@ trait ConfigDatabase
    return $this;
   }
   /** Fin del caso del method de default */
-
   /** Inicio  del method  de admin  */
   public function admin()
   {
@@ -70,4 +70,5 @@ trait ConfigDatabase
   }
   /** Fin del caso del method de admin */
 }
+
 ?>

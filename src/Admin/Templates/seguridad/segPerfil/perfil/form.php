@@ -4,7 +4,7 @@
 </div>
 <!-- /.box-header -->
 <!-- form start -->
-<form role="form" method="post" id="sendPerfilProcesar" enctype="multipart/form-data">
+<form role="form" method="post" id="sendPerfilProcesar" class="Perfil" enctype="multipart/form-data">
    <div class="box-body">
 <input type="hidden" id="id" name="id">
 <div class="form-group">

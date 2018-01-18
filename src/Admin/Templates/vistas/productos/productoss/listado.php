@@ -7,7 +7,8 @@
     <input type="text" class="search" id="search_descripcion" placeholder="Descripcion" onKeyDown="Core.VistaGrid.doSearch(arguments[0]||event,'Productoss')">
     <input type="text" class="search" id="search_codigo" placeholder="Codigo" onKeyDown="Core.VistaGrid.doSearch(arguments[0]||event,'Productoss')">
     <input type="text" class="search" id="search_productos_id" placeholder="ProductosId" onKeyDown="Core.VistaGrid.doSearch(arguments[0]||event,'Productoss')">
-    <button onClick="Core.VistaGrid.reloadGrid('Productoss')" id="submitButtonProductoss" style="margin-left:30px;">Buscar</button>
+        <button onClick="Core.VistaGrid.reloadGrid('Productoss')" id="submitButtonProductoss" style="margin-left:30px;">Buscar</button>
+        <?php JPH\Core\Http\SegCSRF::getTokenField(); ?>
     </div>
     <div class="box-body">
         <div id="dataJPHProductoss" class="listGrid"></div>

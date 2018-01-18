@@ -7,8 +7,8 @@ use JPH\Core\Commun\{All,SimpleXMLExtended};
  * @Author: Ing. Gregorio Bolívar <elalconxvii@gmail.com>
  * @Author: Blog: <http://gbbolivar.wordpress.com>
  * @created Date: 09/08/2017
- * @updated Date: 16/09/2017
- * @version: 5.0.5
+ * @updated Date: 20/12/2017
+ * @version: 6.0
  */
 
 
@@ -38,7 +38,6 @@ class AppCrudVista extends App
        // echo 'App:'.$app.'--,Crud:'.$crud.'--,tabla:'.$tabla; //die();
         foreach ($campos AS $key=>$value)
         {
-            //print_r($campos);
             if($key==0){
                 $campos['entida'] = @$value->entidad;
                 $campos['vista'] = @$value->nombre;
@@ -76,10 +75,9 @@ class AppCrudVista extends App
 
             //$temp1[]=$value->label;
         }
+
         // Permite quitar los indices repetidos
         $campRealEnti['campos'] = array_unique($temp);
-
-        //print_r($campRealEnti); die();
 
         $this->app = All::upperCase($app);
         $ruta = $this->pathapp.$app.All::APP_CONTR;
@@ -98,17 +96,15 @@ class AppCrudVista extends App
             $rutaVista = 'vistas'.'/'.ALL::cameCase($tabla).'/'.strtolower($crud);
             $rutaVistaD = 'vistas'.'/'.ALL::cameCase($tabla).'/';
 
-           // print_r($app);
-
-            // Verificar si existe el controllador que se va a generar en el momento
-            //die();
+            // Verificar si existe el controllador de lo contrario se va a generar en el momento
             $archivoController = $rutaApp.All::APP_CONTR.DIRECTORY_SEPARATOR."".$entidad."Controller.php";
             if (file_exists($archivoController)) {
                 $msj=Interprete::getMsjConsole($this->active,'app:crud-existe');
             }else{
                 self::createFileReadControllerCRUD($archivoController,$this->app,$entidad,$campos,$rutaVistaD);
             }
-            // Verificar si existe modelo $ruta."Model.php"
+
+            // Verificar si existe modelo de lo contrario se genera en el momento
             $archivoModel = $rutaApp.All::APP_MODEL.DIRECTORY_SEPARATOR."".$entidad."Model.php";
             if (file_exists($archivoModel)) {
                 $msj=Interprete::getMsjConsole($this->active,'app:crud-existe');
@@ -116,7 +112,8 @@ class AppCrudVista extends App
             }else{
                self::createFileModelCRUD($archivoModel,$this->app,$entidad,$campRealEnti);
             }
-            // Verificar si existe el Router.xml
+
+            // Verificar si existe el Router.xml de lo contrario se genera al momento
             $archivoRoute = $rutaApp.All::APP_ROUTE.DIRECTORY_SEPARATOR."Router.xml";
             $existe = self::existsRuta($archivoRoute,$crud);
             if ($existe) {
@@ -124,20 +121,51 @@ class AppCrudVista extends App
             }else{ ///'.strtolower($controller).'
                 self::createNewRutaXmlCRUD($archivoRoute,$controller,$tabla);
             }
-            // Permite crear la carpeta donde estará la vistas generadas
-            //self::createDirViews($rutaPadre,$rutaHija);
 
-            // Permite crear los archivos necesarios de la vista en especifico
+            // Permite crear la carpeta donde estará la vistas generada si no existe
+            self::createDirViews($rutaPadre,$rutaHija);
+
+            // Permite crear los archivos necesarios de la vista que se procesara en el moment
+
             // Generacion del Index
-            self::createFileViewIndex($rutaHija, $campos, $rutaVista, $requerido);
-            // Generacion del Assent
-            //self::createFileViewAssent($rutaHija, $campos, $rutaVista, $requerido);
-            // Generacion del Form
-            //self::createFileViewForm($rutaHija, $campos, $requerido);
+            $fileViewIndex = $rutaHija . DIRECTORY_SEPARATOR . "index.php";
+            if (file_exists($fileViewIndex)) {
+                $msj=Interprete::getMsjConsole($this->active,'app:crud-existe');
+            }else{
+                self::createFileViewIndex($fileViewIndex, $campos, $rutaVista, $requerido);
+            }
+
+            // Generacion del Assent donde esta las configuraciones de la grid y los valores de la vista
+            $fileViewAssent = $rutaHija . DIRECTORY_SEPARATOR . "assent.php";
+            if (file_exists($fileViewAssent)) {
+                $msj=Interprete::getMsjConsole($this->active,'app:crud-existe');
+            }else{
+                self::createFileViewAssent($fileViewAssent, $campos, $rutaVista, $requerido);
+            }
+
+            // Generacion del Form donde esta la configuración de los campos del formulario
+            $fileViewForm = $rutaHija.DIRECTORY_SEPARATOR."form.php";
+            if (file_exists($fileViewForm)) {
+                $msj=Interprete::getMsjConsole($this->active,'app:crud-existe');
+            }else{
+                self::createFileViewForm($fileViewForm, $campos, $requerido);
+            }
+
             // Generacion del Listado
-            //self::createFileViewListado($rutaHija, $campos, $campRealEnti);
+            $fileViewListado = $rutaHija.DIRECTORY_SEPARATOR."listado.php";
+            if (file_exists($fileViewListado)) {
+                $msj=Interprete::getMsjConsole($this->active,'app:crud-existe');
+            }else{
+                self::createFileViewListado($fileViewListado, $campos, $campRealEnti);
+            }
+
             // Generacion del Json ecargado de procesar las mascaras
-            //self::createFileViewJsonMascaras($rutaHija, $mascaras);
+            $fileViewJsonMascaras = $rutaHija.DIRECTORY_SEPARATOR."mascaras.json";
+            if (file_exists($fileViewJsonMascaras)) {
+                $msj=Interprete::getMsjConsole($this->active,'app:crud-existe');
+            }else{
+                self::createFileViewJsonMascaras($fileViewJsonMascaras, $mascaras);
+            }
 
             //$msj=Interprete::getMsjConsole($this->active,'app:crud-creado');
 
@@ -257,7 +285,7 @@ class AppCrudVista extends App
         fputs($ar, '      $this->permisos = \'ALTA|CONTROL TOTAL\';'.PHP_EOL);
         fputs($ar, '      $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);'.PHP_EOL.PHP_EOL);
         fputs($ar, '      // Verificar las mascaras'.PHP_EOL);
-        fputs($ar, '      parent::runValidarMascarasVista($this->pathVista(),$request->postParameter());'.PHP_EOL.PHP_EOL);
+        fputs($ar, '      parent::runValidarMascarasVista(\''.$rutaVista.'\', $this->pathVista(),$request->postParameter());'.PHP_EOL.PHP_EOL);
         fputs($ar, '      $result = $this->ho'.$controller.'Model->set'.$controller.'Create($request->postParameter());'.PHP_EOL);
         fputs($ar, '      if(is_null($result)){'.PHP_EOL);
         fputs($ar, '        $dataJson[\'error\']=\'1\';'.PHP_EOL);
@@ -315,7 +343,7 @@ class AppCrudVista extends App
         fputs($ar, '      $this->permisos = \'MODIFICACION|CONTROL TOTAL\';'.PHP_EOL);
         fputs($ar, '      $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);'.PHP_EOL.PHP_EOL);
         fputs($ar, '      // Verificar las mascaras'.PHP_EOL);
-        fputs($ar, '      parent::runValidarMascarasVista($this->pathVista(),$request->postParameter());'.PHP_EOL.PHP_EOL);
+        fputs($ar, '      parent::runValidarMascarasVista(\''.$rutaVista.'\',$this->pathVista(),$request->postParameter());'.PHP_EOL.PHP_EOL);
         fputs($ar, '      $result = $this->ho'.$controller.'Model->set'.$controller.'Update($request->postParameter());'.PHP_EOL);
         fputs($ar, '      if(is_null($result)){'.PHP_EOL);
         fputs($ar, '        $dataJson[\'error\']=\'0\';'.PHP_EOL);
@@ -355,7 +383,7 @@ class AppCrudVista extends App
         fputs($ar, ' * @propiedad: '.All::FW.' '.All::VERSION.''.PHP_EOL);
         fputs($ar, ' * @autor: Ing. Gregorio Bolivar <elalconxvii@gmail.com>'.PHP_EOL);
         fputs($ar, ' * @created: ' .date('d/m/Y') .''.PHP_EOL);
-        fputs($ar, ' * @version: 1.0'.PHP_EOL);
+        fputs($ar, ' * @version: 2.0'.PHP_EOL);
         fputs($ar, ' */ '.PHP_EOL.PHP_EOL);
 
         fputs($ar, "class ". $modelo."Model extends Base".PHP_EOL);
@@ -427,9 +455,18 @@ class AppCrudVista extends App
 
         fputs($ar, '        // Elemento cuando hay relacion'.PHP_EOL);
         fputs($ar, '         $relation = All::formatRelacio(@$request->relacion);'.PHP_EOL);
-        fputs($ar, '         if(!empty($relation[2])){'.PHP_EOL);
-        fputs($ar, '            $search.="  AND $relation[1]=$relation[2]";'.PHP_EOL);
+        fputs($ar, '         if(!empty($relation[0])){'.PHP_EOL);
+        fputs($ar, '            foreach ($relation AS $option) {'.PHP_EOL);
+        fputs($ar, '                $search.="  AND $option";'.PHP_EOL);
+        fputs($ar, '            }'.PHP_EOL);
         fputs($ar, '         }'.PHP_EOL.PHP_EOL);
+
+        // Elemento cuando hay relacion
+        $relation = All::formatRelacio(@$request->relacion);
+        //($relation); die();
+        if(!empty($relation[0])){
+            $search.="  AND $relation[0]";
+        }
 
         fputs($ar, '         // Primero extraer la cantidad de registros'.PHP_EOL);
         fputs($ar, '         $sqlCount = "Select count(*) as items FROM ".$this->tabla.\' WHERE 0=0 \'.$search ;'.PHP_EOL);
@@ -475,7 +512,7 @@ class AppCrudVista extends App
         fputs($ar, '     $val = $this->lastId();'.PHP_EOL.PHP_EOL);
         fputs($ar, '    // Registra log de auditoria de registro de acciones'.PHP_EOL);
         fputs($ar, '    $user = $this->getSession(\'usuario\');'.PHP_EOL);
-        fputs($ar, '    $this->segLogAccionesModel->cargaAcciones($this->tabla, \'id\',serialize($datos),\'\', $val, parent::LOG_ALTA);'.PHP_EOL);
+        fputs($ar, '    $this->segLogAccionesModel->cargaAcciones($this->tabla, $val,serialize($datos),\'\', $user->id, parent::LOG_ALTA);'.PHP_EOL);
         fputs($ar, '     return $val;'.PHP_EOL);
         fputs($ar, '   }'.PHP_EOL.PHP_EOL);
 
@@ -551,174 +588,189 @@ class AppCrudVista extends App
      */
 
     private function createNewRutaXmlCRUD(string $archivoRoute, string $controller, string $tabla)
-{
-    $router = new SimpleXMLExtended($archivoRoute, null, true) or die("Problemas en la creaci&oacute;n del router del apps Router.xml");
-    $router->addComentario(' Bloque de configuracion de la ruta del controller '.ucfirst($controller));
-    // Listar registro
-    $personaje = $router->addChild('link');
-    $personaje->addChild('name', '/'.strtolower($controller).'Index');
-    $personaje->addChild('controller', All::cameCase($tabla));
-    $personaje->addChild('method', 'run'.All::upperCase($tabla).'Index');
-    $personaje->addChild('request', 'GET');
-    //
-    $personaje = $router->addChild('link');
-    $personaje->addChild('name', '/'.strtolower($controller).'Listar');
-    $personaje->addChild('controller', All::cameCase($tabla));
-    $personaje->addChild('method', 'run'.All::upperCase($tabla).'Listar');
-    $personaje->addChild('request', 'GET');
-
-    $personaje = $router->addChild('link');
-    $personaje->addChild('name', '/'.strtolower($controller).'Create');
-    $personaje->addChild('controller', All::cameCase($tabla));
-    $personaje->addChild('method', 'run'.All::upperCase($tabla).'Create');
-    $personaje->addChild('request', 'POST');
-
-    $personaje = $router->addChild('link');
-    $personaje->addChild('name', '/'.strtolower($controller).'Show');
-    $personaje->addChild('controller', All::cameCase($tabla));
-    $personaje->addChild('method', 'run'.All::upperCase($tabla).'Show');
-    $personaje->addChild('request', 'POST');
-
-    $personaje = $router->addChild('link');
-    $personaje->addChild('name', '/'.strtolower ($controller).'Delete');
-    $personaje->addChild('controller', All::cameCase($tabla));
-    $personaje->addChild('method', 'run'.All::upperCase($tabla).'Delete');
-    $personaje->addChild('request', 'POST');
-
-    $personaje = $router->addChild('link');
-    $personaje->addChild('name', '/'.strtolower($controller).'Update');
-    $personaje->addChild('controller', All::cameCase($tabla));
-    $personaje->addChild('method', 'run'.All::upperCase($tabla).'Update');
-    $personaje->addChild('request', 'POST');
-    $router->asXML($archivoRoute);
-    $router->formatXml($archivoRoute);
-}
-
-    private function createFileViewIndex($rutaHija, $campos, $rutaVista, $requerido)
     {
-    $ar = fopen($rutaHija . DIRECTORY_SEPARATOR . "index.php", "w+") or die("Problemas en la creaci&oacute;n del view index.php");
-    // Inicio la escritura en el activo
-    fputs($ar, '<?php' . PHP_EOL);
-    fputs($ar, '$breadcrumb=(object)array(\'actual\'=>\'' . ALL::upperCase($campos['vista']) . '\',\'titulo\'=>\'Vista de integrada de gestion de ' . ALL::upperCase($campos['vista']) . '\',\'ruta\'=>\'' . ALL::upperCase($campos['vista']) . '\')?>' . PHP_EOL);
-    fputs($ar, '<?php $this->layout(\'base\',[\'usuario\'=>$usuario,\'breadcrumb\'=>$breadcrumb])?>' . PHP_EOL);
+        $router = new SimpleXMLExtended($archivoRoute, null, true) or die("Problemas en la creaci&oacute;n del router del apps Router.xml");
+        $router->addComentario(' Bloque de configuracion de la ruta del controller '.ucfirst($controller));
+        // Listar registro
+        $personaje = $router->addChild('link');
+        $personaje->addChild('name', '/'.strtolower($controller).'Index');
+        $personaje->addChild('controller', All::cameCase($tabla));
+        $personaje->addChild('method', 'run'.All::upperCase($tabla).'Index');
+        $personaje->addChild('request', 'GET');
+        //
+        $personaje = $router->addChild('link');
+        $personaje->addChild('name', '/'.strtolower($controller).'Listar');
+        $personaje->addChild('controller', All::cameCase($tabla));
+        $personaje->addChild('method', 'run'.All::upperCase($tabla).'Listar');
+        $personaje->addChild('request', 'GET');
 
-    fputs($ar, '<?php $this->push(\'addCss\')?>' . PHP_EOL);
-    fputs($ar, '<?php $this->end()?>' . PHP_EOL);
+        $personaje = $router->addChild('link');
+        $personaje->addChild('name', '/'.strtolower($controller).'Create');
+        $personaje->addChild('controller', All::cameCase($tabla));
+        $personaje->addChild('method', 'run'.All::upperCase($tabla).'Create');
+        $personaje->addChild('request', 'POST');
 
-    fputs($ar, '<?php $this->push(\'title\') ?>' . PHP_EOL);
-    fputs($ar, ' Gestionar de la vista ' . ALL::upperCase($campos['vista']) . PHP_EOL);
-    fputs($ar, '<?php $this->end()?>' . PHP_EOL);
+        $personaje = $router->addChild('link');
+        $personaje->addChild('name', '/'.strtolower($controller).'Show');
+        $personaje->addChild('controller', All::cameCase($tabla));
+        $personaje->addChild('method', 'run'.All::upperCase($tabla).'Show');
+        $personaje->addChild('request', 'POST');
 
-    fputs($ar, '<div class="row">' . PHP_EOL);
-    fputs($ar, '    <!-- left column -->' . PHP_EOL);
-    fputs($ar, '    <div class="col-md-7">' . PHP_EOL);
-    fputs($ar, '        <!-- general form elements -->' . PHP_EOL);
-    fputs($ar, '        <?php $this->insert(\'view::' . $rutaVista . '/listado\') ?>' . PHP_EOL);
-    fputs($ar, '    </div>' . PHP_EOL);
-    fputs($ar, '        <div class="col-md-5">' . PHP_EOL);
-    fputs($ar, '        <?php $this->insert(\'view::' . $rutaVista . '/form\') ?>' . PHP_EOL);
-    fputs($ar, '    </div>' . PHP_EOL);
-    fputs($ar, '</div>' . PHP_EOL);
+        $personaje = $router->addChild('link');
+        $personaje->addChild('name', '/'.strtolower ($controller).'Delete');
+        $personaje->addChild('controller', All::cameCase($tabla));
+        $personaje->addChild('method', 'run'.All::upperCase($tabla).'Delete');
+        $personaje->addChild('request', 'POST');
 
-    /** Vista con hijos */
-    foreach ($campos['campos'] AS $key => $value){
-        $mostrar = explode('#',$requerido[$value]);
-        //   [0][hidden_form] => 1 # [1][hidden_list] => 1 # [2][relacionado] (grilla|combo) # [3][tabla_vista] personal--personalD1 # [4][vista_campo] id # [5] [$cart_separacion] -
-
-        $valores=explode('--',$mostrar[3]);
-        if($mostrar[2] =='grilla' AND count($valores) > 0 ) {
-            fputs($ar, '<!-- Incluir las de la vista de navegacion de ### ('.$mostrar[3].') ### -->' . PHP_EOL);
-            fputs($ar, '<div class="row">' . PHP_EOL);
-            fputs($ar, '    <!-- left column -->' . PHP_EOL);
-            fputs($ar, '    <div class="col-md-7">' . PHP_EOL);
-            fputs($ar, '        <!-- general form elements -->' . PHP_EOL);
-            fputs($ar, '        <?php $this->insert(\'view::vistas/'.All::cameCase($valores[0]).'/'.$valores[1].'/listado\') ?>' . PHP_EOL);
-            fputs($ar, '    </div>' . PHP_EOL);
-            fputs($ar, '        <div class="col-md-5">' . PHP_EOL);
-            fputs($ar, '        <?php $this->insert(\'view::vistas/'.All::cameCase($valores[0]).'/'.$valores[1].'/form\') ?>' . PHP_EOL);
-            fputs($ar, '    </div>' . PHP_EOL);
-            fputs($ar, '</div>' . PHP_EOL);
-        }
-    }
-    fputs($ar, '<?php $this->push(\'addJs\') ?>' . PHP_EOL);
-    fputs($ar, '<script>' . PHP_EOL);
-    fputs($ar, '    // Definicion los campos del DataTable de esta vista' . PHP_EOL);
-    fputs($ar, '    var Config = {};' . PHP_EOL);
-
-    fputs($ar, '    <?php $this->insert(\'view::' . $rutaVista . '/assent\') ?>' . PHP_EOL);
-
-    fputs($ar, '    Core.Vista.Util = {}' . PHP_EOL);
-    fputs($ar, '    Core.Vista.Util = {' . PHP_EOL);
-    // Fragmento de codigo que permite hacer los combos dinamicos
-    fputs($ar, '        priListaLoad: function (){ ' . PHP_EOL);
-    foreach ($campos['campos'] AS $key => $value){
-        $mostrar = explode('#',$requerido[$value]);
-        //   [0][hidden_form] => 1 # [1][hidden_list] => 1 # [2][relacionado] (grilla|combo) # [3][tabla_vista] personal--personalD1 # [4][vista_campo] id # [5] [$cart_separacion] -
-        $valores=explode('--',$mostrar[3]);
-        if($mostrar[0]==0 AND $mostrar[2]=='combo' AND count($valores)>0) {
-            fputs($ar, '            // Configurar de los campos '.$mostrar[3].' \';' . PHP_EOL);
-            fputs($ar, '            var html'.$key.' = \'<option>Seleccionar</option>\';' . PHP_EOL);
-            fputs($ar, '            $.post("/getEntidadComun",{"tipo":"combo","tabla_vista":"'.$mostrar[3].'","vista_campo":"'.$mostrar[4].'","cart_separacion":"'.$mostrar[5].'"},function(dataJson){' . PHP_EOL);
-            fputs($ar, '                $.each(dataJson.datos,function(key,value){' . PHP_EOL);
-            fputs($ar, '                html'.$key.' += \'<option value="\'+value.id+\'">\'+value.nombre+\'</option>;\'' . PHP_EOL);
-            fputs($ar, '                });' . PHP_EOL);
-            fputs($ar, '                $(".'.$mostrar[3].'").html(html'.$key.')' . PHP_EOL);
-            fputs($ar, '            });' . PHP_EOL);
-        }
+        $personaje = $router->addChild('link');
+        $personaje->addChild('name', '/'.strtolower($controller).'Update');
+        $personaje->addChild('controller', All::cameCase($tabla));
+        $personaje->addChild('method', 'run'.All::upperCase($tabla).'Update');
+        $personaje->addChild('request', 'POST');
+        $router->asXML($archivoRoute);
+        $router->formatXml($archivoRoute);
     }
 
-    fputs($ar, '        },' . PHP_EOL);
-    // Fin de combo dinamicos
-    // Fragmento de codigo para mostrar los datos del hijo seleccionando el padre
-    fputs($ar, '        priListaClick: function (dataJson){'.PHP_EOL);
-    foreach ($campos['campos'] AS $key => $value){
-        $mostrar = explode('#',$requerido[$value]);
-        //   [0][hidden_form] => 1 # [1][hidden_list] => 1 # [2][relacionado] (grilla|combo) # [3] tabla_vista--personal--personalD1 # [4][vista_campo] id # [5] [$cart_separacion] -
-        $valores=explode('--',$mostrar[3]);
-        if($mostrar[2]=='grilla' AND count($valores)>0) {
-            fputs($ar, '           <?php $this->insert(\'view::vistas/'.All::cameCase($valores[0]).'/'.$valores[1].'/assent\') ?>' . PHP_EOL);
-            fputs($ar, '            Config.relacionPadre = {' . PHP_EOL);
-            fputs($ar, '                "field":\''.$valores[2].'\',' . PHP_EOL);
-            fputs($ar, '                "value": \''.$mostrar[4].'\','. PHP_EOL);
-            fputs($ar, '                "id": dataJson.datos.id'. PHP_EOL);
-            fputs($ar, '            };' . PHP_EOL);
-            fputs($ar, '            Core.VistaRelacion.main(\''.All::upperCase($valores[1]).'\',Config);' . PHP_EOL);
-        }
-    }
-    fputs($ar, '        }, ' . PHP_EOL);
-    // Fin de Fragento de codigo para extraer los datos del click del padre
-    fputs($ar, '        priClickProcesarForm: function(){ }, ' . PHP_EOL);
-
-    // Codigo encargado para validar las mascaras
-    fputs($ar, '        validateMascaras: function () {' . PHP_EOL);
-    fputs($ar, '            var item = true;' . PHP_EOL);
-    fputs($ar, '            $.each(Core.Vista.Mascara,function (keys, values) {' . PHP_EOL);
-    fputs($ar, '            var expreg = new RegExp(values.mascara);' . PHP_EOL);
-    fputs($ar, '            var campo = $(\'[name="\'+values.campo+\'"], #\'+values.campo).val();' . PHP_EOL);
-    fputs($ar, '            if(!expreg.test(campo)) {' . PHP_EOL);
-    fputs($ar, '                alertar(values.mensaje,\'Validación del campo \'+values.campo);' . PHP_EOL);
-    fputs($ar, '                $(\'[name="\'+values.campo+\'"], #\'+values.campo).focus();' . PHP_EOL);
-    fputs($ar, '                $(\'i#help-\'+values.campo).html(values.mensaje);' . PHP_EOL);
-    fputs($ar, '                    item = false;' . PHP_EOL);
-    fputs($ar, '                }' . PHP_EOL);
-    fputs($ar, '            });' . PHP_EOL);
-    fputs($ar, '            return item;' . PHP_EOL);
-    fputs($ar, '        }' . PHP_EOL);
-    fputs($ar, '    };' . PHP_EOL);
-
-    fputs($ar, '    $(function () {' . PHP_EOL);
-    fputs($ar, '        Core.main();' . PHP_EOL);
-    fputs($ar, '        Core.Vista.main(Config.show.vista,Config);' . PHP_EOL);
-    fputs($ar, '    })' . PHP_EOL);
-    fputs($ar, '' . PHP_EOL);
-    fputs($ar, '</script>' . PHP_EOL);
-    fputs($ar, '<?php $this->end() ?> ' . PHP_EOL);
-    fclose($ar);
-    }
-
-    private function createFileViewAssent($rutaHija, $campos, $rutaVista, $requerido)
+    /**
+     * Method encargado de generar el index de la vista que se procesa en el momento desde el generador
+     * @param string $fileViewIndex, Indica donde se genera el index de la vista de la vista
+     * @param array $campos, indica toda la configuracion de la vista, campos y detalle en general
+     * @param array $rutaVista, indica toda la configuracion de la ruta real de la vista
+     * @param array $requerido, indica toda la configuracion de los campos requeridos
+     * @return bool true
+     */
+    private function createFileViewIndex($fileViewIndex, $campos, $rutaVista, $requerido)
     {
-        $ar = fopen($rutaHija . DIRECTORY_SEPARATOR . "assent.php", "w+") or die("Problemas en la creaci&oacute;n del view index.php");
+        $ar = fopen($fileViewIndex, "w+") or die("Problemas en la creaci&oacute;n del view index.php");
+        // Inicio la escritura en el activo
+        fputs($ar, '<?php' . PHP_EOL);
+        fputs($ar, '$breadcrumb=(object)array(\'actual\'=>\'' . ALL::upperCase($campos['vista']) . '\',\'titulo\'=>\'Vista de integrada de gestion de ' . ALL::upperCase($campos['vista']) . '\',\'ruta\'=>\'' . ALL::upperCase($campos['vista']) . '\')?>' . PHP_EOL);
+        fputs($ar, '<?php $this->layout(\'base\',[\'usuario\'=>$usuario,\'breadcrumb\'=>$breadcrumb])?>' . PHP_EOL);
+
+        fputs($ar, '<?php $this->push(\'addCss\')?>' . PHP_EOL);
+        fputs($ar, '<?php $this->end()?>' . PHP_EOL);
+
+        fputs($ar, '<?php $this->push(\'title\') ?>' . PHP_EOL);
+        fputs($ar, ' Gestionar de la vista ' . ALL::upperCase($campos['vista']) . PHP_EOL);
+        fputs($ar, '<?php $this->end()?>' . PHP_EOL);
+
+        fputs($ar, '<div class="row">' . PHP_EOL);
+        fputs($ar, '    <!-- left column -->' . PHP_EOL);
+        fputs($ar, '    <div class="col-md-7">' . PHP_EOL);
+        fputs($ar, '        <!-- general form elements -->' . PHP_EOL);
+        fputs($ar, '        <?php $this->insert(\'view::' . $rutaVista . '/listado\') ?>' . PHP_EOL);
+        fputs($ar, '    </div>' . PHP_EOL);
+        fputs($ar, '        <div class="col-md-5">' . PHP_EOL);
+        fputs($ar, '        <?php $this->insert(\'view::' . $rutaVista . '/form\') ?>' . PHP_EOL);
+        fputs($ar, '    </div>' . PHP_EOL);
+        fputs($ar, '</div>' . PHP_EOL);
+
+        /** Vista con hijos */
+        foreach ($campos['campos'] AS $key => $value){
+            $mostrar = explode('#',$requerido[$value]);
+            //   [0][hidden_form] => 1 # [1][hidden_list] => 1 # [2][relacionado] (grilla|combo) # [3][tabla_vista] personal--personalD1 # [4][vista_campo] id # [5] [$cart_separacion] -
+
+            $valores=explode('--',$mostrar[3]);
+            if($mostrar[2] =='grilla' AND count($valores) > 0 ) {
+                fputs($ar, '<!-- Incluir las de la vista de navegacion de ### ('.$mostrar[3].') ### -->' . PHP_EOL);
+                fputs($ar, '<div class="row">' . PHP_EOL);
+                fputs($ar, '    <!-- left column -->' . PHP_EOL);
+                fputs($ar, '    <div class="col-md-7">' . PHP_EOL);
+                fputs($ar, '        <!-- general form elements -->' . PHP_EOL);
+                fputs($ar, '        <?php $this->insert(\'view::vistas/'.All::cameCase($valores[0]).'/'.$valores[1].'/listado\') ?>' . PHP_EOL);
+                fputs($ar, '    </div>' . PHP_EOL);
+                fputs($ar, '        <div class="col-md-5">' . PHP_EOL);
+                fputs($ar, '        <?php $this->insert(\'view::vistas/'.All::cameCase($valores[0]).'/'.$valores[1].'/form\') ?>' . PHP_EOL);
+                fputs($ar, '    </div>' . PHP_EOL);
+                fputs($ar, '</div>' . PHP_EOL);
+            }
+        }
+        fputs($ar, '<?php $this->push(\'addJs\') ?>' . PHP_EOL);
+        fputs($ar, '<script>' . PHP_EOL);
+        fputs($ar, '    // Definicion los campos del DataTable de esta vista' . PHP_EOL);
+        fputs($ar, '    var Config = {};' . PHP_EOL);
+
+        fputs($ar, '    <?php $this->insert(\'view::' . $rutaVista . '/assent\') ?>' . PHP_EOL);
+
+        fputs($ar, '    Core.Vista.Util = {}' . PHP_EOL);
+        fputs($ar, '    Core.Vista.Util = {' . PHP_EOL);
+        // Fragmento de codigo que permite hacer los combos dinamicos
+        fputs($ar, '        priListaLoad: function (){ ' . PHP_EOL);
+        foreach ($campos['campos'] AS $key => $value){
+            $mostrar = explode('#',$requerido[$value]);
+            //   [0][hidden_form] => 1 # [1][hidden_list] => 1 # [2][relacionado] (grilla|combo) # [3][tabla_vista] personal--personalD1 # [4][vista_campo] id # [5] [$cart_separacion] -
+            $valores=explode('--',$mostrar[3]);
+            if($mostrar[0]==0 AND $mostrar[2]=='combo' AND count($valores)>0) {
+                fputs($ar, '            // Configurar de los campos '.$mostrar[3].' \';' . PHP_EOL);
+                fputs($ar, '            var html'.$key.' = \'<option>Seleccionar</option>\';' . PHP_EOL);
+                fputs($ar, '              $.ajax({' . PHP_EOL);
+                fputs($ar, '                url: \'/getEntidadComun\',' . PHP_EOL);
+                fputs($ar, '                type: "POST",' . PHP_EOL);
+                fputs($ar, '                headers: {' . PHP_EOL);
+                fputs($ar, '                        \'X-Auth-Token\' : $(\'#csrf_token\').val()' . PHP_EOL);
+                fputs($ar, '                },' . PHP_EOL);
+                fputs($ar, '                data: {"tipo":"combo","tabla_vista":"'.$mostrar[3].'","vista_campo":"'.$mostrar[4].'","cart_separacion":"'.$mostrar[5].'"},' . PHP_EOL);
+                fputs($ar, '                dataType: \'JSON\',' . PHP_EOL);
+                fputs($ar, '                success : function(dataJson) {' . PHP_EOL);
+                fputs($ar, '                    $.each(dataJson.datos,function(key,value){' . PHP_EOL);
+                fputs($ar, '                    html'.$key.' += \'<option value="\'+value.id+\'">\'+value.nombre+\'</option>;\'' . PHP_EOL);
+                fputs($ar, '                    });' . PHP_EOL);
+                fputs($ar, '                    $(".'.$mostrar[3].'").html(html'.$key.')' . PHP_EOL);
+                fputs($ar, '                }' . PHP_EOL);
+                fputs($ar, '            });' . PHP_EOL);
+            }
+        }
+
+
+        fputs($ar, '        },' . PHP_EOL);
+        // Fin de combo dinamicos
+        // Fragmento de codigo para mostrar los datos del hijo seleccionando el padre
+        fputs($ar, '        priListaClick: function (dataJson){'.PHP_EOL);
+        foreach ($campos['campos'] AS $key => $value){
+            $mostrar = explode('#',$requerido[$value]);
+            //   [0][hidden_form] => 1 # [1][hidden_list] => 1 # [2][relacionado] (grilla|combo) # [3] tabla_vista--personal--personalD1 # [4][vista_campo] id # [5] [$cart_separacion] -
+            $valores=explode('--',$mostrar[3]);
+            if($mostrar[2]=='grilla' AND count($valores)>0) {
+                fputs($ar, '           <?php $this->insert(\'view::vistas/'.All::cameCase($valores[0]).'/'.$valores[1].'/assent\') ?>' . PHP_EOL);
+                fputs($ar, '            Config.relacionPadre = {' . PHP_EOL);
+                fputs($ar, '                "field":\''.$valores[2].'\',' . PHP_EOL);
+                fputs($ar, '                "value": \''.$mostrar[4].'\','. PHP_EOL);
+                fputs($ar, '                "id": dataJson.datos.id'. PHP_EOL);
+                fputs($ar, '            };' . PHP_EOL. PHP_EOL);
+                fputs($ar, '            Core.Vista.main(\''.All::upperCase($valores[1]).'\',Config);' . PHP_EOL);
+            }
+        }
+        fputs($ar, '        }, ' . PHP_EOL);
+        // Fin de Fragento de codigo para extraer los datos del click del padre
+        fputs($ar, '        priClickProcesarForm: function(){ }, ' . PHP_EOL);
+
+        // Codigo encargado para validar las mascaras
+        fputs($ar, '        validateMascaras: function (send) {' . PHP_EOL);
+        fputs($ar, '            return Core.VistaMascara.main(send);' . PHP_EOL);
+        fputs($ar, '        }' . PHP_EOL);
+        fputs($ar, '    };' . PHP_EOL);
+
+        fputs($ar, '    $(function () {' . PHP_EOL);
+        fputs($ar, '        Core.main();' . PHP_EOL);
+        fputs($ar, '        Core.Vista.main(Config.show.vista,Config);' . PHP_EOL);
+        fputs($ar, '    })' . PHP_EOL);
+        fputs($ar, '' . PHP_EOL);
+        fputs($ar, '</script>' . PHP_EOL);
+        fputs($ar, '<?php $this->end() ?> ' . PHP_EOL);
+        fclose($ar);
+    }
+
+    /**
+     * Method encargado de generar el Assent de la vista que se procesa en el momento desde el generador
+     * @param string $fileViewAssent, Indica donde se genera el archivo Assent de la vista
+     * @param array $campos, indica toda la configuracion de la vista, campos y detalle en general
+     * @param array $rutaVista, indica toda la configuracion de la ruta real de la vista
+     * @param array $requerido, indica toda la configuracion de los campos requeridos
+     * @return bool true
+     */
+    private function createFileViewAssent($fileViewAssent, $campos, $rutaVista, $requerido)
+    {
+        $ar = fopen($fileViewAssent, "w+") or die("Problemas en la creaci&oacute;n del view index.php");
         // Inicio la escritura en el activo
         fputs($ar, '    // Definicion de las variables necesarias para la grilla y validacion de mascaras' . PHP_EOL);
         fputs($ar, '    var Config = {};' . PHP_EOL);
@@ -755,21 +807,41 @@ class AppCrudVista extends App
         fputs($ar, '        "value": ""' . PHP_EOL);
         fputs($ar, '    }' . PHP_EOL. PHP_EOL);
 
-        fputs($ar, '    Core.Vista.Select = {' . PHP_EOL);
+        fputs($ar, '    '.All::upperCase($campos['vista']).' = {}' . PHP_EOL);
+        fputs($ar, '    '.All::upperCase($campos['vista']).' = {' . PHP_EOL);
         // Fragmento de codigo que permite hacer los combos dinamicos
-        fputs($ar, '        priListaLoad: function (){ ' . PHP_EOL);
+        fputs($ar, '        loadListaMenu: function (){ ' . PHP_EOL);
+        $exisste = [];
         foreach ($campos['campos'] AS $key => $value){
             $mostrar = explode('#',$requerido[$value]);
             //   [0][hidden_form] => 1 # [1][hidden_list] => 1 # [2][relacionado] (grilla|combo) # [3][tabla_vista] personal--personalD1 # [4][vista_campo] id # [5] [$cart_separacion] -
             $valores=explode('--',$mostrar[3]);
             if($mostrar[0]==0 AND $mostrar[2]=='combo' AND count($valores)>0) {
-                fputs($ar, '            // Configurar de los campos '.$mostrar[3].' \';' . PHP_EOL);
-                fputs($ar, '            var html'.$key.' = \'<option>Seleccionar</option>\';' . PHP_EOL);
-                fputs($ar, '            $.post("/getEntidadComun",{"tipo":"combo","tabla_vista":"'.$mostrar[3].'","vista_campo":"'.$mostrar[4].'","cart_separacion":"'.$mostrar[5].'"},function(dataJson){' . PHP_EOL);
-                fputs($ar, '                $.each(dataJson.datos,function(key,value){' . PHP_EOL);
-                fputs($ar, '                html'.$key.' += \'<option value="\'+value.id+\'">\'+value.nombre+\'</option>;\'' . PHP_EOL);
-                fputs($ar, '                });' . PHP_EOL);
-                fputs($ar, '                $(".'.$mostrar[3].'").html(html'.$key.')' . PHP_EOL);
+                $existe[]=$mostrar[3];
+                fputs($ar, '            // Configurar de los campos '.$mostrar[3].' \';' . PHP_EOL.PHP_EOL);
+                fputs($ar, '            var html'.$key.' = \'<option value=" ">Seleccionar</option>\';' . PHP_EOL);
+                fputs($ar, '            $.ajax({' . PHP_EOL);
+                fputs($ar, '              url: \'/getEntidadComun\',' . PHP_EOL);
+                fputs($ar, '              type: "POST",' . PHP_EOL);
+                fputs($ar, '              headers: {' . PHP_EOL);
+                fputs($ar, '                       \'X-Auth-Token\' : $(\'#csrf_token\').val()' . PHP_EOL);
+                fputs($ar, '              },' . PHP_EOL);
+                fputs($ar, '              data: {"tipo":"combo","tabla_vista":"'.$mostrar[3].'","vista_campo":"'.$mostrar[4].'","cart_separacion":"'.$mostrar[5].'"},' . PHP_EOL);
+                fputs($ar, '              dataType: \'JSON\',' . PHP_EOL);
+                fputs($ar, '              success : function(dataJson) {' . PHP_EOL);
+                fputs($ar, '                 $.each(dataJson.datos,function(key,value){' . PHP_EOL);
+                fputs($ar, '                        html'.$key.' += \'<option value="\'+value.id+\'">\'+value.nombre+\'</option>;\'' . PHP_EOL);
+                fputs($ar, '                 });' . PHP_EOL);
+
+                fputs($ar, '                 var data = sessionStorage.getItem(".'.$mostrar[3].'");' . PHP_EOL);
+                fputs($ar, '                 var cant = $(".'.$mostrar[3].' option").length;' . PHP_EOL);
+                fputs($ar, '                 if(data == typeof null){' . PHP_EOL);
+                fputs($ar, '                     sessionStorage.setItem(".'.$mostrar[3].'",window.btoa(html4));' . PHP_EOL);
+                fputs($ar, '                     $(".'.$mostrar[3].'").html(html'.$key.');' . PHP_EOL);
+                fputs($ar, '                 }else if(cant < 2 ){' . PHP_EOL);
+                fputs($ar, '                     $(".'.$mostrar[3].'").html(html'.$key.');' . PHP_EOL);
+                fputs($ar, '                 }' . PHP_EOL);
+                fputs($ar, '              }' . PHP_EOL);
                 fputs($ar, '            });' . PHP_EOL);
             }
         }
@@ -777,7 +849,6 @@ class AppCrudVista extends App
         fputs($ar, '        },' . PHP_EOL);
         fputs($ar, '     }' . PHP_EOL);
         // Fin de combo dinamicos
-
         // Configuracion de las mascaras
         fputs($ar, '<?php'.PHP_EOL);
         fputs($ar, '       $fies = file_get_contents(__DIR__.\'/mascaras.json\');'.PHP_EOL);
@@ -790,12 +861,15 @@ class AppCrudVista extends App
         fputs($ar, '}'.PHP_EOL);
         fputs($ar, '?>'.PHP_EOL);
         fputs($ar, '];'.PHP_EOL);
+        if(count($existe)>0){
+            fputs($ar, '    '.All::upperCase($campos['vista']).'.loadListaMenu();' . PHP_EOL);
+        }
         fclose($ar);
     }
 
-    private function createFileViewForm($rutaHija, $campos, $requerido)
+    private function createFileViewForm($fileViewForm, $campos, $requerido)
     {
-        $ar = fopen($rutaHija.DIRECTORY_SEPARATOR."form.php", "w+") or die("Problemas en la creaci&oacute;n del view form.php");
+        $ar = fopen($fileViewForm, "w+") or die("Problemas en la creaci&oacute;n del view form.php");
         // Inicio la escritura en el activo
         fputs($ar, '<div class="box box-primary">'.PHP_EOL);
         fputs($ar, '<div class="box-header with-border">'.PHP_EOL);
@@ -803,7 +877,7 @@ class AppCrudVista extends App
         fputs($ar, '</div>'.PHP_EOL);
         fputs($ar, '<!-- /.box-header -->'.PHP_EOL);
         fputs($ar, '<!-- form start -->'.PHP_EOL);
-        fputs($ar, '<form role="form" method="post" id="send'.All::upperCase($campos['vista']).'Procesar" enctype="multipart/form-data">'.PHP_EOL);
+        fputs($ar, '<form role="form" method="post" class="'.All::upperCase($campos['vista']).'" id="send'.All::upperCase($campos['vista']).'Procesar" enctype="multipart/form-data">'.PHP_EOL);
         fputs($ar, '   <div class="box-body">'.PHP_EOL);
         $mascara = '';
         $items = $campos;
@@ -836,7 +910,8 @@ class AppCrudVista extends App
                     //print_r($mostrar[0].'-'.$mostrar[2].' \n');
                     fputs($ar, '<div class="form-group">'.PHP_EOL);
                     fputs($ar, '    <label for="'.$value->label.'">'.$value->label.'</label>'.PHP_EOL);
-                    fputs($ar, '    <select  name="'.$value->field.'" class="form-control '.$classes.' '.$mostrar[3].' " id="'.$value->field.'"  placeholder="'.$value->place_holder.'"><option value="0">Seleccionar</option></select>'.PHP_EOL);
+                    fputs($ar, '    <select name="'.$value->field.'" class="form-control '.$classes.' '.$mostrar[3].' " id="'.$value->field.'"  placeholder="'.$value->place_holder.'"><option value="">Seleccionar</option></select>'.PHP_EOL);
+                    fputs($ar, '    <i class="help" id="help-'.$value->field.'"></i>'.PHP_EOL);
                     fputs($ar, '</div>'.PHP_EOL);
                 }
             }
@@ -854,13 +929,13 @@ class AppCrudVista extends App
 
     /**
      * Method encargado de crear un archivo listado donde se mostrará la grilla
-     * @param string $rutaHija, Indica donde se debe general la vista generada
+     * @param string $fileViewListado, Indica el archivo donde se mostrara la GRID
      * @param array $campos, indica toda la configuracion de la vista, campos y detalle en general
      * @param array $campRealEnti, indica toda la configuracion de solo los campos reales
      * @return bool true
      */
-    private function createFileViewListado($rutaHija, $campos, $campRealEnti){
-        $ar = fopen($rutaHija.DIRECTORY_SEPARATOR."listado.php", "w+") or die("Problemas en la creaci&oacute;n del view listado.php");
+    private function createFileViewListado($fileViewListado, $campos, $campRealEnti){
+        $ar = fopen($fileViewListado, "w+") or die("Problemas en la creaci&oacute;n del view listado.php");
         fputs($ar, '<div class="box box-primary">'.PHP_EOL);
         fputs($ar, '    <div class="box-header with-border">'.PHP_EOL);
         fputs($ar, '        <h3 class="box-title">Lista de '.ALL::upperCase($campos['vista']).'</h3>'.PHP_EOL);
@@ -873,8 +948,9 @@ class AppCrudVista extends App
                 fputs($ar, '    <input type="text" class="search" id="search_'.$value.'" placeholder="'.ALL::upperCase($value).'" onKeyDown="Core.VistaGrid.doSearch(arguments[0]||event,\''.ALL::upperCase($campos['vista']).'\')">'.PHP_EOL);
             }
         }
-        fputs($ar, '    <button onClick="Core.VistaGrid.reloadGrid(\''.ALL::upperCase($campos['vista']).'\')" id="submitButton'.ALL::upperCase($campos['vista']).'" style="margin-left:30px;">Buscar</button>'.PHP_EOL);
+        fputs($ar, '        <button onClick="Core.VistaGrid.reloadGrid(\''.ALL::upperCase($campos['vista']).'\')" id="submitButton'.ALL::upperCase($campos['vista']).'" style="margin-left:30px;">Buscar</button>'.PHP_EOL);
         //fputs($ar, '//<!--input type="checkbox" id="autosearch" onClick="Core.VistaGrid.enableAutosubmit(this.checked,\'Pppp\');"> Enable Autosearch-->'.PHP_EOL);
+        fputs($ar, '        <?php JPH\Core\Http\SegCSRF::getTokenField(); ?>'.PHP_EOL);
         fputs($ar, '    </div>'.PHP_EOL);
 
         // Bloque de Grid del contenido
@@ -890,12 +966,12 @@ class AppCrudVista extends App
 
     /**
      * Method encargado de crear un archivo JsonMascara donde se mostrará las mascaras de la vista
-     * @param string $rutaHija, Indica donde se debe general la vista generada
+     * @param string $fileViewJsonMascaras, Indica donde se debe general la vista generada
      * @campos array $campos, indica toda la configuracion de la vista, campos y detalle en generall
      * @return bool true
      */
-    private function createFileViewJsonMascaras($rutaHija, $mascaras){
-        $ar = fopen($rutaHija.DIRECTORY_SEPARATOR."mascaras.json", "w+") or die("Problemas en la creaci&oacute;n del view listado.php");
+    private function createFileViewJsonMascaras($fileViewJsonMascaras, $mascaras){
+        $ar = fopen($fileViewJsonMascaras, "w+") or die("Problemas en la creaci&oacute;n del view listado.php");
         fputs($ar, '{'.PHP_EOL);
         fputs($ar, '    "mascaras" : ['.PHP_EOL);
         $tmpItem = '';

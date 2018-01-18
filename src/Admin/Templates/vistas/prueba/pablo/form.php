@@ -1,10 +1,12 @@
 <div class="box box-primary">
-<div class="box-header with-border">
-<h3 class="box-title">Formulario de pablo</h3>
+<div class="Pablo box-header with-border">
+    <h3 class="box-title">Formulario de pablo</h3>
+    <div class="btnNew">ff</div>
+
 </div>
 <!-- /.box-header -->
 <!-- form start -->
-<form role="form" method="post" id="sendPabloProcesar" enctype="multipart/form-data">
+<form role="form" method="post" id="sendPabloProcesar" class="Pablo" enctype="multipart/form-data">
    <div class="box-body">
 <input type="hidden" id="id" name="id">
 <div class="form-group">

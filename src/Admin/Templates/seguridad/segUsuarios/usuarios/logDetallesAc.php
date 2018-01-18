@@ -5,5 +5,7 @@
     <div class="box-body">
         <div id="dataJPHUsuarios"></div>
         <div id='pagingAreaUsuarios'></div>
+        <div id='recfoundUsuarios'></div>
+
     </div>
 </div>

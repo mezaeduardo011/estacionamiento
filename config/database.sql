@@ -70,7 +70,15 @@
   --- END
 
 
-  
+  CREATE TABLE seg_cambio_clave (
+    id int Identity(1,1) NOT NULL,
+    token varchar(200) NOT NULL,
+    estatus bit NOT NULL,
+    created_usuario_id INT NOT NULL,
+    created_at DATETIME2(7) NOT NULL,
+    updated_at DATETIME2(7),
+    CONSTRAINT pk_seg_cambio_clave PRIMARY KEY(id)
+  );
 
   CREATE TABLE ho_conexiones (
     id int Identity(1,1) NOT NULL,
@@ -99,7 +107,7 @@
     created_usuario_id INT NOT NULL,
     updated_usuario_id INT  NULL,
     created_at DATETIME2(7) NOT NULL,
-    updated_at  DATETIME2(7)        NULL,
+    updated_at  DATETIME2(7) NULL,
     CONSTRAINT pk_ho_menu PRIMARY KEY(id)
   );
   -- app: Admin, entidad: personal, nombre:demo, vista: ddd, ico_fa: fa-plus, target:__new
@@ -269,5 +277,5 @@
 
  -- Vista encargada de Procesar las mascaras para PHP y JS
   CREATE VIEW view_list_mascaras AS
-  SELECT a.nombre AS vista, b.ho_tipo_dato_type AS type, b.mascara AS mascaraJS, REPLACE(b.mascara,'\\','\') AS  mascaraPHP, b.mensaje, b.clase_input, a.label, CASE WHEN hidden_form=1 THEN 'SI' ELSE 'NO' END hidden FROM ho_vistas AS a
-  INNER JOIN ho_mascaras  AS b ON b.clase_input=a.mascara
+  SELECT a.nombre AS vista, b.ho_tipo_dato_type AS type, b.mascara AS mascaraJS, REPLACE(b.mascara,'\\','\') AS  mascaraPHP, b.mensaje, b.clase_input, a.field AS label, CASE WHEN hidden_form=1 THEN 'SI' ELSE 'NO' END hidden FROM ho_vistas AS a
+  INNER JOIN ho_mascaras  AS b ON b.clase_input=a.mascara;

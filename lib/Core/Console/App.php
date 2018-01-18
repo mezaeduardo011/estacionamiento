@@ -8,8 +8,8 @@ use JPH\Core\Load\Configuration;
  * @Author: Ing. Gregorio Bolívar <elalconxvii@gmail.com>
  * @Author: Blog: <http://gbbolivar.wordpress.com>
  * @created Date: 09/08/2017
- * @updated Date: 29/08/2017
- * @version: 5.0.4
+ * @updated Date: 22/12/2017
+ * @version: 5.0.5
  */
 
 
@@ -445,7 +445,7 @@ class App
             // Inicio la escritura en el activo
             fputs($ar, '<?php'.PHP_EOL);
             fputs($ar, 'namespace APP\\'.$app.'\\Model;'.PHP_EOL);
-            fputs($ar, 'use JPH\\Complements\\Database\\Main;'.PHP_EOL);
+            fputs($ar, 'use JPH\\Complements\\Database\\Base;'.PHP_EOL);
             fputs($ar, 'use JPH\\Core\\Commun\\All;'.PHP_EOL);
             fputs($ar, '/**'.PHP_EOL);
             fputs($ar, ' * Generador de codigo del Modelo de la App '.$app.PHP_EOL);
@@ -454,7 +454,7 @@ class App
             fputs($ar, ' * @created: ' .date('d/m/Y') .''.PHP_EOL);
             fputs($ar, ' * @version: 1.0'.PHP_EOL);
             fputs($ar, ' */ '.PHP_EOL);
-            fputs($ar, "class ". $modelo."Model extends Main".PHP_EOL);
+            fputs($ar, "class ". $modelo."Model extends Base".PHP_EOL);
             fputs($ar, "{".PHP_EOL);
             fputs($ar, '   public function __construct()'.PHP_EOL);
             fputs($ar, '   {'.PHP_EOL);

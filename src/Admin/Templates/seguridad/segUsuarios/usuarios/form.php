@@ -4,7 +4,7 @@
 </div>
 <!-- /.box-header -->
 <!-- form start -->
-<form role="form" method="post" id="sendUsuariosProcesar" enctype="multipart/form-data">
+<form role="form" method="post" id="sendUsuariosProcesar" class="Usuarios" enctype="multipart/form-data">
     <div class="box-body">
         <input type="hidden" id="id" name="id">
         <div class="col-md-4 col-sm-6 col-xs-12">
@@ -21,8 +21,8 @@
         </div>
         <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
-                <label for="fech_nacimiento">fech_nacimiento</label>
-                <input type="text" name="fech_nacimiento" class="form-control default datepicker" id="fech_nacimiento" placeholder="Enter fech_nacimiento">
+                <label for="fech_nacimiento">Fecha de Nacimiento</label>
+                <input type="text" name="fech_nacimiento" class="form-control default date" id="fech_nacimiento" placeholder="Enter fech_nacimiento">
             </div>
         </div>
 
@@ -75,9 +75,9 @@
   </div>
   <!-- /.box-body -->
    <div class="box-footer">
-       <div class="col-sm-4 col-xs-12" id="divDelete"></div>
-       <div class="col-sm-4 col-xs-12" id="divAuditoria"></div>
-       <div class="col-sm-4 col-xs-12"><button id="submit" class="btn btn-primary" value="Procesar">Procesar registro.</button></div>
+       <div class="col-md-4 col-sm-6 col-xs-12" id="divDelete"></div>
+       <div class="col-md-4 col-sm-6 col-xs-12" id="divAuditoria"></div>
+       <div class="col-md-4 col-sm-6 col-xs-12"><button id="submit" class="btn btn-primary" value="Procesar">Procesar registro.</button></div>
    </div>
 </form>
 </div>

@@ -29,18 +29,7 @@ $breadcrumb=(object)array('actual'=>'Tipo','titulo'=>'Vista de integrada de gest
         }, 
         priClickProcesarForm: function(){ }, 
         validateMascaras: function () {
-            var item = true;
-            $.each(Core.Vista.Mascara,function (keys, values) {
-            var expreg = new RegExp(values.mascara);
-            var campo = $('[name="'+values.campo+'"], #'+values.campo).val();
-            if(!expreg.test(campo)) {
-                alertar(values.mensaje,'Validación del campo '+values.campo);
-                $('[name="'+values.campo+'"], #'+values.campo).focus();
-                $('i#help-'+values.campo).html(values.mensaje);
-                    item = false;
-                }
-            });
-            return item;
+            return Core.VistaMascara.main(send);
         }
     };
     $(function () {

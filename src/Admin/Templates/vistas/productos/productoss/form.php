@@ -4,12 +4,13 @@
 </div>
 <!-- /.box-header -->
 <!-- form start -->
-<form role="form" method="post" id="sendProductossProcesar" enctype="multipart/form-data">
+<form role="form" method="post" class="Productoss" id="sendProductossProcesar" enctype="multipart/form-data">
    <div class="box-body">
 <input type="hidden" id="id" name="id">
 <div class="form-group">
-    <label for="tipo_servicio_id">tipo_servicio_id</label>
-    <select  name="tipo_servicio_id" class="form-control int requerido tipo_estatus--estatus--id " id="tipo_servicio_id"  placeholder="Por favor ingresar el/los tipo_servicio_id"><option value="0">Seleccionar</option></select>
+    <label for="Tipo de Servicios">Tipo de Servicios</label>
+    <select name="tipo_servicio_id" class="form-control int requerido tipo_estatus--estatus--id " id="tipo_servicio_id"  placeholder="Por favor ingresar el/los tipo_servicio_id"><option value="">Seleccionar</option></select>
+    <i class="help" id="help-tipo_servicio_id"></i>
 </div>
 <div class="form-group">
     <label for="descripcion">descripcion</label>
@@ -22,8 +23,9 @@
     <i class="help" id="help-codigo"></i>
 </div>
 <div class="form-group">
-    <label for="productos_id">productos_id</label>
-    <select  name="productos_id" class="form-control int productos--productoss--id " id="productos_id"  placeholder="Por favor ingresar el/los productos_id"><option value="0">Seleccionar</option></select>
+    <label for="Productos">Productos</label>
+    <select name="productos_id" class="form-control int productos--productoss--id " id="productos_id"  placeholder="Por favor ingresar el/los productos_id"><option value="">Seleccionar</option></select>
+    <i class="help" id="help-productos_id"></i>
 </div>
   </div>
   <!-- /.box-body -->

@@ -10,13 +10,14 @@ login del sistema
 
     <div class="login-box">
         <div class="login-logo" >
-            <a href="../../index2.html"><b>JPH</b>Lions</a>
+            <a href="/"><b>JPH</b>Lions</a>
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
             <p class="login-box-msg">Accede para comenzar tu sesión</p>
 
             <form action="/loginPost" method="post">
+                <?php JPH\Core\Http\SegCSRF::getTokenField()?>
                 <div class="form-group has-feedback">
                     <input class="form-control" id="usuario" name="login" type="text" class="dato" placeholder="Usuario" required>
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -28,9 +29,9 @@ login del sistema
                 <div class="row">
                     <div class="col-xs-8">
                         <div class="checkbox icheck">
-                            <label>
+                            <!--label>
                                 <input type="checkbox"> Recuérdame
-                            </label>
+                            </label-->
                         </div>
                     </div>
                     <!-- /.col -->
@@ -40,7 +41,7 @@ login del sistema
                     <!-- /.col -->
                 </div>
             </form>
-            <a href="#">Olvidé mi contraseña</a><br>
+            <a href="/recuperarClave">Olvidé mi contraseña</a><br>
             <!--a href="register.html" class="text-center">Register a new membership</a-->
 
         </div>
@@ -54,13 +55,16 @@ login del sistema
             <?php
             if(!empty($msjError)){
                 echo "mostrarError('$msjError');";
+                // Permite eliminar el mensaje luego de efectuar el mensaje
+                //JPH\Core\Store\Cache::rm('msjError');
+            }
+            if(!empty($msjSuccess)){
+                echo "alertar('$msjSuccess');";
+                // Permite eliminar el mensaje luego de efectuar el mensaje
+                //JPH\Core\Store\Cache::rm('msjSuccess');
             }
             ?>
-            $('input').iCheck({
-                checkboxClass: 'icheckbox_square-blue',
-                radioClass: 'iradio_square-blue',
-                increaseArea: '20%' // optional
-            });
+
         });
     </script>
 <?php $this->end() ?>

@@ -1,10 +1,11 @@
 <div class="box box-primary">
 <div class="box-header with-border">
-<h3 class="box-title">Formulario de pppp</h3>
+    <h3 class="box-title">Formulario de pppp</h3>
+    <div id="btnNew">ff</div>
 </div>
 <!-- /.box-header -->
 <!-- form start -->
-<form role="form" method="post" id="sendPpppProcesar" enctype="multipart/form-data">
+<form role="form" method="post" id="sendPpppProcesar" class="Pppp" enctype="multipart/form-data">
    <div class="box-body">
 <input type="hidden" id="id" name="id">
 <div class="form-group">

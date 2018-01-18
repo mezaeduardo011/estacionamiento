@@ -1,6 +1,7 @@
 <?php
 namespace JPH\Core\Http;
 use JPH\Core\Commun\{All,Logs};
+use JPH\Core\Http\SegCSRF;
 
 /**
  * Permite contener un cunjunto de funcionalidades del protocolo http
@@ -11,7 +12,7 @@ use JPH\Core\Commun\{All,Logs};
  * @version: 0.1
  */
 
-class Request
+class Request extends SegCSRF implements RequestInterface
 {
     use Logs;
     public $dataPost;
@@ -29,8 +30,13 @@ class Request
      */
     public function getParameter($index='')
     {
-        $obj = self::complementsRequest($index,All::METHOD_GET);
-        return $obj;
+        if($_SERVER['REQUEST_METHOD']==All::METHOD_GET) {
+            $obj = self::complementsRequest($index,All::METHOD_GET);
+            return $obj;
+        }else{
+            die('Error al intenta extraer datos de un GET y estas haciendo una peticion POST');
+        }
+
     }
 
     /**
@@ -40,8 +46,13 @@ class Request
      */
     public function postParameter($index='')
     {
-        $obj = self::complementsRequest($index,All::METHOD_POST);
-        return $obj;
+        if($_SERVER['REQUEST_METHOD']==All::METHOD_POST) {
+            //self::isJsRequest(); desabilitado temporal
+            $obj = self::complementsRequest($index, All::METHOD_POST);
+            return $obj;
+        }else{
+            die('Error al intenta extraer datos de un POST y estas haciendo una peticion GET');
+        }
 
     }
 
@@ -61,6 +72,8 @@ class Request
             } elseif (!empty($index)) {
                 $data = [];
                 $tmp = explode(',', $index);
+                //print_r($_GET); die();
+                //print_r($tmp);
                 foreach ($tmp AS $key) {
                     if ($method == 'GET') {
                         if(isset($_GET[$key])){
@@ -69,7 +82,8 @@ class Request
                             $obj = array('idx' => $key);
                             $msj = All::getMsjException('Core', 'get-val-no-existe',$obj);
                             $this->logError($msj);
-                            throw new \TypeError($msj);
+                            //throw new \TypeError($msj);
+                            return false;
                         }
                     } else {
                         if(isset($_POST[$key])){
@@ -78,7 +92,8 @@ class Request
                             $obj = array('idx' => $key);
                             $msj = All::getMsjException('Core', 'post-val-no-existe',$obj);
                             $this->logError($msj);
-                            throw new \TypeError($msj);
+                            //throw new \TypeError($msj);
+                            return false;
                         }
                     }
                 }
@@ -92,6 +107,32 @@ class Request
             }
         }catch (\TypeError $t){
             All::statusHttp(400);
+            die($t->getMessage());
+        }
+
+    }
+
+    /** Permite validar los elementos necesario para que las peticiones POST no sea vulnerables a un X-CSRF
+     *  te permite validar peticiones de envio de formularios nativos o envios de datos por post mediante ajax
+     * @return bool tue o false
+     */
+    protected static function isJsRequest()
+    {
+        try{
+            if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
+                //echo "# Ejecuta si la petición es a través de AJAX por POST VALIDAR CABECERA";
+                // Validar XSRF-TOKEN
+                //print_r(getallheaders());
+                // Run CSRF check, on getallheaders data, in exception mode, for 30 minutes, in one-time mode.
+                SegCSRF::checkTokenHaders('csrf_token', getallheaders(),true,60*60,false);
+            }else{
+                //echo "# Ejecuta si la petición NO es a través de AJAX.";
+                // Run CSRF check, on POST data, in exception mode, for 30 minutes, in one-time mode.
+                SegCSRF::checkTokenPOST('csrf_token', $_POST,true,60*60,false);
+            }
+        }catch ( \TypeError $t ){
+            // CSRF attack detected
+            All::statusHttp(401);
             die($t->getMessage());
         }
 

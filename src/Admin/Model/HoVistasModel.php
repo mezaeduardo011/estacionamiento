@@ -44,7 +44,7 @@ class HoVistasModel extends Base
                 $this->fijarValor('fijo', $data->fijo[$a]);
                 $this->fijarValor('restrincion', $data->restrincion[$a]);
                 $this->fijarValor('label', $data->etiqueta[$a]);
-                $this->fijarValor('mascara', $data->mascara[$a]);
+                $this->fijarValor('mascara', @$data->mascara[$a]);
                 $this->fijarValor('nulo', (@$data->nulo[$a]=='on')?'NO':'YES');
                 $this->fijarValor('place_holder', $data->place_holder[$a]);
                 $this->fijarValor('relacionado', $data->relacionado[$a]);

@@ -57,7 +57,7 @@ class TipoEstatusController extends Controller
    public function runTipoEstatusListar($request)
    {
       // Validar roles de acceso;
-      $this->permisos = 'CONSULTA|CONTROL TOTAL';
+     /* $this->permisos = 'CONSULTA|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
       // Bloque de proceso de la grilla
       $result = $this->formatRows($request->getParameter('obj'));
@@ -66,7 +66,20 @@ class TipoEstatusController extends Controller
       $valor['head']=$result['campos'];
       $valor['rows']=$rows; 
       $this->json($valor);
-      $this->json($result);
+      $this->json($result);*/
+
+       // Validar roles de acceso;
+       $this->permisos = 'CONSULTA|CONTROL TOTAL';
+       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
+
+       // Bloque de proceso de la grilla
+       $result = $this->formatRows($request->getParameter('obj'));
+
+       // Procesar los datos del modelo para el paginado
+       $rows = $this->hoTipoEstatusModel->getTipoEstatusListar($request->getParameter(),$result);
+
+       // Exportar el resultado en xml para mostrar los datos
+       $this->xmlGridList($rows);
    }
 
     /**

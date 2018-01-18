@@ -29,6 +29,8 @@ class PruebaController extends Controller
        parent::__construct();
        $this->session = $this->authenticated();
        $this->hoPruebaModel = new Model\PruebaModel();
+
+       // Variables necesaria para el tema de seguridad de cada vista
        $this->valSegPerfils = new Model\SegUsuariosPerfilModel();
        $this->apps = $this->pathApps(__DIR__);
        $this->entidad = $this->hoPruebaModel->tabla;
@@ -58,17 +60,17 @@ class PruebaController extends Controller
     */ 
    public function runPruebaListar($request)
    {
-      // Validar roles de acceso;
-      $this->permisos = 'CONSULTA|CONTROL TOTAL';
-      $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
+       // Validar roles de acceso;
+       $this->permisos = 'CONSULTA|CONTROL TOTAL';
+       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
 
-      // Bloque de proceso de la grilla
-      $result = $this->formatRows($request->getParameter('obj'));
+       // Bloque de proceso de la grilla
+       $result = $this->formatRows($request->getParameter('obj'));
 
-      // Procesar los datos del modelo para el paginado
-      $rows = $this->hoPruebaModel->getPruebaListar($request->getParameter(),$result);
+       // Procesar los datos del modelo para el paginado
+       $rows = $this->hoPruebaModel->getPruebaListar($request->getParameter(),$result);
 
-      // Exportar el resultado en xml para mostrar los datos
+       // Exportar el resultado en xml para mostrar los datos
        $this->xmlGridList($rows);
    }
 
@@ -84,7 +86,7 @@ class PruebaController extends Controller
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
 
       // Verificar las mascaras
-      parent::runValidarMascarasVista($this->pathVista(),$request->postParameter());
+      parent::runValidarMascarasVista('vistas/prueba/',$this->pathVista(),$request->postParameter());
 
       $result = $this->hoPruebaModel->setPruebaCreate($request->postParameter());
       if(is_null($result)){
@@ -146,7 +148,7 @@ class PruebaController extends Controller
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
 
       // Verificar las mascaras
-       parent::runValidarMascarasVista($this->pathVista(),$request->postParameter());
+       parent::runValidarMascarasVista('vistas/prueba/',$this->pathVista(),$request->postParameter());
 
        $result = $this->hoPruebaModel->setPruebaUpdate($request->postParameter());
       if(is_null($result)){

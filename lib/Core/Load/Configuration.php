@@ -111,7 +111,9 @@ class Configuration extends Cache
                 All::modDevelopment();
                 $temp = '\APP\\' . $this->app . '\Router\\' . $this->class;
                 $loadRouter = new $temp;
+
                 $loadRouter->initApp($this->app, $this->fold);
+                //var_dump($a);
                 break;
         endswitch;
         }

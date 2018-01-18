@@ -1,5 +1,31 @@
 
 <noscript>
+    <style>
+        div.wrapper
+        {
+            display: none;
+        }
+        #desabled
+        {
+            text-align: center;
+            aling-items: center;
+            justify-content: center;
+            position: relative;
+            top: 20px;
+        }
+        h1
+        {
+            text-align: center;
+            aling-items: center;
+            position: relative;
+            top: 20px;
+        }
+        #habilite {
+            text-decoration: none;
+            color: red;
+            font-size: 18px;
+        }
+    </style>
 
     <h1>Comprobando si javascript está habilitado</h1>
     <div id="desabled">
@@ -13,33 +39,5 @@
         <a href="http://www.enable-javascript.com/es/"
            target="_blank">aquí</a>.
     </div>
-    <style>
-        div.wrapper
-        {
-            display: none;
-        }
-        #desabled
-        {
-            text-align: center;
-            aling-items: center;
-            justify-content: center;
-            position: relative;
-            top: 20px;
-
-        }
-        h1
-        {
-            text-align: center;
-            aling-items: center;
-            position: relative;
-            top: 20px;
-
-        }
-        #habilite {
-            text-decoration: none;
-            color: red;
-            font-size: 18px;
-        }
-    </style>
 
 </noscript>

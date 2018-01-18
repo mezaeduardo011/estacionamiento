@@ -21,150 +21,108 @@ $breadcrumb=(object)array('actual'=>'Perfil','titulo'=>'Vista de integrada de ge
 <?php $this->push('addJs') ?>
 
 <script>
-    // Variable de configuracion
+    // Variable de configuracionsss
     var Config = {};
-    // Columnas para el dataTable de Perfile
     // Columnas para el grilla
-    Config.colums = [
-        { "id": "detalle", "type":"ed", "align":"left", "sort":"str" , "value":"Detalles" },
-    ];
-    // Configuracion de visualizacion del grilla
-    Config.show = {
-        'module':'Perfil',
-        'tableTitle':'Listado de Perfiles.',
-        'filter':'#text_filter',
-        'autoWidth': false,
-        'multiSelect': false
-    }
+    <?php $this->insert('view::seguridad/segPerfil/perfil/assent') ?>
+
     // Configuración personalizada del entorno privado de la vista
     Core.Vista.Util = {
+        myGrid2 : '',
         asociado: [],
-        myGrid2:'',
         priListaLoad: function () {
-            /* CARGAR SEGUNDA GRILLA */
-            var Config = {};
-            // Columnas para el grilla
-            Config.colums = [
-                { "id": "detalle", "type":"ed", "align":"left", "sort":"str" , "value":"Detalles" }
-            ];
-            // Configuracion de visualizacion del grilla
-            Config.show = {
-                'module':'Roles',
-                'filter':'#text_filter',
-                'autoWidth': true,
-                'multiSelect': true
-            };
-
-            /* START DE GRILLA DHTML */
-            var camp = '';
-            /* Procedemos a crear una cadena de texto paa enviar al procesador de la vista para enviar lo datos en json*/
-            $.each(Config.colums, function (index,value) {
-                camp+='id:'+value.id+'|type:'+value.type+'|align:'+value.align+'|sort:'+value.sort+'|value:'+value.value+'#';
-            });
-            // Quitamos el ultimo caracter de la cadena
-            var tmp = camp.substring(0,camp.length-1);
-
-            Core.Vista.myGrid2 = new dhtmlXGridObject('dataJPHRoles');
-            //myLayout.cells("a").setText(Config.show.tableTitle);
-
-
-            //var myGrid = myLayout.cells("a").attachGrid();
-            Core.Vista.myGrid2.setImagePath("/admin/dhtmlxSuite/codebase/imgs/");
-            // Filtro de la tabla
-            Core.Vista.myGrid2.attachHeader( Config.show.filter);
-            // Campos id Mostrar
-            //myGrid.setColumnIds("col1,col2,col3");
-
-            //myGrid.enablePaging(true, 10, 3, "pagingArea");
-            Core.Vista.myGrid2.enablePaging(true,10,5,'pagingArea'+Config.show.module,true,"recinfoArea");
-
-            Core.Vista.myGrid2.setPagingSkin("toolbar");
-            Core.Vista.myGrid2.enableAutoWidth(true);
-            Core.Vista.myGrid2.enableMultiselect(true);
-
-            Core.Vista.myGrid2.attachEvent("onRowSelect", this.localOnRowSelected);
-            Core.Vista.myGrid2.init();
-            //Core.Vista.myGrid2.enableSmartRendering(true);
-            // Evniamos los parametros de configuracion
-            var gridQString = '/'+ Config.show.module.toLowerCase()+'Listar?obj='+window.btoa(tmp); // save query string to global variable (see step 5)
-            Core.Vista.myGrid2.load(gridQString, 'json');
-
-            /* END  */
-            //Core.Vista = {};
-            //Core.Vista.main('Roles',Config);
-
-           /* localStorage.setItem('rolesId',0);
+            Core.Vista.Util.mostrarBTN(0);
             // Funcionalidad privada del listaLoad
-            var asoc = this.asociado;
-            var onTabla = this.onTable;
-            $('#dataJPHRoles tbody').on( 'click', 'tr', function () {
-                var data = onTabla.row($(this)).data();
-                if($(this).hasClass('selected')){
-                    $(this).removeClass('selected');
-                    var index = asoc    .indexOf(data.id);
-                    asoc.splice(index, 1);
-                }else{
-                    $(this).addClass('selected');
-                    asoc.push(data.id);
-                }
+            <?php $this->insert('view::seguridad/segPerfil/perfil/assent2') ?>
 
-            } );*/
+            localStorage.setItem('urlVistaTmp-'+Config.show.vista,Config.show.vista);
+            // Permite instanciar las funcionalidades de la Grid para la nueva vista Roles
+            Core.VistaGrid.main(Config.show.vista,Config.colums,Config.show);
+
             this.priClickProcesarForm();
         },
-        localOnRowSelected: function(item) {
-           // Core.Vista.myGrid2.
-            var asoc = Core.Vista.Util.asociado;
-            asoc.push(item);
-            Core.Vista.Util.displayRoles(asoc.length);
+        doOnRowSelected: function (id) {
+            var cant=Core.VistaGrid.myGrid['Roles'].getSelectedId().split(',').length;
+            Core.Vista.Util.displayRoles(cant);
+            //Core.Vista.Util.priClickProcesarForm();
 
         },
-        priListaClick: function(dataJson) {
+        mostrarBTN: function (cant) {
+            if(cant>0){
+                $('#marcar').show();
+                // Volver a hacer la busqueda con los campos dinamico a buscar
+
+                // Si fue definido borrar
+                Core.Vista.Util.segClickProcesarForm();
+            }else{
+                $('#marcar').hide();
+            }
+        },
+        priListaClick: function (dataJson) {
+            // Permite mostrar el detalles del perfil seleccionado
+            $('input#detalle').val(dataJson.datos.detalle);
+
+            // Guardar el identifidor del del perfil seleccionado
+            $('input#id').val(dataJson.datos.id);
+
             // Funcionalidad adicional cuando haces click en el datatable principal
-            var asoc = this.asociado;
+            var asoc = Core.Vista.Util.asociado = [];
             //var onTabla = this.onTable;
-            var item = Core.Vista.myGrid2;
-            localStorage.setItem('rolesId',dataJson.datos.id)
-            //$.each(item, function (item, rows) {
+            var item = Core.VistaGrid.myGrid[Config.show.vista];
+            localStorage.setItem('rolesId',dataJson.datos.id);
+
+            // Limpiamos todo el listado de los roles disponible
+            item.clearSelection();
+
+            // Agregando funcionalidad cuando hace click en el segundo listado de las acciones
+            item.attachEvent("onRowSelect", function (data) {
+                Core.Vista.Util.doOnRowSelected(data);
+                Core.Vista.currentRequest.abort();
+            });
+
+            item.forEachRow(function(id){
+                //echo dataJson.roles[id];
+                //alert(id);
+
+            });
+
             // Valores de datos que tienen seleccion
-                $.each(dataJson.roles, function (key, valor) {
+            $.each(dataJson.roles, function (key, valor) {
 
-                    // Valores disponible
-                    var rows = item.getAllItemIds().split(',');
-                    //alert(rows[key]); Valor del item
-                    if(valor.existe=='SI' && rows[key]==valor.id){
-                        item.setSelectedRow(rows[key],'background-color:#293A4A;color: #ffffff');
-                        //console.log(rows[key]);
-                        asoc.push(rows[key]);
-                    }else{
-                        var index = asoc.indexOf(rows[key]);
-                        asoc.splice(index, 1);
-                        item.setSelectedRow(rows[key],'');
-                    }
+                // Valores disponible todos lo valores en arreglos
+                var rows = item.getAllItemIds().split(',');
+                //alert(valor.id +'#'+ rows[key]+'#'+valor.existe);
+                if(valor.existe=='SI' && rows[key]==valor.id){
+                    setTimeout(function(){
+                        item.setSelectedRow(valor.id,'background-color:#293A4A;color: #ffffff');
+                        console.log('Item activado - '+rows[key]);
+                    },500)
+                    asoc.push(rows[key]);
+                }/*else{
+                    var index = asoc.indexOf(rows[key]);
+                    asoc.splice(index, 1);
+                    //item.setSelectedRow(rows[key],'');
+                }*/
 
-                });
-
-            $('#displayRoles').html('').html('<span style="text-align:center;font-size: 18px">'+asoc.length+'  row(s) selected</span>');
-
-            $('#dataJPHRoles').click( function () {
-                //alert(asoc);
-                //alert( onTabla.rows('.selected').data().length +' row(s) selected' );
-                var cant=onTabla.rows('.selected').data().length
-               this.displayRoles(cant);
-            } );
-
+            });
+            var cant=asoc.length;
+            Core.Vista.Util.displayRoles(cant);
         },
         displayRoles: function(cant) {
             var msj = cant +' row(s) selected';
             $('#displayRoles').html('').html('<span style="text-align:center;font-size: 18px">'+msj+'</span>');
+            Core.Vista.Util.mostrarBTN(cant);
         },
-        priClickProcesarForm:function () {
-            var asoc = this.asociado;
+        priClickProcesarForm:function () {},
+        segClickProcesarForm:function () {
+            var asoc = Core.Vista.Util.asociado;
+            var cant=Core.VistaGrid.myGrid['Roles'].getSelectedId();
+            $('#marcar').click(function (e) {
 
-                $('#marcar').click(function (e) {
-                    if(asoc.length>0 && localStorage.getItem('rolesId')>0) {
+                    if(localStorage.getItem('rolesId')>0) {
                         var campos = new FormData();
                         campos.append('seg_perfil_id', localStorage.getItem('rolesId'));
-                        campos.append('seg_roles_id', asoc);
+                        campos.append('seg_roles_id', cant);
                         $.ajax({
                             url: '/setAsociarRolesPerfil',
                             type: "POST",
@@ -184,9 +142,13 @@ $breadcrumb=(object)array('actual'=>'Perfil','titulo'=>'Vista de integrada de ge
                     }else{
                         mostrarError('Uff!, Debe seleccionar un Perfil y luego seleccionar los roles que sean necesarios asociar al perfil.')
                     }
-                    return false;
-                })
 
+
+            })
+        },
+        validateMascaras: function () {
+            var item = true;
+            return item;
         }
     };
 

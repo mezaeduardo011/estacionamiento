@@ -58,7 +58,7 @@ class ProductosController extends Controller
    public function runProductosListar($request)
    {
       // Validar roles de acceso;
-      $this->permisos = 'CONSULTA|CONTROL TOTAL';
+      /*$this->permisos = 'CONSULTA|CONTROL TOTAL';
       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
 
       // Bloque de proceso de la grilla
@@ -68,7 +68,20 @@ class ProductosController extends Controller
       $valor['head']=$result['campos'];
       $valor['rows']=$rows; 
       $this->json($valor);
-      $this->json($result);
+      $this->json($result);*/
+
+       // Validar roles de acceso;
+       $this->permisos = 'CONSULTA|CONTROL TOTAL';
+       $this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
+
+       // Bloque de proceso de la grilla
+       $result = $this->formatRows($request->getParameter('obj'));
+
+       // Procesar los datos del modelo para el paginado
+       $rows = $this->hoProductosModel->getProductosListar($request->getParameter(),$result);
+
+       // Exportar el resultado en xml para mostrar los datos
+       $this->xmlGridList($rows);
    }
 
     /**

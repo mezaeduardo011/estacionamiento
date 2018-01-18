@@ -7,6 +7,7 @@ Es una estructura de desarrollo basada en MVC, muy cómodo para trabajar basado 
 	PSR-4  Estándar de carga automática
 	PSR-7  Interfaz de mensajes HTTP.
 	PSR-16 Caché Simple.
+	Seguridad de una aplicación web en XSS, CSRF
 
 Así mismo te permite desarrollar aplicaciones de forma más simple ordenada y sin tanta capa de abstracción de datos, se adapta a todo tipo de desarrollo por más compleja que sea, hasta puedes incluir componentes de tercero sin restricciones.
 

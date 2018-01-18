@@ -14,7 +14,7 @@ class SegLogAutenticacionModel extends Base
 {
     public function __construct()
     {
-        $this->tabla = 'seg_log_autenticacion';
+            $this->tabla = 'seg_log_autenticacion';
         $this->campoid = array('id');
         $this->campos = array('host','navegador','accion','sistema','usuario','created_at');
         parent::__construct();
@@ -22,7 +22,7 @@ class SegLogAutenticacionModel extends Base
     public function segLogCreateLogin($ip,$navegador,$accion,$sistema,$usuario_id)
     {
         $query = "INSERT INTO seg_log_autenticacion(host,navegador,accion,sistema,usuario,created_at) VALUES('$ip','$navegador','$accion','$sistema','$usuario_id','".All::now()."')";
-        $this->db->execute($query);
+        $this->execute($query);
     }
 
     /**
@@ -33,62 +33,99 @@ class SegLogAutenticacionModel extends Base
      */
     public function getSegLogUsuariosListar($request,$result)
     {
-        // Extraer los datos del usuario
-        $user=explode('|',base64_decode($request->token));
-        //define variables from incoming values
-        if(isset($request->posStart))
-            $posStart = $request->posStart;
-        else
-            $posStart = 0;
-        if(isset($request->count))
-            $count = $request->count;
-        else
-            $count = 100;
 
-        // If ternario para mostrar si filtra por persona o muestra el universo
-         $where = (empty($user[0]))?'':'WHERE usuario='.$user[0];
+        //print_r($request->filter); die();
+// Variables definidas para del paginador
+        $limit = 100;
+        if(isset($request->posStart)){
+            $posStart = $request->posStart;
+        }else{
+            $posStart = 0;
+        }
+
+        if(isset($request->count)){
+            $count = $request->posStart+$limit;
+        }else{
+            $count = $limit;
+        }
+
+        // Permite identificar hay una definicion de busqueda de algun campo mediante el search
+        $search= '';
+        foreach ($request AS $key=>$value){
+            if(\preg_match('/search_\w/',$key) AND !empty($value)){
+                $campo = str_replace('search_','', $key);
+                $search.= " AND $campo like '%$value%'";
+            }
+        }
+
+        // Variables definidas para el ordenamiento DESC y ASC
+        $order = '';
+        $by = '';
+        if(!empty($request->orderBy) AND $request->orderBy!='undefined'){
+            $tmp = $this->campos[$request->orderBy];
+            if (!isset($request->direction) || $request->direction=="asc") {
+                $by = 'ASC';
+                $order = " ORDER BY $tmp ".$by;
+            }else {
+                $by = 'DESC';
+                $order = " ORDER BY $tmp ".$by;
+            }
+        }
+
+        // Elemento cuando hay relacion
+        $relation = All::formatRelacio(@$request->relacion);
+        //($relation); die();
+        if(!empty($relation[0])){
+            $search.="  AND $relation[0]";
+        }
 
         // Primero extraer la cantidad de registros
-        $sqlCount = "Select count(*) as items FROM ".$this->tabla." ".$where;
+        $sqlCount = "Select count(*) as items FROM ".$this->tabla.' WHERE 0=0 '.$search ;
         $resCount = $this->executeQuery($sqlCount);
-
         //create query to products table
-        $sql = implode(',', $result['select']).", id FROM ".$this->tabla." ".$where;
-
+        $sql = implode(',', $result['select']).", ".$this->campoid[0]." FROM ".$this->tabla.' WHERE 0=0 '.$search ;
         //if this is the first query - get total number of records in the query result
-       $sqlCount = "SELECT * FROM (
-				SELECT ROW_NUMBER() OVER( ORDER BY id ASC ) AS row, ".$resCount[0]->items." AS cnt, $sql ) AS sub";
+        $sqlCount = "SELECT * FROM (SELECT ROW_NUMBER() OVER( ORDER BY ".$this->campoid[0]." ".$by." ) AS row, ".$resCount[0]->items." AS cnt, $sql ) AS sub";
         $resQuery = $this->get($sqlCount);
         $rowCount =  $this->fetch();
-
-        $totalCount = @$rowCount->cnt;
-
+        $totalCount = (empty($rowCount->cnt))?0:$rowCount->cnt;
         //add limits to query to get only rows necessary for the output
-       echo  $sqlCount.= " WHERE row>=".$posStart." AND row<=".$count;
+        $sqlCount.= " WHERE row>=".$posStart." AND row<=".$count;
+        $sqlCount.= $order;
 
-        $sqlCount;
-
-        $res = $this->get($sqlCount);
-
-        //output data in XML format
+        // Definir las variables para el uso para el XML
         $items = array();
-        while($row=$this->fetch($res)){
-            $tmp['id'] = $row->id;
-            $tep = array();
-            foreach ($row as $key => $value) {
-                foreach ($row as $col => $val) {
-                    if (gettype($val) == "object" && get_class($val) == "DateTime") {
-                        $row->$col = $val->format("d/m/Y h:i:s");
-                    }
-                }
-                if($key!='id' AND $key!='cnt' AND $key!='row'){
-                    $tep[] = $value;
-                }
-            }
-            $tmp['data'] = $tep;
-            array_push($items,$tmp);
-        }
+        $items['data'] = $this->executeQuery($sqlCount);
+        $items['totalCount'] = (isset($request->posStart))?'':$totalCount;
+        $items['posStart'] = $posStart;
+
         return $items;
+    }
+
+    public function segLogMetricaNavegador()
+    {
+        $query = "SELECT navegador, COUNT(id) AS cantidad FROM seg_log_autenticacion
+                  WHERE convert(date, created_at)=convert(date, GETDATE())
+                  GROUP BY navegador;";
+        $tablas = $this->executeQuery($query);
+        return $tablas;    }
+
+    public function segLogMetricaHost()
+    {
+        $query = "SELECT host, COUNT(id) AS cantidad FROM seg_log_autenticacion
+                  WHERE convert(date, created_at)=convert(date, GETDATE())
+                  GROUP BY host;";
+        $tablas = $this->executeQuery($query);
+        return $tablas;    }
+
+    public function segLogMetricaAccion()
+    {
+        $query = "SELECT accion, COUNT(id) AS cantidad from seg_log_autenticacion
+                  WHERE convert(date, created_at)=convert(date, GETDATE())
+                  --AND accion!='CERRAR SESSION'
+                  GROUP BY accion;";
+        $tablas = $this->executeQuery($query);
+        return $tablas;
     }
 }
 ?>

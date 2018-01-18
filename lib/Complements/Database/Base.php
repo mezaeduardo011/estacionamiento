@@ -18,9 +18,10 @@ class Base extends Comun implements Constant
     public $idx;
     public $active;
     public $base;
+    public $db;
+
     public function __construct()
     {
-
         try{
             // Construir las variables de conexion
             $this->constructConexion();
@@ -36,6 +37,7 @@ class Base extends Comun implements Constant
 
             // Clases donde fue instanciada
             $instan = get_class($this);
+
             // APP\Admin\Model\PruebaModel
             // Verificar que solo sea instanciado desde el modelo si lo hace de otra parte lanza exepcion
             if(\preg_match('/Model/',$instan)){
@@ -57,7 +59,7 @@ class Base extends Comun implements Constant
                 }
 
                 if((bool)Cache::get('conecDb')) {
-                    $this->connect($datos);
+                     $this->connect($datos);
                     parent::__construct();
                 }
 

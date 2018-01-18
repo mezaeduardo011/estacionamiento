@@ -16,17 +16,14 @@ class PruebaModel extends Base
    use Security;
    public function __construct()
    {
-
        $this->tabla = 'prueba';
        $this->campoid = array('id');
        $this->campos = array('apellido','nombre');
-       parent::__construct('admin');
+       parent::__construct();
 
        // Clase de registro de auditoria de las acciones
        $this->segLogAccionesModel = new SegLogAccionesModel();
    }
-
-
 
     /**
     * Extraer todos los registros de Prueba
@@ -113,7 +110,7 @@ class PruebaModel extends Base
 
     // Registra log de auditoria de registro de acciones
     $user = $this->getSession('usuario');
-    $this->segLogAccionesModel->cargaAcciones($this->tabla, 'id',serialize($datos),'', $val, parent::LOG_ALTA);
+    $this->segLogAccionesModel->cargaAcciones($this->tabla, $val ,serialize($datos),'', $val, parent::LOG_ALTA);
      return $val;
    }
 
@@ -148,7 +145,7 @@ class PruebaModel extends Base
       $val = $this->borrar();
       // Registro de Auditoria
       $user = $this->getSession('usuario');
-      //$this->segLogAccionesModel->cargaAcciones($this->tabla, $valor,'','', $user->id, parent::LOG_BAJA);
+      $this->segLogAccionesModel->cargaAcciones($this->tabla, $valor,'','', $user->id, parent::LOG_BAJA);
       return $val;
    }
 

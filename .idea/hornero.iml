@@ -4,5 +4,12 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="Shawn" />
+    <orderEntry type="module" module-name="ejemplo" />
+    <orderEntry type="module" module-name="catatumbo" />
+    <orderEntry type="module" module-name="catatumbo" />
+    <orderEntry type="module" module-name="catatumbo" />
+    <orderEntry type="module" module-name="apiJRH" />
+    <orderEntry type="module" module-name="apiJRH" />
   </component>
 </module>

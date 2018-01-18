@@ -19,12 +19,13 @@ login del sistema
         <div class="lockscreen-item">
             <!-- lockscreen image -->
             <div class="lockscreen-image">
-                <img src="/admin/dist/img/user1-128x128.jpg" alt="User Image">
+                <img src="<?=JPH\Core\Store\Cache::get('srcImg')?>user1-128x128.jpg" alt="User Image">
             </div>
             <!-- /.lockscreen-image -->
 
             <!-- lockscreen credentials (contains the form) -->
             <form class="lockscreen-credentials" method="post" action="/locksPost">
+                <?php JPH\Core\Http\SegCSRF::getTokenField()?>
                 <div class="input-group">
                     <input type="password" name="contra" class="form-control" placeholder="password" requered>
 

@@ -13,9 +13,17 @@ use JPH\Core\Commun\Security;
 
 class SegUsuariosController extends Controller
 {
-   use Security;
-   public $model;
-   public $session;
+    use Security;
+    public $model;
+    public $session;
+
+    // Variables de Seguridad asociado a los roles
+    private $apps;
+    private $entidad;
+    private $vista;
+    private $permisos;
+    public $comps;
+
    public function __construct()
    {
        parent::__construct();
@@ -24,6 +32,13 @@ class SegUsuariosController extends Controller
        $this->hoSegLogUsuariosModel = new Model\SegLogAutenticacionModel();
        $this->hoSegLogAccionesModel = new Model\SegLogAccionesModel();
        $this->hoSegPerfilsModel = new Model\SegPerfilModel();
+
+       // Variables necesaria para el tema de seguridad de cada vista
+       $this->valSegPerfils = new Model\SegUsuariosPerfilModel();
+       $this->apps = $this->pathApps(__DIR__);
+       $this->entidad = $this->hoSegUsuariosModel->tabla;
+       $this->vista = $this->pathVista();
+       $this->comps = $this->apps .' - '. $this->entidad .' - '. $this->vista;
    }
 
     /**
@@ -61,12 +76,18 @@ class SegUsuariosController extends Controller
     */
    public function runSegUsuariosListar($request)
    {
+       // Validar roles de acceso;
+       $this->permisos = 'CONSULTA|CONTROL TOTAL';
+       //$this->validatePermisos($this->valSegPerfils->valSegPerfilRelacionUser($this->comps,$this->permisos),true);
+
+       // Bloque de proceso de la grilla
        $result = $this->formatRows($request->getParameter('obj'));
+
+       // Procesar los datos del modelo para el paginado
        $rows = $this->hoSegUsuariosModel->getSegUsuariosListar($request->getParameter(),$result);
-       $valor = array();
-       $valor['head']=$result['campos'];
-       $valor['rows']=$rows; // return del modelo
-       $this->json($valor);
+
+       // Exportar el resultado en xml para mostrar los datos
+       $this->xmlGridList($rows);
    }
 
     /**
@@ -76,12 +97,16 @@ class SegUsuariosController extends Controller
      */
     public function runSegLogAutenticacion($request)
     {
+
+        // Bloque de proceso de la grilla
         $result = $this->formatRows($request->getParameter('obj'));
+
+        // Procesar los datos del modelo para el paginado
         $rows = $this->hoSegLogUsuariosModel->getSegLogUsuariosListar($request->getParameter(),$result);
-        $valor = array();
-        $valor['head']=$result['campos'];
-        $valor['rows']=$rows; // return del modelo
-        $this->json($valor);
+
+
+        // Exportar el resultado en xml para mostrar los datos
+        $this->xmlGridList($rows);
     }
 
     /**
@@ -91,12 +116,16 @@ class SegUsuariosController extends Controller
      */
     public function runSegUsuariosShowAcciones($request)
     {
+
+
+        // Bloque de proceso de la grilla
         $result = $this->formatRows($request->getParameter('obj'));
+
+        // Procesar los datos del modelo para el paginado
         $rows = $this->hoSegLogAccionesModel->getSegLogUsuariosAccionesListar($request->getParameter(),$result);
-        $valor = array();
-        $valor['head']=$result['campos'];
-        $valor['rows']=$rows; // return del modelo
-        $this->json($valor);
+
+        // Exportar el resultado en xml para mostrar los datos
+        $this->xmlGridList($rows);
     }
 
     /**
@@ -136,9 +165,9 @@ class SegUsuariosController extends Controller
      */
    public function runShowAccionesAuditoria($request)
    {
-       $id = $this->validateRows('NUM', $request->getParameter('item'));
+       $id = $this->validateRows('NUM', $request->postParameter('item'));
        if($id) {
-           $result = $this->hoSegLogAccionesModel->showAcciones($request->getParameter('item'));
+           $result = $this->hoSegLogAccionesModel->showAcciones($request->postParameter('item'));
            $this->json($result);
        }else{
            // Non-Authoritative Information
@@ -155,11 +184,15 @@ class SegUsuariosController extends Controller
     */
    public  function runSegShowAuditoria($request){
        $this->tpl->addIni();
-       //$listado = $this->hoSegUsuariosModel->getSegUsuariosListar($request);
-       //$roles = $this->hoSegPerfilsModel->getSegPerfilListarCombo();
        $this->tpl->add('usuario', $this->getSession('usuario'));
-       //$this->tpl->add('roles', $roles);
        $this->tpl->renders('view::seguridad/segUsuarios/usuarios/auditoriaAll');
+   }
+
+   public  function runLogMetrica(){
+       $metrica['navegador'] = $this->hoSegLogUsuariosModel->segLogMetricaNavegador();
+       $metrica['host'] = $this->hoSegLogUsuariosModel->segLogMetricaHost();
+       $metrica['accion'] = $this->hoSegLogUsuariosModel->segLogMetricaAccion();
+       $this->json($metrica);
    }
 
     /**
@@ -215,10 +248,11 @@ class SegUsuariosController extends Controller
      */
     public function runSegUsuariosShowAuditoria($request)
     {
-       $datos=explode('|',base64_decode($request->getParameter('getItemShow')));
+       $datos=explode('|',base64_decode($request->postParameter('getItemShow')));
        $valor['data']=$datos[0];
        $result = $this->hoSegUsuariosModel->getSegUsuariosShow((object)$valor);
        $this->json($result);
+
     }
 }
 ?>
