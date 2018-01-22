@@ -6,6 +6,7 @@ use JPH\Core\Commun\All;
 use JPH\Core\Console\App;
 
 /**
+ * @namespace APP\Admin\Controller;
  * Generador de codigo de Controller de Hornero 1.0
  * @propiedad: Hornero 1.0
  * @autor: Ing. Gregorio Bolivar <elalconxvii@gmail.com>

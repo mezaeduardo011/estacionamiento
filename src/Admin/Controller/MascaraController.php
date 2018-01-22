@@ -8,6 +8,7 @@ use APP\Admin\Model AS Model;
  * @autor: Ing. Gregorio Bolivar <elalconxvii@gmail.com>
  * @created: 01/12/2017
  * @version: 1.0
+ * @namespace APP\Admin\Controller
  */
 class MascaraController extends Controller
 {

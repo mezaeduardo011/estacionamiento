@@ -6,6 +6,7 @@
  * @utor: Gregorio Bolivar <elalconxvii@gmail.com>
  * @created: 28/08/2017
  * @version: 1.0
+ * @namespace APP\Admin\Controller
  */
 
 namespace APP\Admin\Controller;

@@ -9,6 +9,7 @@ use APP\Admin\Model AS Model;
  * @utor: Gregorio Bolivar <elalconxvii@gmail.com>
  * @created: 25/09/2017
  * @version: 1.0
+ * @namespace APP\Admin\Controller
  */ 
 
 class SegPerfilController extends Controller

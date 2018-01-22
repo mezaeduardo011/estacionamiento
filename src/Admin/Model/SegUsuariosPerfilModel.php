@@ -7,7 +7,9 @@ use JPH\Complements\Database\Base;
  * @utor: Gregorio Bolivar <elalconxvii@gmail.com>
  * @created: 27/09/2017
  * @version: 1.0
- */ 
+ * @namespace APP\Admin\Model
+ */
+
 class SegUsuariosPerfilModel extends Base
 {
 

@@ -9,6 +9,7 @@ use JPH\Complements\Database\Base;
  * @Descripción: Generado por el generador de codigo del core.php de webStores
  * @package: RolesTable.class.php
  * @version: 3.0
+ * @namespace APP\Admin\Model
  */
 class HomeModel extends Base
 {

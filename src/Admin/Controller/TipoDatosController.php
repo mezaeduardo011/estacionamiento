@@ -8,6 +8,7 @@ namespace APP\Admin\Controller;
  * @autor: Ing. Gregorio Bolivar <elalconxvii@gmail.com>
  * @created: 02/12/2017
  * @version: 1.0
+ * @namespace APP\Admin\Controller
  */ 
 class TipoDatosController extends Controller
 {

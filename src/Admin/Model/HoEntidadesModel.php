@@ -10,6 +10,7 @@ use JPH\Core\Commun\{
  * @utor: Gregorio Bolivar <elalconxvii@gmail.com>
  * @created: 14/09/2017
  * @version: 1.0
+ * @namespace APP\Admin\Model
  */ 
 class HoEntidadesModel extends Base
 {

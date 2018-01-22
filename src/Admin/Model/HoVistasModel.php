@@ -10,6 +10,7 @@ use JPH\Core\Commun\{
  * @utor: Gregorio Bolivar <elalconxvii@gmail.com>
  * @created: 15/09/2017
  * @version: 1.0
+ * @namespace APP\Admin\Model
  */ 
 class HoVistasModel extends Base
 {

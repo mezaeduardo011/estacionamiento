@@ -11,6 +11,7 @@ use JPH\Core\Commun\{
  * @utor: Gregorio Bolivar <elalconxvii@gmail.com>
  * @created: 23/11/2017
  * @version: 1.0
+ * @namespace APP\Admin\Model
  */ 
 
 class HoMenuModel extends Base

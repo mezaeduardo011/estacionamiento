@@ -1,5 +1,0 @@
-{
-    "mascaras" : [
-        {"type":"varchar","mascaraJS":"XlthLXpBLVowLTkgXSok","mascaraPHP":"XlthLXpBLVowLTkgXSok","mensaje":"Por favor puede ingresar letras, espacios  y números","input":"letrasSpacioNumeros","campo":"codigo"},{"type":"varchar","mascaraJS":"XlthLXpBLVowLTkgXSok","mascaraPHP":"XlthLXpBLVowLTkgXSok","mensaje":"Por favor puede ingresar letras, espacios  y números","input":"letrasSpacioNumeros","campo":"nombre"}
-    ]
-}

@@ -2,56 +2,81 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9234ef3e-fe29-44e9-ae34-444a7cc49891" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/config/database2.sql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/config/test_crud2_11_12_2017.bak" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/procesador/procesadores/assent.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/procesador/procesadores/form.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/procesador/procesadores/index.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/procesador/procesadores/listado.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/procesador/procesadores/mascaras.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/productos/productoss/assent.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/productos/productoss/assentBKP.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/productos/productoss/form.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/productos/productoss/index.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/productos/productoss/listado.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/productos/productoss/mascaras.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/prueba/gggg/assent.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/prueba/gggg/form.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/prueba/gggg/index.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/prueba/gggg/listado.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/prueba/gggg/mascaras.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/prueba/pablo/assent.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/prueba/pablo/form.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/prueba/pablo/index.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/prueba/pablo/listado.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/prueba/pablo/mascaras.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/prueba/pablo/mascarasOLD.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/prueba/pppp/assent.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/prueba/pppp/form.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/prueba/pppp/index.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/prueba/pppp/listado.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/prueba/pppp/mascaras.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/tipoEstatus/estatus/assent.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/tipoEstatus/estatus/form.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/tipoEstatus/estatus/index.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/tipoEstatus/estatus/listado.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/tipoEstatus/estatus/mascaras.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/tipoEstatus/unida/assent.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/tipoEstatus/unida/form.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/tipoEstatus/unida/index.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/tipoEstatus/unida/listado.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/tipoEstatus/unida/mascaras.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/tipoServicio/buscarhijo/assent.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/tipoServicio/buscarhijo/form.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/tipoServicio/buscarhijo/index.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/tipoServicio/buscarhijo/indexBKP.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/tipoServicio/buscarhijo/listado.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/tipoServicio/buscarhijo/mascaras.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/tipoServicio/tipo/assent.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/tipoServicio/tipo/form.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/tipoServicio/tipo/index.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/tipoServicio/tipo/listado.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/tipoServicio/tipo/mascaras.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Controller/ConvenioController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Controller/GabyController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Controller/HijoslejanController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Controller/LegajosController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Controller/LejanController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Controller/PerroController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Controller/ProcesadorController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Controller/ProductosController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Controller/PruebaController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Controller/SociosController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Controller/TipoEstatusController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Controller/TipoServicioController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Model/ConvenioModel.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Model/EmpleadosModel.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Model/GabyModel.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Model/HijoslejanModel.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Model/LegajosModel.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Model/LejanModel.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Model/PerroModel.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Model/ProcesadorModel.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Model/ProductosModel.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Model/PruebaModel.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Model/SociosModel.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Model/TipoEstatusModel.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Model/TipoServicioModel.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/convenio/abmconvenios/assent.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/convenio/abmconvenios/form.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/convenio/abmconvenios/index.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/convenio/abmconvenios/listado.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/convenio/abmconvenios/mascaras.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/convenio/abmpadrehijos/assent.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/convenio/abmpadrehijos/form.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/convenio/abmpadrehijos/index.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/convenio/abmpadrehijos/listado.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/convenio/abmpadrehijos/mascaras.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/gaby/dddd/assent.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/gaby/dddd/form.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/gaby/dddd/index.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/gaby/dddd/listado.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/gaby/dddd/mascaras.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/gaby/gabriela/assent.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/gaby/gabriela/form.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/gaby/gabriela/index.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/gaby/gabriela/listado.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/gaby/gabriela/mascaras.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/gaby/temas/assent.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/gaby/temas/form.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/gaby/temas/index.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/gaby/temas/listado.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/gaby/temas/mascaras.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/hijoslejan/hijosss/assent.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/hijoslejan/hijosss/form.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/hijoslejan/hijosss/index.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/hijoslejan/hijosss/listado.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/hijoslejan/hijosss/mascaras.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/hijoslejan/lkgfd/assent.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/hijoslejan/lkgfd/form.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/hijoslejan/lkgfd/index.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/hijoslejan/lkgfd/listado.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/hijoslejan/lkgfd/mascaras.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/legajos/abmlegajos/assent.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/legajos/abmlegajos/form.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/legajos/abmlegajos/index.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/legajos/abmlegajos/listado.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/legajos/abmlegajos/mascaras.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/lejan/abmlejan/assent.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/lejan/abmlejan/form.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/lejan/abmlejan/index.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/lejan/abmlejan/listado.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/lejan/abmlejan/mascaras.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/lejan/hijosvertodos/assent.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/lejan/hijosvertodos/form.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/lejan/hijosvertodos/index.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/lejan/hijosvertodos/listado.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/lejan/hijosvertodos/mascaras.json" afterPath="" />
       <change type="MODIFICATION" beforePath="C:/xampp/htdocs/apiAlcolemia/lib/Core/Loading.php" afterPath="C:/xampp/htdocs/apiAlcolemia/lib/Core/Loading.php" />
       <change type="MODIFICATION" beforePath="C:/xampp/htdocs/apiAlcolemia/lib/Driverdb/ConfigDatabase.php" afterPath="C:/xampp/htdocs/apiAlcolemia/lib/Driverdb/ConfigDatabase.php" />
       <change type="MODIFICATION" beforePath="C:/xampp/htdocs/apiAlcolemia/lib/Driverdb/ConfigDatabaseTmp.php" afterPath="C:/xampp/htdocs/apiAlcolemia/lib/Driverdb/ConfigDatabaseTmp.php" />
@@ -60,32 +85,33 @@
       <change type="MODIFICATION" beforePath="C:/xampp/htdocs/catatumbo/.idea/catatumbo.iml" afterPath="C:/xampp/htdocs/catatumbo/.idea/catatumbo.iml" />
       <change type="MODIFICATION" beforePath="C:/xampp/htdocs/catatumbo/config/databases.ini" afterPath="C:/xampp/htdocs/catatumbo/config/databases.ini" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/app.ini" afterPath="$PROJECT_DIR$/config/app.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/database.sql" afterPath="$PROJECT_DIR$/config/database.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/databases.ini" afterPath="$PROJECT_DIR$/config/databases.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Complements/Database/Base.php" afterPath="$PROJECT_DIR$/lib/Complements/Database/Base.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Complements/Database/Comun.php" afterPath="$PROJECT_DIR$/lib/Complements/Database/Comun.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Complements/Database/ConfigDatabase.php" afterPath="$PROJECT_DIR$/lib/Complements/Database/ConfigDatabase.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Complements/Database/ConfigDatabaseTmp.php" afterPath="$PROJECT_DIR$/lib/Complements/Database/ConfigDatabaseTmp.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Complements/Database/Db.php" afterPath="$PROJECT_DIR$/lib/Complements/Database/Db.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Core/Commun/Commun.php" afterPath="$PROJECT_DIR$/lib/Core/Commun/Commun.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Core/Commun/Constant.php" afterPath="$PROJECT_DIR$/lib/Core/Commun/Constant.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Core/Console/App.php" afterPath="$PROJECT_DIR$/lib/Core/Console/App.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Core/Console/AppCrudVista.php" afterPath="$PROJECT_DIR$/lib/Core/Console/AppCrudVista.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Core/Console/Cache.php" afterPath="$PROJECT_DIR$/lib/Core/Console/Cache.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Core/Console/Command.php" afterPath="$PROJECT_DIR$/lib/Core/Console/Command.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Core/Console/Integrate.php" afterPath="$PROJECT_DIR$/lib/Core/Console/Integrate.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Core/Console/Interprete.php" afterPath="$PROJECT_DIR$/lib/Core/Console/Interprete.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Core/Console/doc/es/hornero.json" afterPath="$PROJECT_DIR$/lib/Core/Console/doc/es/hornero.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Core/Load/Configuration.php" afterPath="$PROJECT_DIR$/lib/Core/Load/Configuration.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Cache/AdminRouter.class.php" afterPath="$PROJECT_DIR$/src/Admin/Cache/AdminRouter.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Cache/AdminRouter.classTMP.php" afterPath="$PROJECT_DIR$/src/Admin/Cache/AdminRouter.classTMP.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Controller/Controller.php" afterPath="$PROJECT_DIR$/src/Admin/Controller/Controller.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Controller/GestionarController.php" afterPath="$PROJECT_DIR$/src/Admin/Controller/GestionarController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Controller/HomeController.php" afterPath="$PROJECT_DIR$/src/Admin/Controller/HomeController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Controller/LoginController.php" afterPath="$PROJECT_DIR$/src/Admin/Controller/LoginController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Controller/MascaraController.php" afterPath="$PROJECT_DIR$/src/Admin/Controller/MascaraController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Controller/MenuController.php" afterPath="$PROJECT_DIR$/src/Admin/Controller/MenuController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Controller/SegPerfilController.php" afterPath="$PROJECT_DIR$/src/Admin/Controller/SegPerfilController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Controller/SegRolesController.php" afterPath="$PROJECT_DIR$/src/Admin/Controller/SegRolesController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Controller/SegUsuariosController.php" afterPath="$PROJECT_DIR$/src/Admin/Controller/SegUsuariosController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Controller/TipoDatosController.php" afterPath="$PROJECT_DIR$/src/Admin/Controller/TipoDatosController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Model/HoConexionesModel.php" afterPath="$PROJECT_DIR$/src/Admin/Model/HoConexionesModel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Model/HoEntidadesModel.php" afterPath="$PROJECT_DIR$/src/Admin/Model/HoEntidadesModel.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Model/HoMascaraModel.php" afterPath="$PROJECT_DIR$/src/Admin/Model/HoMascaraModel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Model/HoMenuModel.php" afterPath="$PROJECT_DIR$/src/Admin/Model/HoMenuModel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Model/HoTipoDatosModel.php" afterPath="$PROJECT_DIR$/src/Admin/Model/HoTipoDatosModel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Model/HoVistasModel.php" afterPath="$PROJECT_DIR$/src/Admin/Model/HoVistasModel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Model/HomeModel.php" afterPath="$PROJECT_DIR$/src/Admin/Model/HomeModel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Model/LoginModel.php" afterPath="$PROJECT_DIR$/src/Admin/Model/LoginModel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Model/SegCambioClaveModel.php" afterPath="$PROJECT_DIR$/src/Admin/Model/SegCambioClaveModel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Model/SegLogAccionesModel.php" afterPath="$PROJECT_DIR$/src/Admin/Model/SegLogAccionesModel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Model/SegLogAutenticacionModel.php" afterPath="$PROJECT_DIR$/src/Admin/Model/SegLogAutenticacionModel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Model/SegPerfilMenuModel.php" afterPath="$PROJECT_DIR$/src/Admin/Model/SegPerfilMenuModel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Model/SegPerfilModel.php" afterPath="$PROJECT_DIR$/src/Admin/Model/SegPerfilModel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Model/SegPerfilRolesModel.php" afterPath="$PROJECT_DIR$/src/Admin/Model/SegPerfilRolesModel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Model/SegRolesModel.php" afterPath="$PROJECT_DIR$/src/Admin/Model/SegRolesModel.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Model/SegUsuariosModel.php" afterPath="$PROJECT_DIR$/src/Admin/Model/SegUsuariosModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Router/Router.xml" afterPath="$PROJECT_DIR$/src/Admin/Router/Router.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/admin/js/core/configMascara.js" afterPath="$PROJECT_DIR$/web/admin/js/core/configMascara.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Model/SegUsuariosPerfilModel.php" afterPath="$PROJECT_DIR$/src/Admin/Model/SegUsuariosPerfilModel.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -100,73 +126,81 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="database.sql" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/database.sql">
+      <file leaf-file-name="LoginModel.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Admin/Model/LoginModel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-64">
-              <caret line="286" column="19" lean-forward="false" selection-start-line="286" selection-start-column="19" selection-end-line="286" selection-end-column="19" />
+            <state relative-caret-position="153">
+              <caret line="9" column="29" lean-forward="false" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HoMascaraModel.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Admin/Model/HoMascaraModel.php">
+      <file leaf-file-name="SegCambioClaveModel.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Admin/Model/SegCambioClaveModel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="59" column="18" lean-forward="false" selection-start-line="59" selection-start-column="18" selection-end-line="59" selection-end-column="18" />
+            <state relative-caret-position="170">
+              <caret line="13" column="29" lean-forward="false" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="configMascara.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/admin/js/core/configMascara.js">
+      <file leaf-file-name="SegLogAccionesModel.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Admin/Model/SegLogAccionesModel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="143" column="223" lean-forward="false" selection-start-line="143" selection-start-column="223" selection-end-line="143" selection-end-column="223" />
+            <state relative-caret-position="60">
+              <caret line="10" column="29" lean-forward="false" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Router.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Admin/Router/Router.xml">
+      <file leaf-file-name="SegLogAutenticacionModel.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Admin/Model/SegLogAutenticacionModel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="415">
-              <caret line="398" column="70" lean-forward="false" selection-start-line="398" selection-start-column="70" selection-end-line="398" selection-end-column="70" />
+            <state relative-caret-position="153">
+              <caret line="10" column="29" lean-forward="false" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MascaraController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Admin/Controller/MascaraController.php">
+      <file leaf-file-name="SegPerfilMenuModel.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Admin/Model/SegPerfilMenuModel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="296">
-              <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+            <state relative-caret-position="153">
+              <caret line="9" column="29" lean-forward="false" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Comun.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/Complements/Database/Comun.php">
+      <file leaf-file-name="SegPerfilModel.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Admin/Model/SegPerfilModel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="73">
-              <caret line="563" column="37" lean-forward="false" selection-start-line="563" selection-start-column="37" selection-end-line="563" selection-end-column="37" />
-              <folding>
-                <element signature="e#42#86#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="153">
+              <caret line="10" column="29" lean-forward="false" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Db.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/Complements/Database/Db.php">
+      <file leaf-file-name="SegPerfilRolesModel.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Admin/Model/SegPerfilRolesModel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2637">
-              <caret line="186" column="9" lean-forward="false" selection-start-line="184" selection-start-column="8" selection-end-line="186" selection-end-column="9" />
+            <state relative-caret-position="153">
+              <caret line="10" column="29" lean-forward="false" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SegRolesModel.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Admin/Model/SegRolesModel.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="10" column="29" lean-forward="false" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -175,8 +209,18 @@
       <file leaf-file-name="SegUsuariosModel.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Admin/Model/SegUsuariosModel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="379">
-              <caret line="130" column="0" lean-forward="false" selection-start-line="130" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
+            <state relative-caret-position="153">
+              <caret line="12" column="29" lean-forward="false" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SegUsuariosPerfilModel.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Admin/Model/SegUsuariosPerfilModel.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -276,29 +320,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/../apiJRH/logs/info_2018-01-08.log" />
-        <option value="$PROJECT_DIR$/../apiJRH/lib/Complements/Database/Comun.php" />
-        <option value="$PROJECT_DIR$/../apiJRH/modulos/incidencias/main.php" />
-        <option value="$PROJECT_DIR$/web/admin/js/core/vistaGrid.js" />
-        <option value="$PROJECT_DIR$/src/Admin/Model/SegPerfilModel.php" />
-        <option value="$PROJECT_DIR$/src/Admin/Model/SegPerfilRolesModel.php" />
-        <option value="$PROJECT_DIR$/src/Admin/Templates/seguridad/segPerfil/perfil/asignarRolesPerfil.php" />
-        <option value="$PROJECT_DIR$/src/Admin/Templates/vistas/perro/canino/mascaras.json" />
-        <option value="$PROJECT_DIR$/src/Admin/Controller/PerroController.php" />
-        <option value="$PROJECT_DIR$/src/Admin/Controller/Controller.php" />
-        <option value="$PROJECT_DIR$/src/Admin/Controller/PruebaController.php" />
-        <option value="$PROJECT_DIR$/src/Admin/Model/PruebaModel.php" />
-        <option value="$PROJECT_DIR$/src/Admin/Model/PerroModel.php" />
-        <option value="$PROJECT_DIR$/src/Admin/Templates/home/login.php" />
-        <option value="$PROJECT_DIR$/../apiJRH/.gitignore" />
-        <option value="$PROJECT_DIR$/../apiJRH/README.md" />
-        <option value="$PROJECT_DIR$/lib/Complements/Template/Plate.php" />
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/Admin/Controller/MenuController.php" />
-        <option value="$PROJECT_DIR$/lib/Core/Commun/Constant.php" />
-        <option value="$PROJECT_DIR$/lib/Core/Console/Cache.php" />
-        <option value="$PROJECT_DIR$/lib/Core/Console/Interprete.php" />
-        <option value="$PROJECT_DIR$/lib/Core/Load/Configuration.php" />
         <option value="$PROJECT_DIR$/lib/Core/Commun/Commun.php" />
         <option value="$PROJECT_DIR$/src/Admin/Command/renovarCommands.php" />
         <option value="$PROJECT_DIR$/src/Admin/Command/RenovarsCommands.php" />
@@ -318,15 +339,38 @@
         <option value="$PROJECT_DIR$/lib/Complements/Database/Db.php" />
         <option value="$PROJECT_DIR$/lib/Core/Console/System.php" />
         <option value="$PROJECT_DIR$/config/databases.ini" />
-        <option value="$PROJECT_DIR$/src/Admin/Model/HoVistasModel.php" />
-        <option value="$PROJECT_DIR$/src/Admin/Model/SegUsuariosModel.php" />
         <option value="$PROJECT_DIR$/logs/info_2018-01-22.log" />
-        <option value="$PROJECT_DIR$/src/Admin/Model/HoMascaraModel.php" />
         <option value="$PROJECT_DIR$/lib/Complements/Database/Comun.php" />
-        <option value="$PROJECT_DIR$/src/Admin/Controller/MascaraController.php" />
         <option value="$PROJECT_DIR$/web/admin/js/core/configMascara.js" />
         <option value="$PROJECT_DIR$/src/Admin/Router/Router.xml" />
         <option value="$PROJECT_DIR$/config/database.sql" />
+        <option value="$PROJECT_DIR$/src/Admin/Controller/SegPerfilController.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Controller/SegRolesController.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Controller/SegUsuariosController.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Controller/TipoDatosController.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Controller/MascaraController.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Controller/MenuController.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Controller/Controller.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Controller/GestionarController.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Controller/HomeController.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Controller/LoginController.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Model/HoConexionesModel.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Model/HoEntidadesModel.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Model/HoMascaraModel.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Model/HomeModel.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Model/HoMenuModel.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Model/HoTipoDatosModel.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Model/HoVistasModel.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Model/LoginModel.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Model/SegCambioClaveModel.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Model/SegLogAccionesModel.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Model/SegLogAutenticacionModel.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Model/SegPerfilMenuModel.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Model/SegPerfilModel.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Model/SegPerfilRolesModel.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Model/SegRolesModel.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Model/SegUsuariosModel.php" />
+        <option value="$PROJECT_DIR$/src/Admin/Model/SegUsuariosPerfilModel.php" />
       </list>
     </option>
   </component>
@@ -541,12 +585,12 @@
       <workItem from="1516281254800" duration="6350000" />
       <workItem from="1516393490697" duration="2353000" />
       <workItem from="1516456807225" duration="42882000" />
-      <workItem from="1516621923826" duration="31601000" />
+      <workItem from="1516621923826" duration="32511000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="891138000" />
+    <option name="totallyTimeSpent" value="892048000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -647,7 +691,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/src/Admin/Model/HoVistasModel.php</url>
-          <line>46</line>
+          <line>47</line>
           <option name="timeStamp" value="20" />
         </line-breakpoint>
       </breakpoints>
@@ -656,230 +700,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Admin/Command/GonzaloCommands.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="38" lean-forward="false" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Command/Gonzalo2Commands.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="21" column="2" lean-forward="true" selection-start-line="21" selection-start-column="2" selection-end-line="21" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Core/Console/App.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="442" column="54" lean-forward="true" selection-start-line="442" selection-start-column="54" selection-end-line="442" selection-end-column="54" />
-          <folding>
-            <element signature="e#34#60#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Core/Console/Symbolico.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-157">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Core/Console/ServerInterno.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-231">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Core/Load/Configuration.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="96" column="28" lean-forward="true" selection-start-line="96" selection-start-column="28" selection-end-line="96" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Core/Commun/Commun.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="77" column="27" lean-forward="false" selection-start-line="77" selection-start-column="27" selection-end-line="77" selection-end-column="27" />
-          <folding>
-            <marker date="1516479456508" expanded="true" signature="18712:18775" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Core/Console/doc/es/hornero.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="46" column="202" lean-forward="false" selection-start-line="46" selection-start-column="202" selection-end-line="46" selection-end-column="208" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Model/GabyModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="21" column="29" lean-forward="false" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="29" />
-          <folding>
-            <element signature="e#33#67#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Templates/vistas/lejan/hijosvertodos/mascaras.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Command/EduardoCommands.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="18" column="25" lean-forward="false" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="45" lean-forward="false" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/database2.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1874">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Core/Console/Command.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="37" column="49" lean-forward="false" selection-start-line="37" selection-start-column="41" selection-end-line="37" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Core/Console/Interprete.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="75" column="42" lean-forward="false" selection-start-line="75" selection-start-column="42" selection-end-line="75" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Core/Console/Integrate.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="96" column="40" lean-forward="false" selection-start-line="96" selection-start-column="40" selection-end-line="96" selection-end-column="40" />
-          <folding>
-            <marker date="1516643558592" expanded="true" signature="821:1131" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Complements/Database/Base.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="16" column="66" lean-forward="false" selection-start-line="16" selection-start-column="66" selection-end-line="16" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Core/Console/System.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="67" column="39" lean-forward="false" selection-start-line="67" selection-start-column="28" selection-end-line="67" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/app.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="15" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/databases.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="18" lean-forward="false" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Model/HoVistasModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="20" column="255" lean-forward="false" selection-start-line="20" selection-start-column="255" selection-end-line="20" selection-end-column="255" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Model/SegRolesModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1581">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Model/TipoEstatusModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="121" column="20" lean-forward="false" selection-start-line="121" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Model/SegLogAccionesModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="16" column="39" lean-forward="false" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/error_2018-01-02.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/info_2018-01-02.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="6300" column="166" lean-forward="false" selection-start-line="6300" selection-start-column="166" selection-end-line="6300" selection-end-column="166" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/info_2018-01-03.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="11642" column="166" lean-forward="false" selection-start-line="11642" selection-start-column="166" selection-end-line="11642" selection-end-column="166" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/logs/info_2018-01-04.log">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -988,14 +808,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Model/SegUsuariosModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="130" column="0" lean-forward="false" selection-start-line="130" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/logs/error_2018-01-22.log">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -1030,22 +842,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Model/HoMascaraModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="59" column="18" lean-forward="false" selection-start-line="59" selection-start-column="18" selection-end-line="59" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/Controller/MascaraController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/admin/js/core/configMascara.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -1062,10 +858,252 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Controller/TipoServicioController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-466">
+          <caret line="106" column="29" lean-forward="true" selection-start-line="106" selection-start-column="29" selection-end-line="106" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Controller/TipoEstatusController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-704">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Admin/Router/Router.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="415">
           <caret line="398" column="70" lean-forward="false" selection-start-line="398" selection-start-column="70" selection-end-line="398" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Controller/SociosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Controller/SegRolesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="34" lean-forward="true" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Controller/SegUsuariosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="11" column="34" lean-forward="true" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Controller/TipoDatosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="10" column="34" lean-forward="true" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Controller/MenuController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="8" column="1" lean-forward="false" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Controller/SegPerfilController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="12" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Controller/MascaraController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="10" column="14" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Controller/Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="34" lean-forward="false" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
+          <folding>
+            <element signature="e#322#357#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Controller/GestionarController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="34" lean-forward="false" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Controller/HomeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="34" lean-forward="false" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Controller/LoginController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Model/HoConexionesModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="12" column="24" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Model/HoEntidadesModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="12" column="29" lean-forward="false" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Model/HoMascaraModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="11" column="29" lean-forward="false" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Model/HomeModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="29" lean-forward="false" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Model/HoMenuModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="13" column="29" lean-forward="false" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Model/HoTipoDatosModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="10" column="29" lean-forward="false" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Model/HoVistasModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="12" column="29" lean-forward="false" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Model/LoginModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="29" lean-forward="false" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Model/SegCambioClaveModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="13" column="29" lean-forward="false" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Model/SegLogAccionesModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="10" column="29" lean-forward="false" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Model/SegLogAutenticacionModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="10" column="29" lean-forward="false" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Model/SegPerfilMenuModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="29" lean-forward="false" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Model/SegPerfilModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="10" column="29" lean-forward="false" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Model/SegPerfilRolesModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="10" column="29" lean-forward="false" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Model/SegRolesModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="10" column="29" lean-forward="false" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Model/SegUsuariosModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="12" column="29" lean-forward="false" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Model/SegUsuariosPerfilModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding />
         </state>
       </provider>

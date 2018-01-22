@@ -8,6 +8,7 @@ use JPH\Core\Commun\All;
  * @utor: Gregorio Bolivar <elalconxvii@gmail.com>
  * @created: 25/09/2017
  * @version: 1.0
+ * @namespace APP\Admin\Model
  */ 
 
 class SegRolesModel extends Base

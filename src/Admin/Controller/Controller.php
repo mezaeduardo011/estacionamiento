@@ -5,6 +5,7 @@
  * @Author: Blog: <http://gbbolivar.wordpress.com>
  * @Creation Date: 30/08/2017
  * @version: 0.1
+ * @namespace APP\Admin\Controller
  */
 namespace APP\Admin\Controller;
 use JPH\Complements\Template\Plate;

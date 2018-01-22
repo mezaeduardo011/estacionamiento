@@ -8,6 +8,7 @@ use JPH\Core\Commun\All;
  * @autor: Ing. Gregorio Bolivar <elalconxvii@gmail.com>
  * @created: 02/12/2017
  * @version: 1.0
+ * @namespace APP\Admin\Model
  */ 
 class HoTipoDatosModel extends Base
 {

@@ -1,5 +1,0 @@
-{
-    "mascaras" : [
-        {"type":"int","mascaraJS":"XlswLTldKyQ=","mascaraPHP":"XlswLTldKyQ=","mensaje":"Por favor ingresar solo números, ejemplo 1980","input":"int","campo":"convenio_id"},{"type":"varchar","mascaraJS":"XlthLXpBLVogXSsk","mascaraPHP":"XlthLXpBLVogXSsk","mensaje":"Debe ingresar solo texto acepta espacios en blanco, ejemplo: Mi mama me mima","input":"letraSpacio","campo":"nombres"},{"type":"varchar","mascaraJS":"XlthLXpBLVogXSsk","mascaraPHP":"XlthLXpBLVogXSsk","mensaje":"Debe ingresar solo texto acepta espacios en blanco, ejemplo: Mi mama me mima","input":"letraSpacio","campo":"apelidos"},{"type":"varchar","mascaraJS":"XlthLXpBLVowLTkgXSok","mascaraPHP":"XlthLXpBLVowLTkgXSok","mensaje":"Por favor puede ingresar letras, espacios  y números","input":"letrasSpacioNumeros","campo":"legajo"},{"type":"varchar","mascaraJS":"XlthLXpBLVowLTkgXSok","mascaraPHP":"XlthLXpBLVowLTkgXSok","mensaje":"Por favor puede ingresar letras, espacios  y números","input":"letrasSpacioNumeros","campo":"sueldo"}
-    ]
-}

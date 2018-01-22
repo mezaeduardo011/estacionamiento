@@ -7,6 +7,7 @@ use JPH\Complements\Database\{Base,Usuarios};
  * @utor: Gregorio Bolivar <elalconxvii@gmail.com>
  * @created: 28/08/2017
  * @version: 2.0
+ * @namespace APP\Admin\Model
  */ 
 class LoginModel extends Base
 {

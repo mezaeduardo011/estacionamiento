@@ -11,6 +11,7 @@ use JPH\Core\Store\Cache;
  * @autor: Ing. Gregorio Bolivar <elalconxvii@gmail.com>
  * @created: 21/12/2017
  * @version: 2.0
+ * @namespace APP\Admin\Model
  */
 class SegCambioClaveModel extends Base
 {

@@ -9,6 +9,7 @@ use JPH\Core\Commun\{
  * @autor: Ing. Gregorio Bolivar <elalconxvii@gmail.com>
  * @created: 01/12/2017
  * @version: 1.0
+ * @namespace APP\Admin\Model
  */ 
 class HoMascaraModel extends Base
 {
