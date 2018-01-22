@@ -73,7 +73,7 @@ class Interprete
         {
              $elemento = $this->getJsonConfig();
              $obj = json_decode($elemento);
-             $valor = base64_encode($obj->hornero->$item);
+             $valor = $obj->hornero->$item;
              self::setValor($valor);
      }
 
@@ -88,12 +88,12 @@ class Interprete
                 $fwv.="\n \n";
                 $item=count($this->labmenu);
                 if($item==1){
-                    $fwv.=base64_decode($this->labmenu);
+                    $fwv.= $this->labmenu;
                     
                 }else{
                    
                     foreach ($this->labmenu as  $value) {
-                        $fwv.=base64_decode($value);
+                        $fwv.= $value;
                         $fwv.="\n";
                     }
                 }
@@ -105,7 +105,7 @@ class Interprete
          * Ruta del Archivo json en el cual hay muchas mensajes que debe devolver al sistema
          * @return string $response toda la informacion del json 
          */
-        static public function getJsonConfig()
+        public static function getJsonConfig()
         {
                 $response = file_get_contents(__DIR__.DIRECTORY_SEPARATOR.'doc'.DIRECTORY_SEPARATOR.'es'.DIRECTORY_SEPARATOR.'hornero.json');
                 return $response;
@@ -115,19 +115,25 @@ class Interprete
          * Ruta del Archivo json en el cual hay muchas mensajes que debe devolver al sistema
          * @return string $response toda la informacion del json
          */
-        static public function getDirDoc()
+        public static function getDirDoc()
         {
             $ruta = __DIR__.DIRECTORY_SEPARATOR.'doc'.DIRECTORY_SEPARATOR.'es'.DIRECTORY_SEPARATOR.'document'.DIRECTORY_SEPARATOR;
             return $ruta;
         }
 
-
-        static public function getLogoAscii()
+        /**
+         * Mostrar el logo en ascii
+         * @return devolver el logo en ascc
+         */
+        public static function getLogoAscii()
         {
                 $response = file_get_contents(__DIR__.DIRECTORY_SEPARATOR.'doc'.DIRECTORY_SEPARATOR.'banner.txt');
                 return $response;
         }
 
+        /**
+         * Setter de los valores por el terminal
+         */
         public function setValor($valor)
         {
                 $this->labmenu = $valor;

@@ -1,5 +1,0 @@
-{
-    "mascaras" : [
-        {"type":"int","mascaraJS":"XlswLTldKyQ=","mascaraPHP":"XlswLTldKyQ=","mensaje":"Por favor ingresar solo números, ejemplo 1980","input":"int","campo":"parte"},{"type":"varchar","mascaraJS":"XihbMF1bMS05XXxbMTJdWzAtOV18M1swMV0pKFxcL3wtKShbMF1bMS05XXxbMV1bMC0yXSlcXDIoXFxkezR9KQ==","mascaraPHP":"XihbMF1bMS05XXxbMTJdWzAtOV18M1swMV0pKFwvfC0pKFswXVsxLTldfFsxXVswLTJdKVwyKFxkezR9KQ==","mensaje":"Debe ingresar una fecha correcta, ejemplo 31-12-2017","input":"fecha","campo":"fabricado"},{"type":"date","mascaraJS":"XihbMF1bMS05XXxbMTJdWzAtOV18M1swMV0pKFxcL3wtKShbMF1bMS05XXxbMV1bMC0yXSlcXDIoXFxkezR9KQ==","mascaraPHP":"XihbMF1bMS05XXxbMTJdWzAtOV18M1swMV0pKFwvfC0pKFswXVsxLTldfFsxXVswLTJdKVwyKFxkezR9KQ==","mensaje":"Debe ingresar una fecha correcta, ejemplo 31-12-2017","input":"fecha","campo":"fabricado"},{"type":"varchar","mascaraJS":"XlthLXpBLVowLTkgXSok","mascaraPHP":"XlthLXpBLVowLTkgXSok","mensaje":"Por favor puede ingresar letras, espacios  y números","input":"letrasSpacioNumeros","campo":"modelos"}
-    ]
-}

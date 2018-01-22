@@ -1,6 +1,6 @@
 {
     "hornero": {
-        "all": "Variebles comandos:\n App\n   app:list, Permite listar las aplicacion dentro de tu proyecto\n   app nombre, Permite crear una aplicacion dentro de tu proyecto\n   app nombre public, Permite publicar tus css, js, e img en la parte web\n   app:model nombre-app nombre-modelo, Permite generar el modelo dentro de una aplicacion\n   app:controller nombre-app nombre-controller, Permite generar un controlador dentro de una aplicacion\n   app:CRUD nombre-app nombre-CRUD, Permite generar un ABM dentro de una aplicacion \n Cache\n   cache:clean, permite limpiar el cache de las aplicaciones\n Server\n   server, permite ejecutar el sistema del servidor interno de php.  "
+        "all": "Variebles comandos:\n App\n   app nombre, Permite crear una aplicacion dentro de tu proyecto.\n   app:list, Permite listar las aplicacion dentro de tu proyecto.\n   app:public nombre-app, Permite publicar tus css, js, e img en la parte web.\n   app:model nombre-app nombre-modelo, Permite generar el modelo dentro de una aplicacion.\n   app:controller nombre-app nombre-controller, Permite generar un controlador dentro de una aplicacion.\n   app:crud nombre-app nombre-crud, Permite generar un ABM dentro de una aplicacion. \n Command\n   command:app nombre-app command, Permite generar comandos personalizados para uso del terminal.\n   command:app:run nombre-app command, Permite ejecutar comandos personalizados para uso del terminal.\n Cache\n   cache:clean, permite limpiar el cache de las aplicaciones.\n Server\n   server, permite ejecutar el sistema del servidor interno de php.  \n System\n   system:initialize, permite inicializar el sistema para instalar las tablas y datos necesarios para instalar e sistema.\n   system:refresh, permite refrescar todo el sistema completo, queda el sistema como por primera vez, no es reversible."
     },
     "mensajes": {
         "App": {
@@ -15,6 +15,9 @@
             "app:list" : "Aplicacion {name}, se encuentra dentro tu proyecto.",
             "app:crud-existe" : "El controlador ABM {controller}, existe  dentro de la aplicacion {app}.",
             "app:crud-creado" : "El controlador ABM {controller}, fue creado dentro de la aplicacion {app}."
+        },
+        "Commands":{
+            "command-create" : "Comando personalizado {name} creada exitosamente dentro de la Aplicacion {apps}.\n"
         },
         "Cache" : {
             "cache-clean" : "Cache de la aplicacion {name} fue eliminado exitosamente."

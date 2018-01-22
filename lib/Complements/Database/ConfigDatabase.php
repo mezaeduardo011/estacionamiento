@@ -4,7 +4,7 @@ namespace JPH\Complements\Database;
  * Configuracion de las conexiones bb Hornero 4
  * @propiedad: Hornero 4
  * @utor: Gregorio Bolivar <elalconxvii@gmail.com>
- * @created: 18/01/2018
+ * @created: 22/01/2018
  * @version: 1.0
  */ 
 
@@ -39,7 +39,7 @@ trait ConfigDatabase
    // Puerto de comunicacion con el servidor de base de datos
    $this->port = '3305';
    // Nombre base de datos
-   $this->db = 'test_crud2';
+   $this->db = 'hornero';
    // Usuario de acceso a la base de datos
    $this->user = 'sa';
    // Clave de acceso a la base de datos
@@ -59,7 +59,7 @@ trait ConfigDatabase
    // Puerto de comunicacion con el servidor de base de datos
    $this->port = '3305';
    // Nombre base de datos
-   $this->db = 'test_crud2';
+   $this->db = 'hornero';
    // Usuario de acceso a la base de datos
    $this->user = 'sa';
    // Clave de acceso a la base de datos

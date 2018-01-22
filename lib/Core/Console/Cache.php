@@ -26,12 +26,12 @@ class Cache
         if(count($list)==1){
             $ruta = $tmp.implode($list).DIRECTORY_SEPARATOR.'Cache'.DIRECTORY_SEPARATOR.'System';
             $Commun->eliminarDir($ruta);
-            $item=base64_encode(All::mergeTaps($msj,array('name'=>end($list))));
+            $item=All::mergeTaps($msj,array('name'=>end($list)));
         }else{
             foreach ($list as $value) {
                 $ruta = $tmp.$value.DIRECTORY_SEPARATOR.'Cache'.DIRECTORY_SEPARATOR.'System';
                 $Commun->eliminarDir($ruta);
-                $tmp=base64_encode(All::mergeTaps($msj,array('name'=>$value)));
+                $tmp=All::mergeTaps($msj,array('name'=>$value));
                 $item[] =$tmp;
             }
         }

@@ -33,8 +33,6 @@ class Comun{
         $this->id = true;
         $this->active = 'Model';
         $this->query = new Query();
-        /*echo "<pre>";
-        print_r($this); die();*/
 
         if (isset($_SESSION["usuario"])) {
             $this->usuario = $_SESSION["usuario"];
@@ -96,7 +94,7 @@ class Comun{
                 $values = substr($values, 0, -1);
 
                $query = "INSERT INTO " . $this->tabla . " (" . $fields . ") VALUES(" . $values . ")";
-                $this->execute($query);
+               $this->execute($query);
 
                 if (!is_array($this->campoid)) {
                     $campoid = $this->campoid;
@@ -219,7 +217,6 @@ class Comun{
 
     public function fijarValores($data = false)
     {
-        //print_r($data); die();
         if(!$data) $data = $_POST;
         foreach ($data as $campo => $valor) {
             $this->fijarValor($campo,trim($valor));

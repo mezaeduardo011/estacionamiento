@@ -114,7 +114,7 @@ Config.Mascaras = {
         var option = Config.TipoDatos.getTipoDatos();
         optNuevaMascara.click(function() {
             Config.html = Config.Mascaras.showFormulario();
-            Config.agregarContenido('Registro de nueva Mascara, <a href="https://regex101.com" target="_new">validar online</a> ', Config.html,'box4');
+            Config.agregarContenido('Registro de nueva Mascara, <a href="https://regex101.com" target="_new">1-validar online</a> <a href="https://www.regexpal.com" target="_new">2-validar online</a>  ', Config.html,'box4');
             Config.Mascaras.setMascaraSubmit();
             Config.activarSegundo('box4');
         });
@@ -141,7 +141,7 @@ Config.Mascaras = {
         Config.html +=    ' </div>';
         Config.html +=    ' <div class="form-group">';
         Config.html +=    '     <label for="expresion">Expresión</label>';
-        Config.html +=    '     <input type="text" name="mascara" class="form-control contar requerido" id="mascara" placeholder="Ingresar la expresion regular, ejemplo DNI: ^\\\\d{8}[a-zA-Z]$" maxlength="100" data-item="100" required>';
+        Config.html +=    '     <input type="text" name="mascara" class="form-control contar requerido" id="mascara" placeholder="Ingresar la expresion regular, ejemplo DNI: ^\\\\d{8}[a-zA-Z]$" maxlength="200" data-item="200" required>';
         Config.html +=    ' </div>';
         Config.html +=    ' <div class="form-group">';
         Config.html +=    '     <label for="mensaje">mensaje</label>';

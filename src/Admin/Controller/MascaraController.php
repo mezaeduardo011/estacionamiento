@@ -40,15 +40,16 @@ class MascaraController extends Controller
      */
     public function runMascaraCreate($request)
     {
-        $result = $this->hoMascaraModel->setProductosCreate((array)$request->postParameter());
+        $result = $this->hoMascaraModel->setMascaraCreate((array)$request->postParameter());
         if(is_null($result)){
             $dataJson['error']='1';
             $dataJson['msj']='Error en procesar el registro';
+            $this->json($dataJson,400);
         }else{;
             $dataJson['error']='0';
             $dataJson['msj'] = 'Registro efectuado exitosamente';
+            $this->json($dataJson);
         }
-        $this->json($dataJson);
     }
 
     public function runMascaraShow($request)

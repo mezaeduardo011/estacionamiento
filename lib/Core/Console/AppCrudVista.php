@@ -861,7 +861,7 @@ class AppCrudVista extends App
         fputs($ar, '}'.PHP_EOL);
         fputs($ar, '?>'.PHP_EOL);
         fputs($ar, '];'.PHP_EOL);
-        if(count($existe)>0){
+        if(@count($existe)>0){
             fputs($ar, '    '.All::upperCase($campos['vista']).'.loadListaMenu();' . PHP_EOL);
         }
         fclose($ar);

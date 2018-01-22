@@ -39,8 +39,8 @@ class Base extends Comun implements Constant
             $instan = get_class($this);
 
             // APP\Admin\Model\PruebaModel
-            // Verificar que solo sea instanciado desde el modelo si lo hace de otra parte lanza exepcion
-            if(\preg_match('/Model/',$instan)){
+            // Verificar que solo sea instanciado desde el modelo o el Core si lo hace de otra parte lanza exepcion
+            if(\preg_match('/Model/',$instan) OR \preg_match('/Core/',$instan)){
                 if(!empty($tmp)){
 
                     $ext = method_exists($this,strtolower($tmp));

@@ -149,6 +149,33 @@ trait Db  {
     }
 
     /**
+     * Executa el query y trae el valor
+     * @param string $query
+     * @return bool boolean
+     */
+    public function getAll($query) {
+
+        try {
+            switch ($this->motor) {
+                case "maria":
+                    $this->resultSet = $this->conn->query($query);
+
+                    break;
+                case "sql":
+                    $this->resultSet = sqlsrv_query($this->conn, $query);
+                    // variables de proceso de auditoria de registro de las accciones en base de datos guardar en log
+                    if((bool)Cache::get('debug')){
+                        $this->logInfo($query);
+                    }
+                    break;
+            }
+        }catch (\TypeError $t){
+            $this->logError($t->getMessage());
+            die($t->getMessage());
+        }
+    }
+
+    /**
      * Es para ejecutar store procedure
      * @param string $query
      * @return object $this

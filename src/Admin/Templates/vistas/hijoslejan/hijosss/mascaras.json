@@ -1,0 +1,5 @@
+{
+    "mascaras" : [
+        {"type":"int","mascaraJS":"XlswLTldKyQ=","mascaraPHP":"XlswLTldKyQ=","mensaje":"Por favor ingresar solo números, ejemplo 1980","input":"int","campo":"lejan_id"},{"type":"varchar","mascaraJS":"XlthLXpBLVowLTkgXSok","mascaraPHP":"XlthLXpBLVowLTkgXSok","mensaje":"Por favor puede ingresar letras, espacios  y números","input":"letrasSpacioNumeros","campo":"nombres"},{"type":"varchar","mascaraJS":"XlthLXpBLVowLTkgXSok","mascaraPHP":"XlthLXpBLVowLTkgXSok","mensaje":"Por favor puede ingresar letras, espacios  y números","input":"letrasSpacioNumeros","campo":"apellidos"}
+    ]
+}

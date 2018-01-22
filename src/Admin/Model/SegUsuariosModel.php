@@ -115,6 +115,7 @@ class SegUsuariosModel extends Base
     */ 
    public function setSegUsuariosCreate($datos)
    {
+       die('llego');
        $roles = $datos->roles;
        unset($datos->roles);
 
@@ -129,7 +130,7 @@ class SegUsuariosModel extends Base
 
        // Registra log de auditoria de registro de acciones
        $user = $this->getSession('usuario');
-       $this->segLogAccionesModel->cargaAcciones($this->tabla, 'id', serialize($datos),'',$user->id,Constant::LOG_ALTA);
+       $this->segLogAccionesModel->cargaAcciones($this->tabla, $val,serialize($datos),'', $user->id, parent::LOG_ALTA);
 
        return $val;
    }

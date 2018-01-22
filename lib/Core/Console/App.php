@@ -64,6 +64,34 @@ class App
                 return $msj;
         }
 
+        /**
+         * Pemite crear comandos personalizados en la aplicacion indicada por parametros
+         * @param String $apps, Aplicacion que se desea efectuar el comando personalizado
+         * @param String $command, Comando el cual deseamos Crear
+         * @return Void
+         */
+        public function createCommands($apps, $comand)
+        {
+            $app = All::upperCase($apps);
+            $existe = self::existsApp($app);
+            if($existe){
+                $ruta = $this->pathapp.$app;
+                self::createDirCommand($ruta);
+                self::createFileCommands($app,$ruta,$comand);
+
+                $msj=Interprete::getMsjConsole('Commands','command-create');
+                $msj=All::mergeTaps($msj,array('name'=>$comand,'apps'=>$app));
+                return $msj;
+            }
+        }
+        /**
+         * Perite crear el directorio donde se almacenara los command de la aplicacion creada
+         * @return boolean
+         */
+        private function createDirCommand($ruta)
+        {
+            All::mkddir($ruta.All::APP_COMMAND);
+        }
 
         /**
          * Perite crear el directorio donde se almacenara el cache de la aplicacion creada
@@ -182,11 +210,11 @@ class App
             $item = array();
             
             if(count($list)==1){
-                $item=base64_encode(All::mergeTaps($msj,array('name'=>end($list))));
+                $item=All::mergeTaps($msj,array('name'=>end($list)));
             }else{
                 foreach ($list as $value) {
 
-                   $tmp=base64_encode(All::mergeTaps($msj,array('name'=>$value)));
+                   $tmp=All::mergeTaps($msj,array('name'=>$value));
                    $item[] =$tmp;
                 }
             }
@@ -195,7 +223,7 @@ class App
 
         /**
          * Permite visuaizar un listado de las aplicaciones existente dentro del sistema
-         * return Array $list, listado de aplicaciones disponible
+         * @return Array $list, listado de aplicaciones disponible
          */
         private function showAppsList()
         {
@@ -209,7 +237,7 @@ class App
          * @param String $app
          * @return Bool $tmp;
          */
-        public function existsApp($app)
+        public function existsApp(String $app)
         {
             $app = All::upperCase($app);
             $appList = self::showAppsList();
@@ -253,22 +281,30 @@ class App
             fclose($ar);
         }
 
-        private function createNewConfigItemApp(string $app)
+        /**
+         * Permite crear otros item nuevos si no existen dentro del archivo.ini
+         */
+        private function createNewConfigItemApp(String $apps)
         {
-            $temp = Configuration::fileConfigApp();
-            $file = fopen($temp->app, "a") or die("Problemas en la creaci&oacute;n de nueva configuracion de app.ini del apps " . $app);
-            var_dump($file);
-            fwrite($file, "[$app]" . PHP_EOL);
-            fwrite($file, "    urlComp = 'http://localhost:8000/".ucfirst($app).".php/';" . PHP_EOL);
-            fwrite($file, "    urlWebs = 'http://localhost:8000/';" . PHP_EOL);
-            fwrite($file, "    urlAute = 'http://localhost:8000/login'" . PHP_EOL);
-            fwrite($file, "    urlLock = 'http://localhost:8000/".ucfirst($app).".php/lockscreen'" . PHP_EOL);
-            fwrite($file, "    dir_theme = 'JPH'" . PHP_EOL);
-            fwrite($file, "    srcImg  = '/jph/img/'" . PHP_EOL);
-            fwrite($file, "    srcJs   = '/jph/js/'" . PHP_EOL);
-            fwrite($file, "    srcCss  = '/jph/css/'" . PHP_EOL);
-            fwrite($file, PHP_EOL);
-            fclose($file);
+            $temp = All::parserObject(Configuration::fileConfigApp());
+            $fileIni = parse_ini_file($temp->app, true);
+            //All::pp($fileIni);
+            if(@is_null($fileIni[$apps])) {
+                $file = fopen($temp->app, "a") or die("Problemas en la creaci&oacute;n de nueva configuracion de app.ini del apps " . $apps);
+                fwrite($file, "[$apps]" . PHP_EOL);
+                fwrite($file, "    urlComp = 'http://localhost/" . All::low($apps) . ".php/';" . PHP_EOL);
+                fwrite($file, "    urlWebs = 'http://localhost/';" . PHP_EOL);
+                fwrite($file, "    urlAute = 'http://localhost/login'" . PHP_EOL);
+                fwrite($file, "    urlLock = 'http://localhost/" . All::low($apps) . ".php/lockscreen'" . PHP_EOL);
+                fwrite($file, "    dir_theme = '".All::low($apps)."'" . PHP_EOL);
+                fwrite($file, "    srcImg  = '/jph/img/'" . PHP_EOL);
+                fwrite($file, "    srcJs   = '/jph/js/'" . PHP_EOL);
+                fwrite($file, "    srcCss  = '/jph/css/'" . PHP_EOL);
+                fwrite($file, PHP_EOL);
+                fclose($file);
+            }else{
+                return true;
+            }
         }
 
         /**
@@ -317,6 +353,7 @@ class App
             // Cierro el archivo y la escritura
             fclose($ar);
         }
+
 
         /**
          * Permite crear el archivo controller principal base para luego ser instanciado por los demas creado
@@ -376,6 +413,41 @@ class App
             fputs($ar, '            }'.PHP_EOL);
             fputs($ar, '            return $resultado;'.PHP_EOL);
             fputs($ar, '        }'.PHP_EOL);
+            fputs($ar, '   }'.PHP_EOL);
+            fputs($ar, '}'.PHP_EOL);
+            fputs($ar, '?>'.PHP_EOL);
+            // Cierro el archivo y la escritura
+            fclose($ar);
+        }
+
+        /**
+         * Permite crear una plantilla archivo encargado de procesar el controller simple
+         * @param string $ruta, ruta donde esta el xml
+         * @param string $commands, commands que se desea ejecutar
+         */
+        private function createFileCommands(String $app, string $ruta, string $commands)
+        {
+            $ar = fopen($ruta.All::APP_COMMAND.DIRECTORY_SEPARATOR."".All::upperCase($commands)."Commands.php", "w+") or die("Problemas en la creaci&oacute;n el comando personalizados ");
+            // Inicio la escritura en el activo
+            fputs($ar, '<?php'.PHP_EOL);
+            fputs($ar, 'namespace APP\\'.$app.'\\Commands;'.PHP_EOL);
+            fputs($ar, 'use JPH\\Core\\Console;'.PHP_EOL);
+            fputs($ar, 'use JPH\\Core\\Commun\\All;'.PHP_EOL);
+            fputs($ar, '/**'.PHP_EOL);
+            fputs($ar, ' * Generador de codigo de Commands de '.All::FW.' '.All::VERSION.''.PHP_EOL);
+            fputs($ar, ' * @propiedad: '.All::FW.' '.All::VERSION.''.PHP_EOL);
+            fputs($ar, ' * @autor: Ing. Gregorio Bolivar <elalconxvii@gmail.com>'.PHP_EOL);
+            fputs($ar, ' * @created: ' .date('d/m/Y') .''.PHP_EOL);
+            fputs($ar, ' * @version: 1.0'.PHP_EOL);
+            fputs($ar, ' */ '.PHP_EOL);
+            fputs($ar, 'class '.All::upperCase($commands).'Commands'.PHP_EOL);
+            fputs($ar, '{'.PHP_EOL);
+            fputs($ar, '  static $nombre= \'run Commands Go.\';'.PHP_EOL);
+            fputs($ar, '   public function __construct()'.PHP_EOL);
+            fputs($ar, '   {}'.PHP_EOL);
+            fputs($ar, '   public static function main() : void'.PHP_EOL);
+            fputs($ar, '   {'.PHP_EOL);
+            fputs($ar, '      die(self::$nombre);'.PHP_EOL);
             fputs($ar, '   }'.PHP_EOL);
             fputs($ar, '}'.PHP_EOL);
             fputs($ar, '?>'.PHP_EOL);

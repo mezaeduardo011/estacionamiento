@@ -123,7 +123,7 @@ class Configuration extends Cache
         }
     }
 
-    public static function fileConfigApp()
+    public static function fileConfigApp():Array
     {
 
         $variable['app'] = All::DIR_CONFIG . "app.ini";

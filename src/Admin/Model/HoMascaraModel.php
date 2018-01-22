@@ -19,6 +19,7 @@ class HoMascaraModel extends Base
         $this->campoid = array('id');
         $this->campos = array('ho_tipo_dato_type','label', 'mascara', 'mensaje', 'clase_input', 'created_usuario_id', 'updated_usuario_id', 'created_at', 'updated_at');
         parent::__construct();
+        $this->segLogAccionesModel = new SegLogAccionesModel();
     }
 
     /**
@@ -49,7 +50,7 @@ class HoMascaraModel extends Base
      * @param: Array $datos
      * @return array $tablas
      */
-    public function setProductosCreate($datos)
+    public function setMascaraCreate($datos)
     {
         $user = $this->getSession('usuario');
         $this->fijarValores($datos);
@@ -58,6 +59,11 @@ class HoMascaraModel extends Base
         $this->fijarValor('created_at',All::now());
         $this->guardar();
         $val = $this->lastId();
+        if(!empty($val)) {
+            // Registra log de auditoria de registro de acciones
+            $user = $this->getSession('usuario');
+            $this->segLogAccionesModel->cargaAcciones($this->tabla, $val, serialize($datos), '', $user->id, parent::LOG_ALTA);
+        }
         return $val;
     }
 

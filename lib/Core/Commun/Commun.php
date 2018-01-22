@@ -1,13 +1,14 @@
 <?php
 namespace JPH\Core\Commun;
 /**
- * Commun permite terner un conjunto de funcionalidades muy utiles para el sistema que pueden ser usada en cualquier momento
+ * Commun permite terner un conjunto de funcionalidades muy utiles para el sistema que
+ * pueden ser usada en cualquier momento
  * @author: Gregorio Jose Bolivar Bolivar <elalconxvii@gmail.com>
  * @Creation Date: 09/7/2017
  * @Audited by: Gregorio J Bolivar B
- * @Modified Date: 31/10/2017
- * @package: CommunController.php
- * @version: 4.0
+ * @Modified Date: 20/01/2017
+ * @package: Commun.php
+ * @version: 4.1
  */
 
 trait Commun
@@ -53,7 +54,7 @@ trait Commun
      * @param array $dataArray , parametro de entrada para ser impreso
      * @return array valores
      */
-    static function pp($dataArray)
+    public static function pp($dataArray)
     {
         self::statusHttp(201);
         echo "<pre>";
@@ -62,9 +63,19 @@ trait Commun
     }
 
     /**
+     * Permite parsear un arreglo en un objeto
+     * @parrent $valorArray, Valor recibido en arreglo
+     * @return $returnObject, Valor retornado en objeto
+     */
+    public static function parserObject(Array $valorArray)
+    {
+        return (object)$valorArray;
+    }
+
+    /**
      * Permite poner en modo desarrollador al sistema
      */
-    static function modDevelopment($opt=true)
+    public static function modDevelopment($opt=true)
     {
         if($opt){
             error_reporting(E_ALL);
@@ -77,11 +88,11 @@ trait Commun
     }
 
     /**
-     * Permite cambiar tu texto de entrada en formato came case
+     * Permite cambiar tu texto de entrada en formato came case, ejemplo: codigoBueno
      * @param string $texto , lo que deseas cambiar de formato
      * @return string $came, texto formateado
      */
-    static function cameCase(string $texto)
+    public static function cameCase(string $texto)
     {
         $resul = str_replace(array('_'), array(' '), $texto);
         $tmp = explode(' ', $resul);
@@ -101,11 +112,11 @@ trait Commun
     }
 
     /**
-     * Permite cambiar tu texto de extrada en formato upper case
+     * Permite cambiar tu texto de extrada en formato upper case ejemplo: CodigoBueno
      * @param string $texto , lo que deseas cambiar de formato
      * @return string $valor;
      */
-    static function upperCase(string $texto)
+    public static function upperCase(string $texto)
     {
         $resul = str_replace(array('_'), array(' '), $texto);
         $tmp = explode(' ', $resul);
@@ -121,10 +132,20 @@ trait Commun
     }
 
     /**
+     * Permite cambiar un texto de entrada en minuscula
+     * @param String $texto, lo que deseas cambiar a minuscula
+     * @return String $valor, cambiado a minuscula
+     */
+    public static function low(String $texto)
+    {
+        return mb_strtolower($texto);
+    }
+
+    /**
      * Permite formatar la cabecera http para diferentes formatos
      * @param String $type, Permite indicar los formato que deseas procesar, ejemplo: xml, json u otros
      */
-    static function headerFormat($type)
+    public static function headerFormat($type)
     {
         switch ($type){
             case 'json':
@@ -142,7 +163,7 @@ trait Commun
      * @param integer $num, Numero de respuesta del protocolo http 200 por default
      * @return \JsonSerializable $buffer, xml del registro del grid
      */
-    static function json($datosJson, $num = 200)
+    public static function json($datosJson, $num = 200)
     {
         self::headerFormat('json');
         self::statusHttp($num);
@@ -157,7 +178,7 @@ trait Commun
      * @param integer $num, Numero de respuesta del protocolo http 200 por default
      * @return \XMLWriter $buffer, xml del registro del grid
      */
-    static function xmlGridList($datosXml, $num = 200)
+    public static function xmlGridList($datosXml, $num = 200)
     {
         self::headerFormat('xml');
         self::statusHttp($num);
@@ -172,7 +193,7 @@ trait Commun
      * @param array $data, Arreglo de resultado de la consulta a base de datos
      * @return \XMLWriter $buffer, xml del registro del grid
      */
-    static function settingListXml($data)
+    public static function settingListXml($data)
     {
 
         //$xmlTmp="<?xml version=\"1.0\" encoding=\"UTF-8\">";
@@ -192,7 +213,7 @@ trait Commun
 
     }
 
-    static function utf8enc($array)
+    public static function utf8enc($array)
     {
         if (!is_array($array)) return;
         $helper = array();
@@ -200,7 +221,7 @@ trait Commun
         return $helper;
     }
 
-    static function utf8dec($array)
+    public static function utf8dec($array)
     {
         if (!is_array($array)) return;
         $helper = array();
@@ -211,7 +232,7 @@ trait Commun
     /**
      *
      */
-    static function compressResponse(string $html)
+    public static function compressResponse(string $html)
     {
         $search = array('/\>[^\S ]+/s', '/[^\S ]+\</s', '/(\s)+/s', '[\n|\r|\n\r|\t|\0|\x0B]');
         $replace = array('>', '<', '\\1');
@@ -221,7 +242,7 @@ trait Commun
     /**
      *
      */
-    static function sanear_string(string $string)
+    public static function sanear_string(string $string)
     {
         $string = trim($string);
         $string = str_replace(
@@ -311,7 +332,7 @@ trait Commun
      * @param array $options , Valores del arreglo a cambiar
      * @return string $result, cadena de texto con los datos reales
      */
-    static function mergeTaps($texto, $option)
+    public static function mergeTaps($texto, $option)
     {
         $tmp = array();
         // Creamos las reglas en lote
@@ -327,7 +348,7 @@ trait Commun
      * @param string $carpeta , ruta donde esta la carpeta a eliminar
      * @author http://aprendizdealquimia.es/blog/?p=231
      */
-    function eliminarDir(string $carpeta)
+    public function eliminarDir(string $carpeta)
     {
         foreach (glob($carpeta . "/*") as $archivos_carpeta) {
             //si es un directorio volvemos a llamar recursivamente
@@ -340,7 +361,7 @@ trait Commun
         @rmdir($carpeta);
     }
 
-    static function statusHttp($num)
+    public static function statusHttp($num)
     {
         static $http = array(
             100 => "HTTP/1.1 100 Continue",
@@ -392,7 +413,7 @@ trait Commun
      * @param integer $num , numero de proceso
      */
 
-    static function redirect(string $url, $num = 200)
+    public static function redirect(string $url, $num = 200)
     {
         self::statusHttp($num);
         @header("Location: $url");
@@ -457,7 +478,7 @@ trait Commun
 
     /**
      * Retornar la el nombre del directorio donde se esta ejecutando el sistema
-     **/
+     */
     public static function pathApps($dir)
     {
         $vista = @end(explode(DIRECTORY_SEPARATOR, dirname($dir)));
@@ -497,8 +518,9 @@ trait Commun
         return array('select' => $select);
     }
 
-    /*
-     * Permite desencriptar y devolver el objeto de lo valores */
+    /**
+     * Permite desencriptar y devolver el objeto de lo valores
+     */
     public static function formatRelacio($obj)
     {
         $str = base64_decode($obj);

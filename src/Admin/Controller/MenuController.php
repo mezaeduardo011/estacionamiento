@@ -233,7 +233,7 @@ class MenuController extends Controller
                     $menu3[$it2]['submenu'][] = (count($menuSegundoCompleto)==0)?'':$menuSegundoCompleto[0];
 
             }
-            $menu4[$key3]=$menu3;
+            $menu4[$key3]=@$menu3;
 
         }
         return $menu4;
