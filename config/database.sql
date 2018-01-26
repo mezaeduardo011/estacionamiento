@@ -1,3 +1,4 @@
+  -----  ULTIMA MODIFICACION 25-01-2018 09:37 ----------------
   -- #### Seguridad de Datos de roles #### ---
 
   -- Clase encargada de mantener todos los perfies del sistema ejemplo Root
@@ -213,9 +214,12 @@
     id BIGINT Identity(1,1),
     apps varchar(50) NOT NULL,
     conexiones_id int NOT NULL,
-    entidad varchar(64) NOT NULL,
-    nombre varchar(64) NOT NULL,
-    field varchar(64) NOT NULL,
+    entidad varchar(70) NOT NULL,
+    entidad_alias varchar(70) NULL,
+    nombre varchar(70) NOT NULL,
+    nombre_alias varchar(70) NULL,
+    field varchar(70) NOT NULL,
+    field_alias varchar(70) NULL,
     type varchar(20) NOT NULL,
     dimension int,
     fijo varchar(60) NULL,
@@ -223,7 +227,7 @@
     label varchar(50) NOT NULL,
     mascara varchar(50) NOT NULL,
     nulo varchar(3) NOT NULL,
-    place_holder varchar(14),
+    place_holder varchar(200),
     relacionado varchar(10),
     tabla_vista varchar(50) NULL,
     vista_campo varchar(50),
@@ -235,9 +239,8 @@
     CONSTRAINT pk_ho_vistas PRIMARY KEY(id)
   );
 
-
   ALTER TABLE ho_vistas
-   ADD UNIQUE  (conexiones_id, entidades_tabla,nombre,field,label,mascara);
+   ADD UNIQUE  (conexiones_id, entidad, nombre, field, label, mascara);
 
 
   -- Vista encargada de extraer las tablas
@@ -245,18 +248,17 @@
 
   -- Extraer las vistas generadas a partir de una entidad generadas por el sistema
   CREATE VIEW view_list_vist_gene AS
- SELECT c.apps, c.conexiones_id, c.entidad, c.nombre, (select b.COLUMN_NAME from INFORMATION_SCHEMA.TABLE_CONSTRAINTS AS a
-    INNER JOIN INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE AS b
-    ON a.CONSTRAINT_NAME=b.CONSTRAINT_NAME
-    WHERE a.TABLE_NAME=c.entidad AND CONSTRAINT_TYPE='PRIMARY KEY') AS pk, coalesce(procesado,0) AS procesado from ho_vistas AS c
-    GROUP BY c.apps,c.conexiones_id, c.entidad, c.nombre, c.procesado;
+	 SELECT c.apps, c.conexiones_id, c.entidad, c.nombre, c.nombre_alias, d.cls AS pk , coalesce(procesado,0) AS procesado
+	 from ho_vistas AS c
+	 INNER JOIN view_list_tabla_con_pk AS d ON c.entidad=d.tbs
+	 GROUP BY c.apps, c.conexiones_id, c.entidad, c.nombre, c.nombre_alias, d.cls, c.procesado;
 
   -- Vista encargadas de extraer las entidades seleccionada por el cliente en el momento
   CREATE VIEW view_list_enti_regi AS
-   SELECT b.apps, b.conexiones_id, a.entidad, (SELECT COUNT(conexiones_id) FROM view_list_vist_gene AS c WHERE c.entidad=a.entidad ) AS catidad, b.nombre, b.procesado FROM ho_entidades AS a
-      LEFT JOIN view_list_vist_gene AS b ON a.entidad=b.entidad
-    --WHERE a.entidad='test_abm'
-    GROUP BY b.apps,b.conexiones_id, a.entidad, b.nombre, b.procesado;
+SELECT b.apps, b.conexiones_id, a.entidad, (SELECT COUNT(conexiones_id) FROM view_list_vist_gene AS c WHERE c.entidad=a.entidad ) AS catidad, REPLACE(b.nombre,' ','') AS nombre, b.nombre_alias AS nombre_alias, b.procesado FROM ho_entidades AS a
+LEFT JOIN view_list_vist_gene AS b ON a.entidad=b.entidad
+--WHERE a.entidad='test_abm'
+GROUP BY b.apps,b.conexiones_id, a.entidad, b.nombre, b.nombre_alias, b.procesado;
 
 
 -- Vistas encargada de mostrar los campos cuando se selecciona drilla en la definicion
@@ -272,13 +274,23 @@
   SELECT a.nombre AS vista, b.ho_tipo_dato_type AS type, b.mascara AS mascaraJS, REPLACE(b.mascara,'\\','\') AS  mascaraPHP, b.mensaje, b.clase_input, a.field AS label, CASE WHEN hidden_form=1 THEN 'SI' ELSE 'NO' END hidden FROM ho_vistas AS a
   INNER JOIN ho_mascaras  AS b ON b.clase_input=a.mascara;
 
-    -- Vista encargada de procesar los dato de seguridad
-  CREATE view view_seguridad AS
-    SELECT a.id AS perfil_id, a.detalle AS perfil, c.id AS roles_id, c.detalle AS roles, e.*  from seg_perfil AS a
+    -- Vista encargada de procesar los dato de seguridad M 23/01/2018
+   CREATE VIEW view_seguridad AS
+   SELECT a.id AS perfil_id, a.detalle AS perfil, c.id AS roles_id, c.detalle AS roles , REPLACE(LOWER(c.detalle),' ','') AS rolesm, e.*  from seg_perfil AS a
       INNER JOIN seg_perfil_roles AS b ON b.seg_perfil_id=a.id
       INNER JOIN seg_roles AS c ON c.id=b.seg_roles_id
       INNER JOIN seg_usuarios_perfil AS d ON d.seg_perfil_id=a.id
       INNER JOIN seg_usuarios AS e ON d.seg_usuarios_id=e.id;
+
+
+
+  -- Vista para visualizar todas las tablas con lo campos primarios con sus nombre_campo
+  CREATE VIEW view_list_tabla_con_pk AS
+    SELECT a.TABLE_CATALOG AS dbs, a.TABLE_NAME AS tbs, b.COLUMN_NAME AS cls from INFORMATION_SCHEMA.TABLE_CONSTRAINTS AS a
+    INNER JOIN INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE AS b
+    ON a.CONSTRAINT_NAME=b.CONSTRAINT_NAME
+    WHERE  CONSTRAINT_TYPE='PRIMARY KEY'
+    GROUP BY a.TABLE_CATALOG, a.TABLE_NAME, b.COLUMN_NAME
 
 
 

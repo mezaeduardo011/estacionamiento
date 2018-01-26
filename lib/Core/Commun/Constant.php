@@ -80,7 +80,12 @@ interface Constant
     const LOG_BAJA = 'Baja de Registro';
 
     // Valores del LogFile
-    const LOG_DIR = '../logs/';
+    const LOG_DIR = Constant::DIR_INT.'logs'.DIRECTORY_SEPARATOR;
+    const LOG_RECYCLING_MODEL_DIR = Constant::DIR_INT.'logs'.DIRECTORY_SEPARATOR.'Recycling'.DIRECTORY_SEPARATOR.'Model'.DIRECTORY_SEPARATOR;
+    const LOG_RECYCLING_CONSTROLLER_DIR = Constant::DIR_INT.'logs'.DIRECTORY_SEPARATOR.'Recycling'.DIRECTORY_SEPARATOR.'Controller'.DIRECTORY_SEPARATOR;
+    const LOG_RECYCLING_VISTAS_DIR = Constant::DIR_INT.'logs'.DIRECTORY_SEPARATOR.'Recycling'.DIRECTORY_SEPARATOR.'Vistas'.DIRECTORY_SEPARATOR;
+    const LOG_RECYCLING_DB_DIR = Constant::DIR_INT.'logs'.DIRECTORY_SEPARATOR.'Recycling'.DIRECTORY_SEPARATOR.'DataBase'.DIRECTORY_SEPARATOR;
+
 
 }
 

@@ -70,7 +70,7 @@ Config.Box3 = {
                                     Config.html += '                         <td>';
                                     if (parseInt(valores.procesado) == 0) {
                                         console.info(valores.procesado + '--0');
-                                        Config.html += '                      <i class="fa fa-square-o" aria-hidden="true"></i> <a class="cursor" data-tabla="' + key + '" data-id="1-' + valores.nombre + '">' + valores.nombre + '</a>';
+                                        Config.html += '                      <i class="fa fa-square-o" aria-hidden="true"></i> <a class="cursor" data-tabla="' + key + '" data-id="1-' + valores.nombre + '">' + valores.nombre_alias + '</a>';
                                     } else {
                                         // Menu de opciones de la vista 3
                                         var Tmp = ' <ul class="nav navbar-nav opt">';
@@ -87,7 +87,7 @@ Config.Box3 = {
                                         Tmp += '	</ul>';
                                         Tmp += '	</li>';
                                         Tmp += '</ul>';
-                                        Config.html += '                  <a class="cursor optMenuLink" data-tabla="' + key + '" data-id="1-' + valores.nombre + '"><i class="fa fa-check-square-o" aria-hidden="true"></i> ' + valores.nombre + '</a>  <div class=" text-right" style="margin-top: -21px">' + Tmp + '</div>';
+                                        Config.html += '                  <a class="cursor optMenuLink" data-tabla="' + key + '" data-id="1-' + valores.nombre + '"><i class="fa fa-check-square-o" aria-hidden="true"></i> ' + valores.nombre_alias + '</a>  <div class=" text-right" style="margin-top: -21px">' + Tmp + '</div>';
                                         console.info(valores.procesado + '--1');
                                     }
                                     Config.html += '                       </td>';
@@ -179,12 +179,13 @@ Config.Box3 = {
                         // Recorrer datos principal
                         $.each(dataJson, function (key, value) {
                             var tmp = $('#box3 #' + tabla + '-titulo').text().trim();
-                            var titulo = seleApps + ' / <b>' + tmp + '</b>' + ' / <input placeholder="Nombre de la vista" name="nombre" id="nameVista" value="' + select + '" style="border: none" maxlength="50" required>';
+                            var titulo = seleApps + ' / <b>' + tmp + '</b>' + ' / <input type="hidden" name="nombre" id="nameVista"> <input placeholder="Nombre de la vista" name="nombre_alias" id="nameVistaAlias" value="' + select + '" style="border: none" maxlength="50" required>';
                             $('#box3 #menuSegundarioTilulo').html(' ').html(titulo);
                             var BTN = 'Procesar vista';
 
                             // Recorrer campos principal
                             $.each(value.columns, function (item, valor) {
+
                                 // ########### Ya esta registrado  mostar ############
                                 // Valores cuando es un update o mostrar
                                 var VA_0 = '';
@@ -229,21 +230,27 @@ Config.Box3 = {
 
                                 var pk = valor.restrincion == 'PRI' ? '<u><b title="Primary Key de la entidad">' + valor.name + '</b></u>' : valor.name;
                                 Config.html += '    <td><input type="hidden" name="restrincion[' + item + ']" value="' + valor.restrincion + '"><input type="hidden" name="field[' + item + ']" value="' + valor.name + '">' + pk + '</td>';
+
+                                var isPKNew = 'false';
+
                                 if (id != 0) {
                                     Config.html += '<td><input type="hidden" name="id[' + item + ']" value="' + valor.id + '">';
                                 } else {
                                     Config.html += '<td>';
+                                    isPKNew = 'true';
                                 }
+                                Config.Mascaras.getMascaraShow(valor.tipo,isPKNew);
+
                                 Config.html += '    <input type="hidden" name="type[' + item + ']" value="' + valor.tipo + '">' + valor.tipo + '</td>';
                                 Config.html += '    <td><input type="hidden" name="dimension[' + item + ']" value="' + valor.dimension + '"><span class="badge bg-blue">' + valor.dimension + '</span></td>';
                                 //alert(valor.restrincion);
                                 var req = valor.nulo != 'YES' ? 'nulo' : '';
                                 var req1 = valor.nulo != 'YES' ? '<div class="requerido" title="Campo Requerido">*</div>' : '';
                                 var req2 = valor.nulo != 'YES' ? '<div id="etiqueta-' + item + '" data-item="' + item + '" style=" float: right; margin-top: -12px; margin-right: -12px; font-size: 10px; z-index: 100;" title="Maxima cantidad de caracteres">40</div>' : '';
-                                var imp = valor.restrincion == 'PRI' ? '<input type="hidden" name="etiqueta[' + item + ']" size="20" value="' + valor.name + '" required><span title="Primary Key de la entidad">' + valor.name + '</span>' : req1 + '<input class="form-control etiqueta" name="etiqueta[' + item + ']"  data-item="etiqueta-' + item + '" type="text" size="20" maxlength="40" ' + req + ' ' + TC_0 + ' ' + VA_0 + '>' + req2;
+                                var imp = valor.restrincion == 'PRI' ? '<input type="hidden" name="etiqueta[' + item + ']" size="20" value="' + valor.name + '" required><span title="Primary Key de la entidad">' + valor.name + '</span>' : req1 + '<input class="form-control etiqueta" name="etiqueta[' + item + ']"  data-item="etiqueta-' + item + '" type="text" size="20" maxlength="40" ' + req + ' ' + TC_0 + ' ' + VA_0 + ' required>' + req2;
                                 Config.html += '          <td>' + imp + '</td>';
 
-                                Config.html += '          <td>' + Config.Box3.selectMascara(item, valor, PK_0) + '</td>';
+                                Config.html += '          <td>' + Config.Box3.selectMascara(item, valor, PK_0, isPKNew) + '</td>';
                                 Config.html += '          <td class="text-center"><input type="checkbox" name="nulo[' + item + ']" ' + RE_1 + ' ' + TC_2 + ' ' + VA_1 + '></td>';
                                 Config.html += '          <td class="text-center"><input type="checkbox" name="hidden_form[' + item + ']" ' + PK_1 + ' ' + TC_1 + ' ' + VA_1 + '></td>';
                                 Config.html += '          <td class="text-center"><input type="checkbox" name="hidden_list[' + item + ']" ' + PK_1 + ' ' + TC_1 + ' ' + VA_1 + '></td>';
@@ -253,7 +260,7 @@ Config.Box3 = {
                                 Config.html += '          <td>' + Config.Box3.selectCualVista(item, TC_0, VA_4) + '</td>';
                                 Config.html += '          <td class="vista_campo">' + Config.Box3.selectVistaCampos(item, TC_0, VA_5, VA_6, VA_7) + '</td>';
                                 Config.html += '     </tr>';
-                                mascaras.push(valor.mascara);
+                                //mascaras.push(valor.mascara);
                             });
                             Config.html += '</table>';
                             Config.html += ' <div class="box-footer">';
@@ -292,14 +299,14 @@ Config.Box3 = {
                     }
         });
     },
-    selectMascara: function(item,valor,PK_0){
+    selectMascara: function(item,valor,PK_0,isPKNew){
         // Permite instanciar los tipos de datos en el momento cuando carga
-        Config.Mascaras.getMascaraShow(valor.tipo);
-        //setTimeout(alert(valor.tipo),500);
+        //Config.Mascaras.getMascaraShow(valor.tipo,isPKNew);
+        //console.log(item+ ' ' +valor.tipo+ ' ' +);
         Config.html = '';
-        Config.html +='<select class="form-control" name="mascara['+item+']" '+PK_0+' id="mascara_'+item+'">';
+        Config.html +='<select class="form-control" name="mascara['+item+']" '+PK_0+' id="mascara_'+item+'" required>';
         Config.html += sessionStorage.getItem('getMascaraShow'+valor.tipo);
-        Config.html +='          </select>';
+        Config.html +='</select>';
         return Config.html;
     },
     selectNavegaVista: function (item,VA_3) {
@@ -457,39 +464,46 @@ Config.Box3 = {
             var diff = max_chars - chars;
             $('#'+id ).html(diff);
         });
+
         // Enviar la vista al controlador
         $('#box3 #menuSegundarioBody form#sendVistaActiva').submit(function(e){
             var apps = $('#box3 #apps');
-            var name = $('#box3 #nameVista');
+            var name = $('#box3 #nameVistaAlias');
+            var nameAlias = $('#box3 #nameVistaAlias');
             var item = $('#box3 #tabla');
+
+            if(name==''){
+                name.val(nameAlias.val());
+            }
+
             // Validar que alla ingresado un valor valido en la vista
-            if(name.val()=='Nueva Vista' && name.val()!=''){
-                mostrarError('Debe cambiar el nombre de la vista para poder procesar el registro: '+name.val());
-                name.focus();
+            if(nameAlias.val()=='Nueva Vista' && nameAlias.val()!=''){
+                mostrarError('Debe cambiar el nombre de la vista para poder procesar el registro: '+nameAlias.val());
+                nameAlias.focus();
                 return false;
-            }else if(name.val().length<4){
-                mostrarError('Debe cambiar el nombre de la vista para poder procesar el registro, debe tener mas de 3 caracteres y diferente de null la vista: '+name.val());
-                name.focus();
+            }else if(nameAlias.val().length<4){
+                mostrarError('Debe cambiar el nombre de la vista para poder procesar el registro, debe tener mas de 3 caracteres y diferente de null la vista: '+nameAlias.val());
+                nameAlias.focus();
                 return false;
             }
             // Validar que alla seleccionado una apps
             //alert(parseInt(apps.val()));
             if(parseInt(apps.val())==0){
-                mostrarError('Debe seleccionar una aplicación en el cual será creada esta vista: '+name.val());
+                mostrarError('Debe seleccionar una aplicación en el cual será creada esta vista: '+nameAlias.val());
                 apps.focus();
                 return false;
             }
             var procesada = $("#box3 #tabla").val();
             // Permite regenerar el campo de ordenamiento para verificar los datos del combo
             Config.Box3.reordenarCamposCombo();
-            //$('#box3 #comprimirExpandir').click();
+
                 $.ajax({
                     url: '/sendVistaNuevaConfigurada',
                     type: "POST",
                     headers: {
                         'X-Auth-Token' : $('#csrf_token').val()
                     },
-                    data: $(this).serialize()+'&name='+name.val()+'&apps='+apps.val(),
+                    data: $(this).serialize()+'&name='+name.val()+'&nameAlias='+nameAlias.val()+'&apps='+apps.val(),
                     dataType: 'JSON',
                     success : function(dataJson) {
                         if (dataJson.error == 0) {
@@ -499,6 +513,15 @@ Config.Box3 = {
                             setTimeout(function () {
                                 $('#box3 #accordionTablas #' + procesada + '-titulo').click();
                             }, 1000);
+
+                            // Validar que si esta activado luego de procesar se vuelva a su estado original
+                            var btnExpandir = $('#box3 #menuPrincipalBody');
+                            console.info('Informando que esta pasando por el btn comprimirExpandir')
+                            if(btnExpandir.hasClass("ocultoDivMB3")){
+                                setTimeout(function(){
+                                    $('#comprimirExpandir').click().click();
+                                },1000)
+                            }
                         }
                     }
             })
@@ -529,12 +552,14 @@ Config.Box3 = {
             if(!existe) {
                 $('#box3 #menuPrincipalTitulo').hide(900);
                 $('#box3 #menuPrincipalBody').hide(900).parent('div').parent('div').addClass('col-md-1').removeClass('col-md-4').hide(900);
+                $('#box3 #menuPrincipalBody').addClass('ocultoDivMB3');
                 $('#box3 #menuSegundario').addClass('col-md-12').removeClass('col-md-8');
                 $(this).addClass('activado');
                 $(this).addClass('fa-expand').removeClass('fa-compress');
             }else{
                 $('#box3 #menuPrincipalTitulo').show(900);
                 $('#box3 #menuPrincipalBody').show(900).parent('div').parent('div').addClass('col-md-4').removeClass('col-md-1').show(900);
+                $('#box3 #menuPrincipalBody').removeClass('ocultoDivMB3');
                 $('#box3 #menuSegundario').addClass('col-md-8').removeClass('col-md-12');
                 $(this).removeClass('activado');
                 $(this).addClass('fa-compress').removeClass('fa-expand');

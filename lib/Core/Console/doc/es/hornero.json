@@ -17,7 +17,12 @@
             "app:crud-creado" : "El controlador ABM {controller}, fue creado dentro de la aplicacion {app}."
         },
         "Commands":{
-            "command-create" : "Comando personalizado {name} creada exitosamente dentro de la Aplicacion {apps}.\n"
+            "command-create" : "Comando personalizado {name} creada exitosamente dentro de la Aplicacion {apps}.\n",
+            "system-refresh-init" : "Proceso de inicializar el sistema fue activado.\n",
+            "system-refresh" : "Limpiar datos de la tabla del sistema {tabla} {truncate}, efectuado exitosamente.\n",
+            "system-refresh-eliminar" : "Elimado fisico de la tabla {tabla}, efectuado exitosamente.\n",
+            "system-refresh-no-existe" : "Archivo {file} no existe, efectuado exitosamente.\n",
+            "system-refresh-existe" : "Archivo {file} , eliminado exitosamente.\n"
         },
         "Cache" : {
             "cache-clean" : "Cache de la aplicacion {name} fue eliminado exitosamente."

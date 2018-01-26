@@ -560,7 +560,6 @@ class Comun{
     {
         $valido = true;
         $rs = $this->describe($this->tabla);
-
         while ($r = $this->fetch()) {
             $campo = $r->Field;
             $tipo = $r->Type;

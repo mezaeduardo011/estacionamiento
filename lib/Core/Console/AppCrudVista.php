@@ -1,6 +1,6 @@
 <?php
 namespace JPH\Core\Console;
-use JPH\Core\Commun\{All,SimpleXMLExtended};
+use JPH\Core\Commun\{All, SimpleXMLExtended, Logs};
 
 /**
  * Permite integrar un conjunto de funcionalidades que permite generar CRUD de forma automatica
@@ -17,6 +17,7 @@ class AppCrudVista extends App
     /**
      * AppCrud constructor.
      */
+    use Logs;
 
     public function __construct()
     {
@@ -41,6 +42,7 @@ class AppCrudVista extends App
             if($key==0){
                 $campos['entida'] = @$value->entidad;
                 $campos['vista'] = @$value->nombre;
+                $campos['vista_alias'] = @$value->nombre_alias;
             }
             if($value->restrincion=='PRI'){
                 $campos['pk'] = @$value->field;
@@ -92,8 +94,8 @@ class AppCrudVista extends App
             $rutaApp = $this->pathapp.$app;
             $temp = All::parseRutaAbsolut($rutaApp);
             $rutaPadre = $temp->scalar.All::APP_VISTA.DIRECTORY_SEPARATOR.ALL::cameCase($tabla);
-            $rutaHija  = $rutaPadre.DIRECTORY_SEPARATOR.strtolower($crud);
-            $rutaVista = 'vistas'.'/'.ALL::cameCase($tabla).'/'.strtolower($crud);
+            $rutaHija  = $rutaPadre.DIRECTORY_SEPARATOR.All::formatRuta($crud);
+            $rutaVista = 'vistas'.'/'.ALL::cameCase($tabla).'/'.All::formatRuta($crud);
             $rutaVistaD = 'vistas'.'/'.ALL::cameCase($tabla).'/';
 
             // Verificar si existe el controllador de lo contrario se va a generar en el momento
@@ -118,8 +120,8 @@ class AppCrudVista extends App
             $existe = self::existsRuta($archivoRoute,$crud);
             if ($existe) {
                 $msj=Interprete::getMsjConsole($this->active,'app:crud-existe');
-            }else{ ///'.strtolower($controller).'
-                self::createNewRutaXmlCRUD($archivoRoute,$controller,$tabla);
+            }else{
+                self::createNewRutaXmlCRUD($archivoRoute,$crud,$tabla);
             }
 
             // Permite crear la carpeta donde estará la vistas generada si no existe
@@ -145,11 +147,11 @@ class AppCrudVista extends App
 
             // Generacion del Form donde esta la configuración de los campos del formulario
             $fileViewForm = $rutaHija.DIRECTORY_SEPARATOR."form.php";
-            if (file_exists($fileViewForm)) {
+            /*if (file_exists($fileViewForm)) {
                 $msj=Interprete::getMsjConsole($this->active,'app:crud-existe');
-            }else{
+            }else{*/
                 self::createFileViewForm($fileViewForm, $campos, $requerido);
-            }
+            //}
 
             // Generacion del Listado
             $fileViewListado = $rutaHija.DIRECTORY_SEPARATOR."listado.php";
@@ -167,10 +169,11 @@ class AppCrudVista extends App
                 self::createFileViewJsonMascaras($fileViewJsonMascaras, $mascaras);
             }
 
-            //$msj=Interprete::getMsjConsole($this->active,'app:crud-creado');
+            $msj=Interprete::getMsjConsole($this->active,'app:crud-creado');
 
         }
         $msj=All::mergeTaps($msj,array('app'=>$this->app,'controller'=>$entidad));
+        $this->logInfo($msj);
         return true;
     }
 
@@ -183,8 +186,8 @@ class AppCrudVista extends App
         if (!file_exists($rutaPadre)) {
             All::mkddir($rutaPadre);
         }
-        if (!file_exists($rutaHija)) {
-            All::mkddir($rutaHija);
+        if (!file_exists(All::formatRuta($rutaHija))) {
+            All::mkddir(All::formatRuta($rutaHija));
         }
 
     }
@@ -589,41 +592,42 @@ class AppCrudVista extends App
 
     private function createNewRutaXmlCRUD(string $archivoRoute, string $controller, string $tabla)
     {
+        //print_r($controller);
         $router = new SimpleXMLExtended($archivoRoute, null, true) or die("Problemas en la creaci&oacute;n del router del apps Router.xml");
         $router->addComentario(' Bloque de configuracion de la ruta del controller '.ucfirst($controller));
         // Listar registro
         $personaje = $router->addChild('link');
-        $personaje->addChild('name', '/'.strtolower($controller).'Index');
+        $personaje->addChild('name', '/'.All::formatRuta($controller).'Index');
         $personaje->addChild('controller', All::cameCase($tabla));
         $personaje->addChild('method', 'run'.All::upperCase($tabla).'Index');
         $personaje->addChild('request', 'GET');
         //
         $personaje = $router->addChild('link');
-        $personaje->addChild('name', '/'.strtolower($controller).'Listar');
+        $personaje->addChild('name', '/'.All::formatRuta($controller).'Listar');
         $personaje->addChild('controller', All::cameCase($tabla));
         $personaje->addChild('method', 'run'.All::upperCase($tabla).'Listar');
         $personaje->addChild('request', 'GET');
 
         $personaje = $router->addChild('link');
-        $personaje->addChild('name', '/'.strtolower($controller).'Create');
+        $personaje->addChild('name', '/'.All::formatRuta($controller).'Create');
         $personaje->addChild('controller', All::cameCase($tabla));
         $personaje->addChild('method', 'run'.All::upperCase($tabla).'Create');
         $personaje->addChild('request', 'POST');
 
         $personaje = $router->addChild('link');
-        $personaje->addChild('name', '/'.strtolower($controller).'Show');
+        $personaje->addChild('name', '/'.All::formatRuta($controller).'Show');
         $personaje->addChild('controller', All::cameCase($tabla));
         $personaje->addChild('method', 'run'.All::upperCase($tabla).'Show');
         $personaje->addChild('request', 'POST');
 
         $personaje = $router->addChild('link');
-        $personaje->addChild('name', '/'.strtolower ($controller).'Delete');
+        $personaje->addChild('name', '/'.All::formatRuta($controller).'Delete');
         $personaje->addChild('controller', All::cameCase($tabla));
         $personaje->addChild('method', 'run'.All::upperCase($tabla).'Delete');
         $personaje->addChild('request', 'POST');
 
         $personaje = $router->addChild('link');
-        $personaje->addChild('name', '/'.strtolower($controller).'Update');
+        $personaje->addChild('name', '/'.All::formatRuta($controller).'Update');
         $personaje->addChild('controller', All::cameCase($tabla));
         $personaje->addChild('method', 'run'.All::upperCase($tabla).'Update');
         $personaje->addChild('request', 'POST');
@@ -644,14 +648,14 @@ class AppCrudVista extends App
         $ar = fopen($fileViewIndex, "w+") or die("Problemas en la creaci&oacute;n del view index.php");
         // Inicio la escritura en el activo
         fputs($ar, '<?php' . PHP_EOL);
-        fputs($ar, '$breadcrumb=(object)array(\'actual\'=>\'' . ALL::upperCase($campos['vista']) . '\',\'titulo\'=>\'Vista de integrada de gestion de ' . ALL::upperCase($campos['vista']) . '\',\'ruta\'=>\'' . ALL::upperCase($campos['vista']) . '\')?>' . PHP_EOL);
+        fputs($ar, '$breadcrumb=(object)array(\'actual\'=>\'' . $campos['vista_alias'] . '\',\'titulo\'=>\'Vista de integrada de gestion de ' . $campos['vista_alias']. '\',\'ruta\'=>\'' . $campos['vista_alias'] . '\')?>' . PHP_EOL);
         fputs($ar, '<?php $this->layout(\'base\',[\'usuario\'=>$usuario,\'breadcrumb\'=>$breadcrumb])?>' . PHP_EOL);
 
         fputs($ar, '<?php $this->push(\'addCss\')?>' . PHP_EOL);
         fputs($ar, '<?php $this->end()?>' . PHP_EOL);
 
         fputs($ar, '<?php $this->push(\'title\') ?>' . PHP_EOL);
-        fputs($ar, ' Gestionar de la vista ' . ALL::upperCase($campos['vista']) . PHP_EOL);
+        fputs($ar, ' Gestionar de la vista ' . ALL::upperCase($campos['vista_alias']) . PHP_EOL);
         fputs($ar, '<?php $this->end()?>' . PHP_EOL);
 
         fputs($ar, '<div class="row">' . PHP_EOL);
@@ -869,11 +873,12 @@ class AppCrudVista extends App
 
     private function createFileViewForm($fileViewForm, $campos, $requerido)
     {
+
         $ar = fopen($fileViewForm, "w+") or die("Problemas en la creaci&oacute;n del view form.php");
         // Inicio la escritura en el activo
         fputs($ar, '<div class="box box-primary">'.PHP_EOL);
         fputs($ar, '<div class="box-header with-border">'.PHP_EOL);
-        fputs($ar, '<h3 class="box-title">Formulario de '.$campos['vista'].'</h3>'.PHP_EOL);
+        fputs($ar, '<h3 class="box-title">Formulario de '.$campos['vista_alias'].'</h3>'.PHP_EOL);
         fputs($ar, '</div>'.PHP_EOL);
         fputs($ar, '<!-- /.box-header -->'.PHP_EOL);
         fputs($ar, '<!-- form start -->'.PHP_EOL);
@@ -881,17 +886,24 @@ class AppCrudVista extends App
         fputs($ar, '   <div class="box-body">'.PHP_EOL);
         $mascara = '';
         $items = $campos;
+        // Nota si agregas mas elementos aca debes eliminar ese indice ejemplo como vista_alis
         unset($items['entida']);
         unset($items['vista']);
         unset($items['pk']);
         unset($items['campos']);
+        unset($items['vista_alias']);
+        //print_r($items); die();
+
+
         foreach ($items AS $key=>$value){
 
-            if($value->restrincion=='PRI'){
+            //print_r($value); die();
+            if(@$value->restrincion=='PRI' AND !empty($value->restrincion)){
                 fputs($ar, '<input type="hidden" id="id" name="'.$value->field.'">'.PHP_EOL);
             }else{
                 $classes = '';
-                $classes = self::valTipoMascara($value->mascara);
+                $classes = @self::valTipoMascara($value->mascara);
+                //print_r($value->nulo);
                 $classes .= ($value->nulo!='YES')?' requerido':'';
                 $mostrar = explode('#',$requerido[$value->field]);
                 //All::pp($mostrar);
@@ -938,7 +950,7 @@ class AppCrudVista extends App
         $ar = fopen($fileViewListado, "w+") or die("Problemas en la creaci&oacute;n del view listado.php");
         fputs($ar, '<div class="box box-primary">'.PHP_EOL);
         fputs($ar, '    <div class="box-header with-border">'.PHP_EOL);
-        fputs($ar, '        <h3 class="box-title">Lista de '.ALL::upperCase($campos['vista']).'</h3>'.PHP_EOL);
+        fputs($ar, '        <h3 class="box-title">Lista de '.$campos['vista_alias'].'</h3>'.PHP_EOL);
         fputs($ar, '    </div>'.PHP_EOL);
 
         // Bloque de filtros de busqueda

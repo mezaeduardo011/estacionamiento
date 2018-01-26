@@ -83,7 +83,7 @@ class HoMenuModel extends Base
      */
     public function reCargarMenuSegundo($app,$entidad,$vista)
     {
-        $sql = " select app, entidad, vista, nombre, icon_fa, targe FROM ho_menu WHERE app='$app' AND entidad='$entidad' AND vista='$vista'";
+        $sql = "select app, entidad, vista, nombre, icon_fa, targe FROM ho_menu WHERE app='$app' AND entidad='$entidad' AND vista='$vista'";
         $datos=$this->executeQuery($sql);
         return $datos;
     }
@@ -140,7 +140,7 @@ class HoMenuModel extends Base
        $this->fijarValor('created_at',All::now());
        $this->guardar();
        $menuId = $this->lastId();
-       if($opt==subMenu){
+       if($opt=='subMenu'){
            self::setSubMenu($menuId,$app,$entidad,$vista);
        }
    }

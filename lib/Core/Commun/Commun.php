@@ -141,6 +141,25 @@ trait Commun
         return mb_strtolower($texto);
     }
 
+
+    /**
+     * Permite cambiar un texto de entrada con un formato adaptado para las rutas del sistema
+     * @param String $texto, lo que deseas cambiar a minuscula
+     * @return String $valor, cambiado a entra (Hola Code => hola_code)
+     */
+    public  static function formatRuta(String $texto): String
+    {
+        /*$matches = null;
+        $validate=preg_match("/\s/" , $texto, $matches);
+        if($validate!=1){
+            return  self::low(str_replace(" ", "_", $texto));
+        }else{
+            return  self::low(str_replace(" ", "_", $texto));
+        }*/
+        // Permitir quitar espacios en blancos para mostrar
+        return  self::low(str_replace(" ", "", $texto));
+    }
+
     /**
      * Permite formatar la cabecera http para diferentes formatos
      * @param String $type, Permite indicar los formato que deseas procesar, ejemplo: xml, json u otros
@@ -308,6 +327,11 @@ trait Commun
         $string = str_replace(
             array(utf8_decode('?'), utf8_decode('Ã‚Â¿'), utf8_decode('Ã‚Âº')),
             array('', '', ''),
+            $string
+        );
+        $string = str_replace(
+            array('Ñ', 'ñ', 'á', 'é', 'í', 'ó', 'ú','Á', 'É', 'Í', 'Ó', 'Ú'),
+            array('n', 'n', 'a', 'e', 'i', 'o', 'u','A', 'E', 'I', 'O', 'U'),
             $string
         );
         $string = str_replace(

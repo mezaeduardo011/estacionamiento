@@ -184,7 +184,8 @@ Config.Mascaras = {
             event.preventDefault();
         })
     },
-    getMascaraShow: function (type) {
+    getMascaraShow: function (type, isPKNew) {
+            console.info('Campos de la vista que vamos a extraer  :'+type);
             $.ajax({
                 url: '/mascaraShow',
                 type: "POST",
@@ -195,8 +196,14 @@ Config.Mascaras = {
                 dataType: 'JSON',
                 success : function(dataJson) {
                     Config.html = '';
+
                     $.each(dataJson.data, function (idx, val) {
-                        Config.html += '<option value="' + val.clase_input + '">' + val.label + '</option>';
+                            if(isPKNew == 'true' && val.clase_input==type){
+                                Config.html += '<option selected value="' + val.clase_input + '">' + val.label + '</option>';
+                                console.log('Elementos procesadososososos selected');
+                            }else{
+                                Config.html += '<option value="' + val.clase_input + '">' + val.label + '</option>';
+                            }
                     });
                     sessionStorage.setItem('getMascaraShow' + type, Config.html);
                 }

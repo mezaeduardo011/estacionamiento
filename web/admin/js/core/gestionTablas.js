@@ -162,7 +162,7 @@ Config.GestionaTablas = {
         tipo += '<option value="date">date</option>';
         tipo += '<option value="datetime">datetime</option>';
         tipo += '</select>';
-        tipo += '<input id="item" name="varcharValor[]" type="text" size="2" maxlength="3" style="position:absolute;margin-top:-30px; z-index: 100; display: none;float: left"/>';
+        tipo += '<input id="item" class="gestionTablasInput" name="varcharValor[]" type="text" size="2" maxlength="3" />';
 
         // Variable encargada de contener los index de las variables
         var index = '<select name="index[]" class="form-control" id="index">';
@@ -183,7 +183,7 @@ Config.GestionaTablas = {
         Config.html += '    <td><input class="requerido form-control" name="campos[]" id="campos" placeholder="Nombre del campo" maxlength="60" size="20" pattern="^[a-z]([a-z_]){1,29}$" required></td>';
         Config.html += '    <td>'+tipo+'</td>';
         Config.html += '    <td><input name="default[]" class="requerido form-control" placeholder="Valor por default" id="default"></td>';
-        Config.html += '    <td><select name="requerido[]" class="requerido form-control" id="requerido"><option value="NULL">SI</option><option value="NOT NULL">NO</option></select></td>';
+        Config.html += '    <td><select name="requerido[]" class="requerido form-control" id="requerido"><option value="NULL">SI</option><option value="NOT NULL" selected>NO</option></select></td>';
         Config.html += '    <td>'+index+'</td>';
         Config.html += '    <td>'+extra+'</td>';
         var btn = '<i class="fa fa-arrows-v fa-2 cursor" aria-hidden="true" title="Mover Item" ></i><i class="fa fa-minus-circle fa-2 cursor btn" aria-hidden="true" id="delItem" title="eliminar item"></i>';

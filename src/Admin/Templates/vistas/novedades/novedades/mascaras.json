@@ -1,0 +1,5 @@
+{
+    "mascaras" : [
+        {"type":"int","mascaraJS":"XlswLTldezcsOH0k","mascaraPHP":"XlswLTldezcsOH0k","mensaje":"Debe ingresar un DNI correcte","input":"idni","campo":"licencia_id"},{"type":"int","mascaraJS":"XlswLTldezcsOH0k","mascaraPHP":"XlswLTldezcsOH0k","mensaje":"Debe ingresar un DNI correcte","input":"idni","campo":"dias_a_liquidar"},{"type":"int","mascaraJS":"XlswLTldezEsOH0k","mascaraPHP":"XlswLTldezEsOH0k","mensaje":"Debe ingresar un número de 1 a 8 dígitos.","input":"int","campo":"legajo_id"},{"type":"date","mascaraJS":"XigxOXwyMClbMC05XXsyfVxcLSgwWzEtOV18MVswMTJdKVxcLSgwWzEtOV18WzEyXVswLTldfDNbMDFdKSQ=","mascaraPHP":"XigxOXwyMClbMC05XXsyfVwtKDBbMS05XXwxWzAxMl0pXC0oMFsxLTldfFsxMl1bMC05XXwzWzAxXSkk","mensaje":"Debe ingresar una fecha valida, ejemplo AAAA-MM-DD","input":"dfecha","campo":"fecha_inicio"},{"type":"date","mascaraJS":"XigxOXwyMClbMC05XXsyfVxcLSgwWzEtOV18MVswMTJdKVxcLSgwWzEtOV18WzEyXVswLTldfDNbMDFdKSQ=","mascaraPHP":"XigxOXwyMClbMC05XXsyfVwtKDBbMS05XXwxWzAxMl0pXC0oMFsxLTldfFsxMl1bMC05XXwzWzAxXSkk","mensaje":"Debe ingresar una fecha valida, ejemplo AAAA-MM-DD","input":"dfecha","campo":"fecha_fin"}
+    ]
+}

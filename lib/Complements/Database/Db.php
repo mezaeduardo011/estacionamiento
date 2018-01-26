@@ -1,7 +1,6 @@
 <?php
 namespace JPH\Complements\Database;
-use JPH\Core\Commun\All;
-use JPH\Core\Commun\Logs;
+use JPH\Core\Commun\{All,Logs};
 use JPH\Core\Store\Cache;
 use mysqli;
 

@@ -155,7 +155,7 @@ Config.Box2 = {
 
                     Config.html += '</table>';
                     Config.html += ' <div class="box-footer">';
-                    Config.html += '  <button type="submit" class="btn btn-info pull-right" id="enviarUniversoTablas">Enviar tablas seleccionadas</button>';
+                    Config.html += '  <button type="submit" class="btn btn-info pull-right" id="enviarUniversoTablas">Gestionar Vistas Seleccionadas</button>';
                     Config.html += ' </div>';
                     Config.html += '</form>';
                     $('#box2 #menuSegundarioBody').html(' ').html(Config.html);

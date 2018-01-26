@@ -369,3 +369,11 @@ div.btnNew{
     width: 50%;
 
 }
+
+.gestionTablasInput{
+    position:absolute;
+    margin-top:-30px;
+    z-index: 100;
+    display: none;
+    float: left
+}

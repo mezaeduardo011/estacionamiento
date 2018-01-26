@@ -1,7 +1,8 @@
 <?php
 namespace JPH\Core\Console;
-use JPH\Core\Commun\All;
+use JPH\Core\Commun\{All,Logs};
 use JPH\Complements\Database\Base;
+use JPH\Core\Console\App;
 
 
 class System extends Base
@@ -9,6 +10,7 @@ class System extends Base
     public $pathapp;
     public $msj;
     public $active;
+    use Logs;
 
     // Constante de la clase
     const SUBITEM = __CLASS__;
@@ -24,39 +26,140 @@ class System extends Base
      */
     public function cleanSystemRefresh() : void
     {
+         $msj=Interprete::getMsjConsole('Commands','system-refresh-init');
+         $msj=All::mergeTaps($msj,array());
+         $this->logInfo("##### ".$msj." #####"); echo $msj;
+
          // Verificar el environment antes de procesar
          $elemento = self::getTablasSystem();
+
+         // Hacer backup de base de datos
+         self::backupSql();
 
          // Todo el esquema de la conexion
          $elementoGeneral = $this->informationschema();
          foreach ($elementoGeneral AS $item=>$value){
              if($value->TABLE_TYPE=='BASE TABLE'){
+
                  foreach ($elemento AS $item2=>$value2){
                      if($value->TABLE_NAME == $value2['tabla']){
-                         echo ($value2['tabla']).PHP_EOL;
                          // Permite verificar si la tabla se le hace truncate
+                         $msj = '';
+                         $msj=Interprete::getMsjConsole('Commands','system-refresh');
                          if($value2['truncar']=='SI'){
-                             echo " truncar SI ";
-                            $sql = "TRUNCATE TABLE ".$value2['tabla'].";";
-                            //$this->executeQuery($sql);
+                             $msj=All::mergeTaps($msj,array('tabla'=>$value2['tabla'],'truncate'=>$value2['truncar']));
+                             $this->logInfo($msj); echo $msj;
+                             $sql = "TRUNCATE TABLE ".$value2['tabla'].";";
+                             $this->executeQuery($sql);
                          }else{
-                             echo " truncar NO ";
+                             $msj=All::mergeTaps($msj,array('tabla'=>$value2['tabla'],'truncate'=>$value2['truncar']));
+                             $this->logInfo($msj); echo $msj;
                          }
                      }
-                     /*else{
-                         // Eliminar tabla debido que no es el sistema
-                         $sql = "DROP TABLE ".$value2['tabla'].";";
-                         //$this->executeQuery($sql);
-                     }*/
-                 }
-             }
-         }
+                }
 
-        //All::pp();
-        die('llego'.$this->active);
+                 $tempValue = self::getValidateTableNoExistente($value->TABLE_NAME,$elemento);
+                 if($tempValue){
+                     $msj=Interprete::getMsjConsole('Commands','system-refresh-eliminar');
+                     $msj=All::mergeTaps($msj,array('tabla'=>$value->TABLE_NAME));
+                     $this->logInfo($msj); echo $msj;
+                     //self::removeFileModel($value->TABLE_NAME);
+                     //self::removeFileController($value->TABLE_NAME);
+                     //self::removeFileVistas($value->TABLE_NAME);
+
+                     die('lll');
+                     $sql = "DROP TABLE ".$value->TABLE_NAME.";";
+                     //$this->executeQuery($sql);
+                 }
+            }
+
+         }
+        $this->logInfo("##### Fin del proeceso #####"); die();
+    }
+
+    /**
+     * Permite validar las tablas que son las que se van a eliminar de estas manera el sistema quedara como nuevo para su uso
+     * @param String $search, Valor de la tabla que vamos a buscar su existenia
+     * @param Array $tablas, Valor de tablas que estan definidas reservadas por el sistema
+     * @return Bool $valor, permite devolver true si la tabla a buscar no existe y false si existe
+     */
+    private static function getValidateTableNoExistente(String $search ,Array $tablas):Bool
+    {
+         $valor = 0;
+         $tmpValor = [];
+         foreach($tablas AS $item=>$tabla){
+             array_push($tmpValor,$tabla['tabla']);
+         }
+         if (in_array($search, $tmpValor)) {
+             $valor = 0;
+         }else{
+             $valor = 1;
+         }
+         return $valor;
+    }
+
+
+    private function removeFileModel(String $nameFile): bool
+    {
+        $dirOrigen = All::APP_MODEL;
+        $dir = All::LOG_RECYCLING_MODEL_DIR;
+        $fileExt = All::upperCase($nameFile)."Model.php";
+        self::logCambiosMoverArchivosLogConstVistaModel($dirOrigen, $dir, $fileExt);
+        return true;
+    }
+
+    private function removeFileController(String $nameFile): bool
+    {
+        $dirOrigen = All::APP_CONTR;
+        $dir = All::LOG_RECYCLING_CONSTROLLER_DIR;
+        $fileExt = All::upperCase($nameFile)."Controller.php";
+        self::logCambiosMoverArchivosLogConstVistaModel($dirOrigen, $dir, $fileExt);
+        return true;
+    }
+
+    private function removeFileVistas(String $nameFile): bool
+    {
+        $dirOrigen = All::APP_VISTA;
+        $dir = All::LOG_RECYCLING_VISTAS_DIR;
+        $fileExt = All::cameCase($nameFile);
+        self::logCambiosMoverArchivosLogConstVistaModel($dirOrigen, $dir, $fileExt);
+        return true;
 
     }
 
+    private function backupSql()
+    {
+        $dir = 'E:\backup\\';
+        $fileCambTmp = $dir.str_replace(array(' ',':'),array('_',''),All::now());
+        All::mkddir($fileCambTmp);
+        $backup_file = $fileCambTmp.DIRECTORY_SEPARATOR.$this->db.".bak";
+        $sql = "BACKUP DATABASE ".$this->db." TO DISK = '".$backup_file."';";
+        //$this->get($sql);
+        return true;
+    }
+
+    private function logCambiosMoverArchivosLogConstVistaModel(String $dirOrigen, String $dirDestino, String $fileExt  )
+    {
+        $apps = new App();
+        $listApps = $apps->showAppsList();
+        $tmpFile = $fileExt;
+        $rutaLog = $dirDestino;
+        $fileCambTmp = $rutaLog.str_replace(array(' ',':'),array('_',''),All::now());
+        foreach ($listApps AS $item => $valor){
+            $tmp = All::DIR_SRC.$valor.$dirOrigen.DIRECTORY_SEPARATOR.$tmpFile;
+            if (file_exists($tmp)) {
+                All::mkddir($fileCambTmp);
+                rename($tmp,$fileCambTmp.DIRECTORY_SEPARATOR.$tmpFile);
+                $msj=Interprete::getMsjConsole('Commands','system-refresh-existe');
+                $msj=All::mergeTaps($msj,array('file'=>$tmp));
+                $this->logInfo($msj);
+            }else{
+                $msj=Interprete::getMsjConsole('Commands','system-refresh-no-existe');
+                $msj=All::mergeTaps($msj,array('file'=>$tmp));
+                $this->logError($msj);
+            }
+        }
+    }
 
     private static function getTablasSystem()
     {
@@ -75,7 +178,7 @@ class System extends Base
             array('tabla'=>'seg_perfil_roles','truncar'=>'SI'),
             array('tabla'=>'seg_roles','truncar'=>'SI'),
             array('tabla'=>'seg_usuarios','truncar'=>'NO'),
-            array('tabla'=>'seg_usuarios_perfil','truncar'=>'NO')
+            array('tabla'=>'seg_usuarios_perfil','truncar'=>'SI')
         );
         return $tconfig;
 

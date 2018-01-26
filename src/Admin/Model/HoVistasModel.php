@@ -19,7 +19,7 @@ class HoVistasModel extends Base
    {
        $this->tabla = 'ho_vistas';
        $this->campoid = array('id');
-       $this->campos = array('apps','conexiones_id','entidad','nombre','field','type','dimension', 'fijo','restrincion','label','mascara','nulo','place_holder','relacionado','tabla_vista','vista_campo','cart_separacion','orden','hidden_form','hidden_list');
+       $this->campos = array('apps','conexiones_id','entidad','entidad_alias','nombre', 'nombre_alias', 'field', 'field_alias','type','dimension', 'fijo','restrincion','label','mascara','nulo','place_holder','relacionado','tabla_vista','vista_campo','cart_separacion','orden','hidden_form','hidden_list');
        parent::__construct();
    }
 
@@ -38,7 +38,8 @@ class HoVistasModel extends Base
                 $this->fijarValor('apps', $data->apps);
                 $this->fijarValor('conexiones_id', $data->conexiones_id);
                 $this->fijarValor('entidad', $data->tabla);
-                $this->fijarValor('nombre', $data->name);
+                $this->fijarValor('nombre', All::sanear_string(All::formatRuta($data->name)));
+                $this->fijarValor('nombre_alias', $data->nameAlias);
                 $this->fijarValor('field', $data->field[$a]);
                 $this->fijarValor('type', $data->type[$a]);
                 $this->fijarValor('dimension', self::validarDimensionCampo($data->type[$a],$data->dimension[$a]));

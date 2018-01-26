@@ -20,7 +20,7 @@
                         <td ><br>
                             <p><b>Hola <?php echo $usuario;?></b><br><br>
                                 Gracias por solicitar el cambio de clave. <br><br>
-                                <em><b>A partir de ahora, se le gener&oacute; un enace tempora de uso exclusivo para recuperar contrase&ntilde;as.</b></em>
+                                <em><b>A partir de ahora, se le gener&oacute; un enlace temporal de uso exclusivo para recuperar contrase&ntilde;as.</b></em>
                                 <br>
                                 <br>
                                 <a href="<?php echo JPH\Core\Store\Cache::get('urlWebs').'recuperarClaveToken?t='.$tokenRew?>" target="_blank">Hacer click en este link para recuperar la clave</a>

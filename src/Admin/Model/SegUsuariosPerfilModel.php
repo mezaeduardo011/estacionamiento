@@ -1,6 +1,7 @@
 <?php
 namespace APP\Admin\Model;
 use JPH\Complements\Database\Base;
+use JPH\Core\Commun\All;
 /**
  * Generador de codigo del Modelo de la App Admin
  * @propiedad: Hornero 1.0
@@ -75,8 +76,8 @@ class SegUsuariosPerfilModel extends Base
     public function valSegPerfilRelacionUser($comps,$roles)
     {
         $seg = explode('|',$roles);
-        $temp = strtoupper($comps.' - '.implode("','".$comps.' - ',$seg));
-        $sql = "SELECT CASE WHEN COUNT(roles) > 0 THEN 'SI' ELSE 'NO' END AS permiso  FROM view_seguridad WHERE roles IN('".$temp."') ";
+        $temp = str_replace(' ','',All::low($comps.' - '.implode("','".$comps.' - ',$seg)));
+        $sql = "SELECT CASE WHEN COUNT(roles) > 0 THEN 'SI' ELSE 'NO' END AS permiso  FROM view_seguridad WHERE rolesm IN('".$temp."') ";
         $datos=$this->executeQuery($sql);
         $this->free();
         return $datos[0];

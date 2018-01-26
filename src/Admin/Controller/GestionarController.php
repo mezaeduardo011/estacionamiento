@@ -80,7 +80,7 @@ class GestionarController extends Controller
                $columnsReal = NULL;
                $columnsReal = $views['columnas'];
                unset($views['columnas']);
-               //print_r($columnsReal);die();
+               //print_r($views);die();
                // sleep(20);
 
                foreach ($views AS $nombreVista => $campos) {
@@ -286,6 +286,7 @@ class GestionarController extends Controller
                 'fijo' => (empty($value->fijo))?'':@$value->fijo,
                 'restrincion' => $value->restrincion,
                 'nombre' => (empty($value->nombre))?'':$value->nombre,
+                'nombre_alias' => (empty($value->nombre_alias))?'':$value->nombre_alias,
                 'label' => (empty($value->label))?'':@$value->label,
                 'mascara' => (empty($value->mascara))?'':@$value->mascara,
                 'nulo' => $value->nulo,

@@ -225,7 +225,7 @@ class App
          * Permite visuaizar un listado de las aplicaciones existente dentro del sistema
          * @return Array $list, listado de aplicaciones disponible
          */
-        private function showAppsList()
+        public function showAppsList()
         {
             $tmp = $this->pathapp;
             $list = array_diff(scandir($tmp), array('..', '.'));
