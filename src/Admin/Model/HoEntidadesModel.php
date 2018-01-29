@@ -87,6 +87,7 @@ class HoEntidadesModel extends Base
      */
     public function setEstructuraCreateTabla($data)
     {
+        All::pp($data);
         // BLOQUE DE DEFINIR TABLA
         $ldd0='CREATE TABLE '.$data->entidad.' ('.PHP_EOL;
         $constraint = array();

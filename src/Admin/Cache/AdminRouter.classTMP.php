@@ -3,7 +3,7 @@
 /**
  * @propiedad: PROPIETARIO DEL CODIGO
  * @Autor: Gregorio Bolivar * @email: elalconxvii@gmail.com
- * @Fecha de Creacion: 26/01/2018
+ * @Fecha de Creacion: 29/01/2018
  * @Auditado por: Gregorio J Bolívar B
  * @Descripción: Generado por el generador de codigo de router de webStores * @package: datosClass
  * @version: 1.0
@@ -451,5 +451,125 @@ $process108 = $router->setRuta($datos108);
 $datos109 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/legajosnovedadesUpdate", 'apps'=>"Admin", 'controller'=>"legajo",'method'=>'runLegajoUpdate');
 $process109 = $router->setRuta($datos109);
 /** Fin del caso de /legajosnovedadesUpdate */
+/** Inicio  del Bloque de instancia al proceso de /convenionuevoIndex  */
+$datos110 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/convenionuevoIndex", 'apps'=>"Admin", 'controller'=>"convenio",'method'=>'runConvenioIndex');
+$process110 = $router->setRuta($datos110);
+/** Fin del caso de /convenionuevoIndex */
+/** Inicio  del Bloque de instancia al proceso de /convenionuevoListar  */
+$datos111 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/convenionuevoListar", 'apps'=>"Admin", 'controller'=>"convenio",'method'=>'runConvenioListar');
+$process111 = $router->setRuta($datos111);
+/** Fin del caso de /convenionuevoListar */
+/** Inicio  del Bloque de instancia al proceso de /convenionuevoCreate  */
+$datos112 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/convenionuevoCreate", 'apps'=>"Admin", 'controller'=>"convenio",'method'=>'runConvenioCreate');
+$process112 = $router->setRuta($datos112);
+/** Fin del caso de /convenionuevoCreate */
+/** Inicio  del Bloque de instancia al proceso de /convenionuevoShow  */
+$datos113 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/convenionuevoShow", 'apps'=>"Admin", 'controller'=>"convenio",'method'=>'runConvenioShow');
+$process113 = $router->setRuta($datos113);
+/** Fin del caso de /convenionuevoShow */
+/** Inicio  del Bloque de instancia al proceso de /convenionuevoDelete  */
+$datos114 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/convenionuevoDelete", 'apps'=>"Admin", 'controller'=>"convenio",'method'=>'runConvenioDelete');
+$process114 = $router->setRuta($datos114);
+/** Fin del caso de /convenionuevoDelete */
+/** Inicio  del Bloque de instancia al proceso de /convenionuevoUpdate  */
+$datos115 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/convenionuevoUpdate", 'apps'=>"Admin", 'controller'=>"convenio",'method'=>'runConvenioUpdate');
+$process115 = $router->setRuta($datos115);
+/** Fin del caso de /convenionuevoUpdate */
+/** Inicio  del Bloque de instancia al proceso de /convenisodeelemIndex  */
+$datos116 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/convenisodeelemIndex", 'apps'=>"Admin", 'controller'=>"convenio",'method'=>'runConvenioIndex');
+$process116 = $router->setRuta($datos116);
+/** Fin del caso de /convenisodeelemIndex */
+/** Inicio  del Bloque de instancia al proceso de /convenisodeelemListar  */
+$datos117 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/convenisodeelemListar", 'apps'=>"Admin", 'controller'=>"convenio",'method'=>'runConvenioListar');
+$process117 = $router->setRuta($datos117);
+/** Fin del caso de /convenisodeelemListar */
+/** Inicio  del Bloque de instancia al proceso de /convenisodeelemCreate  */
+$datos118 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/convenisodeelemCreate", 'apps'=>"Admin", 'controller'=>"convenio",'method'=>'runConvenioCreate');
+$process118 = $router->setRuta($datos118);
+/** Fin del caso de /convenisodeelemCreate */
+/** Inicio  del Bloque de instancia al proceso de /convenisodeelemShow  */
+$datos119 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/convenisodeelemShow", 'apps'=>"Admin", 'controller'=>"convenio",'method'=>'runConvenioShow');
+$process119 = $router->setRuta($datos119);
+/** Fin del caso de /convenisodeelemShow */
+/** Inicio  del Bloque de instancia al proceso de /convenisodeelemDelete  */
+$datos120 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/convenisodeelemDelete", 'apps'=>"Admin", 'controller'=>"convenio",'method'=>'runConvenioDelete');
+$process120 = $router->setRuta($datos120);
+/** Fin del caso de /convenisodeelemDelete */
+/** Inicio  del Bloque de instancia al proceso de /convenisodeelemUpdate  */
+$datos121 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/convenisodeelemUpdate", 'apps'=>"Admin", 'controller'=>"convenio",'method'=>'runConvenioUpdate');
+$process121 = $router->setRuta($datos121);
+/** Fin del caso de /convenisodeelemUpdate */
+/** Inicio  del Bloque de instancia al proceso de /newparentescoIndex  */
+$datos122 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/newparentescoIndex", 'apps'=>"Admin", 'controller'=>"parentesco",'method'=>'runParentescoIndex');
+$process122 = $router->setRuta($datos122);
+/** Fin del caso de /newparentescoIndex */
+/** Inicio  del Bloque de instancia al proceso de /newparentescoListar  */
+$datos123 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/newparentescoListar", 'apps'=>"Admin", 'controller'=>"parentesco",'method'=>'runParentescoListar');
+$process123 = $router->setRuta($datos123);
+/** Fin del caso de /newparentescoListar */
+/** Inicio  del Bloque de instancia al proceso de /newparentescoCreate  */
+$datos124 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/newparentescoCreate", 'apps'=>"Admin", 'controller'=>"parentesco",'method'=>'runParentescoCreate');
+$process124 = $router->setRuta($datos124);
+/** Fin del caso de /newparentescoCreate */
+/** Inicio  del Bloque de instancia al proceso de /newparentescoShow  */
+$datos125 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/newparentescoShow", 'apps'=>"Admin", 'controller'=>"parentesco",'method'=>'runParentescoShow');
+$process125 = $router->setRuta($datos125);
+/** Fin del caso de /newparentescoShow */
+/** Inicio  del Bloque de instancia al proceso de /newparentescoDelete  */
+$datos126 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/newparentescoDelete", 'apps'=>"Admin", 'controller'=>"parentesco",'method'=>'runParentescoDelete');
+$process126 = $router->setRuta($datos126);
+/** Fin del caso de /newparentescoDelete */
+/** Inicio  del Bloque de instancia al proceso de /newparentescoUpdate  */
+$datos127 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/newparentescoUpdate", 'apps'=>"Admin", 'controller'=>"parentesco",'method'=>'runParentescoUpdate');
+$process127 = $router->setRuta($datos127);
+/** Fin del caso de /newparentescoUpdate */
+/** Inicio  del Bloque de instancia al proceso de /nuevoppaIndex  */
+$datos128 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/nuevoppaIndex", 'apps'=>"Admin", 'controller'=>"parentesco",'method'=>'runParentescoIndex');
+$process128 = $router->setRuta($datos128);
+/** Fin del caso de /nuevoppaIndex */
+/** Inicio  del Bloque de instancia al proceso de /nuevoppaListar  */
+$datos129 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/nuevoppaListar", 'apps'=>"Admin", 'controller'=>"parentesco",'method'=>'runParentescoListar');
+$process129 = $router->setRuta($datos129);
+/** Fin del caso de /nuevoppaListar */
+/** Inicio  del Bloque de instancia al proceso de /nuevoppaCreate  */
+$datos130 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/nuevoppaCreate", 'apps'=>"Admin", 'controller'=>"parentesco",'method'=>'runParentescoCreate');
+$process130 = $router->setRuta($datos130);
+/** Fin del caso de /nuevoppaCreate */
+/** Inicio  del Bloque de instancia al proceso de /nuevoppaShow  */
+$datos131 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/nuevoppaShow", 'apps'=>"Admin", 'controller'=>"parentesco",'method'=>'runParentescoShow');
+$process131 = $router->setRuta($datos131);
+/** Fin del caso de /nuevoppaShow */
+/** Inicio  del Bloque de instancia al proceso de /nuevoppaDelete  */
+$datos132 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/nuevoppaDelete", 'apps'=>"Admin", 'controller'=>"parentesco",'method'=>'runParentescoDelete');
+$process132 = $router->setRuta($datos132);
+/** Fin del caso de /nuevoppaDelete */
+/** Inicio  del Bloque de instancia al proceso de /nuevoppaUpdate  */
+$datos133 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/nuevoppaUpdate", 'apps'=>"Admin", 'controller'=>"parentesco",'method'=>'runParentescoUpdate');
+$process133 = $router->setRuta($datos133);
+/** Fin del caso de /nuevoppaUpdate */
+/** Inicio  del Bloque de instancia al proceso de /nuevanovedadaIndex  */
+$datos134 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/nuevanovedadaIndex", 'apps'=>"Admin", 'controller'=>"novedades",'method'=>'runNovedadesIndex');
+$process134 = $router->setRuta($datos134);
+/** Fin del caso de /nuevanovedadaIndex */
+/** Inicio  del Bloque de instancia al proceso de /nuevanovedadaListar  */
+$datos135 = array('petition'=>"GET", 'request'=>$request, 'name'=>"/nuevanovedadaListar", 'apps'=>"Admin", 'controller'=>"novedades",'method'=>'runNovedadesListar');
+$process135 = $router->setRuta($datos135);
+/** Fin del caso de /nuevanovedadaListar */
+/** Inicio  del Bloque de instancia al proceso de /nuevanovedadaCreate  */
+$datos136 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/nuevanovedadaCreate", 'apps'=>"Admin", 'controller'=>"novedades",'method'=>'runNovedadesCreate');
+$process136 = $router->setRuta($datos136);
+/** Fin del caso de /nuevanovedadaCreate */
+/** Inicio  del Bloque de instancia al proceso de /nuevanovedadaShow  */
+$datos137 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/nuevanovedadaShow", 'apps'=>"Admin", 'controller'=>"novedades",'method'=>'runNovedadesShow');
+$process137 = $router->setRuta($datos137);
+/** Fin del caso de /nuevanovedadaShow */
+/** Inicio  del Bloque de instancia al proceso de /nuevanovedadaDelete  */
+$datos138 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/nuevanovedadaDelete", 'apps'=>"Admin", 'controller'=>"novedades",'method'=>'runNovedadesDelete');
+$process138 = $router->setRuta($datos138);
+/** Fin del caso de /nuevanovedadaDelete */
+/** Inicio  del Bloque de instancia al proceso de /nuevanovedadaUpdate  */
+$datos139 = array('petition'=>"POST", 'request'=>$request, 'name'=>"/nuevanovedadaUpdate", 'apps'=>"Admin", 'controller'=>"novedades",'method'=>'runNovedadesUpdate');
+$process139 = $router->setRuta($datos139);
+/** Fin del caso de /nuevanovedadaUpdate */
  
 ?>

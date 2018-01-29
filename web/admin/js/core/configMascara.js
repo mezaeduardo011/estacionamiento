@@ -200,7 +200,7 @@ Config.Mascaras = {
                     $.each(dataJson.data, function (idx, val) {
                             if(isPKNew == 'true' && val.clase_input==type){
                                 Config.html += '<option selected value="' + val.clase_input + '">' + val.label + '</option>';
-                                console.log('Elementos procesadososososos selected');
+                                console.log('Elementos '+val.clase_input+' selected');
                             }else{
                                 Config.html += '<option value="' + val.clase_input + '">' + val.label + '</option>';
                             }

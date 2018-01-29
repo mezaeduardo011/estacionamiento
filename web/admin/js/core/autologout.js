@@ -77,7 +77,7 @@ Core.Autologout = {
     modalMsjClose: function (msj) {
         $.confirm({
             title: 'Logout?'+msj,
-            content: 'Your time is out, you will be automatically logged out in 10 seconds.',
+            content: 'Su tiempo se agota, se cerrará automáticamente en 10 segundos.',
             autoClose: 'logoutUser|10000',
             buttons: {
                 logoutUser: {

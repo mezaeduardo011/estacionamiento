@@ -108,7 +108,7 @@ class SegUsuariosPerfilModel extends Base
         foreach ($perfilId as $item => $value) {
             $tmp[$item] = $value->seg_perfil_id;
         }
-        $sql = "select * from view_seguridad WHERE perfil_id in(".implode(',',$tmp).")";
+        $sql = "select * from view_seguridad WHERE perfil_id in(".implode(',',$tmp).") ORDER BY roles ";
         $datos=$this->executeQuery($sql);
         return $datos;
     }

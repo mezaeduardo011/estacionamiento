@@ -239,7 +239,7 @@ Config.GestionMenu = {
         })
     },
     jsonFa:function(){
-        $.get('/admin/dist/js/core/fa.json',function(dataJson){
+        $.get('/js/core/fa.json',function(dataJson){
             Config.html = '';
             Config.html +='<option value="" selected>Seleccionar</option>';
             $.each(dataJson.iconos,function(idx,valu){

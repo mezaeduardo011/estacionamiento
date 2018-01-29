@@ -162,7 +162,7 @@ Config.GestionaTablas = {
         tipo += '<option value="date">date</option>';
         tipo += '<option value="datetime">datetime</option>';
         tipo += '</select>';
-        tipo += '<input id="item" class="gestionTablasInput" name="varcharValor[]" type="text" size="2" maxlength="3" />';
+        tipo += '<input id="item" class="gestionTablasInput" name="varcharValor[]" type="text" size="2" maxlength="3" value="50" required />';
 
         // Variable encargada de contener los index de las variables
         var index = '<select name="index[]" class="form-control" id="index">';

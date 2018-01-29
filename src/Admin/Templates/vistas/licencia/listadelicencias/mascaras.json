@@ -1,5 +1,0 @@
-{
-    "mascaras" : [
-        {"type":"varchar","mascaraJS":"XlthLXpBLVpcc10rJA==","mascaraPHP":"XlthLXpBLVpcc10rJA==","mensaje":"Debe ingresar solo texto sin caracteres especiales ni números.","input":"varchar","campo":"codigo"},{"type":"varchar","mascaraJS":"XlthLXpBLVpcc10rJA==","mascaraPHP":"XlthLXpBLVpcc10rJA==","mensaje":"Debe ingresar solo texto sin caracteres especiales ni números.","input":"varchar","campo":"nombre"}
-    ]
-}

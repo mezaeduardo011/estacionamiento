@@ -276,7 +276,7 @@ GROUP BY b.apps,b.conexiones_id, a.entidad, b.nombre, b.nombre_alias, b.procesad
 
     -- Vista encargada de procesar los dato de seguridad M 23/01/2018
    CREATE VIEW view_seguridad AS
-   SELECT a.id AS perfil_id, a.detalle AS perfil, c.id AS roles_id, c.detalle AS roles , REPLACE(LOWER(c.detalle),' ','') AS rolesm, e.*  from seg_perfil AS a
+   SELECT a.id AS perfil_id, a.detalle AS perfil, c.id AS roles_id, c.detalle AS roles , e.*  from seg_perfil AS a
       INNER JOIN seg_perfil_roles AS b ON b.seg_perfil_id=a.id
       INNER JOIN seg_roles AS c ON c.id=b.seg_roles_id
       INNER JOIN seg_usuarios_perfil AS d ON d.seg_perfil_id=a.id

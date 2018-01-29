@@ -42,14 +42,13 @@ class MenuController extends Controller
 
            // Permite extraer los datos del perfil primero con el objetivo de hacer comparaciones con el menu
            //$appConMenu = $this->segUsuarioPerfil->reCargarMenuApp($perfiles);
-            $appConMenu = $this->segUsuarioPerfil->reCargarMenuApp($perfiles);
+            $appConMenus = $this->segUsuarioPerfil->reCargarMenuApp($perfiles);
+            $menu = array();
+            $appConMenu = self::extrerMenu($appConMenus);
 
-           $menu = array();
-
-           $appConMenu = self::extrerMenu($appConMenu);
-
-           $menu['menu'] = $appConMenu;
-           $this->json($menu);   
+            $menu['menu'] = $appConMenu;
+            //print_r($menu); die();
+            $this->json($menu);
    }
 
 
@@ -189,7 +188,6 @@ class MenuController extends Controller
     public function extrerMenu($appConMenu)
     {
         // Bloque encargado de extraer el el primer parte del arreglo
-        //print_r($appConMenu);
         $menu = array();
         foreach ($appConMenu AS $kry => $value1) {
             $item = explode('-', $value1->roles);
@@ -197,12 +195,13 @@ class MenuController extends Controller
             unset($item[$v]);
             $menu[] = trim(implode('|', $item)) ;
         }
+        // Esto permite quitar los arreglos repetidos algo como un group by
         $bufer = array_unique($menu);
 
         $menu2 = array();
 
         $it = '';
-        // Bloque de proceso del sub menu principal para sacar el item principal
+        // Bloque de proceso del sub menu principal para sacar el item principal, ademas lo procesa bloque por app
         foreach ($bufer AS $key => $value2) {
             $item2 = explode('|', $value2);
             $v = count($item2) - 1;
@@ -214,31 +213,61 @@ class MenuController extends Controller
 
         $menu3 = array();
         $menu4 = array();
-        $menuPrincipalCompleto = array();
-        $it2 = '';
+
 
         // Bloque encargado del ultimo menu
-        foreach ($menu2 AS $key3 => $value3) {
-            for ($a = 0; $a < count($value3); $a++) {
-                $item3 = explode('|', $value3[$a]);
-                // Menu prncipal
-                $it2 = trim($item3[0]);
-                $menuPrincipalCompleto = $this->hoMenuModel->reCargarMenuPrimer($it,trim($item3[0]));
-                $menu3[$it2]['item'] = (count($menuPrincipalCompleto)==0)?'':$menuPrincipalCompleto[0];
-                // Verificar que exista el contenido el continue hace que salta la iteracion y pasa al siguiente
-                if($menu3[$it2]['item']==''){ unset($menu3); continue;}
-                unset($item3[0]);
 
-                    //$menu3[$it2]['submenu'][$a] = trim(implode($item3));
-                    $menuSegundoCompleto = $this->hoMenuModel->reCargarMenuSegundo($it,$it2,trim(implode($item3)));
-                    $menu3[$it2]['submenu'][] = (count($menuSegundoCompleto)==0)?'':$menuSegundoCompleto[0];
-
+        foreach ($menu2 AS $keyApp => $value3)
+        {
+            $menuApp = self::extraerMatriz($value3);
+            foreach ($menuApp AS $keyEntidad => $keyVista){
+                //print_r($keyVista);
+                $menuPrincipalCompleto = $this->hoMenuModel->reCargarMenuPrimer($keyApp,$keyEntidad);
+                $menu3[$keyEntidad]['item'] = @$menuPrincipalCompleto[0];
+                if(is_null(@$menuPrincipalCompleto[0])){
+                    unset($menu3[$keyEntidad]['item']);
+                }
+                $c = 0;
+                foreach ($keyVista AS $keyItem => $nameVista){
+                    $menuSegundoCompleto = $this->hoMenuModel->reCargarMenuSegundo($keyApp, $keyEntidad, $nameVista);
+                    $menu3[$keyEntidad]['submenu'][$c] = @$menuSegundoCompleto[0];
+                    if(is_null(@$menuSegundoCompleto[0])){
+                        unset($menu3[$keyEntidad]['submenu'][$c]);
+                    }
+                $c++;
+                }
             }
-            $menu4[$key3]=@$menu3;
-
+            $menu4[$keyApp]=$menu3;
         }
         return $menu4;
     }
+
+    private function extraerMatriz($arrayContenido)
+    {
+        /*
+         *  [0] => CONVENIO | CONVENIONUEVO
+            [1] => CONVENIO | CONVENISODEELEM
+            [2] => CONVENIO | LISTADECONVENIOS
+        */
+        $matriz = [];
+        foreach ($arrayContenido AS $key => $value){
+            $item3 = explode('|', $value);
+            $matriz[$item3[0]][] = $item3[1];
+
+
+        }
+        /**
+         *  [CONVENIO ] => Array
+        (
+        [0] =>  CONVENIONUEVO
+        [1] =>  CONVENISODEELEM
+        [2] =>  LISTADECONVENIOS
+        )
+         */
+        return $matriz;
+    }
+
+
 
     /**
      * Permite extraer el contenido del arreglo mutidimencional de la captura del rol de la session

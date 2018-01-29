@@ -110,7 +110,6 @@ class AppCrudVista extends App
             $archivoModel = $rutaApp.All::APP_MODEL.DIRECTORY_SEPARATOR."".$entidad."Model.php";
             if (file_exists($archivoModel)) {
                 $msj=Interprete::getMsjConsole($this->active,'app:crud-existe');
-
             }else{
                self::createFileModelCRUD($archivoModel,$this->app,$entidad,$campRealEnti);
             }
@@ -131,43 +130,27 @@ class AppCrudVista extends App
 
             // Generacion del Index
             $fileViewIndex = $rutaHija . DIRECTORY_SEPARATOR . "index.php";
-            if (file_exists($fileViewIndex)) {
-                $msj=Interprete::getMsjConsole($this->active,'app:crud-existe');
-            }else{
-                self::createFileViewIndex($fileViewIndex, $campos, $rutaVista, $requerido);
-            }
+            self::createFileViewIndex($fileViewIndex, $campos, $rutaVista, $requerido);
 
             // Generacion del Assent donde esta las configuraciones de la grid y los valores de la vista
             $fileViewAssent = $rutaHija . DIRECTORY_SEPARATOR . "assent.php";
-            if (file_exists($fileViewAssent)) {
-                $msj=Interprete::getMsjConsole($this->active,'app:crud-existe');
-            }else{
-                self::createFileViewAssent($fileViewAssent, $campos, $rutaVista, $requerido);
-            }
+            self::createFileViewAssent($fileViewAssent, $campos, $rutaVista, $requerido);
+
 
             // Generacion del Form donde esta la configuración de los campos del formulario
             $fileViewForm = $rutaHija.DIRECTORY_SEPARATOR."form.php";
-            /*if (file_exists($fileViewForm)) {
-                $msj=Interprete::getMsjConsole($this->active,'app:crud-existe');
-            }else{*/
-                self::createFileViewForm($fileViewForm, $campos, $requerido);
-            //}
+            self::createFileViewForm($fileViewForm, $campos, $requerido);
+
 
             // Generacion del Listado
             $fileViewListado = $rutaHija.DIRECTORY_SEPARATOR."listado.php";
-            if (file_exists($fileViewListado)) {
-                $msj=Interprete::getMsjConsole($this->active,'app:crud-existe');
-            }else{
-                self::createFileViewListado($fileViewListado, $campos, $campRealEnti);
-            }
+            self::createFileViewListado($fileViewListado, $campos, $campRealEnti);
+
 
             // Generacion del Json ecargado de procesar las mascaras
             $fileViewJsonMascaras = $rutaHija.DIRECTORY_SEPARATOR."mascaras.json";
-            if (file_exists($fileViewJsonMascaras)) {
-                $msj=Interprete::getMsjConsole($this->active,'app:crud-existe');
-            }else{
-                self::createFileViewJsonMascaras($fileViewJsonMascaras, $mascaras);
-            }
+            self::createFileViewJsonMascaras($fileViewJsonMascaras, $mascaras);
+
 
             $msj=Interprete::getMsjConsole($this->active,'app:crud-creado');
 

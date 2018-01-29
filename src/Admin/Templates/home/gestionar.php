@@ -141,6 +141,7 @@ Gestionar del Generador
         Config.main();
         Core.Menu.main();
         Core.Teclado.main();
+        Core.Autologout.main();
     });
 </script>
 <?php $this->end()?>

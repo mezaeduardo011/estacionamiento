@@ -71,7 +71,7 @@ class HoMenuModel extends Base
      */
     public function reCargarMenuPrimer($app,$entidad)
     {
-        $sql = "select app, entidad, vista, nombre, icon_fa, targe FROM ho_menu WHERE app='$app' AND entidad='$entidad' AND ho_menu_id is null;";
+        $sql = "select top 1 app, entidad, vista, nombre, icon_fa, targe FROM ho_menu WHERE app='".trim($app)."' AND entidad='".trim($entidad)."' AND ho_menu_id is null;";
         $datos=$this->executeQuery($sql);
         return $datos;
     }
@@ -83,7 +83,7 @@ class HoMenuModel extends Base
      */
     public function reCargarMenuSegundo($app,$entidad,$vista)
     {
-        $sql = "select app, entidad, vista, nombre, icon_fa, targe FROM ho_menu WHERE app='$app' AND entidad='$entidad' AND vista='$vista'";
+        $sql = "select app, entidad, vista, nombre, icon_fa, targe FROM ho_menu WHERE app='".trim($app)."' AND entidad='".trim($entidad)."' AND vista='".trim($vista)."';".PHP_EOL;
         $datos=$this->executeQuery($sql);
         return $datos;
     }
@@ -109,7 +109,7 @@ class HoMenuModel extends Base
      */
     public function reVerificarSiExisteMenu($app,$entidad)
     {
-        $sql = "SELECT id, app, entidad, vista, nombre, icon_fa, targe, ho_menu_id FROM ". $this->tabla." WHERE app='$app' AND entidad='$entidad' AND ho_menu_id IS NULL";
+        $sql = "SELECT id, app, entidad, vista, nombre, icon_fa, targe, ho_menu_id  FROM ho_menu WHERE app='$app' AND entidad='$entidad' AND ho_menu_id IS NULL";
         $datos=$this->executeQuery($sql);
         return $datos;
     }
@@ -123,11 +123,31 @@ class HoMenuModel extends Base
      */
     public function reVerificarSiExisteSubMenu($app,$entidad,$vista)
     {
-        $sql = "SELECT id, app, entidad, vista, nombre, icon_fa, targe, ho_menu_id FROM ". $this->tabla." WHERE app='$app' AND entidad='$entidad' AND vista='$vista'";
+        $sql = "SELECT id, app, entidad, vista, nombre, icon_fa, targe, ho_menu_id FROM ho_menu WHERE app='$app' AND entidad='$entidad' AND vista='$vista'";
         $datos=$this->executeQuery($sql);
         return $datos;
     }
 
+    public function regMenuVerificado($apps,$tablas,$vista)
+    {
+        $itemPrinc = self::reVerificarSiExisteMenu($apps,$tablas);
+        $itemSegun = self::reVerificarSiExisteSubMenu($apps,$tablas,$vista);
+
+        // Permite verificar la existencia de los item del menu
+        if(empty($itemPrinc) AND empty($itemSegun)) {
+            // No existe ningun item
+            self::setMenu($apps, $tablas, $vista);
+            $itemPrinc = self::reVerificarSiExisteMenu($apps,$tablas);
+            $itemSegun = self::reVerificarSiExisteSubMenu($apps,$tablas,$vista);
+
+        }elseif(!empty($itemPrinc) AND empty($itemSegun)){
+            // Existe el item principal menos el segundo
+            self::setSubMenu($itemPrinc[0]->id,$apps,$tablas,$vista);
+            self::reVerificarSiExisteSubMenu($apps,$tablas,$vista);
+
+        }
+        return true;
+    }
 
    public function setMenu($app,$entidad,$vista,$opt='subMenu')
    {

@@ -88,7 +88,7 @@ Config.Box3 = {
                                         Tmp += '	</li>';
                                         Tmp += '</ul>';
                                         Config.html += '                  <a class="cursor optMenuLink" data-tabla="' + key + '" data-id="1-' + valores.nombre + '"><i class="fa fa-check-square-o" aria-hidden="true"></i> ' + valores.nombre_alias + '</a>  <div class=" text-right" style="margin-top: -21px">' + Tmp + '</div>';
-                                        console.info(valores.procesado + '--1');
+                                        //console.info(valores.procesado + '--1');
                                     }
                                     Config.html += '                       </td>';
                                     Config.html += '                     </tr>';

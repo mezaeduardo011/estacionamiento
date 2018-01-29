@@ -21,6 +21,7 @@ class HoVistasModel extends Base
        $this->campoid = array('id');
        $this->campos = array('apps','conexiones_id','entidad','entidad_alias','nombre', 'nombre_alias', 'field', 'field_alias','type','dimension', 'fijo','restrincion','label','mascara','nulo','place_holder','relacionado','tabla_vista','vista_campo','cart_separacion','orden','hidden_form','hidden_list');
        parent::__construct();
+       $this->hoMenuModel = new HoMenuModel();
    }
 
     /**
@@ -59,6 +60,8 @@ class HoVistasModel extends Base
                 $this->fijarValor('hidden_form', (@$data->hidden_form[$a]=='on')?true:false);
                 $this->fijarValor('hidden_list', (@$data->hidden_list[$a]=='on')?true:false);
                 $this->guardar();
+                $existeMP = $this->hoMenuModel->regMenuVerificado($data->apps,$data->tabla,All::sanear_string(All::formatRuta($data->name)));
+
             }
         }
        //$this->fijarValores($datos);
