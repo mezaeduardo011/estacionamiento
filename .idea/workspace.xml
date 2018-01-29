@@ -2,41 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9234ef3e-fe29-44e9-ae34-444a7cc49891" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/convenio/listadeconvenios/assent.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/convenio/listadeconvenios/form.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/convenio/listadeconvenios/index.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/convenio/listadeconvenios/listado.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/convenio/listadeconvenios/mascaras.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/legajo/legajosnovedades/assent.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/legajo/legajosnovedades/form.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/legajo/legajosnovedades/index.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/legajo/legajosnovedades/listado.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/legajo/legajosnovedades/mascaras.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/legajo/legajosparientes/assent.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/legajo/legajosparientes/form.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/legajo/legajosparientes/index.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/legajo/legajosparientes/listado.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/legajo/legajosparientes/mascaras.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/licencia/listadelicencias/assent.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/licencia/listadelicencias/form.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/licencia/listadelicencias/index.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/licencia/listadelicencias/listado.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/licencia/listadelicencias/mascaras.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/novedades/novedades/assent.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/novedades/novedades/form.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/novedades/novedades/index.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/novedades/novedades/listado.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/novedades/novedades/mascaras.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/parentesco/listadeparentescos/assent.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/parentesco/listadeparentescos/form.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/parentesco/listadeparentescos/index.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/parentesco/listadeparentescos/listado.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/parentesco/listadeparentescos/mascaras.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/parientes/parientesdellegajo/assent.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/parientes/parientesdellegajo/form.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/parientes/parientesdellegajo/index.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/parientes/parientesdellegajo/listado.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Admin/Templates/vistas/parientes/parientesdellegajo/mascaras.json" afterPath="" />
       <change type="MODIFICATION" beforePath="C:/xampp/htdocs/apiAlcolemia/.idea/Shawn.iml" afterPath="C:/xampp/htdocs/apiAlcolemia/.idea/Shawn.iml" />
       <change type="MODIFICATION" beforePath="C:/xampp/htdocs/apiAlcolemia/lib/Core/Loading.php" afterPath="C:/xampp/htdocs/apiAlcolemia/lib/Core/Loading.php" />
       <change type="MODIFICATION" beforePath="C:/xampp/htdocs/apiAlcolemia/lib/Driverdb/ConfigDatabase.php" afterPath="C:/xampp/htdocs/apiAlcolemia/lib/Driverdb/ConfigDatabase.php" />
@@ -45,26 +10,6 @@
       <change type="MODIFICATION" beforePath="C:/xampp/htdocs/apiAlcolemia/modulos/incidencias/main.php" afterPath="C:/xampp/htdocs/apiAlcolemia/modulos/incidencias/main.php" />
       <change type="MODIFICATION" beforePath="C:/xampp/htdocs/catatumbo/config/databases.ini" afterPath="C:/xampp/htdocs/catatumbo/config/databases.ini" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../apiJRH/.idea/apiJRH.iml" afterPath="$PROJECT_DIR$/../apiJRH/.idea/apiJRH.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/database.sql" afterPath="$PROJECT_DIR$/config/database.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Complements/Database/ConfigDatabase.php" afterPath="$PROJECT_DIR$/lib/Complements/Database/ConfigDatabase.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Complements/Database/ConfigDatabaseTmp.php" afterPath="$PROJECT_DIR$/lib/Complements/Database/ConfigDatabaseTmp.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Core/Console/AppCrudVista.php" afterPath="$PROJECT_DIR$/lib/Core/Console/AppCrudVista.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Cache/AdminRouter.class.php" afterPath="$PROJECT_DIR$/src/Admin/Cache/AdminRouter.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Cache/AdminRouter.classTMP.php" afterPath="$PROJECT_DIR$/src/Admin/Cache/AdminRouter.classTMP.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Controller/MenuController.php" afterPath="$PROJECT_DIR$/src/Admin/Controller/MenuController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Model/HoEntidadesModel.php" afterPath="$PROJECT_DIR$/src/Admin/Model/HoEntidadesModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Model/HoMenuModel.php" afterPath="$PROJECT_DIR$/src/Admin/Model/HoMenuModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Model/HoVistasModel.php" afterPath="$PROJECT_DIR$/src/Admin/Model/HoVistasModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Model/SegUsuariosPerfilModel.php" afterPath="$PROJECT_DIR$/src/Admin/Model/SegUsuariosPerfilModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Router/Router.xml" afterPath="$PROJECT_DIR$/src/Admin/Router/Router.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Admin/Templates/home/gestionar.php" afterPath="$PROJECT_DIR$/src/Admin/Templates/home/gestionar.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/admin/js/core/autologout.js" afterPath="$PROJECT_DIR$/web/admin/js/core/autologout.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/admin/js/core/configBox3.js" afterPath="$PROJECT_DIR$/web/admin/js/core/configBox3.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/admin/js/core/configMascara.js" afterPath="$PROJECT_DIR$/web/admin/js/core/configMascara.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/admin/js/core/configMenu.js" afterPath="$PROJECT_DIR$/web/admin/js/core/configMenu.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/admin/js/core/gestionTablas.js" afterPath="$PROJECT_DIR$/web/admin/js/core/gestionTablas.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/admin/js/core/menu.js" afterPath="$PROJECT_DIR$/web/admin/js/core/menu.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -79,11 +24,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="gestionTablas.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="gestionTablas.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/admin/js/core/gestionTablas.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="391">
               <caret line="159" column="46" lean-forward="false" selection-start-line="159" selection-start-column="40" selection-end-line="159" selection-end-column="46" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TipoDatosController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Admin/Controller/TipoDatosController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -249,7 +204,6 @@
         <option value="$PROJECT_DIR$/src/Admin/Templates/vistas/legajos/nuevoelementodelegajosparatodos/form.php" />
         <option value="$PROJECT_DIR$/lib/Core/Console/System.php" />
         <option value="$PROJECT_DIR$/src/Admin/Router/Router.xml" />
-        <option value="$PROJECT_DIR$/web/admin/js/core/gestionTablas.js" />
         <option value="$PROJECT_DIR$/web/admin/js/core/configMenu.js" />
         <option value="$PROJECT_DIR$/src/Admin/Templates/home/gestionar.php" />
         <option value="$PROJECT_DIR$/web/admin/js/core/autologout.js" />
@@ -264,6 +218,7 @@
         <option value="$PROJECT_DIR$/src/Admin/Controller/MenuController.php" />
         <option value="$PROJECT_DIR$/src/Admin/Templates/vistas/parientes/parientesdellegajo/index.php" />
         <option value="$PROJECT_DIR$/src/Admin/Model/HoEntidadesModel.php" />
+        <option value="$PROJECT_DIR$/web/admin/js/core/gestionTablas.js" />
       </list>
     </option>
   </component>
@@ -467,12 +422,12 @@
       <workItem from="1516926681127" duration="5202000" />
       <workItem from="1516969307905" duration="24266000" />
       <workItem from="1517055467191" duration="1268000" />
-      <workItem from="1517243078831" duration="1056000" />
+      <workItem from="1517243078831" duration="1462000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1019239000" />
+    <option name="totallyTimeSpent" value="1019645000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -485,8 +440,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1378" height="735" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2822458" sideWeight="0.87873757" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2822458" sideWeight="0.87873757" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.04318937" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -574,13 +530,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lib/Core/Commun/All.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Admin/Controller/LegajosController.php" />
     <entry file="file://$PROJECT_DIR$/src/Admin/Templates/vistas/convenios/promediodesueldo/index.php" />
     <entry file="file://$PROJECT_DIR$/src/Admin/Templates/vistas/convenios/promediodesueldo/form.php" />
@@ -844,6 +793,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
           <caret line="159" column="46" lean-forward="false" selection-start-line="159" selection-start-column="40" selection-end-line="159" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/Controller/TipoDatosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
